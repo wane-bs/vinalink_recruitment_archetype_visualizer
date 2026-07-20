@@ -75,6 +75,7 @@ Vinalink Group thiết lập một mô hình kinh doanh phân phối tinh gọn 
   - Nhận ngay **25% CV** từ các đơn hàng của F1 (từ 1.000 CV đến 4.000 CV).
   - Khi F1 kích hoạt gói Vàng (10.000 CV): Doanh chủ cấp bậc Đồng/Bạc nhận trần **1.000 CV** (1.000.000 VNĐ); Doanh chủ cấp bậc Vàng nhận trần **2.000 CV** (2.000.000 VNĐ).
 * **Hoa hồng cộng hưởng (Matching Bonus)**:
+
   * **Cơ cấu hưởng theo Danh hiệu và Doanh số nhánh Yếu tháng trước:**
     * **Director, Ruby, Emerald:** Nhánh yếu tháng trước đạt từ **85.000 CV** $\rightarrow$ Hưởng **10%** hoa hồng chu kỳ nhóm của F1 và F2.
     * **Diamond, Blue Diamond, Black Diamond:** Nhánh yếu tháng trước đạt từ **300.000 CV** $\rightarrow$ Hưởng **10%** của F1, F2 và **5%** của F3.
