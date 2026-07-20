@@ -1616,3 +1616,31 @@ html[data-theme="dark"] {
   border-top-color: var(--admin-sidebar-border);
   color: var(--admin-sidebar-text);
 }
+
+/* Custom overrides for Dark Mode contrast and Sidebar Mini layout */
+html[data-theme="dark"] .bg-light {
+  background-color: var(--admin-surface-soft) !important;
+  color: var(--admin-text) !important;
+}
+
+html[data-theme="dark"] .border,
+html[data-theme="dark"] .border-top,
+html[data-theme="dark"] .border-bottom,
+html[data-theme="dark"] .border-start,
+html[data-theme="dark"] .border-end {
+  border-color: var(--admin-border) !important;
+}
+
+html[data-theme="dark"] .table-light,
+html[data-theme="dark"] .table-light th {
+  background-color: var(--admin-surface-soft) !important;
+  color: var(--admin-text) !important;
+  border-color: var(--admin-border) !important;
+}
+
+@media (min-width: 992px) {
+  body.sidebar-mini .sidebar-user {
+    display: none !important;
+  }
+}
+
