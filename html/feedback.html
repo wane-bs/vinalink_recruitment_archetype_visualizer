@@ -146,8 +146,14 @@
                     </div>
                     <div class="col-12 col-md-6">
                       <label class="form-label" for="motivation">Động lực lớn nhất</label>
-                      <input class="form-control" id="motivation" type="text" required placeholder="Ví dụ: Tự do tài chính & Tạo lập tài sản kế thừa...">
-                      <div class="invalid-feedback">Vui lòng điền động lực lớn nhất.</div>
+                      <select class="form-select" id="motivation" required>
+                        <option value="">Chọn động lực lớn nhất...</option>
+                        <option value="Tự do tài chính">Tự do tài chính</option>
+                        <option value="Phát triển bản thân">Phát triển bản thân</option>
+                        <option value="Giúp đỡ cộng đồng">Giúp đỡ cộng đồng</option>
+                        <option value="Tạo lập tài sản kế thừa">Tạo lập tài sản kế thừa</option>
+                      </select>
+                      <div class="invalid-feedback">Vui lòng chọn động lực lớn nhất.</div>
                     </div>
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="thu_nhap_nam_1">Thu nhập mục tiêu Năm 1 (VNĐ/tháng)</label>
@@ -170,7 +176,13 @@
                   <div class="row g-3">
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="so_luong_f1_nong_cot">Số F1 nòng cốt trực tiếp</label>
-                      <input class="form-control" id="so_luong_f1_nong_cot" type="number" required placeholder="Ví dụ: 3">
+                      <select class="form-select" id="so_luong_f1_nong_cot" required>
+                        <option value="">Chọn số lượng F1...</option>
+                        <option value="3">3 người (Mẫu hình Tinh gọn)</option>
+                        <option value="4">4 người (Mẫu hình Bổ khuyết)</option>
+                        <option value="5">5 người (Giới hạn tối đa)</option>
+                      </select>
+                      <div class="invalid-feedback">Vui lòng chọn số lượng F1.</div>
                     </div>
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="tong_quy_mo_he_thong">Tổng quy mô hệ thống sau 3 năm</label>
@@ -178,7 +190,11 @@
                     </div>
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="ty_le_phan_bo">Tỷ lệ phân bổ (KHTT % - NPP %)</label>
-                      <input class="form-control" id="ty_le_phan_bo" type="text" required placeholder="Ví dụ: 80% tiêu dùng - 20% kinh doanh">
+                      <select class="form-select" id="ty_le_phan_bo" required>
+                        <option value="80% tiêu dùng - 20% kinh doanh">80% tiêu dùng - 20% kinh doanh</option>
+                        <option value="70% tiêu dùng - 30% kinh doanh">70% tiêu dùng - 30% kinh doanh</option>
+                        <option value="90% tiêu dùng - 10% kinh doanh">90% tiêu dùng - 10% kinh doanh</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -193,7 +209,87 @@
                     </div>
                     <div class="col-12 col-md-6">
                       <label class="form-label" for="phong_cach_lanh_dao">Phong cách lãnh đạo hướng tới</label>
-                      <input class="form-control" id="phong_cach_lanh_dao" type="text" required placeholder="Ví dụ: Lãnh đạo phục vụ (Servant Leadership)">
+                      <select class="form-select" id="phong_cach_lanh_dao" required>
+                        <option value="Lãnh đạo phục vụ (Servant Leadership)">Lãnh đạo phục vụ (Servant Leadership)</option>
+                        <option value="Lãnh đạo truyền cảm hứng">Lãnh đạo truyền cảm hứng</option>
+                        <option value="Lãnh đạo huấn luyện">Lãnh đạo huấn luyện</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="mb-3 mt-4">
+                    <label class="form-label d-block fw-bold text-xs mb-2">Trụ cột 3.1: Xác định nỗi đau lo ngại nhất để định vị Giá trị Cốt lõi (Tầng Chìm):</label>
+                    <div class="row g-2">
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="cult_pain_burnout">
+                          <label class="form-check-label text-xs" for="cult_pain_burnout">Quá tải thời gian (Kiệt sức vì hỗ trợ liên tục) → Tối giản Tinh gọn (Lean)</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="cult_pain_dumping">
+                          <label class="form-check-label text-xs" for="cult_pain_dumping">Dumping & Mất lòng tin (Ôm hàng bán phá giá) → Chính trực Minh bạch (Integrity)</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="cult_pain_churn">
+                          <label class="form-check-label text-xs" for="cult_pain_churn">Gãy rụng tuyến dưới (Bỏ mặc người mới tự bơi) → Đồng hành Dụng tâm (Servant Lead)</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="cult_pain_disrespect">
+                          <label class="form-check-label text-xs" for="cult_pain_disrespect">Mất bản sao quy trình (Mỗi nhánh làm một kiểu) → Tôn trọng Nguyên bản (Duplication)</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-3 mt-4">
+                    <label class="form-label d-block fw-bold text-xs mb-2">Trụ cột 3.2: Cam kết Thiết lập Hành vi Thực hành Hằng ngày (Tầng Nổi):</label>
+                    <div class="row g-3">
+                      <div class="col-12 col-md-4">
+                        <label class="form-label text-xs" for="cult_daily_time">Giờ họp Daily Power cố định (15')</label>
+                        <input class="form-control form-control-sm" id="cult_daily_time" type="time" required value="08:00">
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label class="form-label text-xs" for="cult_daily_channel">Kênh họp Daily chính thức</label>
+                        <input class="form-control form-control-sm" id="cult_daily_channel" type="text" required placeholder="Ví dụ: Zoom, Google Meet...">
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label class="form-label text-xs" for="cult_daily_fine">Phạt đi muộn (VNĐ/lần)</label>
+                        <input class="form-control form-control-sm" id="cult_daily_fine" type="text" required placeholder="Ví dụ: 50.000">
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label class="form-label text-xs" for="cult_comm_channel">Kênh nhắn tin công việc</label>
+                        <input class="form-control form-control-sm" id="cult_comm_channel" type="text" required placeholder="Ví dụ: Zalo, Discord...">
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label class="form-label text-xs" for="cult_comm_response_limit">Hạn phản hồi tối đa (tiếng)</label>
+                        <input class="form-control form-control-sm" id="cult_comm_response_limit" type="number" required placeholder="Ví dụ: 4">
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label class="form-label text-xs" for="cult_weekly_meeting_day">Lịch họp tuần Ban điều hành F1</label>
+                        <select class="form-select form-select-sm" id="cult_weekly_meeting_day" required>
+                          <option value="Chủ nhật">Chủ nhật</option>
+                          <option value="Thứ hai">Thứ hai</option>
+                          <option value="Thứ bảy">Thứ bảy</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check mt-2">
+                          <input class="form-check-input" type="checkbox" id="cult_trouble_no_blame" checked>
+                          <label class="form-check-label text-xs" for="cult_trouble_no_blame">Cam kết KHÔNG đổ lỗi khi gãy nhánh, tập trung đối thoại qua Simulator</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check mt-2">
+                          <input class="form-check-input" type="checkbox" id="cult_trouble_retrain" checked>
+                          <label class="form-check-label text-xs" for="cult_trouble_retrain">Cam kết cùng F1-Hacker trực tiếp đứng lớp huấn luyện lại cho nhánh bị yếu</label>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -201,10 +297,18 @@
                 <!-- SECTION 4: Nguồn lực đầu vào -->
                 <div class="mb-5">
                   <h3 class="form-section-title"><i class="bi bi-hourglass-split me-2"></i>04. Nguồn lực Đầu vào</h3>
-                  <div class="row g-3 mb-3">
+                  <div class="row g-3 mb-4">
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="thoi_gian_cam_ket">Thời gian cam kết (tiếng/ngày)</label>
-                      <input class="form-control" id="thoi_gian_cam_ket" type="number" required placeholder="Ví dụ: 4">
+                      <select class="form-select" id="thoi_gian_cam_ket" required>
+                        <option value="">Chọn thời gian cam kết...</option>
+                        <option value="4">4 tiếng/ngày (Vùng tinh gọn)</option>
+                        <option value="5">5 tiếng/ngày</option>
+                        <option value="6">6 tiếng/ngày (Vùng tối ưu)</option>
+                        <option value="7">7 tiếng/ngày</option>
+                        <option value="8">8 tiếng/ngày (Vùng truyền thống)</option>
+                      </select>
+                      <div class="invalid-feedback">Vui lòng chọn thời gian cam kết.</div>
                     </div>
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="ngan_sach_ban_dau">Ngân sách dự kiến hàng tháng (VNĐ)</label>
@@ -213,6 +317,7 @@
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="ky_nang_san_co">Kinh nghiệm/Kỹ năng sẵn có nổi bật</label>
                       <input class="form-control" id="ky_nang_san_co" type="text" required placeholder="Ví dụ: Thuyết trình & Đào tạo sản phẩm...">
+                      <div class="invalid-feedback">Vui lòng điền kỹ năng sẵn có.</div>
                     </div>
                   </div>
                   
@@ -279,6 +384,98 @@
                           <label class="form-check-label text-xs" for="sm_vpol_operation">Vận hành văn phòng trực tuyến (VPOL) số hóa</label>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SECTION 4.1: Tự đánh giá kỹ năng quản trị -->
+                <div class="mb-5">
+                  <h3 class="form-section-title"><i class="bi bi-person-badge-fill me-2"></i>04.1 Tự Đánh giá Mức độ Kỹ năng (Dành cho chẩn đoán co-founder F1)</h3>
+                  <p class="text-muted text-xs mb-3">Tự chấm điểm khả năng thực tế của bản thân theo thang điểm từ 1 (Yếu) đến 5 (Rất mạnh).</p>
+                  
+                  <div class="row g-3">
+                    <!-- Hustler Group -->
+                    <div class="col-12"><strong class="text-xs text-dark">Nhóm 1: Kết nối & Tuyển dụng (Hustler)</strong></div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hustler_1">Tự tin thu hút, giao tiếp người lạ</label>
+                      <select class="form-select form-select-sm" id="self_hustler_1" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hustler_2">Kỹ năng thuyết trình OPP & chốt khách</label>
+                      <select class="form-select form-select-sm" id="self_hustler_2" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hustler_3">Có tầm ảnh hưởng & uy tín lớn</label>
+                      <select class="form-select form-select-sm" id="self_hustler_3" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+
+                    <!-- Hacker Group -->
+                    <div class="col-12"><strong class="text-xs text-dark">Nhóm 2: Đào tạo & Huấn luyện (Hacker)</strong></div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hacker_1">Đóng gói quy trình thành 1-2-3 đơn giản</label>
+                      <select class="form-select form-select-sm" id="self_hacker_1" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hacker_2">Tự tin đứng lớp, truyền lửa người mới</label>
+                      <select class="form-select form-select-sm" id="self_hacker_2" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hacker_3">Thiết kế slide, giáo trình & SOP</label>
+                      <select class="form-select form-select-sm" id="self_hacker_3" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+
+                    <!-- Hipster Group -->
+                    <div class="col-12"><strong class="text-xs text-dark">Nhóm 3: Công nghệ & Truyền thông (Hipster)</strong></div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hipster_1">Sử dụng công cụ thiết kế Canva, CapCut</label>
+                      <select class="form-select form-select-sm" id="self_hipster_1" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hipster_2">Viết bài MXH, xây dựng thương hiệu</label>
+                      <select class="form-select form-select-sm" id="self_hipster_2" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_hipster_3">Thiết lập Landing page & phễu tự động</label>
+                      <select class="form-select form-select-sm" id="self_hipster_3" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+
+                    <!-- Operator Group -->
+                    <div class="col-12"><strong class="text-xs text-dark">Nhóm 4: Quản trị & Vận hành (Operator)</strong></div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_operator_1">Đọc hiểu số cân nhánh nhị phân, năng động</label>
+                      <select class="form-select form-select-sm" id="self_operator_1" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_operator_2">Tỉ mỉ quản đơn hàng, kết nối tổng kho</label>
+                      <select class="form-select form-select-sm" id="self_operator_2" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label text-xs" for="self_operator_3">Tổ chức họp tinh gọn, kiểm soát kỷ luật</label>
+                      <select class="form-select form-select-sm" id="self_operator_3" required>
+                        <option value="1">1 - Yếu</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5 - Xuất sắc</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -506,10 +703,10 @@
                 <!-- SUBMIT BUTTONS -->
                 <div class="d-flex justify-content-between align-items-center border-top pt-4">
                   <button type="button" class="btn btn-outline-secondary" id="saveDraftBtn">
-                    <i class="bi bi-pencil-square me-1"></i> Lưu Nháp Cục Bộ
+                     Lưu Nháp Cục Bộ
                   </button>
                   <button type="submit" class="btn btn-success" style="background-color: #10b981; border-color: #10b981;">
-                    <i class="bi bi-send me-1"></i> Gửi Phản Hồi
+                     Gửi Phản Hồi
                   </button>
                 </div>
                 
@@ -598,7 +795,7 @@
     });
 
     function saveFormDraft() {
-      const inputs = document.querySelectorAll("#feedbackForm input[type='text'], #feedbackForm input[type='number'], #feedbackForm select");
+      const inputs = document.querySelectorAll("#feedbackForm input[type='text'], #feedbackForm input[type='number'], #feedbackForm input[type='time'], #feedbackForm select");
       const checkBoxes = document.querySelectorAll("#feedbackForm input[type='checkbox']");
       const draft = { text: {}, checks: {} };
 
@@ -620,16 +817,41 @@
         document.getElementById("thu_nhap_nam_1").value = "15.000.000 VNĐ";
         document.getElementById("thu_nhap_nam_2").value = "60.000.000 VNĐ";
         document.getElementById("thu_nhap_nam_3").value = "150.000.000 VNĐ";
-        document.getElementById("motivation").value = "Tự do tài chính & Tạo lập tài sản kế thừa";
+        document.getElementById("motivation").value = "Tự do tài chính";
         document.getElementById("so_luong_f1_nong_cot").value = "3";
         document.getElementById("tong_quy_mo_he_thong").value = "1000";
         document.getElementById("ty_le_phan_bo").value = "80% tiêu dùng - 20% kinh doanh";
         document.getElementById("tinh_tu_van_hoa").value = "Tinh gọn, An vui, Cam kết";
         document.getElementById("phong_cach_lanh_dao").value = "Lãnh đạo phục vụ (Servant Leadership)";
+        
+        // Cult Defaults
+        document.getElementById("cult_pain_burnout").checked = true;
+        document.getElementById("cult_daily_time").value = "08:00";
+        document.getElementById("cult_daily_channel").value = "Zoom";
+        document.getElementById("cult_daily_fine").value = "50.000";
+        document.getElementById("cult_comm_channel").value = "Zalo";
+        document.getElementById("cult_comm_response_limit").value = "4";
+        document.getElementById("cult_weekly_meeting_day").value = "Chủ nhật";
+
         document.getElementById("thoi_gian_cam_ket").value = "4";
         document.getElementById("ngan_sach_ban_dau").value = "5.000.000 VNĐ";
         document.getElementById("ky_nang_san_co").value = "Thuyết trình & Đào tạo sản phẩm";
         document.getElementById("sm_emc_training").checked = true;
+
+        // self skills defaults
+        document.getElementById("self_hustler_1").value = "3";
+        document.getElementById("self_hustler_2").value = "3";
+        document.getElementById("self_hustler_3").value = "3";
+        document.getElementById("self_hacker_1").value = "4";
+        document.getElementById("self_hacker_2").value = "3";
+        document.getElementById("self_hacker_3").value = "3";
+        document.getElementById("self_hipster_1").value = "2";
+        document.getElementById("self_hipster_2").value = "3";
+        document.getElementById("self_hipster_3").value = "2";
+        document.getElementById("self_operator_1").value = "3";
+        document.getElementById("self_operator_2").value = "4";
+        document.getElementById("self_operator_3").value = "3";
+
         document.getElementById("hien_tai_quy_mo_tong").value = "50";
         document.getElementById("hien_tai_npp_hoat_dong").value = "10";
         document.getElementById("hien_tai_khtt_hoat_dong").value = "30";
@@ -640,6 +862,7 @@
         document.getElementById("hien_tai_ty_le_giu_chan").value = "80";
         document.getElementById("hien_tai_diem_tran_cv").value = "0";
         document.getElementById("hien_tai_f1_nong_cot").value = "2";
+        
         document.getElementById("lvp_a1_cam_tay").checked = true;
         document.getElementById("lvp_a1_opp_21").checked = true;
         document.getElementById("lvp_a2_phong_cach").value = "Đào tạo thực chiến y học cổ truyền kết hợp phễu tự động.";
@@ -677,7 +900,7 @@
       const scriptUrl = localStorage.getItem("sihub_script_url") || "";
       const accessToken = localStorage.getItem("sihub_access_token") || "sihub_token_2026";
 
-      // Build payload JSON matches old postData structure
+      // Build complete payload JSON including all newly added fields
       const payload = {
         timestamp: new Date().toISOString(),
         accessToken: accessToken,
@@ -691,9 +914,50 @@
         distributionRatio: document.getElementById("ty_le_phan_bo").value.trim(),
         culture: document.getElementById("tinh_tu_van_hoa").value.trim(),
         leadershipStyle: document.getElementById("phong_cach_lanh_dao").value.trim(),
+        
+        // Cult variables
+        cult_pain_burnout: document.getElementById("cult_pain_burnout").checked,
+        cult_pain_dumping: document.getElementById("cult_pain_dumping").checked,
+        cult_pain_churn: document.getElementById("cult_pain_churn").checked,
+        cult_pain_disrespect: document.getElementById("cult_pain_disrespect").checked,
+        cult_daily_time: document.getElementById("cult_daily_time").value.trim(),
+        cult_daily_channel: document.getElementById("cult_daily_channel").value.trim(),
+        cult_daily_fine: document.getElementById("cult_daily_fine").value.trim(),
+        cult_comm_channel: document.getElementById("cult_comm_channel").value.trim(),
+        cult_comm_response_limit: document.getElementById("cult_comm_response_limit").value.trim(),
+        cult_weekly_meeting_day: document.getElementById("cult_weekly_meeting_day").value.trim(),
+        cult_trouble_no_blame: document.getElementById("cult_trouble_no_blame").checked,
+        cult_trouble_retrain: document.getElementById("cult_trouble_retrain").checked,
+
         d1: document.getElementById("thoi_gian_cam_ket").value.trim(),
         d2: document.getElementById("ngan_sach_ban_dau").value.trim(),
         skills: Array.from(document.querySelectorAll("#sm_strat_plan, #sm_data_analysis, #sm_scheme_opt, #sm_team_recruit, #sm_emc_training, #sm_servant_lead, #sm_opp_present, #sm_brand_persona, #sm_appointment_sales, #sm_vpol_operation")).filter(c => c.checked).map(c => c.id),
+        
+        // self skills variables
+        self_hustler_1: document.getElementById("self_hustler_1").value.trim(),
+        self_hustler_2: document.getElementById("self_hustler_2").value.trim(),
+        self_hustler_3: document.getElementById("self_hustler_3").value.trim(),
+        self_hacker_1: document.getElementById("self_hacker_1").value.trim(),
+        self_hacker_2: document.getElementById("self_hacker_2").value.trim(),
+        self_hacker_3: document.getElementById("self_hacker_3").value.trim(),
+        self_hipster_1: document.getElementById("self_hipster_1").value.trim(),
+        self_hipster_2: document.getElementById("self_hipster_2").value.trim(),
+        self_hipster_3: document.getElementById("self_hipster_3").value.trim(),
+        self_operator_1: document.getElementById("self_operator_1").value.trim(),
+        self_operator_2: document.getElementById("self_operator_2").value.trim(),
+        self_operator_3: document.getElementById("self_operator_3").value.trim(),
+
+        hien_tai_quy_mo_tong: document.getElementById("hien_tai_quy_mo_tong").value.trim(),
+        hien_tai_npp_hoat_dong: document.getElementById("hien_tai_npp_hoat_dong").value.trim(),
+        hien_tai_khtt_hoat_dong: document.getElementById("hien_tai_khtt_hoat_dong").value.trim(),
+        hien_tai_cap_bac_ca_nhan: document.getElementById("hien_tai_cap_bac_ca_nhan").value.trim(),
+        hien_tai_danh_hieu: document.getElementById("hien_tai_danh_hieu").value.trim(),
+        hien_tai_doanh_so_cv: document.getElementById("hien_tai_doanh_so_cv").value.trim(),
+        hien_tai_nhanh_yeu_cv: document.getElementById("hien_tai_nhanh_yeu_cv").value.trim(),
+        hien_tai_ty_le_giu_chan: document.getElementById("hien_tai_ty_le_giu_chan").value.trim(),
+        hien_tai_diem_tran_cv: document.getElementById("hien_tai_diem_tran_cv").value.trim(),
+        hien_tai_f1_nong_cot: document.getElementById("hien_tai_f1_nong_cot").value.trim(),
+        
         a1: Array.from(document.querySelectorAll("#lvp_a1_giao_trinh, #lvp_a1_cam_tay, #lvp_a1_opp_21, #lvp_a1_vpol")).filter(c => c.checked).map(c => c.id),
         lvpStyle: document.getElementById("lvp_a2_phong_cach").value.trim(),
         lvpIntra: Array.from(document.querySelectorAll("#lvp_a3_emc, #lvp_a3_tech, #lvp_a3_culture, #lvp_a3_mentor")).filter(c => c.checked).map(c => c.id),
