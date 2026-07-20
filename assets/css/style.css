@@ -1618,8 +1618,13 @@ html[data-theme="dark"] {
 }
 
 /* Custom overrides for Dark Mode contrast and Sidebar Mini layout */
-html[data-theme="dark"] .bg-light {
+html[data-theme="dark"] .bg-light,
+html[data-theme="dark"] .bg-white {
   background-color: var(--admin-surface-soft) !important;
+  color: var(--admin-text) !important;
+}
+
+html[data-theme="dark"] .text-dark {
   color: var(--admin-text) !important;
 }
 
