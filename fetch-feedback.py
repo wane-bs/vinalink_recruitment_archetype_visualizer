@@ -15,7 +15,6 @@ DOI_CHIEU_BAO_CAO_PATH = os.path.join(BASE_DIR, "doi-chieu-bao-cao.md")
 BO_CHUAN_MUC_PATH = os.path.join(BASE_DIR, "bo-chuan-muc-trao-doi-doanh-chu.md")
 
 # ID Google Sheet lưu phản hồi (chia sẻ Anyone with link can view)
-# Form sẽ gửi dữ liệu tới Sheet này qua Google Apps Script Web App
 SPREADSHEET_ID = "1-MockSpreadsheetID-VinalinkFeedback" 
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/export?format=csv"
 
@@ -28,52 +27,85 @@ RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL", SENDER_EMAIL) # Gửi cho chí
 
 def fetch_feedback_data():
     """Tải dữ liệu phản hồi mới nhất từ Google Sheet hoặc sử dụng mock data nếu chưa cấu hình SPREADSHEET_ID"""
-    print(f"[{datetime.now()}] Bắt đầu đồng bộ dữ liệu phản hồi...")
+    print(f"[{datetime.now()}] Bắt đầu đồng bộ dữ liệu phản hồi từ Google Sheets...")
     
     # Kiểm tra xem có cấu hình SPREADSHEET_ID thực tế chưa
     if "Mock" in SPREADSHEET_ID or not SPREADSHEET_ID:
-        print("Chế độ mô phỏng: Đang giả lập phản hồi của Doanh chủ...")
-        # Mock dữ liệu phản hồi của Doanh chủ gửi từ Web Form
+        print("Chế độ mô phỏng: Đang giả lập phản hồi đầy đủ 22 trường của Doanh chủ...")
         return {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "doanhChuName": "Doanh Chủ Vinalink (Mock Leader)",
-            "a1": "Chia sẻ OPP 2-1 và hỗ trợ quy trình EMC",
-            "a2": "6", # Số F1 nòng cốt muốn dẫn dắt (Vi phạm: Vượt quá 5 người)
-            "b1": "nhom_3", # Thủ lĩnh chuyên nghiệp
-            "b2": "Người làm tự do và kinh doanh bảo hiểm",
-            "c2": "yêu cầu ước mơ mục tiêu và thái độ tốt", # Bộ lọc cam kết (Vi phạm: định tính)
-            "d1": "14", # Thời gian làm việc mỗi ngày (Vi phạm: Burnout)
+            "e1": "15.000.000 VNĐ",
+            "e2": "60.000.000 VNĐ",
+            "e3": "1.500.000.000 VNĐ", # Vi phạm: Mâu thuẫn toán học (maxout ~764tr, đề xuất diamond 150tr)
+            "motivation": "Tự do tài chính & Tạo lập tài sản kế thừa",
+            "a2": "6", # Vi phạm: Vượt giới hạn quản trị Lean (tối đa 5 F1)
+            "totalMembers": "10000",
+            "distributionRatio": "80% tiêu dùng - 20% kinh doanh",
+            "culture": "Tinh gọn, Tốc độ, Thành công",
+            "leadershipStyle": "Lãnh đạo phục vụ (Servant Leadership)",
+            "d1": "14", # Vi phạm: Cảnh báo kiệt sức (>10 tiếng)
             "d2": "10.000.000 VNĐ",
-            "e1": "300.000.000 VNĐ", # Thu nhập Năm 1 (Vi phạm: Quá cao)
-            "e2": "800.000.000 VNĐ", # Thu nhập Năm 2 (Vi phạm: Quá cao)
-            "e3": "1.500.000.000 VNĐ" # Thu nhập Năm 3 (Vi phạm: Mâu thuẫn toán học)
+            "skills": "Thuyết trình & Đào tạo sản phẩm",
+            "a1": "Cầm tay chỉ việc hướng dẫn tuyển dụng, Đồng hành chia sẻ trực tiếp (OPP 2-1)",
+            "lvpStyle": "Đào tạo thực chiến y học cổ truyền kết hợp phễu tự động.",
+            "lvpIntra": "Quy trình EMC cải tiến dễ sao chép, Văn hóa An vui & Tinh gọn",
+            "lvpInter": "Lợi thế Thuần Việt giá bình dân, Chính sách trả thưởng nhị phân lai không ly khai",
+            "lvpBrand": "Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến.",
+            "b1": "nhom_3", # Thủ lĩnh chuyên nghiệp
+            "b2": "Nhân viên văn phòng, người làm tự do 30-45 tuổi.",
+            "c1": "Khát khao & Động lực lớn, Tinh thần học hỏi (Coachability), Cam kết thời gian",
+            "c2": "yêu cầu ước mơ mục tiêu và thái độ tốt" # Vi phạm: Định tính
         }
         
     try:
         req = urllib.request.Request(CSV_URL, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req) as response:
             lines = [line.decode('utf-8') for line in response.readlines()]
-            reader = csv.DictReader(lines)
+            reader = csv.reader(lines)
             rows = list(reader)
-            if not rows:
-                print("Google Sheet trống. Không có phản hồi mới.")
+            if len(rows) <= 1:
+                print("Google Sheet trống hoặc chỉ có tiêu đề. Không có phản hồi mới.")
                 return None
             
-            # Lấy phản hồi mới nhất (dòng cuối cùng)
+            # Lấy dòng cuối cùng
             latest_row = rows[-1]
+            
+            # Đảm bảo có đủ số cột dữ liệu (ít nhất là 23 cột kể cả timestamp và các trường phản hồi)
+            # Trật tự cột được định nghĩa trong hàm doPost:
+            # 0: timestamp, 1: doanhChuName, 2: e1, 3: e2, 4: e3, 5: motivation,
+            # 6: a2, 7: totalMembers, 8: distributionRatio, 9: culture, 10: leadershipStyle,
+            # 11: d1, 12: d2, 13: skills, 14: a1, 15: lvpStyle, 16: lvpIntra, 17: lvpInter,
+            # 18: lvpBrand, 19: b1, 20: b2, 21: c1, 22: c2
+            
+            # Hàm an toàn lấy dữ liệu theo index
+            def get_val(idx, default=""):
+                return latest_row[idx] if idx < len(latest_row) else default
+                
             return {
-                "timestamp": latest_row.get("timestamp", ""),
-                "doanhChuName": latest_row.get("doanhChuName", "Doanh Chủ Vinalink"),
-                "a1": latest_row.get("a1", ""),
-                "a2": latest_row.get("a2", "0"),
-                "b1": latest_row.get("b1", ""),
-                "b2": latest_row.get("b2", ""),
-                "c2": latest_row.get("c2", ""),
-                "d1": latest_row.get("d1", "0"),
-                "d2": latest_row.get("d2", ""),
-                "e1": latest_row.get("e1", ""),
-                "e2": latest_row.get("e2", ""),
-                "e3": latest_row.get("e3", "")
+                "timestamp": get_val(0),
+                "doanhChuName": get_val(1, "Doanh Chủ Vinalink"),
+                "e1": get_val(2),
+                "e2": get_val(3),
+                "e3": get_val(4),
+                "motivation": get_val(5),
+                "a2": get_val(6, "0"),
+                "totalMembers": get_val(7),
+                "distributionRatio": get_val(8),
+                "culture": get_val(9),
+                "leadershipStyle": get_val(10),
+                "d1": get_val(11, "0"),
+                "d2": get_val(12),
+                "skills": get_val(13),
+                "a1": get_val(14),
+                "lvpStyle": get_val(15),
+                "lvpIntra": get_val(16),
+                "lvpInter": get_val(17),
+                "lvpBrand": get_val(18),
+                "b1": get_val(19),
+                "b2": get_val(20),
+                "c1": get_val(21),
+                "c2": get_val(22)
             }
     except Exception as e:
         print(f"Lỗi khi tải dữ liệu từ Google Sheets: {e}")
@@ -81,16 +113,27 @@ def fetch_feedback_data():
         return {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "doanhChuName": "Doanh Chủ Vinalink (Mô Phỏng)",
-            "a1": "Chia sẻ OPP 2-1",
+            "e1": "15.000.000 VNĐ",
+            "e2": "60.000.000 VNĐ",
+            "e3": "1.500.000.000 VNĐ",
+            "motivation": "Tự do tài chính & Tạo lập tài sản kế thừa",
             "a2": "6",
-            "b1": "nhom_3",
-            "b2": "Chưa cụ thể",
-            "c2": "yêu cầu ước mơ mục tiêu",
+            "totalMembers": "10000",
+            "distributionRatio": "80% tiêu dùng - 20% kinh doanh",
+            "culture": "Tinh gọn, Tốc độ, Thành công",
+            "leadershipStyle": "Lãnh đạo phục vụ (Servant Leadership)",
             "d1": "14",
             "d2": "10.000.000 VNĐ",
-            "e1": "300.000.000 VNĐ",
-            "e2": "800.000.000 VNĐ",
-            "e3": "1.500.000.000 VNĐ"
+            "skills": "Thuyết trình & Đào tạo sản phẩm",
+            "a1": "Cầm tay chỉ việc hướng dẫn tuyển dụng, Đồng hành chia sẻ trực tiếp (OPP 2-1)",
+            "lvpStyle": "Đào tạo thực chiến y học cổ truyền kết hợp phễu tự động.",
+            "lvpIntra": "Quy trình EMC cải tiến dễ sao chép, Văn hóa An vui & Tinh gọn",
+            "lvpInter": "Lợi thế Thuần Việt giá bình dân, Chính sách trả thưởng nhị phân lai không ly khai",
+            "lvpBrand": "Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến.",
+            "b1": "nhom_3",
+            "b2": "Nhân viên văn phòng, người làm tự do 30-45 tuổi.",
+            "c1": "Khát khao & Động lực lớn, Tinh thần học hỏi (Coachability), Cam kết thời gian",
+            "c2": "yêu cầu ước mơ mục tiêu và thái độ tốt"
         }
 
 def analyze_violations(data):
@@ -146,10 +189,8 @@ def analyze_violations(data):
         return int(nums[0]) if nums else 0
 
     e1_val = clean_money(data["e1"])
-    e2_val = clean_money(data["e2"])
     e3_val = clean_money(data["e3"])
 
-    # Giả định quy đổi CV
     if e1_val > 100000000: # > 100tr ở năm 1
         violations.append({
             "aspect": "Mục tiêu Năm 1 (Phần 1)",
@@ -158,18 +199,19 @@ def analyze_violations(data):
             "reason": "Quá cao cho giai đoạn khởi nghiệp hệ thống năm đầu tiên, đòi hỏi doanh số nhánh yếu khổng lồ khi chưa nhân bản xong F1."
         })
     
-    if e3_val > 693896000: # > 693 triệu VNĐ (giới hạn lý tưởng 10.000 người)
+    # Cập nhật trần maxout lý tưởng theo giải thuật mới (Ambassador GVC + Matching + Qualify) là ~764.792.000 VNĐ
+    if e3_val > 764792000:
         violations.append({
             "aspect": "Mục tiêu Năm 3 (Phần 1)",
-            "rule": "Ràng buộc VI.1 (Con số thu nhập tối đa mô phỏng lý tưởng là ~693 triệu VNĐ/tháng ở quy mô 10.000 người)",
+            "rule": "Ràng buộc VI.1 (Con số thu nhập tối đa mô phỏng lý tưởng nâng cấp là ~764 triệu VNĐ/tháng ở quy mô 10.000 người)",
             "value": f"{data['e3']}/tháng",
-            "reason": "Mâu thuẫn toán học về giới hạn doanh thu hệ thống. Kể cả kịch bản lý tưởng nhất cũng chỉ đạt tối đa ~693 triệu VNĐ/tháng. Đề xuất điều chỉnh mục tiêu Năm 3 về 150 triệu VNĐ/tháng (cấp Diamond)."
+            "reason": "Mâu thuẫn toán học về giới hạn doanh thu hệ thống. Kể cả kịch bản lý tưởng nhất (100% giữ chân, 50/50 cân nhánh) cũng chỉ đạt tối đa ~764 triệu VNĐ/tháng. Đề xuất điều chỉnh mục tiêu Năm 3 về 150 triệu VNĐ/tháng (cấp Diamond)."
         })
 
     return violations
 
 def write_doanh_chu_checklist_tra_loi(data):
-    """Ghi đè tệp local doanh-chu-checklist-tra-loi.md với câu trả lời mới"""
+    """Ghi đè tệp local doanh-chu-checklist-tra-loi.md với câu trả lời mới đầy đủ 22 trường"""
     content = f"""# BẢN PHẢN HỒI CHECKLIST KHẢO SÁT TẦM NHÌN DOANH CHỦ VINALINK
 
 **Doanh chủ thực hiện:** {data["doanhChuName"]}
@@ -178,25 +220,44 @@ def write_doanh_chu_checklist_tra_loi(data):
 
 ---
 
-## PHẦN CHI TIẾT CÂU TRẢ LỜI KHẢO SÁT
+## PHẦN CHI TIẾT CÂU TRẢ LỜI KHẢO SÁT (22 TRƯỜNG DỮ LIỆU)
 
-### 1. Mục tiêu Tài chính (Phần 1)
+### 1. Tầm nhìn & Mục tiêu Tài chính (Phần 1)
 - **Thu nhập Năm 1:** {data["e1"]}
 - **Thu nhập Năm 2:** {data["e2"]}
 - **Thu nhập Năm 3:** {data["e3"]}
+- **Động lực lớn nhất:** {data["motivation"]}
 
-### 2. Quy mô & Cấu trúc Hệ thống (Phần 2)
+### 2. Quy mô & Cấu trúc Hệ thống mong muốn (Phần 2)
 - **Số lượng F1 nòng cốt thiết lập dẫn dắt:** {data["a2"]} người
+- **Tổng quy mô hệ thống (3 năm):** {data["totalMembers"]} người
+- **Tỷ lệ phân bổ định hướng:** {data["distributionRatio"]}
 
-### 3. Nguồn lực Đầu vào (Phần 4)
+### 3. Xác định Giá trị Cốt lõi & Văn hóa Đội nhóm (Phần 3)
+- **3 tính từ văn hóa đội nhóm:** {data["culture"]}
+- **Phong cách lãnh đạo:** {data["leadershipStyle"]}
+
+### 4. Đánh giá Nguồn lực Đầu vào (Phần 4)
 - **Thời gian cam kết làm việc mỗi ngày:** {data["d1"]} giờ/ngày
 - **Ngân sách đầu tư ban đầu:** {data["d2"]}
+- **Kỹ năng sẵn có sở hữu:** {data["skills"]}
 
-### 4. Định vị Tuyển dụng Tinh gọn (Phần 5)
-- **Câu A1 (LVP - Giá trị hỗ trợ cốt lõi):** {data["a1"]}
-- **Câu B1 (IDP - Phân khúc downline ưu tiên):** {"Thủ lĩnh chuyên nghiệp (Nhóm 3)" if data["b1"] == "nhom_3" else "Người làm thêm (Nhóm 1)" if data["b1"] == "nhom_1" else "Khách hàng chuyển đổi (Nhóm 2)"}
-- **Câu B2 (IDP - Chi tiết nghề nghiệp & độ tuổi):** {data["b2"]}
-- **Câu C2 (Bộ lọc cam kết hành động):** {data["c2"]}
+### 5. Khung Định vị Tuyển dụng Tuyến dưới Tinh gọn (Phần 5)
+
+#### Trụ cột A: Định vị Giá trị của Doanh chủ (Leader Value Proposition - LVP)
+- **Câu A1 (Hỗ trợ 30 ngày đầu):** {data["a1"]}
+- **Câu A2 (Phong cách dẫn dắt khác biệt):** {data["lvpStyle"]}
+- **Câu A3 (Lợi thế nội bộ - Intra-system):** {data["lvpIntra"]}
+- **Câu A4 (Lợi thế ngoại bộ - Inter-system):** {data["lvpInter"]}
+- **Câu A5 (Hình ảnh thương hiệu cá nhân):** {data["lvpBrand"]}
+
+#### Trụ cột B: Xác định Chân dung Phân khúc Tuyến dưới Ưu tiên (IDP)
+- **Câu B1 (Phân khúc ưu tiên tuyển dụng):** {data["b1"]}
+- **Câu B2 (Nghề nghiệp & độ tuổi mục tiêu):** {data["b2"]}
+
+#### Trụ cột C: Bộ lọc Tuyển dụng Nòng cốt (Qualification Filters)
+- **Câu C1 (3 tiêu chí bắt buộc):** {data["c1"]}
+- **Câu C2 (Bài test hành động cam kết):** {data["c2"]}
 """
     with open(CHECKLIST_TRA_LOI_PATH, "w", encoding="utf-8") as f:
         f.write(content)
@@ -213,15 +274,12 @@ def update_doi_chieu_bao_cao(data, violations):
         for v in violations:
             table_rows += f"| **{v['aspect']}**: {v['value']} | **{v['rule'].split(' (')[0]}** (tại [bo-chuan-muc-trao-doi-doanh-chu.md](file:///d:/DebianBackup/source_code/lop_sihub/03-Projects/vinalink/visualizer_deploy/bo-chuan-muc-trao-doi-doanh-chu.md)) | {v['reason']} |\n"
 
-    # Đọc nội dung cũ của doi-chieu-bao-cao.md để giữ lại phần phân tích y học & toán học phía dưới
     try:
         with open(DOI_CHIEU_BAO_CAO_PATH, "r", encoding="utf-8") as f:
             old_content = f.read()
     except FileNotFoundError:
         old_content = ""
 
-    # Tách phần tiêu đề và bảng đối chiếu cũ để thay thế
-    # Chúng ta thay thế phần bảng đối chiếu (từ dòng đầu đến phần "## I. PHÂN TÍCH CHUYÊN SÂU TỪ TALENT POOL HỆ THỐNG")
     header_section = f"""# BÁO CÁO ĐỐI CHIẾU & ĐÁNH GIÁ CHÂN DUNG MỤC TIÊU DOANH CHỦ VINALINK
 
 **Mã tài liệu:** VNL-2026-VAL-01
@@ -238,14 +296,12 @@ def update_doi_chieu_bao_cao(data, violations):
 {table_rows}
 """
     
-    # Tìm phần phân tích chuyên sâu cũ
     split_pattern = r"## I\. PHÂN TÍCH CHUYÊN SÂU.*"
     match = re.search(split_pattern, old_content, re.DOTALL)
     
     if match:
         new_content = header_section + "\n" + match.group(0)
     else:
-        # Nếu không tìm thấy, ghép nội dung mặc định
         new_content = header_section
 
     with open(DOI_CHIEU_BAO_CAO_PATH, "w", encoding="utf-8") as f:
@@ -258,7 +314,6 @@ def send_email_report(data, violations):
         print("Bỏ qua gửi email: Chưa cấu hình thông tin tài khoản SMTP trong file .env.")
         return
 
-    # Tạo nội dung email
     subject = f"[SIHUB Vinalink] Báo cáo đối chiếu phản hồi Doanh chủ - {datetime.now().strftime('%Y-%m-%d')}"
     
     violation_html = ""
@@ -275,7 +330,7 @@ def send_email_report(data, violations):
     <html>
     <body style="font-family: sans-serif; color: #334155; line-height: 1.6;">
         <h2 style="color: #0f172a; border-bottom: 2px solid #10b981; padding-bottom: 8px;">
-            Báo Cáo Đối Chiếu Phản Hồi Doanh Chủ Vinalink
+            Báo Cáo Đối Chiếu Phản Hồi Doanh Chủ Vinalink (Bản Nâng Cấp)
         </h2>
         <p>Chào anh Mr. Híu,</p>
         <p>Hệ thống SIHUB đã ghi nhận phản hồi khảo sát của Doanh chủ <b>{data["doanhChuName"]}</b> gửi từ website lúc {data["timestamp"]}.</p>

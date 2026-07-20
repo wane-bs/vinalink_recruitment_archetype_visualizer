@@ -93,7 +93,7 @@
         }
         .markdown-content blockquote {
             border-left: 4px solid #10b981;
-            background-color: #052e16/20;
+            background-color: rgba(16, 185, 129, 0.05);
             padding: 0.75rem 1rem;
             margin-bottom: 1.2rem;
             border-radius: 0 0.375rem 0.375rem 0;
@@ -121,12 +121,10 @@
             Document: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>,
             Visualizer: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>,
             Feedback: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>,
-            UserCheck: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+            Lock: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>,
+            Unlock: () => <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" /></svg>,
             Target: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22a10 10 0 110-20 10 10 0 010 20zm0 0v-4m0-12V4M4 12H2m20 0h-2m-3.05-4.95l-1.42 1.42M7.47 16.53l-1.42 1.42m10.1-1.42l1.42 1.42M7.47 7.47l1.42-1.42" /></svg>,
-            Zap: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
             Brain: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>,
-            Compass: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>,
-            Sparkles: () => <svg className="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>,
             Download: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>,
             Info: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
             Check: () => <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -216,7 +214,7 @@
                     },
                     {
                         title: "📝 Mẫu tin đăng tuyển dụng Group Cộng đồng / Facebook",
-                        content: `📌 TUYỂN CỘNG TÁC VIÊN KINH DOANH THẢO DƯỢC CÔNG NGHỆ CAO (KHÔNG VỐN - KHÔNG ÔM HÀNG)\n\nBạn là mẹ bỉm sữa hoặc dân văn phòng muốn tận dụng 2 tiếng rảnh rỗi mỗi ngày để tạo thêm thu nhập 5-10 triệu/tháng? \n\n🌿 HỢP TÁC CÙNG VINALINK GROUP:\n❌ Không áp chỉ tiêu doanh số cá nhân - Không lo chôn vốn.\n❌ Không cần tự đóng gói và giao hàng - Tổng kho xử lý tự động.\n✅ Được hỗ trợ Landing Page cá nhân và quy trình EMC "cầm tay chỉ việc" thực chiến.\n✅ Sản phẩm thảo dược Việt Nam đạt chuẩn GMP-WHO uy tín, dễ bán.\n\n👉 Inbox ngay để nhận quy trình chuyển giao miễn phí!`
+                        content: `📌 TUYỂN CỘNG TÁC VIÊN KINH DOANH THẢO DƯỢC CÔNG NGHỆ CAO (KHÔNG VỐN - KHÔNG ÔM HÀNG)\n\nBạn là mẹ bỉm sữa hoặc dân văn phòng muốn tận dụng 2 tiếng rảnh rỗi mỗi ngày để tạo thêm thu nhập 5-10 triệu/tháng? \n\n🌿 HỢP TAC CÙNG VINALINK GROUP:\n❌ Không áp chỉ tiêu doanh số cá nhân - Không lo chôn vốn.\n❌ Không cần tự đóng gói và giao hàng - Tổng kho xử lý tự động.\n✅ Được hỗ trợ Landing Page cá nhân và quy trình EMC "cầm tay chỉ việc" thực chiến.\n✅ Sản phẩm thảo dược Việt Nam đạt chuẩn GMP-WHO uy tín, dễ bán.\n\n👉 Inbox ngay để nhận quy trình chuyển giao miễn phí!`
                     }
                 ]
             },
@@ -356,7 +354,7 @@
                     gains: [
                         "Bảo tồn trọn vẹn nhánh mạnh thông qua cơ chế tích lũy cộng hưởng.",
                         "Giải phóng sức lao động cá nhân nhờ quy trình tự động hóa nhân bản hoàn hảo.",
-                        "Quy tụ cộng đồng nhân tài bền chặt nhờ văn hóa chính trực nhân văn."
+                        "Quy quy tụ cộng đồng nhân tài bền chặt nhờ văn hóa chính trực nhân văn."
                     ],
                     products: [
                         "Sơ đồ trả thưởng nhị phân lai mặt trời được Bộ Công Thương phê chuẩn nghiêm ngặt.",
@@ -389,40 +387,93 @@
             }
         ];
 
-        const DOCUMENTS_LIST = [
-            { id: "vinalink-parent-research.md", name: "1. Nghiên cứu công ty mẹ" },
-            { id: "phan-tich-co-che-kinh-doanh.md", name: "2. Phân tích cơ chế kinh doanh EMC" },
-            { id: "doanh-chu-checklist.md", name: "3. Checklist khảo sát tầm nhìn" },
-            { id: "downline-customer-persona.md", name: "4. Chân dung khách hàng mục tiêu" },
-            { id: "bo-chuan-muc-trao-doi-doanh-chu.md", name: "5. Bộ chuẩn mực trao đổi doanh chủ" },
-            { id: "doi-chieu-bao-cao.md", name: "6. Báo cáo đối chiếu & Đánh giá" },
-            { id: "vinalink-simulator-desc.md", name: "7. Giải thuật Bộ mô phỏng Kế hoạch 3 năm" }
+        const ALL_DOCUMENTS = [
+            { id: "vinalink-parent-research.md", name: "1. Nghiên cứu công ty mẹ", adminOnly: false },
+            { id: "phan-tich-co-che-kinh-doanh.md", name: "2. Phân tích cơ chế kinh doanh EMC", adminOnly: false },
+            { id: "doanh-chu-checklist.md", name: "3. Checklist khảo sát tầm nhìn (Trắng)", adminOnly: false },
+            { id: "downline-customer-persona.md", name: "4. Chân dung khách hàng mục tiêu", adminOnly: false },
+            { id: "vinalink-simulator-desc.md", name: "5. Giải thuật Bộ mô phỏng Kế hoạch 3 năm", adminOnly: false },
+            { id: "bo-chuan-muc-trao-doi-doanh-chu.md", name: "6. Bộ chuẩn mực trao đổi doanh chủ", adminOnly: false },
+            { id: "doi-chieu-bao-cao.md", name: "7. Báo cáo đối chiếu & Đánh giá (Sai phạm)", adminOnly: true }
         ];
 
         function App() {
             const [currentView, setCurrentView] = useState("roadmap"); // "roadmap" | "documents" | "visualizer" | "feedback"
+            const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem("sihub_is_admin") === "true");
+            const [passwordInput, setPasswordInput] = useState("");
+            const [showLoginModal, setShowLoginModal] = useState(false);
             
             // Visualizer State
             const [selectedGroup, setSelectedGroup] = useState("nhom_1");
             const [currentVisualizerTab, setCurrentVisualizerTab] = useState("empathy");
-            const [matchedPair, setMatchedPair] = useState({ type: null, index: null });
             
             // Document Viewer State
             const [selectedDoc, setSelectedDoc] = useState("vinalink-parent-research.md");
             const [docHtml, setDocHtml] = useState("");
             const [loadingDoc, setLoadingDoc] = useState(false);
             
-            // Feedback Form State
+            // Feedback Form State (22 trường dữ liệu tương ứng doanh-chu-checklist.md)
             const [formData, setFormData] = useState({
                 doanhChuName: "Doanh Chủ Vinalink",
-                scriptUrl: "",
-                a1: "", a2: "",
-                b1: "nhom_3", b2: "",
-                c1: "", c2: "",
-                d1: "", d2: "",
-                e1: "", e2: "", e3: ""
+                e1: "15.000.000 VNĐ",
+                e2: "60.000.000 VNĐ",
+                e3: "150.000.000 VNĐ",
+                motivation: "Tự do tài chính & Tạo lập tài sản kế thừa",
+                a2: "3", // Số F1 nòng cốt
+                totalMembers: "1000",
+                distributionRatio: "80% tiêu dùng - 20% kinh doanh",
+                culture: "Tinh gọn, An vui, Cam kết",
+                leadershipStyle: "Lãnh đạo phục vụ (Servant Leadership)",
+                d1: "4", // Giờ làm việc/ngày
+                d2: "5.000.000 VNĐ",
+                skills: ["Thuyết trình & Đào tạo sản phẩm"],
+                a1: ["Cầm tay chỉ việc hướng dẫn tuyển dụng", "Đồng hành chia sẻ trực tiếp (OPP 2-1)"],
+                lvpStyle: "Đào tạo thực chiến y học cổ truyền dân tộc kết hợp phễu tuyển dụng tự động.",
+                lvpIntra: ["Quy trình EMC cải tiến dễ sao chép", "Văn hóa An vui & Tinh gọn"],
+                lvpInter: ["Lợi thế Thuần Việt giá bình dân", "Chính sách trả thưởng nhị phân lai không ly khai"],
+                lvpBrand: "Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến.",
+                b1: "nhom_3", // Thủ lĩnh chuyên nghiệp
+                b2: "Nhân viên văn phòng, người làm tự do 30-45 tuổi.",
+                c1: ["Khát khao & Động lực lớn", "Tinh thần học hỏi (Coachability)", "Cam kết thời gian"],
+                c2: "Trải nghiệm ít nhất 1 sản phẩm & hoàn thành khóa học pháp lý cơ bản 3 ngày."
             });
+
+            // Admin config variables (Loaded from localStorage)
+            const [apiConfig, setApiConfig] = useState(() => ({
+                scriptUrl: localStorage.getItem("sihub_script_url") || "",
+                accessToken: localStorage.getItem("sihub_access_token") || "sihub_token_2026"
+            }));
+
             const [submitStatus, setSubmitStatus] = useState({ type: null, msg: "" });
+
+            // Filter documents based on Admin Role
+            const visibleDocuments = useMemo(() => {
+                return ALL_DOCUMENTS.filter(doc => !doc.adminOnly || isAdmin);
+            }, [isAdmin]);
+
+            // Handle Admin Login
+            const handleAdminLogin = (e) => {
+                e.preventDefault();
+                if (passwordInput === "sihub2026") {
+                    setIsAdmin(true);
+                    localStorage.setItem("sihub_is_admin", "true");
+                    setShowLoginModal(false);
+                    setPasswordInput("");
+                } else {
+                    alert("Sai mật khẩu cố vấn! Vui lòng kiểm tra lại.");
+                }
+            };
+
+            // Handle Admin Logout
+            const handleAdminLogout = () => {
+                setIsAdmin(false);
+                localStorage.removeItem("sihub_is_admin");
+                // If current view is showing admin only doc, switch to default
+                const currentDocMeta = ALL_DOCUMENTS.find(d => d.id === selectedDoc);
+                if (currentDocMeta && currentDocMeta.adminOnly) {
+                    setSelectedDoc("vinalink-parent-research.md");
+                }
+            };
 
             // Load Document Markdown
             useEffect(() => {
@@ -434,18 +485,14 @@
                             return res.text();
                         })
                         .then(text => {
-                            // Configure marked options
-                            marked.setOptions({
-                                breaks: true,
-                                gfm: true
-                            });
+                            marked.setOptions({ breaks: true, gfm: true });
                             setDocHtml(marked.parse(text));
                             setLoadingDoc(false);
                         })
                         .catch(err => {
                             console.error(err);
                             setDocHtml(`<div class="p-6 text-red-400 bg-red-950/20 border border-red-800/40 rounded-xl">
-                                <strong>⚠️ Lỗi tải file:</strong> Không tìm thấy tệp <code>${selectedDoc}</code> hoặc tệp chưa được di chuyển vào thư mục <code>visualizer_deploy/</code>.
+                                <strong>⚠️ Lỗi tải file:</strong> Không tìm thấy tệp <code>${selectedDoc}</code> hoặc tệp chưa được di chuyển vào thư mục deploy.
                             </div>`);
                             setLoadingDoc(false);
                         });
@@ -471,29 +518,53 @@
                 setFormData(prev => ({ ...prev, [name]: value }));
             };
 
+            // Handle multiple selection (checkboxes)
+            const handleCheckboxChange = (name, value) => {
+                setFormData(prev => {
+                    const currentValues = prev[name] || [];
+                    if (currentValues.includes(value)) {
+                        return { ...prev, [name]: currentValues.filter(v => v !== value) };
+                    } else {
+                        return { ...prev, [name]: [...currentValues, value] };
+                    }
+                });
+            };
+
+            // Save Admin Configuration to LocalStorage
+            const handleConfigChange = (e) => {
+                const { name, value } = e.target;
+                setApiConfig(prev => {
+                    const newConfig = { ...prev, [name]: value };
+                    localStorage.setItem(`sihub_${name}`, value);
+                    return newConfig;
+                });
+            };
+
+            // Submit Form to Google Sheets
             const handleFormSubmit = (e) => {
                 e.preventDefault();
-                setSubmitStatus({ type: "pending", msg: "Đang gửi phản hồi về Google Sheets..." });
+                setSubmitStatus({ type: "pending", msg: "Đang mã hóa và gửi phản hồi lên Google Sheets..." });
                 
                 const postData = {
                     timestamp: new Date().toISOString(),
+                    accessToken: apiConfig.accessToken,
                     ...formData
                 };
 
-                // If user didn't specify URL, mock successful submission
-                if (!formData.scriptUrl) {
+                // Chế độ mô phỏng
+                if (!apiConfig.scriptUrl) {
                     setTimeout(() => {
                         setSubmitStatus({ 
                             type: "success", 
-                            msg: "Đăng ký phản hồi thành công! (Chế độ mô phỏng: Đã lưu dữ liệu tạm thời. Để chạy thực tế, vui lòng cấu hình link Google Apps Script ở ô phía dưới)." 
+                            msg: "Đăng ký phản hồi thành công! (Chế độ mô phỏng: Đã lưu dữ liệu tạm thời. Để chạy thực tế, vui lòng cấu hình link Google Apps Script ở phần cấu hình Admin)." 
                         });
                         console.log("Mock data submitted:", postData);
                     }, 1500);
                     return;
                 }
 
-                // Call Google Apps Script Web App
-                fetch(formData.scriptUrl, {
+                // POST request to Web App Google Apps Script
+                fetch(apiConfig.scriptUrl, {
                     method: "POST",
                     mode: "no-cors",
                     headers: {
@@ -504,14 +575,14 @@
                 .then(() => {
                     setSubmitStatus({ 
                         type: "success", 
-                        msg: "Gửi phản hồi lên Google Sheets thành công! Dữ liệu sẽ được tự động đồng bộ về local vào lúc 20:00 hàng ngày." 
+                        msg: "Gửi phản hồi lên Google Sheets thành công! Dữ liệu sẽ được tự động đồng bộ về máy local lúc 20:00 hàng ngày." 
                     });
                 })
                 .catch(err => {
                     console.error(err);
                     setSubmitStatus({ 
                         type: "error", 
-                        msg: "Lỗi kết nối: Không thể gửi dữ liệu tới Google Apps Script URL. Vui lòng kiểm tra lại cấu hình." 
+                        msg: "Lỗi kết nối: Không thể gửi dữ liệu tới Google Apps Script URL. Vui lòng kiểm tra lại cấu hình bảo mật hoặc đường dẫn URL." 
                     });
                 });
             };
@@ -533,33 +604,90 @@
                         </div>
                         
                         {/* Navigation Menu */}
-                        <nav className="flex items-center bg-[#111a2e] p-1 rounded-xl border border-gray-800 text-xs">
-                            <button 
-                                onClick={() => setCurrentView("roadmap")}
-                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "roadmap" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
-                            >
-                                <Icons.Roadmap /> Lộ Trình & Tiến Độ
-                            </button>
-                            <button 
-                                onClick={() => setCurrentView("documents")}
-                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "documents" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
-                            >
-                                <Icons.Document /> Tài Liệu (.md)
-                            </button>
-                            <button 
-                                onClick={() => setCurrentView("visualizer")}
-                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "visualizer" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
-                            >
-                                <Icons.Visualizer /> Tuyển Dụng F1
-                            </button>
-                            <button 
-                                onClick={() => setCurrentView("feedback")}
-                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "feedback" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
-                            >
-                                <Icons.Feedback /> Checklist Phản Hồi
-                            </button>
-                        </nav>
+                        <div className="flex flex-wrap items-center gap-3">
+                            <nav className="flex items-center bg-[#111a2e] p-1 rounded-xl border border-gray-800 text-xs">
+                                <button 
+                                    onClick={() => setCurrentView("roadmap")}
+                                    className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "roadmap" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Roadmap /> Lộ Trình & Tiến Độ
+                                </button>
+                                <button 
+                                    onClick={() => setCurrentView("documents")}
+                                    className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "documents" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Document /> Tài Liệu (.md)
+                                </button>
+                                <button 
+                                    onClick={() => setCurrentView("visualizer")}
+                                    className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "visualizer" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Visualizer /> Tuyển Dụng F1
+                                </button>
+                                <button 
+                                    onClick={() => setCurrentView("feedback")}
+                                    className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "feedback" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Feedback /> Checklist Phản Hồi
+                                </button>
+                            </nav>
+
+                            {/* Admin Auth Toggle */}
+                            {isAdmin ? (
+                                <button 
+                                    onClick={handleAdminLogout}
+                                    className="py-2 px-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-bold rounded-xl text-xs flex items-center gap-1.5 transition"
+                                >
+                                    <Icons.Unlock /> Cố Vấn (Thoát)
+                                </button>
+                            ) : (
+                                <button 
+                                    onClick={() => setShowLoginModal(true)}
+                                    className="py-2 px-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 font-bold rounded-xl text-xs flex items-center gap-1.5 transition"
+                                >
+                                    <Icons.Lock /> Cố Vấn
+                                </button>
+                            )}
+                        </div>
                     </header>
+
+                    {/* Admin Login Modal */}
+                    {showLoginModal && (
+                        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+                            <div className="bg-[#111a2e] border border-gray-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl animate-scaleIn">
+                                <h3 className="text-md font-bold text-white mb-2 flex items-center gap-2">
+                                    <Icons.Lock /> Xác Thực Quyền Cố Vấn
+                                </h3>
+                                <p className="text-xs text-gray-400 mb-4">Nhập mật khẩu của cố vấn để mở khóa cấu hình hệ thống & xem báo cáo đối chiếu chuyên sâu.</p>
+                                <form onSubmit={handleAdminLogin} className="space-y-4">
+                                    <input 
+                                        type="password" 
+                                        placeholder="Mật khẩu (mặc định: sihub2026)"
+                                        value={passwordInput}
+                                        onChange={(e) => setPasswordInput(e.target.value)}
+                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-emerald-500"
+                                        required
+                                        autoFocus
+                                    />
+                                    <div className="flex gap-2 justify-end">
+                                        <button 
+                                            type="button"
+                                            onClick={() => { setShowLoginModal(false); setPasswordInput(""); }}
+                                            className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-xs font-semibold"
+                                        >
+                                            Hủy
+                                        </button>
+                                        <button 
+                                            type="submit"
+                                            className="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-semibold"
+                                        >
+                                            Đăng Nhập
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Main Content Area */}
                     <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6">
@@ -653,7 +781,7 @@
                                                 <p className="text-xs text-gray-400 mb-3">Doanh chủ điền phản hồi checklist trực tiếp trên giao diện web. Cố vấn tiến hành chạy đối chiếu chuẩn mực để phản biện các mục tiêu phi thực tế.</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     <span className="text-[10px] bg-gray-950 px-2 py-1 rounded text-gray-500">doanh-chu-checklist-tra-loi.md</span>
-                                                    <span className="text-[10px] bg-gray-950 px-2 py-1 rounded text-gray-500">doi-chieu-bao-cao.md</span>
+                                                    {isAdmin && <span className="text-[10px] bg-gray-950 px-2 py-1 rounded text-gray-500">doi-chieu-bao-cao.md</span>}
                                                 </div>
                                             </div>
                                         </div>
@@ -705,7 +833,7 @@
                                         <Icons.Document /> Danh Sách Tài Liệu
                                     </h3>
                                     <div className="space-y-2">
-                                        {DOCUMENTS_LIST.map((doc) => {
+                                        {visibleDocuments.map((doc) => {
                                             const isSelected = selectedDoc === doc.id;
                                             return (
                                                 <button
@@ -713,7 +841,7 @@
                                                     onClick={() => setSelectedDoc(doc.id)}
                                                     className={`w-full text-left py-2 px-3 text-xs font-medium rounded-lg transition ${isSelected ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "text-gray-400 hover:bg-gray-800/50 hover:text-gray-200"}`}
                                                 >
-                                                    {doc.name}
+                                                    {doc.name} {doc.adminOnly && "🔒"}
                                                 </button>
                                             );
                                         })}
@@ -785,11 +913,6 @@
                                                 );
                                             })}
                                         </div>
-                                    </div>
-                                    <div className="bg-[#111a2e]/60 rounded-xl p-4 border border-gray-800 text-xs text-gray-400 space-y-2">
-                                        <p className="font-semibold text-gray-300 border-b border-gray-800 pb-1.5 mb-1.5">Thông tin công cụ</p>
-                                        <div className="flex justify-between"><span>Tên:</span> <span className="text-gray-200">F1 Recruiter Visualizer</span></div>
-                                        <div className="flex justify-between"><span>Phiên bản:</span> <span className="text-emerald-400">v2.0 (Responsive)</span></div>
                                     </div>
                                 </div>
 
@@ -997,206 +1120,476 @@
 
                         {/* VIEW 4: FEEDBACK SURVEY FORM */}
                         {currentView === "feedback" && (
-                            <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl max-w-4xl mx-auto animate-fadeIn">
-                                <div className="border-b border-gray-800 pb-4 mb-6">
-                                    <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                                        <Icons.Feedback /> Checklist Phản Hồi Từ Doanh Chủ
-                                    </h2>
-                                    <p className="text-xs text-gray-400 mt-1">Doanh chủ điền thông tin khảo sát tầm nhìn dưới đây. Các câu hỏi được cấu hình ràng buộc theo chuẩn mực hệ thống.</p>
+                            <div className="space-y-6 max-w-4xl mx-auto animate-fadeIn">
+                                {/* Admin config for Google Sheets App Script Web App */}
+                                {isAdmin && (
+                                    <div className="p-5 bg-emerald-950/10 border border-emerald-500/20 rounded-2xl space-y-4">
+                                        <div className="flex justify-between items-center border-b border-emerald-500/10 pb-2">
+                                            <h3 className="text-xs font-bold text-emerald-400 flex items-center gap-1.5 uppercase tracking-wider">
+                                                ⚙️ Cấu Hình API Kết Nối Google Sheets (Đặc Quyền Cố Vấn)
+                                            </h3>
+                                            <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">Admin Config</span>
+                                        </div>
+                                        
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase">Google Apps Script Web App URL</label>
+                                                <input 
+                                                    type="url" 
+                                                    name="scriptUrl"
+                                                    value={apiConfig.scriptUrl}
+                                                    onChange={handleConfigChange}
+                                                    placeholder="https://script.google.com/macros/s/.../exec"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase">Mã Access Token bảo mật Backend</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="accessToken"
+                                                    value={apiConfig.accessToken}
+                                                    onChange={handleConfigChange}
+                                                    placeholder="Nhập mã xác thực gửi kèm payload"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Apps Script Guide */}
+                                        <div className="p-3 bg-gray-950/60 rounded-xl border border-gray-800 text-[11px] text-gray-400 space-y-2">
+                                            <p className="font-semibold text-gray-200 flex items-center gap-1">📖 Hướng dẫn cấu hình Apps Script bảo mật Backend:</p>
+                                            <p>1. Mở Google Sheet, chọn <b>Extensions &gt; Apps Script</b> và dán đoạn mã sau:</p>
+                                            <pre className="bg-[#070b13] p-2.5 rounded border border-gray-800 text-[10px] text-gray-300 overflow-x-auto leading-relaxed">
+{`function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  
+  // Xác thực Access Token bảo mật cơ bản
+  if (data.accessToken !== "${apiConfig.accessToken}") {
+    return ContentService.createTextOutput("Access Denied").setMimeType(ContentService.MimeType.TEXT);
+  }
+  
+  sheet.appendRow([
+    data.timestamp, data.doanhChuName, data.e1, data.e2, data.e3, data.motivation,
+    data.a2, data.totalMembers, data.distributionRatio, data.culture, data.leadershipStyle,
+    data.d1, data.d2, data.skills.join(", "), data.a1.join(", "), data.lvpStyle,
+    data.lvpIntra.join(", "), data.lvpInter.join(", "), data.lvpBrand, data.b1, data.b2,
+    data.c1.join(", "), data.c2
+  ]);
+  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+}`}
+                                            </pre>
+                                            <p>2. Chọn <b>Deploy &gt; New Deployment</b>, loại <b>Web App</b>. Thiết lập <i>Execute as: Me</i> và <i>Who has access: Anyone</i>.</p>
+                                            <p>3. Copy URL Web App dán vào ô cấu hình phía trên.</p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Main Form */}
+                                <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl">
+                                    <div className="border-b border-gray-800 pb-4 mb-6">
+                                        <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                                            <Icons.Feedback /> Khảo Sát Tầm Nhìn & Mục Tiêu Doanh Chủ Vinalink
+                                        </h2>
+                                        <p className="text-xs text-gray-400 mt-1">Vui lòng điền đầy đủ các thông tin khảo sát dưới đây để thiết lập thông số đầu vào cho Kế hoạch kinh doanh 3 năm.</p>
+                                    </div>
+
+                                    <form onSubmit={handleFormSubmit} className="space-y-8">
+                                        
+                                        {/* SECTION 1 */}
+                                        <div className="space-y-4">
+                                            <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                                                <span>01</span> Tầm Nhìn & Mục Tiêu Tài Chính
+                                            </h3>
+                                            
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="md:col-span-2">
+                                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Tên Doanh Chủ / Leader</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="doanhChuName"
+                                                        value={formData.doanhChuName}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 1 (VNĐ/tháng)</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="e1"
+                                                        value={formData.e1}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 2 (VNĐ/tháng)</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="e2"
+                                                        value={formData.e2}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 3 (VNĐ/tháng)</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="e3"
+                                                        value={formData.e3}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Động lực lớn nhất</label>
+                                                    <select 
+                                                        name="motivation"
+                                                        value={formData.motivation}
+                                                        onChange={handleInputChange}
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    >
+                                                        <option value="Tự do tài chính & Tạo lập tài sản kế thừa">Tự do tài chính & Tạo lập tài sản kế thừa</option>
+                                                        <option value="Phát triển bản thân & Trải nghiệm thực tế">Phát triển bản thân & Trải nghiệm thực tế</option>
+                                                        <option value="Giúp đỡ cộng đồng & Lan tỏa lối sống xanh">Giúp đỡ cộng đồng & Lan tỏa lối sống xanh</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* SECTION 2 */}
+                                        <div className="space-y-4 pt-6 border-t border-gray-800/80">
+                                            <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                                                <span>02</span> Quy Mô & Cấu Trúc Hệ Thống Mong Muốn
+                                            </h3>
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Số lượng F1 nòng cốt dẫn dắt</label>
+                                                    <input 
+                                                        type="number" 
+                                                        name="a2"
+                                                        value={formData.a2}
+                                                        onChange={handleInputChange}
+                                                        min="1" max="10"
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Quy mô mạng lưới (3 năm)</label>
+                                                    <input 
+                                                        type="number" 
+                                                        name="totalMembers"
+                                                        value={formData.totalMembers}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Tỷ lệ phân bổ định hướng</label>
+                                                    <select 
+                                                        name="distributionRatio"
+                                                        value={formData.distributionRatio}
+                                                        onChange={handleInputChange}
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    >
+                                                        <option value="80% tiêu dùng - 20% kinh doanh">80% tiêu dùng - 20% kinh doanh</option>
+                                                        <option value="70% tiêu dùng - 30% kinh doanh">70% tiêu dùng - 30% kinh doanh</option>
+                                                        <option value="90% tiêu dùng - 10% kinh doanh">90% tiêu dùng - 10% kinh doanh</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* SECTION 3 */}
+                                        <div className="space-y-4 pt-6 border-t border-gray-800/80">
+                                            <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                                                <span>03</span> Giá Trị Cốt Lõi & Văn Hóa Đội Nhóm
+                                            </h3>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">3 tính từ mô tả văn hóa đội nhóm</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="culture"
+                                                        value={formData.culture}
+                                                        onChange={handleInputChange}
+                                                        placeholder="VD: Tinh gọn, An vui, Kỷ luật"
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Phong cách lãnh đạo hướng tới</label>
+                                                    <select 
+                                                        name="leadershipStyle"
+                                                        value={formData.leadershipStyle}
+                                                        onChange={handleInputChange}
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    >
+                                                        <option value="Lãnh đạo phục vụ (Servant Leadership)">Lãnh đạo phục vụ (Servant Leadership)</option>
+                                                        <option value="Lãnh đạo truyền cảm hứng (Inspirational)">Lãnh đạo truyền cảm hứng (Inspirational)</option>
+                                                        <option value="Lãnh đạo huấn luyện (Coaching)">Lãnh đạo huấn luyện (Coaching)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* SECTION 4 */}
+                                        <div className="space-y-4 pt-6 border-t border-gray-800/80">
+                                            <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                                                <span>04</span> Đánh Giá Nguồn Lực Đầu Vào
+                                            </h3>
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Thời gian cam kết (giờ/ngày)</label>
+                                                    <input 
+                                                        type="number" 
+                                                        name="d1"
+                                                        value={formData.d1}
+                                                        onChange={handleInputChange}
+                                                        min="1" max="24"
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Ngân sách đầu tư ban đầu</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="d2"
+                                                        value={formData.d2}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                        className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-gray-400 mb-2">Kỹ năng sẵn có sở hữu</label>
+                                                    <div className="space-y-2 text-xs text-gray-300">
+                                                        {["Thuyết trình & Đào tạo sản phẩm", "Marketing Online", "Telesale & Chăm sóc"].map(skill => (
+                                                            <label key={skill} className="flex items-center gap-2 cursor-pointer">
+                                                                <input 
+                                                                    type="checkbox"
+                                                                    checked={formData.skills.includes(skill)}
+                                                                    onChange={() => handleCheckboxChange("skills", skill)}
+                                                                    className="rounded bg-gray-900 border-gray-800 text-emerald-500 focus:ring-emerald-500"
+                                                                />
+                                                                <span>{skill}</span>
+                                                            </label>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* SECTION 5: RECRUITMENT CANVAS */}
+                                        <div className="space-y-6 pt-6 border-t border-gray-800/80">
+                                            <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                                                <span>05</span> Khung Định Vị Tuyển Dụng Tuyến Dưới Tinh Gọn (Canvas)
+                                            </h3>
+
+                                            {/* Trụ cột A */}
+                                            <div className="space-y-4 bg-gray-900/30 p-4 rounded-xl border border-gray-800/60">
+                                                <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider border-b border-gray-800/80 pb-1">
+                                                    Trụ cột A: Định vị Giá trị của Doanh chủ (Leader Value Proposition - LVP)
+                                                </h4>
+                                                
+                                                <div className="space-y-4">
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">A1: Hỗ trợ trực tiếp cho người mới trong 30 ngày đầu</label>
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-300">
+                                                            {[
+                                                                "Quy trình chuyển giao giáo trình đào tạo sản phẩm & sức khỏe",
+                                                                "Cầm tay chỉ việc hướng dẫn tuyển dụng",
+                                                                "Đồng hành chia sẻ trực tiếp (OPP 2-1)",
+                                                                "Cung cấp văn phòng trực tuyến (VPOL)"
+                                                            ].map(item => (
+                                                                <label key={item} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-800/30">
+                                                                    <input 
+                                                                        type="checkbox"
+                                                                        checked={formData.a1.includes(item)}
+                                                                        onChange={() => handleCheckboxChange("a1", item)}
+                                                                        className="rounded bg-gray-900 border-gray-800 text-emerald-500 focus:ring-emerald-500"
+                                                                    />
+                                                                    <span>{item}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">A2: Phong cách dẫn dắt đội nhóm khác biệt</label>
+                                                        <input 
+                                                            type="text" 
+                                                            name="lvpStyle"
+                                                            value={formData.lvpStyle}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                        />
+                                                    </div>
+
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">A3: Lợi thế nội bộ hệ thống mang lại cho người mới (Intra-system)</label>
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-300">
+                                                            {[
+                                                                "Quy trình EMC cải tiến dễ sao chép",
+                                                                "Landing Page & Phễu tuyển dụng",
+                                                                "Văn hóa An vui & Tinh gọn",
+                                                                "Cố vấn lộ trình tài chính rõ ràng"
+                                                            ].map(item => (
+                                                                <label key={item} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-800/30">
+                                                                    <input 
+                                                                        type="checkbox"
+                                                                        checked={formData.lvpIntra.includes(item)}
+                                                                        onChange={() => handleCheckboxChange("lvpIntra", item)}
+                                                                        className="rounded bg-gray-900 border-gray-800 text-emerald-500 focus:ring-emerald-500"
+                                                                    />
+                                                                    <span>{item}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">A4: Lợi thế ngoại bộ định vị thuyết phục ứng viên (Inter-system)</label>
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-300">
+                                                            {[
+                                                                "Lợi thế Thuần Việt giá bình dân",
+                                                                "Chính sách trả thưởng nhị phân lai không ly khai",
+                                                                "Giá trị thừa kế pháp lý vững chắc"
+                                                            ].map(item => (
+                                                                <label key={item} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-800/30">
+                                                                    <input 
+                                                                        type="checkbox"
+                                                                        checked={formData.lvpInter.includes(item)}
+                                                                        onChange={() => handleCheckboxChange("lvpInter", item)}
+                                                                        className="rounded bg-gray-900 border-gray-800 text-emerald-500 focus:ring-emerald-500"
+                                                                    />
+                                                                    <span>{item}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">A5: Định vị thương hiệu cá nhân của Doanh chủ</label>
+                                                        <input 
+                                                            type="text" 
+                                                            name="lvpBrand"
+                                                            value={formData.lvpBrand}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Trụ cột B */}
+                                            <div className="space-y-4 bg-gray-900/30 p-4 rounded-xl border border-gray-800/60">
+                                                <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider border-b border-gray-800/80 pb-1">
+                                                    Trụ cột B: Phân khúc Tuyến dưới Ưu tiên (Ideal Downline Profiling - IDP)
+                                                </h4>
+                                                
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">B1: Nhóm ưu tiên tập trung tuyển dụng</label>
+                                                        <select 
+                                                            name="b1"
+                                                            value={formData.b1}
+                                                            onChange={handleInputChange}
+                                                            className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                        >
+                                                            <option value="nhom_1">Nhóm 1: Người làm thêm kiếm thu nhập thụ động</option>
+                                                            <option value="nhom_2">Nhóm 2: Khách hàng tiêu dùng chuyển đổi</option>
+                                                            <option value="nhom_3">Nhóm 3: Thủ lĩnh xây dựng hệ thống chuyên nghiệp</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">B2: Chi tiết đặc điểm nghề nghiệp & độ tuổi mục tiêu</label>
+                                                        <input 
+                                                            type="text" 
+                                                            name="b2"
+                                                            value={formData.b2}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Trụ cột C */}
+                                            <div className="space-y-4 bg-gray-900/30 p-4 rounded-xl border border-gray-800/60">
+                                                <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider border-b border-gray-800/80 pb-1">
+                                                    Trụ cột C: Bộ lọc Tuyển dụng Nòng cốt (Qualification Filters)
+                                                </h4>
+                                                
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">C1: 3 tiêu chí bắt buộc để đồng hành 2-1 (Chọn 3)</label>
+                                                        <div className="space-y-2 text-xs text-gray-300">
+                                                            {[
+                                                                "Khát khao & Động lực lớn",
+                                                                "Tinh thần học hỏi (Coachability)",
+                                                                "Uy tín cá nhân (Trustworthiness)",
+                                                                "Cam kết thời gian",
+                                                                "Năng lực đầu vào"
+                                                            ].map(item => (
+                                                                <label key={item} className="flex items-center gap-2 cursor-pointer">
+                                                                    <input 
+                                                                        type="checkbox"
+                                                                        checked={formData.c1.includes(item)}
+                                                                        onChange={() => handleCheckboxChange("c1", item)}
+                                                                        className="rounded bg-gray-900 border-gray-800 text-emerald-500 focus:ring-emerald-500"
+                                                                    />
+                                                                    <span>{item}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-xs font-bold text-gray-300 mb-2">C2: Bài test hành động đo lường sự cam kết</label>
+                                                        <input 
+                                                            type="text" 
+                                                            name="c2"
+                                                            value={formData.c2}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                            className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Action button & Status */}
+                                        <div className="pt-6 border-t border-gray-800/80 flex flex-col md:flex-row justify-between items-center gap-4">
+                                            <button 
+                                                type="submit"
+                                                className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-2.5 px-8 rounded-lg shadow-lg shadow-emerald-500/10 transition-all focus:outline-none text-xs"
+                                            >
+                                                Gửi Phản Hồi Khảo Sát
+                                            </button>
+
+                                            {submitStatus.type && (
+                                                <div className={`p-3 rounded-lg text-xs leading-relaxed max-w-lg ${submitStatus.type === "success" ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/20" : submitStatus.type === "error" ? "bg-red-500/10 text-red-300 border border-red-500/20" : "bg-gray-800 text-gray-400 border border-gray-700 animate-pulse"}`}>
+                                                    {submitStatus.msg}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </form>
                                 </div>
-
-                                <form onSubmit={handleFormSubmit} className="space-y-6">
-                                    {/* Admin config for Google Sheets App Script Web App */}
-                                    <div className="p-4 bg-gray-950/40 border border-gray-800 rounded-xl space-y-3">
-                                        <div className="flex justify-between items-center">
-                                            <label className="text-xs font-bold text-gray-300 flex items-center gap-1.5">
-                                                ⚙️ Thiết lập API Google Sheets (Dành cho Cố vấn)
-                                            </label>
-                                            <span className="text-[10px] font-semibold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">Config</span>
-                                        </div>
-                                        <div>
-                                            <input 
-                                                type="url" 
-                                                name="scriptUrl"
-                                                value={formData.scriptUrl}
-                                                onChange={handleInputChange}
-                                                placeholder="Ví dụ: https://script.google.com/macros/s/.../exec"
-                                                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                            />
-                                            <p className="text-[10px] text-gray-500 mt-1">Để trống ô này để chạy thử chế độ mô phỏng. Khi chạy thực tế, dán URL của Google Apps Script Web App được kết nối với Google Sheet vào đây.</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Doanh Chủ Name */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Tên Doanh Chủ / Leader</label>
-                                            <input 
-                                                type="text" 
-                                                name="doanhChuName"
-                                                value={formData.doanhChuName}
-                                                onChange={handleInputChange}
-                                                required
-                                                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {/* Question Sections */}
-                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
-                                        <h3 className="text-sm font-bold text-emerald-400">Phần A: Định Vị Tuyển Dụng Tinh Gọn (LVP & IDP)</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu A1: Giá trị hỗ trợ cốt lõi (Tối đa 2 giá trị)</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="a1"
-                                                    value={formData.a1}
-                                                    onChange={handleInputChange}
-                                                    placeholder="VD: Đào tạo sản phẩm EMC & chia sẻ 2-1"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu B1: Phân khúc downline ưu tiên (Chọn duy nhất 1)</label>
-                                                <select 
-                                                    name="b1"
-                                                    value={formData.b1}
-                                                    onChange={handleInputChange}
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                >
-                                                    <option value="nhom_1">Nhóm 1: Người làm thêm kiếm thu nhập thụ động</option>
-                                                    <option value="nhom_2">Nhóm 2: Khách hàng tiêu dùng chuyển đổi</option>
-                                                    <option value="nhom_3">Nhóm 3: Thủ lĩnh xây dựng hệ thống chuyên nghiệp</option>
-                                                </select>
-                                            </div>
-                                            <div className="md:col-span-2">
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu B2: Chi tiết đặc điểm nghề nghiệp & độ tuổi mục tiêu</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="b2"
-                                                    value={formData.b2}
-                                                    onChange={handleInputChange}
-                                                    placeholder="VD: Nhân viên văn phòng, tuổi từ 30 - 45..."
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
-                                        <h3 className="text-sm font-bold text-emerald-400">Phần B: Chỉ Số Hành Động Lọc Cam Kết & Quy Mô</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu C2: Chỉ số hành động lọc cam kết tuyển dụng</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="c2"
-                                                    value={formData.c2}
-                                                    onChange={handleInputChange}
-                                                    placeholder="VD: Trải nghiệm 1 sản phẩm & học pháp lý 3 ngày"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Phần 2: Số F1 nòng cốt muốn dẫn dắt (Tối đa 5 người)</label>
-                                                <input 
-                                                    type="number" 
-                                                    name="a2"
-                                                    value={formData.a2}
-                                                    onChange={handleInputChange}
-                                                    min="1" max="10"
-                                                    placeholder="Khuyên dùng: 3 - 4 người"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
-                                        <h3 className="text-sm font-bold text-emerald-400">Phần C: Nguồn Lực & Cam Kết Thời Gian</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Thời gian cam kết làm việc mỗi ngày (giờ/ngày)</label>
-                                                <input 
-                                                    type="number" 
-                                                    name="d1"
-                                                    value={formData.d1}
-                                                    onChange={handleInputChange}
-                                                    min="1" max="24"
-                                                    placeholder="VD: 4"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Ngân sách đầu tư ban đầu (VNĐ)</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="d2"
-                                                    value={formData.d2}
-                                                    onChange={handleInputChange}
-                                                    placeholder="VD: 5.000.000 VNĐ"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
-                                        <h3 className="text-sm font-bold text-emerald-400">Phần D: Mục Tiêu Thu Nhập Thụ Động Qua 3 Năm (VNĐ/tháng)</h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 1 (VNĐ/tháng)</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="e1"
-                                                    value={formData.e1}
-                                                    onChange={handleInputChange}
-                                                    placeholder="VD: 15.000.000 VNĐ"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 2 (VNĐ/tháng)</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="e2"
-                                                    value={formData.e2}
-                                                    onChange={handleInputChange}
-                                                    placeholder="VD: 60.000.000 VNĐ"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 3 (VNĐ/tháng)</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="e3"
-                                                    value={formData.e3}
-                                                    onChange={handleInputChange}
-                                                    placeholder="VD: 150.000.000 VNĐ"
-                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Action button & Status */}
-                                    <div className="pt-6 border-t border-gray-800/80 flex flex-col md:flex-row justify-between items-center gap-4">
-                                        <button 
-                                            type="submit"
-                                            className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-2.5 px-8 rounded-lg shadow-lg shadow-emerald-500/10 transition-all focus:outline-none text-xs"
-                                        >
-                                            Gửi Phản Hồi Lên Google Sheets
-                                        </button>
-
-                                        {submitStatus.type && (
-                                            <div className={`p-3 rounded-lg text-xs leading-relaxed max-w-lg ${submitStatus.type === "success" ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/20" : submitStatus.type === "error" ? "bg-red-500/10 text-red-300 border border-red-500/20" : "bg-gray-800 text-gray-400 border border-gray-700 animate-pulse"}`}>
-                                                {submitStatus.msg}
-                                            </div>
-                                        )}
-                                    </div>
-                                </form>
                             </div>
                         )}
                     </main>

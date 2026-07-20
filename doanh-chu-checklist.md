@@ -1,7 +1,4 @@
-﻿# [BẢN NHÁP] Checklist Khảo sát Tầm nhìn & Mục tiêu Doanh chủ Vinalink
-
-> [!NOTE]
-> Tài liệu này hiện đang là **BẢN NHÁP**. Doanh chủ/Người dùng sẽ bổ sung và tinh chỉnh nội dung này sau.
+# Checklist Khảo sát Tầm nhìn & Mục tiêu Doanh chủ Vinalink
 
 Bộ câu hỏi này giúp Doanh chủ tự định hình tư duy chiến lược và xác lập các thông số đầu vào để AI cụ thể hóa kế hoạch kinh doanh 3 năm.
 
