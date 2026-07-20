@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinalink F1 Recruitment Strategy Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+        /* Custom scrollbar for premium feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React and ReactDOM CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- Babel for JSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useMemo } = React;
+
+        // Custom Inline SVG Icons
+        const Icons = {
+            UserCheck: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+            Target: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22a10 10 0 110-20 10 10 0 010 20zm0 0v-4m0-12V4M4 12H2m20 0h-2m-3.05-4.95l-1.42 1.42M7.47 16.53l-1.42 1.42m10.1-1.42l1.42 1.42M7.47 7.47l1.42-1.42" /></svg>,
+            Zap: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
+            Brain: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>,
+            Shield: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>,
+            Search: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>,
+            Download: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>,
+            Compass: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>,
+            Sparkles: () => <svg className="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>,
+            MessageSquare: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+        };
+
+        const ARCHETYPES_DATA = [
+            {
+                id: "nhom_1",
+                name: "Người Làm Thêm / Thu Nhập Thụ Động",
+                subTitle: "Nhà Vua Tương Lai (Muốn làm chủ cuộc đời từ gốc rễ nhỏ bé)",
+                badge: "Mẹ Bỉm, Văn Phòng",
+                color: "emerald",
+                themeHex: "#10b981",
+                description: "Nhóm mong muốn gia tăng nguồn lực tài chính chủ động, bắt đầu tinh gọn từ vài giờ rảnh mỗi ngày mà không mạo hiểm rủi ro tài chính.",
+                positioning: { x: 30, y: 75, label: "Thực Tế & An Toàn Cao" },
+                empathy: {
+                    thinkFeel: [
+                        "Mong muốn kiếm thêm 5 - 10 triệu/tháng trang trải cuộc sống gia đình.",
+                        "Rất sợ rủi ro mất tiền, lừa đảo, hoặc dính vào đa cấp biến tướng ôm hàng.",
+                        "Tự ti về khả năng bán hàng, nghĩ rằng mình 'không có duyên'."
+                    ],
+                    hear: [
+                        "Người thân cảnh báo: 'Coi chừng bị lừa đa cấp!', 'Đừng tin mấy việc online.'",
+                        "Báo đài đưa tin về lừa đảo tài chính qua mạng, giật nợ."
+                    ],
+                    see: [
+                        "Các bài đăng khoe doanh số khủng, nhà lầu xe hơi trên MXH (vừa mơ ước vừa nghi ngờ).",
+                        "Bạn bè bè phái làm đại lý, bán hàng online có đồng ra đồng vào."
+                    ],
+                    sayDo: [
+                        "Nói: 'Em chỉ muốn kiếm thêm ít đồng bỉm sữa, không muốn làm gì phức tạp đâu.'",
+                        "Làm: Lướt mạng tìm việc cộng tác viên không cọc, bán đồ ăn vặt tự phát, đăng bài ngẫu hứng nhưng ít người mua."
+                    ],
+                    pains: [
+                        "Nỗi sợ bị ép doanh số, dồn hàng, chôn vốn gây mâu thuẫn gia đình.",
+                        "Sợ sản phẩm độc hại làm mất uy tín cá nhân tích lũy cả đời.",
+                        "Sợ bị bỏ rơi bơ vơ giữa chợ, không ai kèm cặp hướng dẫn."
+                    ],
+                    gains: [
+                        "Có quy trình thực chiến bài bản, 'mì ăn liền' có thể copy paste ra đơn ngay.",
+                        "Sản phẩm thảo dược Việt Nam thương hiệu quốc gia chất lượng tốt giá bình dân.",
+                        "Được đội nhóm đồng hành cầm tay chỉ việc tận tình."
+                    ]
+                },
+                vpc: {
+                    jobs: [
+                        "Tạo dòng tiền phụ từ 5 - 10 triệu/tháng bằng thời gian nhàn rỗi.",
+                        "Tự chủ tài chính cá nhân, không phụ thuộc hoàn toàn vào thu nhập chính.",
+                        "Được xã hội công nhận là năng động, biết vun vén gia đình."
+                    ],
+                    pains: [
+                        "Áp lực tài chính từ việc ôm hàng ban đầu.",
+                        "Mất uy tín cá nhân nếu sản phẩm không đảm bảo.",
+                        "Cảm giác cô độc và bế tắc khi không biết cách tìm kiếm khách hàng đầu tiên."
+                    ],
+                    gains: [
+                        "Quy trình bán lẻ dễ sao chép nhanh chóng.",
+                        "Tự tin chia sẻ sản phẩm vì chất lượng thực tế vượt kỳ vọng.",
+                        "Sinh hoạt trong một cộng đồng hỗ trợ ấm áp, tích cực."
+                    ],
+                    products: [
+                        "Gói khởi động linh hoạt một lần duy nhất (Đồng/Bạc) từ 800k - 1.6 triệu đồng.",
+                        "Quy trình đào tạo EMC rút gọn tối giản hóa mọi bước thực hành.",
+                        "Hệ thống VPOL xử lý vận hành, đóng gói, giao hàng tự động không cần mang trữ hàng."
+                    ],
+                    painRelievers: [
+                        "Không áp chỉ tiêu doanh số cá nhân hàng tháng để ép trữ hàng.",
+                        "Thảo dược công nghệ cao từ nhà máy IMC đạt tiêu chuẩn GMP-WHO danh tiếng Việt Nam.",
+                        "Chế độ người đi trước kèm cặp hướng dẫn 1-1 nhiệt tình."
+                    ],
+                    gainCreators: [
+                        "Sơ đồ Nhị phân lai Mặt trời bảo lưu tích lũy điểm trọn đời không mất đi.",
+                        "Sponsor Bonus 25% CV thanh khoản ngay giúp giải quyết nhu cầu kiếm tiền nhanh.",
+                        "Trang bị sẵn Landing Page cá nhân và hệ thống phễu tuyển dụng số hóa tinh gọn."
+                    ]
+                },
+                fitMatrix: [
+                    { need: "💥 Rủi ro tài chính", struggle: "Sợ ôm hàng, chôn vốn ban đầu gây xung đột tài chính cá nhân.", solution: "Không ép doanh số cá nhân hàng tháng + Mức năng động cực thấp." },
+                    { need: "🛡️ Uy tín cá nhân", struggle: "Sợ sản phẩm kém chất lượng, bị mang tiếng lừa đảo đa cấp.", solution: "Thảo dược Việt công nghệ sinh học cao (IMC), giấy phép Bộ Công Thương, chuẩn GMP-WHO." },
+                    { need: "🎓 Kỹ năng & Nhân bản", struggle: "Thiếu kỹ năng bán hàng, lo lắng hệ thống dưới khó tự sao chép.", solution: "Giáo trình đào tạo EMC cải tiến tối giản + Landing Page & Phễu tuyển dụng tự động hóa." },
+                    { need: "🤝 Giá trị tinh thần", struggle: "Ngại sự áp lực chạy số ảo, chèo kéo bạn bè; mong muốn văn hóa nhân văn.", solution: "Định vị 'Đồng hành dụng tâm, trí tuệ, nâng đỡ' + Văn hóa 'An vui & Tinh gọn'." }
+                ],
+                pitchTemplates: [
+                    {
+                        title: "📲 Kịch bản tin nhắn tiếp cận nhanh (Mẹ bỉm sữa, Văn phòng)",
+                        content: `Chào bạn,\n\nMình thấy bạn đang quan tâm đến các cơ hội kinh doanh online kiếm thêm thu nhập thụ động đúng không? Bên hệ thống của mình có quy trình khởi nghiệp cực kỳ tinh gọn cho người mới bắt đầu:\n\n1. KHÔNG ÉP DOANH SỐ: Bạn không lo phải ôm hàng hay chôn vốn, bắt đầu cực kỳ an toàn.\n2. QUY TRÌNH EMC RÚT GỌN: Có sẵn bài viết, hình ảnh và cách làm, bạn chỉ việc copy-paste theo hướng dẫn là có thể ra đơn ngay trong ngày.\n3. VẬN HÀNH TỰ ĐỘNG: Tổng kho xử lý hết việc đóng gói và ship hàng, bạn chỉ cần một chiếc điện thoại lúc rảnh.\n\nNếu bạn muốn trải nghiệm thử quy trình 0 đồng này, mình chia sẻ tài liệu qua Zalo nhé!`
+                    },
+                    {
+                        title: "📝 Mẫu tin đăng tuyển dụng Group Cộng đồng / Facebook",
+                        content: `📌 TUYỂN CỘNG TÁC VIÊN KINH DOANH THẢO DƯỢC CÔNG NGHỆ CAO (KHÔNG VỐN - KHÔNG ÔM HÀNG)\n\nBạn là mẹ bỉm sữa hoặc dân văn phòng muốn tận dụng 2 tiếng rảnh rỗi mỗi ngày để tạo thêm thu nhập 5-10 triệu/tháng? \n\n🌿 HỢP TÁC CÙNG VINALINK GROUP:\n❌ Không áp chỉ tiêu doanh số cá nhân - Không lo chôn vốn.\n❌ Không cần tự đóng gói và giao hàng - Tổng kho xử lý tự động.\n✅ Được hỗ trợ Landing Page cá nhân và quy trình EMC "cầm tay chỉ việc" thực chiến.\n✅ Sản phẩm thảo dược Việt Nam đạt chuẩn GMP-WHO uy tín, dễ bán.\n\n👉 Inbox ngay để nhận quy trình chuyển giao miễn phí!`
+                    }
+                ]
+            },
+            {
+                id: "nhom_2",
+                name: "Người Tiêu Dùng Chuyển Đổi",
+                subTitle: "Pháp Sư Chuyển Hóa (Yêu bản chất sản phẩm, muốn lan tỏa tự nhiên)",
+                badge: "Khách Quen, Yêu Sức Khỏe",
+                color: "indigo",
+                themeHex: "#6366f1",
+                description: "Nhóm khách hàng sử dụng sản phẩm thực tế có kết quả xuất sắc, có khao khát lan tỏa giá trị thảo dược nước nhà và muốn tiêu dùng miễn phí.",
+                positioning: { x: 70, y: 35, label: "Trải Nghiệm & Đổi Mới Tâm Sức" },
+                empathy: {
+                    thinkFeel: [
+                        "Nhận thức sâu sắc giá trị bảo vệ sức khỏe chủ động.",
+                        "Yêu thích tinh hoa y học cổ truyền kết hợp công nghệ sinh học cao của Việt Nam.",
+                        "Nhạy cảm về chi phí sử dụng lâu dài hàng tháng.",
+                        "Ngại định kiến xã hội rằng mình lợi dụng bạn bè để 'bán đa cấp trục lợi'."
+                    ],
+                    hear: [
+                        "Người thân khen ngợi cải thiện sức khỏe sau khi dùng ké sản phẩm.",
+                        "Ý kiến chuyên gia, bác sĩ nhấn mạnh phòng bệnh hơn chữa bệnh."
+                    ],
+                    see: [
+                        "Thực trạng ô nhiễm môi trường, thực phẩm bẩn rình rập hàng ngày.",
+                        "Kết quả xét nghiệm lâm sàng bản thân tiến triển tốt sau khi trải nghiệm sản phẩm Vinalink."
+                    ],
+                    sayDo: [
+                        "Nói: 'Sản phẩm này cực tốt, tôi uống thấy hiệu quả kỳ diệu thật, bạn thử dùng xem sao.'",
+                        "Làm: Đăng ký thành viên Khách hàng Thân thiết (KHTT) mua giá sỉ, tự tin chia sẻ câu chuyện thật của gia đình mình."
+                    ],
+                    pains: [
+                        "Chi phí gia đình duy trì đều đặn hàng tháng tương đối lớn so với ví tiền.",
+                        "Không có kiến thức chuyên sâu để giải thích chi tiết cơ chế khoa học phức tạp khi bạn bè thắc mắc.",
+                        "Sợ đánh mất thiện cảm mối quan hệ bạn bè thân thiết lâu năm."
+                    ],
+                    gains: [
+                        "Mua sản phẩm chính hãng chiết khấu sâu nhất từ tổng kho.",
+                        "Tham gia học hỏi từ cộng đồng chia sẻ lối sống xanh, khoa học.",
+                        "Tích lũy hoa hồng gián tiếp từ chia sẻ thật để bù trừ chi phí, hướng tới dùng sản phẩm miễn phí."
+                    ]
+                },
+                vpc: {
+                    jobs: [
+                        "Tối ưu chi phí chăm sóc sức khỏe lâu dài của đại gia đình.",
+                        "Chia sẻ giải pháp cải thiện sức khỏe uy tín giúp đỡ người thân quen.",
+                        "Trở thành một hạt nhân sống khỏe, tích cực trong cộng đồng."
+                    ],
+                    pains: [
+                        "Gánh nặng chi phí sử dụng sản phẩm trường kỳ.",
+                        "Không biết diễn giải chuyên môn y dược phức tạp.",
+                        "Sợ bị hiểu lầm là đi 'lôi kéo, dụ dỗ' trục lợi bè bạn."
+                    ],
+                    gains: [
+                        "Dùng sản phẩm đạt hiệu quả tối đa với chi phí tối thiểu.",
+                        "Nắm bắt kiến thức y học thường thức chuẩn xác.",
+                        "Cảm giác tự hào an lành khi cứu giúp/giới thiệu điều tốt cho mọi người."
+                    ],
+                    products: [
+                        "Đăng ký miễn phí tài khoản Khách hàng Thân thiết (KHTT) hưởng ưu đãi giá sỉ.",
+                        "Các hội thảo chuyên đề sức khỏe thường kỳ chia sẻ bởi bác sĩ chuyên môn.",
+                        "Công thức Storytelling (Kể chuyện chân thực) dễ ứng dụng của hệ thống EMC."
+                    ],
+                    painRelievers: [
+                        "Không yêu cầu trữ hàng, đóng gói hay giao nhận; hệ thống logistics tự động xử lý trực tiếp.",
+                        "Doanh số mua của khách hàng thân thiết được tích lũy thẳng vào mã số, tối ưu điểm thưởng.",
+                        "Giáo trình chăm sóc sức khỏe tinh gọn giúp tự học nhanh chóng."
+                    ],
+                    gainCreators: [
+                        "Chính sách dùng hoa hồng hệ thống bù đắp đơn hàng tiêu dùng cá nhân (Dùng sản phẩm 0 đồng).",
+                        "Môi trường văn hóa giao lưu nâng đỡ tinh thần 'An vui & Tinh gọn'.",
+                        "Mô hình hỗ trợ tư vấn chéo 2-1 trực tiếp từ các cố vấn sức khỏe chuyên sâu (Upline)."
+                    ]
+                },
+                fitMatrix: [
+                    { need: "💸 Gánh nặng chi phí", struggle: "Chi phí gia đình duy trì đều đặn hàng tháng tương đối lớn so với ví tiền.", solution: "Tích lũy điểm nhận hoa hồng tự nhiên từ chia sẻ, hướng tới dùng sản phẩm miễn phí (0 đồng)." },
+                    { need: "🔬 Chuyên môn y dược", struggle: "Không biết diễn giải chuyên môn y dược phức tạp khi bạn bè thắc mắc.", solution: "Giáo trình sức khỏe tinh gọn dễ học + Các buổi chia sẻ từ bác sĩ chuyên môn." },
+                    { need: "🤝 Định kiến xã hội", struggle: "Sợ bị hiểu lầm là đi 'lôi kéo, dụ dỗ' trục lợi bè bạn.", solution: "Không cần đóng gói/giao hàng/thu tiền (logistics VPOL tự động) + Chia sẻ tự nhiên theo Storytelling." },
+                    { need: "🤝 Giá trị tinh thần", struggle: "Ngại sự áp lực chạy số ảo, chèo kéo bạn bè; mong muốn văn hóa nhân văn.", solution: "Định vị 'Đồng hành dụng tâm, trí tuệ, nâng đỡ' + Văn hóa 'An vui & Tinh gọn'." }
+                ],
+                pitchTemplates: [
+                    {
+                        title: "🗣️ Kịch bản hội thoại trực tiếp / Chia sẻ tự nhiên (Storytelling)",
+                        content: `(Sau khi người quen hỏi thăm về sức khỏe hoặc khen ngợi sự cải thiện của mình/người thân)\n\n"Thực sự là đợt trước mình dùng sản phẩm thảo dược công nghệ sinh học của Vinalink này thấy cải thiện rõ rệt quá nên mới duy trì dùng đều đặn. \n\nMình thấy sản phẩm Việt Nam công nghệ cao thế này rất đáng dùng, mà lại được đăng ký tài khoản Khách hàng Thân thiết (KHTT) miễn phí mua giá sỉ trực tiếp từ công ty luôn, không qua trung gian nên rất an tâm.\n\nHơn nữa, khi mình chia sẻ trải nghiệm thật cho bạn bè và họ cũng tự mở mã mua hàng giống mình, công ty tự động trích hoa hồng gián tiếp tích lũy vào tài khoản cho mình. Nhờ vậy mà giờ mình toàn được dùng sản phẩm miễn phí (0 đồng) đấy. \n\nĐể mình gửi link mở tài khoản miễn phí trực tiếp từ tổng kho công ty cho bạn tự đặt mua dùng thử nhé, giá sỉ tốt lắm!"`
+                    }
+                ]
+            },
+            {
+                id: "nhom_3",
+                name: "Doanh Chủ Hệ Thống / Thủ Lĩnh Chuyên Nghiệp",
+                subTitle: "Chiến Binh Chinh Phục (Khao khát tạo lập giang sơn tài chính thụ động thực sự)",
+                badge: "Leader MLM, Chủ Doanh Nghiệp",
+                color: "amber",
+                themeHex: "#f59e0b",
+                description: "Các thủ lĩnh hệ thống giàu kinh nghiệm bán hàng/bảo hiểm, khát khao làm chủ mô hình dòng tiền thụ động vững chãi, không ly khai tách nhánh.",
+                positioning: { x: 50, y: 15, label: "Kiểm Soát Cao & Phát Triển Rộng" },
+                empathy: {
+                    thinkFeel: [
+                        "Khao khát xây dựng doanh nghiệp dòng tiền bền vững lên tới hàng trăm triệu mỗi tháng.",
+                        "Rất lo lắng nguy cơ hệ thống đổ gãy do chính sách tách nhánh ly khai khốc liệt của các hãng MLM lớn.",
+                        "Đòi hỏi nền tảng pháp lý tối thượng, chuẩn sạch tại Việt Nam để bảo vệ sự nghiệp trọn đời và thừa kế."
+                    ],
+                    hear: [
+                        "Đồng nghiệp than thở gãy rụng nhóm do áp lực doanh số nhóm quá ngột ngạt.",
+                        "Vấn nạn bán phá giá, bán lén, cạnh tranh nội bộ bẩn thỉu tàn phá hệ thống."
+                    ],
+                    see: [
+                        "Các tập đoàn MLM nước ngoài liên tục vướng giấy phép hoặc thay đổi cơ chế bất thình lình tước đoạt quyền lợi NPP.",
+                        "Xuuyên hướng bùng nổ của thị trường chăm sóc sức khỏe tự nhiên nội địa Việt Nam."
+                    ],
+                    sayDo: [
+                        "Nói về bản đồ tầm nhìn, định hướng chiến lược đào tạo, phát triển tổ chức.",
+                        "Làm: Nghiên cứu kỹ lưỡng sơ đồ trả thưởng, lập kế hoạch ngân sách, tích cực chiêu mộ hiền tài cốt cán và xây dựng giáo trình đào tạo bài bản."
+                    ],
+                    pains: [
+                        "Cơ chế ly khai (tuyến dưới thăng cấp giỏi hơn sẽ bị tách nhánh khiến mất đi nguồn thu lớn).",
+                        "Nạn bán phá giá thị trường do hệ thống dưới bị ép ôm hàng để giữ danh hiệu ảo.",
+                        "Rủi ro mất trắng cơ nghiệp tích lũy nhiều năm do công ty đối tác thiếu cam kết pháp lý lâu dài."
+                    ],
+                    gains: [
+                        "Sơ đồ vận hành thông minh cộng dồn doanh số trọn đời bảo toàn thành quả.",
+                        "Hệ thống công cụ chuyển đổi số hiện đại tự động hóa quản trị hàng ngàn thành viên.",
+                        "Hệ giá trị văn hóa gắn kết bền chặt thu hút nhân tài thực thụ hướng thượng."
+                    ]
+                },
+                vpc: {
+                    jobs: [
+                        "Xây dựng kỳ quan hệ thống phân phối lớn phát sinh dòng tiền thụ động vô hạn.",
+                        "Thăng hạng các vị trí đỉnh cao (Crown Diamond/Ambassador) khẳng định tầm vóc thủ lĩnh.",
+                        "Kiến tạo di sản kinh doanh vững chắc, có tính thừa kế hợp pháp cho thế hệ con cháu."
+                    ],
+                    pains: [
+                        "Rủi ro gãy nhánh, ly khai mất thu nhập thụ động khi tuyến dưới bứt phá xuất sắc.",
+                        "Chi phí vận hành cồng kềnh, mệt mỏi xử lý tàn dư từ vấn nạn ôm hàng phá giá.",
+                        "Nền tảng kỹ thuật số của hệ thống lỗi thời làm hạn chế tốc độ nhân bản quy mô lớn."
+                    ],
+                    gains: [
+                        "Bảo tồn trọn vẹn nhánh mạnh thông qua cơ chế tích lũy cộng hưởng.",
+                        "Giải phóng sức lao động cá nhân nhờ quy trình tự động hóa nhân bản hoàn hảo.",
+                        "Quy tụ cộng đồng nhân tài bền chặt nhờ văn hóa chính trực nhân văn."
+                    ],
+                    products: [
+                        "Sơ đồ trả thưởng nhị phân lai mặt trời được Bộ Công Thương phê chuẩn nghiêm ngặt.",
+                        "Mô hình huấn luyện sao chép EMC tự động hóa toàn diện.",
+                        "Nền tảng số hóa VPOL đồng bộ cùng kho Landing Page phễu thông minh."
+                    ],
+                    painRelievers: [
+                        "Chính sách không ly khai: Hưởng Matching Bonus sâu từ F1 đến F5 đảm bảo thu nhập cộng hưởng cực lớn từ tuyến dưới siêu việt.",
+                        "Tích lũy cộng dồn doanh số nhóm trọn đời giữ vững danh vị không lo hạ bậc.",
+                        "Năng động cực thấp kết hợp gom doanh số khách hàng sỉ giúp triệt hạ tận gốc áp lực chôn vốn phá giá."
+                    ],
+                    gainCreators: [
+                        "Bản đồ lộ trình phát triển doanh chủ 3 năm an vui mang tính dẫn dắt tầm cao.",
+                        "Chia sẻ Quỹ Lãnh Đạo Toàn Quốc 4% doanh số toàn quốc cùng đặc quyền nhận Mercedes-Benz.",
+                        "Hỗ trợ hệ thống phễu công nghệ tuyển dụng thu hút lead tự động giúp tối ưu năng suất tuyển F1."
+                    ]
+                },
+                fitMatrix: [
+                    { need: "📉 Rủi ro gãy rụng", struggle: "Cơ chế ly khai làm gãy nhánh, mất thu nhập thụ động khi tuyến dưới thăng cấp giỏi vượt bậc.", solution: "Sơ đồ Nhị phân lai Mặt trời KHÔNG LY KHAI, hưởng Matching Bonus sâu F1-F5 cộng hưởng thu nhập." },
+                    { need: "📦 Áp lực doanh số", struggle: "Chi phí vận hành cồng kềnh, mệt mỏi xử lý tàn dư từ vấn nạn ôm hàng phá giá.", solution: "Tích lũy cộng dồn doanh số nhóm trọn đời giữ danh vị không hạ cấp + Năng động cá nhân cực thấp." },
+                    { need: "⚙️ Nhân bản quy mô", struggle: "Nền tảng kỹ thuật số lỗi thời làm hạn chế tốc độ nhân bản xuống các tầng sâu.", solution: "Hệ thống phễu công nghệ tuyển dụng thu hút lead tự động + Nền tảng số hóa VPOL đồng bộ." },
+                    { need: "🤝 Giá trị tinh thần", struggle: "Ngại sự áp lực chạy số ảo, chèo kéo bạn bè; mong muốn văn hóa nhân văn.", solution: "Định vị 'Đồng hành dụng tâm, trí tuệ, nâng đỡ' + Văn hóa 'An vui & Tinh gọn'." }
+                ],
+                pitchTemplates: [
+                    {
+                        title: "👔 Kịch bản tiếp cận thủ lĩnh MLM / Kinh doanh bảo hiểm / Doanh chủ",
+                        content: `Chào anh/chị,\n\nVới kinh nghiệm xây dựng hệ thống lớn của anh/chị, em rất muốn thảo luận về một mô hình trả thưởng và vận hành cực kỳ nhân văn và giải phóng sức lao động tại Vinalink hiện nay:\n\n1. SƠ ĐỒ KHÔNG LY KHAI: Dù tuyến dưới có phát triển giỏi vượt cấp, họ vẫn thuộc trực hệ của anh/chị. Matching Bonus hưởng sâu từ F1 đến F5 trên thu nhập chu kỳ của họ, bảo toàn dòng tiền thụ động trọn đời cho anh/chị.\n2. CỘNG DỒN DOANH SỐ TRỌN ĐỜI: Danh hiệu nhóm được cộng dồn lũy kế qua các tháng và không bao giờ bị hạ cấp, giúp triệt tiêu hoàn toàn áp lực chạy số ảo hay ép tuyến dưới ôm hàng.\n3. HỆ THỐNG VPOL SỐ HÓA: Quản trị tự động quy mô hàng ngàn người, quy trình sao chép EMC cải tiến giúp nhân bản cực nhanh xuống các tầng sâu mà không tốn sức hỗ trợ trực tiếp.\n\nEm rất hy vọng được trao đổi sâu hơn về lộ trình 3 năm xây dựng dòng tiền thụ động tỷ đồng cùng anh/chị. Chúng ta hẹn gặp trực tiếp hoặc qua Zoom tối nay nhé!`
+                    }
+                ]
+            }
+        ];
+
+        function App() {
+            const [selectedGroup, setSelectedGroup] = useState("nhom_1");
+            const [currentTab, setCurrentTab] = useState("empathy"); // "empathy" | "vpc" | "mapping" | "matrix" | "pitch-templates"
+            const [matchedPair, setMatchedPair] = useState({ type: null, index: null });
+
+            const activeData = useMemo(() => {
+                return ARCHETYPES_DATA.find(g => g.id === selectedGroup);
+            }, [selectedGroup]);
+
+            const copyToClipboard = (text) => {
+                const tempTextArea = document.createElement("textarea");
+                tempTextArea.value = text;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempTextArea);
+                alert("Đã sao chép nội dung vào bộ nhớ tạm!");
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col bg-[#0b0f19] text-gray-100 selection:bg-emerald-500 selection:text-white">
+                    {/* Header bar */}
+                    <header className="border-b border-gray-800 bg-[#0e1726]/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/30 text-emerald-400">
+                                <Icons.Target />
+                            </div>
+                            <div>
+                                <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
+                                    Vinalink F1 Strategy Hub
+                                </h1>
+                                <p className="text-xs text-gray-400 font-medium">Phân Tích Chân Dung & Định Vị Giá Trị Khách Hàng Tuyển Dụng</p>
+                            </div>
+                        </div>
+                        <div className="text-right text-xs text-emerald-400 font-bold bg-emerald-500/5 border border-emerald-500/10 px-3 py-1.5 rounded-lg">
+                            ☕ Văn Hóa An Vui & Tinh Gọn
+                        </div>
+                    </header>
+
+                    {/* Main Content Area */}
+                    <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        
+                        {/* Left Sidebar: Archetype Selector */}
+                        <div className="lg:col-span-3 flex flex-col gap-4">
+                            <div className="bg-[#111a2e] rounded-xl p-4 border border-gray-800">
+                                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <Icons.Brain /> Chọn Nhóm Chân Dung
+                                </h3>
+                                <div className="space-y-3">
+                                    {ARCHETYPES_DATA.map((group) => {
+                                        const isSelected = selectedGroup === group.id;
+                                        const activeColors = 
+                                            group.color === 'emerald' ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.05)]' :
+                                            group.color === 'indigo' ? 'border-indigo-500/50 bg-indigo-500/10 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.05)]' :
+                                            'border-amber-500/50 bg-amber-500/10 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.05)]';
+                                        
+                                        return (
+                                            <button
+                                                key={group.id}
+                                                onClick={() => setSelectedGroup(group.id)}
+                                                className={`w-full text-left p-3.5 rounded-xl border transition-all duration-300 focus:outline-none ${
+                                                    isSelected 
+                                                        ? activeColors 
+                                                        : 'border-gray-800/80 bg-gray-900/40 hover:bg-gray-800/40 text-gray-400 hover:text-gray-300'
+                                                }`}
+                                            >
+                                                <div className="flex justify-between items-center mb-1">
+                                                    <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/40 text-gray-300">
+                                                        {group.badge}
+                                                    </span>
+                                                    <span className={`w-2 h-2 rounded-full ${
+                                                        group.color === 'emerald' ? 'bg-emerald-500' :
+                                                        group.color === 'indigo' ? 'bg-indigo-500' : 'bg-amber-500'
+                                                    }`} />
+                                                </div>
+                                                <h4 className="font-semibold text-sm leading-tight">{group.name}</h4>
+                                                <p className="text-[11px] text-gray-400 mt-1 line-clamp-2">{group.description}</p>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                            {/* PROJECT INFO SUMMARY CARD */}
+                            <div className="bg-[#111a2e]/60 rounded-xl p-4 border border-gray-800 text-xs text-gray-400 space-y-2">
+                                <p className="font-semibold text-gray-300 border-b border-gray-800 pb-1.5 mb-1.5">Thông tin dự án</p>
+                                <div className="flex justify-between"><span>Dự án:</span> <span className="text-gray-200 font-medium">Tuyển dụng F1 Vinalink</span></div>
+                                <div className="flex justify-between"><span>Triết lý:</span> <span className="text-emerald-400 font-medium">Lean Customer Discovery</span></div>
+                                <div className="flex justify-between"><span>Cập nhật:</span> <span className="text-gray-200">20-07-2026</span></div>
+                            </div>
+                        </div>
+
+                        {/* Right Area: Framework Tabs and Visualizers */}
+                        <div className="lg:col-span-9 flex flex-col gap-6">
+                            
+                            {/* Navigation Tabs */}
+                            <div className="flex flex-wrap items-center bg-[#111a2e] p-1.5 rounded-xl border border-gray-800 gap-1">
+                                <button 
+                                    onClick={() => setCurrentTab("empathy")}
+                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "empathy" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Brain /> Bản Đồ Thấu Cảm
+                                </button>
+                                <button 
+                                    onClick={() => setCurrentTab("vpc")}
+                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "vpc" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Zap /> Khung Định Vị Giá Trị (VPC)
+                                </button>
+                                <button 
+                                    onClick={() => setCurrentTab("mapping")}
+                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "mapping" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Compass /> Bản Đồ Định Vị (Mapping)
+                                </button>
+                                <button 
+                                    onClick={() => setCurrentTab("matrix")}
+                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "matrix" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.UserCheck /> Ma Trận Trùng Khớp
+                                </button>
+                                <button 
+                                    onClick={() => setCurrentTab("pitch-templates")}
+                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "pitch-templates" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "text-gray-400 hover:text-gray-200"}`}
+                                >
+                                    <Icons.Sparkles /> Mẫu Bản Pitch Tuyển Dụng
+                                </button>
+                            </div>
+
+                            {/* Main Board Container */}
+                            <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl relative overflow-hidden min-h-[480px]">
+                                <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b" style={{ backgroundImage: `linear-gradient(to bottom, ${activeData.themeHex}, transparent)` }} />
+                                
+                                {/* Info Banner for Active Persona */}
+                                <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800/80 pb-4 gap-4">
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-800 text-gray-300 border border-gray-700">
+                                                Đối tượng khảo sát
+                                            </span>
+                                            <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Vinalink Core F1
+                                            </span>
+                                        </div>
+                                        <h2 className="text-2xl font-bold tracking-tight text-white">{activeData.name}</h2>
+                                        <p className="text-xs text-gray-400 font-medium mt-0.5 italic">{activeData.subTitle}</p>
+                                    </div>
+                                    <div className="text-right text-xs text-gray-400">
+                                        Triết lý cốt lõi: <span className="font-bold text-gray-200">An vui & Tinh gọn</span>
+                                    </div>
+                                </div>
+
+                                {/* TAB 1: EMPATHY MAP (4-Quadrants Layout) */}
+                                {currentTab === "empathy" && (
+                                    <div className="space-y-6">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {/* Think & Feel */}
+                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
+                                                <h4 className="font-bold text-sm text-indigo-400 mb-3 flex items-center gap-1.5">
+                                                    💭 NGHĨ & CẢM THẤY (Think & Feel)
+                                                </h4>
+                                                <ul className="space-y-2 text-xs text-gray-300">
+                                                    {activeData.empathy.thinkFeel.map((item, i) => (
+                                                        <li key={i} className="flex items-start gap-2">
+                                                            <span className="text-indigo-400 mt-0.5">•</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                            {/* See */}
+                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
+                                                <h4 className="font-bold text-sm text-emerald-400 mb-3 flex items-center gap-1.5">
+                                                    👁️ NHÌN THẤY (See)
+                                                </h4>
+                                                <ul className="space-y-2 text-xs text-gray-300">
+                                                    {activeData.empathy.see.map((item, i) => (
+                                                        <li key={i} className="flex items-start gap-2">
+                                                            <span className="text-emerald-400 mt-0.5">•</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                            {/* Hear */}
+                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
+                                                <h4 className="font-bold text-sm text-amber-400 mb-3 flex items-center gap-1.5">
+                                                    👂 NGHE THẤY (Hear)
+                                                </h4>
+                                                <ul className="space-y-2 text-xs text-gray-300">
+                                                    {activeData.empathy.hear.map((item, i) => (
+                                                        <li key={i} className="flex items-start gap-2">
+                                                            <span className="text-amber-400 mt-0.5">•</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                            {/* Say & Do */}
+                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
+                                                <h4 className="font-bold text-sm text-pink-400 mb-3 flex items-center gap-1.5">
+                                                    🗣️ NÓI & LÀM (Say & Do)
+                                                </h4>
+                                                <ul className="space-y-2 text-xs text-gray-300">
+                                                    {activeData.empathy.sayDo.map((item, i) => (
+                                                        <li key={i} className="flex items-start gap-2">
+                                                            <span className="text-pink-400 mt-0.5">•</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        {/* Bottom split: Pains & Gains */}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-gray-800/80 pt-4">
+                                            {/* Pains */}
+                                            <div className="bg-red-500/5 rounded-xl p-4 border border-red-500/10 hover:border-red-500/20 transition duration-300">
+                                                <h4 className="font-bold text-sm text-red-400 mb-3 flex items-center gap-1.5">
+                                                    💥 NỖI ĐAU (Pains / Frustrations)
+                                                </h4>
+                                                <ul className="space-y-2 text-xs text-red-200/95">
+                                                    {activeData.empathy.pains.map((item, i) => (
+                                                        <li key={i} className="flex items-start gap-2">
+                                                            <span className="text-red-400 mt-0.5">⚠️</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                            {/* Gains */}
+                                            <div className="bg-emerald-500/5 rounded-xl p-4 border border-emerald-500/10 hover:border-emerald-500/20 transition duration-300">
+                                                <h4 className="font-bold text-sm text-emerald-400 mb-3 flex items-center gap-1.5">
+                                                    🏆 MONG MUỐN (Gains / Aspirations)
+                                                    <Icons.Sparkles />
+                                                </h4>
+                                                <ul className="space-y-2 text-xs text-emerald-200/95">
+                                                    {activeData.empathy.gains.map((item, i) => (
+                                                        <li key={i} className="flex items-start gap-2">
+                                                            <span className="text-emerald-400 mt-0.5">⭐</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* TAB 2: VALUE PROPOSITION CANVAS (VPC) */}
+                                {currentTab === "vpc" && (
+                                    <div className="space-y-6">
+                                        <p className="text-xs text-gray-400 italic mb-2">
+                                            💡 Mẹo tương tác: Rê chuột vào từng ô bất kỳ để xem phân tích trùng khớp giải pháp (Fit Matrix) tự động phát sáng!
+                                        </p>
+                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative">
+                                            
+                                            {/* LEFT SIDE: Customer Profile */}
+                                            <div className="bg-[#0f172a]/80 p-5 rounded-2xl border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.05)] relative">
+                                                <div className="absolute top-3 right-3 text-[10px] font-extrabold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full uppercase">
+                                                    Hồ sơ khách hàng
+                                                </div>
+                                                <h3 className="text-base font-bold text-blue-300 mb-4 flex items-center gap-2">
+                                                    👤 CUSTOMER PROFILE
+                                                </h3>
+
+                                                <div className="space-y-4">
+                                                    {/* Jobs to be done */}
+                                                    <div 
+                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'jobs' ? 'bg-blue-500/15 border-blue-400' : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/30'}`}
+                                                        onMouseEnter={() => setMatchedPair({ type: 'jobs', index: 0 })}
+                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
+                                                    >
+                                                        <h4 className="text-xs font-bold text-blue-300 mb-1.5 uppercase tracking-wide">💼 Việc Cần Làm (Jobs-to-be-Done)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-gray-300">
+                                                            {activeData.vpc.jobs.map((item, i) => <li key={i}>• {item}</li>)}
+                                                        </ul>
+                                                    </div>
+
+                                                    {/* Pains */}
+                                                    <div 
+                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'pains' ? 'bg-red-500/15 border-red-400' : 'bg-gray-900/50 border-gray-800 hover:border-red-500/30'}`}
+                                                        onMouseEnter={() => setMatchedPair({ type: 'pains', index: 0 })}
+                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
+                                                    >
+                                                        <h4 className="text-xs font-bold text-red-300 mb-1.5 uppercase tracking-wide">💥 Nỗi Đau Khách Hàng (Customer Pains)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-red-200">
+                                                            {activeData.vpc.pains.map((item, i) => <li key={i}>• {item}</li>)}
+                                                        </ul>
+                                                    </div>
+
+                                                    {/* Gains */}
+                                                    <div 
+                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'gains' ? 'bg-emerald-500/15 border-emerald-400' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
+                                                        onMouseEnter={() => setMatchedPair({ type: 'gains', index: 0 })}
+                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
+                                                    >
+                                                        <h4 className="text-xs font-bold text-emerald-300 mb-1.5 uppercase tracking-wide">🏆 Mong Muốn Đạt Được (Customer Gains)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-emerald-200">
+                                                            {activeData.vpc.gains.map((item, i) => <li key={i}>• {item}</li>)}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* RIGHT SIDE: Value Map */}
+                                            <div className="bg-[#0f172a]/80 p-5 rounded-2xl border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.05)] relative">
+                                                <div className="absolute top-3 right-3 text-[10px] font-extrabold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full uppercase">
+                                                    Bản đồ giá trị hệ thống
+                                                </div>
+                                                <h3 className="text-base font-bold text-emerald-300 mb-4 flex items-center gap-2">
+                                                    📦 VALUE PROPOSITION (VINALINK)
+                                                </h3>
+
+                                                <div className="space-y-4">
+                                                    {/* Products & Services */}
+                                                    <div 
+                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'jobs' ? 'bg-blue-500/15 border-blue-400 scale-[1.02] shadow-lg' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
+                                                        onMouseEnter={() => setMatchedPair({ type: 'jobs', index: 0 })}
+                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
+                                                    >
+                                                        <h4 className="text-xs font-bold text-blue-300 mb-1.5 uppercase tracking-wide">🛒 Sản phẩm & Dịch vụ (Products & Services)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-gray-300">
+                                                            {activeData.vpc.products.map((item, i) => <li key={i}>• {item}</li>)}
+                                                        </ul>
+                                                    </div>
+
+                                                    {/* Pain Relievers */}
+                                                    <div 
+                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'pains' ? 'bg-red-500/15 border-red-400 scale-[1.02] shadow-lg' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
+                                                        onMouseEnter={() => setMatchedPair({ type: 'pains', index: 0 })}
+                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
+                                                    >
+                                                        <h4 className="text-xs font-bold text-red-300 mb-1.5 uppercase tracking-wide">🛡️ Bộ Giải Quyết Nỗi Đau (Pain Relievers)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-emerald-200">
+                                                            {activeData.vpc.painRelievers.map((item, i) => <li key={i}>• {item}</li>)}
+                                                        </ul>
+                                                    </div>
+
+                                                    {/* Gain Creators */}
+                                                    <div 
+                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'gains' ? 'bg-emerald-500/15 border-emerald-400 scale-[1.02] shadow-lg' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
+                                                        onMouseEnter={() => setMatchedPair({ type: 'gains', index: 0 })}
+                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
+                                                    >
+                                                        <h4 className="text-xs font-bold text-emerald-300 mb-1.5 uppercase tracking-wide">🚀 Bộ Tạo Lợi Ích (Gain Creators)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-emerald-200">
+                                                            {activeData.vpc.gainCreators.map((item, i) => <li key={i}>• {item}</li>)}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Dynamic connection indicator */}
+                                        {matchedPair.type && (
+                                            <div className="bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-xs text-emerald-300 animate-pulse text-center">
+                                                🔗 Phát hiện Trùng Khớp (VPC FIT): Vinalink giải quyết trực diện khía cạnh <strong>{matchedPair.type === 'jobs' ? 'Công Việc Của Khách Hàng' : matchedPair.type === 'pains' ? 'Nỗi Đau' : 'Mong Muốn'}</strong> bằng hệ thống đặc thù của mình!
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* TAB 3: PERCEPTUAL MAPPING */}
+                                {currentTab === "mapping" && (
+                                    <div className="space-y-6">
+                                        <div className="bg-[#0f172a] rounded-2xl border border-gray-800 p-6 flex flex-col items-center">
+                                            <h4 className="text-sm font-bold text-gray-300 mb-2 text-center uppercase tracking-wider">
+                                                Bản Đồ Định Vị Tâm Lý Học Hành Vi Khách Hàng (Vinalink Việt Nam)
+                                            </h4>
+                                            <p className="text-xs text-gray-400 max-w-xl text-center mb-6">
+                                                Tọa độ định vị dựa trên trục hoành (Tính Thực Tế Hành Động vs. Tính Trải Nghiệm Đổi Mới) và trục tung (Xu hướng Kiểm Soát vs. Xu hướng Linh Hoạt Tự Do).
+                                            </p>
+
+                                            {/* Core Coordinates Grid */}
+                                            <div className="relative w-full max-w-[500px] h-[350px] bg-[#0c101d] rounded-xl border border-gray-800 flex items-center justify-center">
+                                                
+                                                {/* Y Axis line */}
+                                                <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-gray-700/60" />
+                                                {/* X Axis line */}
+                                                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gray-700/60" />
+
+                                                {/* Axis Labels */}
+                                                <span className="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                                    Kiểm Soát Cao (Sắp đặt hệ thống)
+                                                </span>
+                                                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                                    Linh Hoạt (Hành động tự phát)
+                                                </span>
+                                                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">
+                                                    Trải Nghiệm & Đổi Mới 👉
+                                                </span>
+                                                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                                    👈 Thực Tế & An Toàn
+                                                </span>
+
+                                                {/* Plotting points */}
+                                                {ARCHETYPES_DATA.map((item) => {
+                                                    const isSelected = item.id === selectedGroup;
+                                                    const colorClass = 
+                                                        item.color === 'emerald' ? 'bg-emerald-500 text-emerald-200 border-emerald-400 shadow-emerald-500/20' :
+                                                        item.color === 'indigo' ? 'bg-indigo-500 text-indigo-200 border-indigo-400 shadow-indigo-500/20' :
+                                                        'bg-amber-500 text-amber-200 border-amber-400 shadow-amber-500/20';
+
+                                                    return (
+                                                        <div 
+                                                            key={item.id}
+                                                            className={`absolute flex flex-col items-center z-10 transition-all duration-500 cursor-pointer ${isSelected ? 'scale-110' : 'opacity-60 hover:opacity-100'}`}
+                                                            style={{ left: `${item.positioning.x}%`, top: `${item.positioning.y}%` }}
+                                                            onClick={() => setSelectedGroup(item.id)}
+                                                        >
+                                                            <div className={`px-2.5 py-1.5 rounded-lg border-2 text-[10px] font-bold shadow-lg ${colorClass}`}>
+                                                                {item.badge}
+                                                            </div>
+                                                            <span className="text-[9px] text-gray-400 font-medium mt-1 bg-black/80 px-1 py-0.5 rounded border border-gray-800">
+                                                                {item.positioning.label}
+                                                            </span>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+
+                                            {/* Summary text underneath mapping */}
+                                            <div className="mt-4 bg-[#172237]/50 p-3.5 rounded-xl border border-gray-800/80 text-xs text-gray-300 max-w-xl text-center">
+                                                📍 <span className="font-semibold text-emerald-400">{activeData.name}</span> nằm ở góc phân khúc <span className="font-semibold text-white">{activeData.positioning.label}</span>. Định hướng chiến dịch tuyển dụng nên bám sát hệ giá trị thực chiến trực diện của nhóm này.
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* TAB 4: MA TRẬN TRÙNG KHỚP (Fit Matrix) - DYNAMIC VERSION */}
+                                {currentTab === "matrix" && (
+                                    <div className="space-y-6 overflow-x-auto animate-fadeIn">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <span className="text-xs text-gray-400 italic">
+                                                📊 Ma trận trùng khớp đặc thù cho chân dung: <strong className="text-emerald-400">{activeData.name}</strong>
+                                            </span>
+                                        </div>
+                                        <table className="w-full text-left text-xs border-collapse">
+                                            <thead>
+                                                <tr className="border-b border-gray-800 text-gray-400 uppercase tracking-wider">
+                                                    <th className="py-3 px-4 font-bold w-1/4">Khía Cạnh Đánh Giá</th>
+                                                    <th className="py-3 px-4 font-bold w-3/8">Chi Tiết Rào Cản (Struggle)</th>
+                                                    <th className="py-3 px-4 font-bold w-3/8">Giải Pháp Vinalink Định Vị (Fit)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-800/60">
+                                                {activeData.fitMatrix.map((row, idx) => (
+                                                    <tr key={idx} className="hover:bg-gray-800/20 transition-all">
+                                                        <td className="py-4 px-4 font-semibold text-emerald-300">{row.need}</td>
+                                                        <td className="py-4 px-4 text-gray-300">{row.struggle}</td>
+                                                        <td className="py-4 px-4 text-emerald-400 font-medium bg-emerald-500/5 rounded">{row.solution}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
+
+                                {/* TAB 5: PITCH TEMPLATES (MANUAL PITCH GENERATOR) */}
+                                {currentTab === "pitch-templates" && (
+                                    <div className="space-y-6">
+                                        <div className="bg-[#0f172a] rounded-xl border border-gray-800 p-5 space-y-6">
+                                            <div>
+                                                <h4 className="font-bold text-sm text-emerald-400 flex items-center gap-1.5">
+                                                    <Icons.Sparkles /> Mẫu Bản Pitch Tuyển Dụng (Sao chép nhanh)
+                                                </h4>
+                                                <p className="text-[11px] text-gray-400 mt-0.5">Các mẫu kịch bản tiếp cận và tin đăng được thiết kế dựa trên đúng nỗi đau và giải pháp trùng khớp cho chân dung: <strong className="text-white">{activeData.name}</strong></p>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                {activeData.pitchTemplates.map((template, idx) => (
+                                                    <div key={idx} className="bg-[#070b13] rounded-xl border border-gray-800 p-4 relative">
+                                                        <div className="flex justify-between items-center mb-2 pb-2 border-b border-gray-800/80">
+                                                            <h5 className="font-bold text-xs text-indigo-300 flex items-center gap-1.5">
+                                                                {template.title}
+                                                            </h5>
+                                                            <button 
+                                                                onClick={() => copyToClipboard(template.content)}
+                                                                className="p-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700/60 rounded-md text-gray-300 hover:text-white transition duration-200 flex items-center gap-1 text-[10px] font-bold"
+                                                                title="Sao chép bản pitch"
+                                                            >
+                                                                <Icons.Download /> Sao chép
+                                                            </button>
+                                                        </div>
+                                                        <pre className="text-xs text-gray-300 whitespace-pre-wrap font-sans leading-relaxed pr-6 select-all">
+                                                            {template.content}
+                                                        </pre>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </main>
+
+                    {/* Footer bar */}
+                    <footer className="border-t border-gray-800/80 bg-[#070b13] py-4 text-center text-xs text-gray-500">
+                        <p>© 2026 Vinalink Hub - Hệ Thống An Vui & Tinh Gọn. Nghiên cứu & Định vị bởi Nhà phân tích 10 năm kinh nghiệm.</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
