@@ -482,7 +482,7 @@
             const handleAdminLogin = async (e) => {
                 e.preventDefault();
                 const hash = await sha256(passwordInput);
-                if (hash === "e405f6c8d76d4dbdcf7c089cc5cf4eb8db757732a39281a1a5df80210f443b71") {
+                if (hash === "7134e62c3f9841a77a71c08f222d9c66e0d315f8a7067a29fe61d7f3b3423107") {
                     setIsAdmin(true);
                     localStorage.setItem("sihub_is_admin", "true");
                     setShowLoginModal(false);
