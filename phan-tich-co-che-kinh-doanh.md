@@ -1,4 +1,4 @@
-﻿# Báo cáo Phân tích Cơ chế Kinh doanh và Sơ đồ Trả thưởng EMC - Vinalink Group
+# Báo cáo Phân tích Cơ chế Kinh doanh và Sơ đồ Trả thưởng EMC - Vinalink Group
 
 Báo cáo này tập trung phân tích sâu và bóc tách cơ chế vận hành hệ thống của Vinalink Group dựa trên tài liệu Cẩm nang Dự án Liên Kết Nhiệm Màu nhằm phục vụ việc lập kế hoạch kinh doanh 3 năm cho Doanh chủ.
 
@@ -75,9 +75,12 @@ Vinalink Group thiết lập một mô hình kinh doanh phân phối tinh gọn 
   - Nhận ngay **25% CV** từ các đơn hàng của F1 (từ 1.000 CV đến 4.000 CV).
   - Khi F1 kích hoạt gói Vàng (10.000 CV): Doanh chủ cấp bậc Đồng/Bạc nhận trần **1.000 CV** (1.000.000 VNĐ); Doanh chủ cấp bậc Vàng nhận trần **2.000 CV** (2.000.000 VNĐ).
 * **Hoa hồng cộng hưởng (Matching Bonus)**:
-
-  - Hưởng phần trăm trên thu nhập hoa hồng chu kỳ của các thế hệ F1 $\rightarrow$ F5 trực hệ (F1, F2: 10%; F3, F4, F5: 5% tùy thuộc vào danh hiệu).
-  - *Ý nghĩa*: Khuyến khích doanh chủ đồng hành đào tạo, giúp đỡ tuyến dưới tạo ra thu nhập, tránh tình trạng "ly khai hệ thống" khi tuyến dưới vượt cấp. Dù tuyến dưới có giỏi hơn doanh chủ, họ vẫn thuộc sơ đồ và đem lại dòng tiền cộng hưởng trọn đời cho doanh chủ.
+  * **Cơ cấu hưởng theo Danh hiệu và Doanh số nhánh Yếu tháng trước:**
+    * **Director, Ruby, Emerald:** Nhánh yếu tháng trước đạt từ **85.000 CV** $\rightarrow$ Hưởng **10%** hoa hồng chu kỳ nhóm của F1 và F2.
+    * **Diamond, Blue Diamond, Black Diamond:** Nhánh yếu tháng trước đạt từ **300.000 CV** $\rightarrow$ Hưởng **10%** của F1, F2 và **5%** của F3.
+    * **Crown Diamond:** Nhánh yếu tháng trước đạt từ **700.000 CV** $\rightarrow$ Hưởng **10%** của F1, F2 và **5%** của F3, F4.
+    * **Ambassador:** Nhánh yếu tháng trước đạt từ **3.000.000 CV** $\rightarrow$ Hưởng **10%** của F1, F2 và **5%** của F3, F4, F5.
+  * *Ý nghĩa*: Khuyến khích doanh chủ đồng hành đào tạo, giúp đỡ tuyến dưới tạo ra thu nhập, tránh tình trạng "ly khai hệ thống" khi tuyến dưới vượt cấp. Dù tuyến dưới có giỏi hơn doanh chủ, họ vẫn thuộc sơ đồ và đem lại dòng tiền cộng hưởng trọn đời cho doanh chủ.
 
   ***lưu ý:*** trong mô hình lai này người tuyến đầu (tạm gọi là F0) có thể tuyển thêm F1 vào vị trí nhánh dưới của F2 hoặc hơn (đảm bảo quy tắc 2 nhánh) để hỗ trợ tuyến dưới cân bằng tuyến dưới và mở rộng hệ thống.
 

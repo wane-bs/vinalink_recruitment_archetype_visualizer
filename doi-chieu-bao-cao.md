@@ -77,20 +77,20 @@ Chúng tôi đã triệu tập ý kiến đánh giá từ các chuyên gia phụ
 | Danh hiệu thăng cấp dự kiến                       |             Ambassador             |             Ambassador             |                 Ambassador                 |
 | Doanh số phát sinh nhánh Yếu                       |            2.760.000 CV            |            4.000.000 CV            |                6.000.000 CV                |
 | Số chu kỳ cân nhánh yếu / tháng                  |             394 chu kỳ             |             571 chu kỳ             |                 857 chu kỳ                 |
-| Hoa hồng Chu kỳ nhóm                                |          220.640.000 VNĐ          |          319.760.000 VNĐ          |              479.920.000 VNĐ              |
+| Hoa hồng Chu kỳ nhóm (GVC)                          |          220.640.000 VNĐ          |          319.760.000 VNĐ          |              479.920.000 VNĐ              |
 | **Thưởng duy trì doanh số (Qualify Bonus)**  |       **70.000.000 VNĐ**        |       **70.000.000 VNĐ**        |            **70.000.000 VNĐ**             |
-| Các khoản hoa hồng khác (ước tính 30% GVC)          |           66.192.000 VNĐ           |           95.928.000 VNĐ           |              143.976.000 VNĐ              |
-| **TỔNG THU NHẬP ƯỚC TÍNH**                  |  **356.832.000 VNĐ/tháng**  |  **485.688.000 VNĐ/tháng**  |      **693.896.000 VNĐ/tháng**      |
+| Hoa hồng Cộng hưởng (Matching Bonus)                |               0 VNĐ               |          110.068.000 VNĐ          |              166.880.000 VNĐ              |
+| Các khoản hoa hồng khác (ước tính 10% GVC)          |           22.064.000 VNĐ           |           31.976.000 VNĐ           |              47.992.000 VNĐ               |
+| **TỔNG THU NHẬP ƯỚC TÍNH**                  |  **312.704.000 VNĐ/tháng**  |  **531.804.000 VNĐ/tháng**  |      **764.792.000 VNĐ/tháng**      |
 
 ### 3. Kết luận định lượng khoa học:
 
 1. **Năm 1 ($300.000.000$ VNĐ/tháng) quá cao và phi thực tế:** Mức thu nhập này đòi hỏi một hệ thống hoạt động thực tế quy mô lớn (doanh số nhánh yếu phát sinh ngay trong năm đầu tiên phải đạt gần $1.300.000$ CV/tháng). Điều này là bất khả thi đối với tốc độ nhân bản tự nhiên của sơ đồ nhị phân trong 12 tháng đầu tiên, đặc biệt là khi Doanh chủ chưa có sẵn lực lượng nòng cốt và hệ thống mới khởi động.
 2. **Đánh giá mục tiêu Năm 2 ($800.000.000$ VNĐ) và Năm 3 ($1,5$ tỷ VNĐ):**
-   * Khi tích hợp đầy đủ **Thưởng duy trì doanh số** (tính theo doanh số phát sinh độc lập hàng tháng và cộng gộp tất cả các mốc đạt được), tổng thu nhập trong **Kịch bản 3 (Lý tưởng tuyệt đối)** đạt được cực đại là **$693.896.000$ VNĐ/tháng**. Con số này chứng minh mục tiêu $1,5$ tỷ VNĐ/tháng là bất khả thi về mặt toán học ở quy mô $10.000$ người kể cả trong kịch bản tốt nhất.
+   * Khi tích hợp đầy đủ **Thưởng duy trì doanh số** và **Hoa hồng Cộng hưởng Matching Bonus** chi tiết, tổng thu nhập trong **Kịch bản 3 (Lý tưởng tuyệt đối)** đạt được cực đại là **$764.792.000$ VNĐ/tháng**. Con số này chứng minh mục tiêu $1,5$ tỷ VNĐ/tháng là bất khả thi về mặt toán học ở quy mô $10.000$ người kể cả trong kịch bản tốt nhất.
    * Kịch bản 3 yêu cầu hệ thống hoạt động hoàn hảo 100% không hao hụt quân số và cân nhánh tuyệt đối 50/50. Trong thực tế MLM, sự lệch nhánh nhị phân luôn xảy ra, và tỷ lệ hao hụt NPP trung bình luôn dao động từ 50% - 70%.
-   * Với kịch bản thực tế hơn là **Khả quan (Kịch bản 2)**, dòng tiền thu nhập thụ động đạt được là **$485.688.000$ VNĐ/tháng**, và kịch bản **Thực tế sát sao (Kịch bản 1)** là **$356.832.000$ VNĐ/tháng**.
-   * Nhảy vọt thu nhập từ $300$ triệu VNĐ ở năm 1 lên thẳng $800$ triệu VNĐ ở năm 2 mặc dù có tỷ lệ tăng trưởng tương đối hợp lý ($2,67$ lần), nhưng điểm xuất phát $300$ triệu VNĐ ở năm đầu tiên đã là mục tiêu quá cao và không khả thi cho giai đoạn khởi động.
-   * **Kết luận hành động:** Đề xuất Doanh chủ điều chỉnh lại mục tiêu thu nhập Năm 3 về mức **$150.000.000$ VNĐ/tháng** (đạt danh hiệu Diamond) là hoàn toàn khả thi và an toàn định lượng (nằm sâu trong vùng an toàn của kịch bản thực tế sát sao là 356 triệu VNĐ). Lộ trình này giúp Doanh chủ giảm áp lực và bảo toàn năng lượng vận hành.
+   * Với kịch bản thực tế hơn là **Khả quan (Kịch bản 2)**, dòng tiền thu nhập thụ động đạt được là **$531.804.000$ VNĐ/tháng**, và kịch bản **Thực tế sát sao (Kịch bản 1)** là **$312.704.000$ VNĐ/tháng**.
+   * **Kết luận hành động:** Đề xuất Doanh chủ điều chỉnh lại mục tiêu thu nhập Năm 3 về mức **$150.000.000$ VNĐ/tháng** (đạt danh hiệu Diamond) là hoàn toàn khả thi và an toàn định lượng (nằm sâu trong vùng an toàn của kịch bản thực tế sát sao là 312 triệu VNĐ). Lộ trình này giúp Doanh chủ giảm áp lực và bảo toàn năng lượng vận hành.
 
 ---
 
