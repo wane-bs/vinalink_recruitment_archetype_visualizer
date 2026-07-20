@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Marked JS for parsing markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -16,21 +18,26 @@
             background-color: #0b0f19;
             color: #f3f4f6;
         }
+
         /* Custom scrollbar for premium feel */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #0f172a;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #334155;
             border-radius: 3px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
+
         /* Markdown rendering styles */
         .markdown-content h1 {
             font-size: 1.8rem;
@@ -41,6 +48,7 @@
             border-bottom: 1px solid #1e293b;
             padding-bottom: 0.5rem;
         }
+
         .markdown-content h2 {
             font-size: 1.4rem;
             font-weight: 700;
@@ -48,6 +56,7 @@
             margin-bottom: 0.8rem;
             color: #f1f5f9;
         }
+
         .markdown-content h3 {
             font-size: 1.1rem;
             font-weight: 600;
@@ -55,26 +64,31 @@
             margin-bottom: 0.6rem;
             color: #cbd5e1;
         }
+
         .markdown-content p {
             margin-bottom: 1rem;
             line-height: 1.6;
             color: #94a3b8;
         }
+
         .markdown-content ul {
             list-style-type: disc;
             margin-left: 1.5rem;
             margin-bottom: 1rem;
             color: #cbd5e1;
         }
+
         .markdown-content li {
             margin-bottom: 0.4rem;
         }
+
         .markdown-content table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 1.5rem;
             font-size: 0.875rem;
         }
+
         .markdown-content th {
             background-color: #1e293b;
             color: #f1f5f9;
@@ -83,14 +97,17 @@
             border: 1px solid #334155;
             text-align: left;
         }
+
         .markdown-content td {
             padding: 0.75rem 1rem;
             border: 1px solid #1e293b;
             color: #94a3b8;
         }
+
         .markdown-content tr:nth-child(even) {
             background-color: #0f172a;
         }
+
         .markdown-content blockquote {
             border-left: 4px solid #10b981;
             background-color: rgba(16, 185, 129, 0.05);
@@ -98,11 +115,13 @@
             margin-bottom: 1.2rem;
             border-radius: 0 0.375rem 0.375rem 0;
         }
+
         .markdown-content strong {
             color: #ffffff;
         }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
 
@@ -402,16 +421,16 @@
             const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem("sihub_is_admin") === "true");
             const [passwordInput, setPasswordInput] = useState("");
             const [showLoginModal, setShowLoginModal] = useState(false);
-            
+
             // Visualizer State
             const [selectedGroup, setSelectedGroup] = useState("nhom_1");
             const [currentVisualizerTab, setCurrentVisualizerTab] = useState("empathy");
-            
+
             // Document Viewer State
             const [selectedDoc, setSelectedDoc] = useState("vinalink-parent-research.md");
             const [docHtml, setDocHtml] = useState("");
             const [loadingDoc, setLoadingDoc] = useState(false);
-            
+
             // Feedback Form State (22 trường dữ liệu tương ứng doanh-chu-checklist.md)
             const [formData, setFormData] = useState({
                 doanhChuName: "Doanh Chủ Vinalink",
@@ -451,10 +470,19 @@
                 return ALL_DOCUMENTS.filter(doc => !doc.adminOnly || isAdmin);
             }, [isAdmin]);
 
+            // Helper function to hash text using SHA-256
+            const sha256 = async (text) => {
+                const msgBuffer = new TextEncoder().encode(text);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            };
+
             // Handle Admin Login
-            const handleAdminLogin = (e) => {
+            const handleAdminLogin = async (e) => {
                 e.preventDefault();
-                if (passwordInput === "sihub2026") {
+                const hash = await sha256(passwordInput);
+                if (hash === "e405f6c8d76d4dbdcf7c089cc5cf4eb8db757732a39281a1a5df80210f443b71") {
                     setIsAdmin(true);
                     localStorage.setItem("sihub_is_admin", "true");
                     setShowLoginModal(false);
@@ -544,7 +572,7 @@
             const handleFormSubmit = (e) => {
                 e.preventDefault();
                 setSubmitStatus({ type: "pending", msg: "Đang mã hóa và gửi phản hồi lên Google Sheets..." });
-                
+
                 const postData = {
                     timestamp: new Date().toISOString(),
                     accessToken: apiConfig.accessToken,
@@ -554,9 +582,9 @@
                 // Chế độ mô phỏng
                 if (!apiConfig.scriptUrl) {
                     setTimeout(() => {
-                        setSubmitStatus({ 
-                            type: "success", 
-                            msg: "Đăng ký phản hồi thành công! (Chế độ mô phỏng: Đã lưu dữ liệu tạm thời. Để chạy thực tế, vui lòng cấu hình link Google Apps Script ở phần cấu hình Admin)." 
+                        setSubmitStatus({
+                            type: "success",
+                            msg: "Đăng ký phản hồi thành công! (Chế độ mô phỏng: Đã lưu dữ liệu tạm thời. Để chạy thực tế, vui lòng cấu hình link Google Apps Script ở phần cấu hình Admin)."
                         });
                         console.log("Mock data submitted:", postData);
                     }, 1500);
@@ -572,19 +600,19 @@
                     },
                     body: JSON.stringify(postData)
                 })
-                .then(() => {
-                    setSubmitStatus({ 
-                        type: "success", 
-                        msg: "Gửi phản hồi lên Google Sheets thành công! Dữ liệu sẽ được tự động đồng bộ về máy local lúc 20:00 hàng ngày." 
+                    .then(() => {
+                        setSubmitStatus({
+                            type: "success",
+                            msg: "Gửi phản hồi lên Google Sheets thành công! Dữ liệu sẽ được tự động đồng bộ về máy local lúc 20:00 hàng ngày."
+                        });
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        setSubmitStatus({
+                            type: "error",
+                            msg: "Lỗi kết nối: Không thể gửi dữ liệu tới Google Apps Script URL. Vui lòng kiểm tra lại cấu hình bảo mật hoặc đường dẫn URL."
+                        });
                     });
-                })
-                .catch(err => {
-                    console.error(err);
-                    setSubmitStatus({ 
-                        type: "error", 
-                        msg: "Lỗi kết nối: Không thể gửi dữ liệu tới Google Apps Script URL. Vui lòng kiểm tra lại cấu hình bảo mật hoặc đường dẫn URL." 
-                    });
-                });
             };
 
             return (
@@ -602,29 +630,29 @@
                                 <p className="text-xs text-gray-400 font-medium">Không Gian Làm Việc, Trao Đổi Tài Liệu & Đồng Bộ Phản Hồi</p>
                             </div>
                         </div>
-                        
+
                         {/* Navigation Menu */}
                         <div className="flex flex-wrap items-center gap-3">
                             <nav className="flex items-center bg-[#111a2e] p-1 rounded-xl border border-gray-800 text-xs">
-                                <button 
+                                <button
                                     onClick={() => setCurrentView("roadmap")}
                                     className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "roadmap" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
                                 >
                                     <Icons.Roadmap /> Lộ Trình & Tiến Độ
                                 </button>
-                                <button 
+                                <button
                                     onClick={() => setCurrentView("documents")}
                                     className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "documents" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
                                 >
                                     <Icons.Document /> Tài Liệu (.md)
                                 </button>
-                                <button 
+                                <button
                                     onClick={() => setCurrentView("visualizer")}
                                     className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "visualizer" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
                                 >
                                     <Icons.Visualizer /> Tuyển Dụng F1
                                 </button>
-                                <button 
+                                <button
                                     onClick={() => setCurrentView("feedback")}
                                     className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "feedback" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
                                 >
@@ -634,14 +662,14 @@
 
                             {/* Admin Auth Toggle */}
                             {isAdmin ? (
-                                <button 
+                                <button
                                     onClick={handleAdminLogout}
                                     className="py-2 px-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-bold rounded-xl text-xs flex items-center gap-1.5 transition"
                                 >
                                     <Icons.Unlock /> Cố Vấn (Thoát)
                                 </button>
                             ) : (
-                                <button 
+                                <button
                                     onClick={() => setShowLoginModal(true)}
                                     className="py-2 px-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 font-bold rounded-xl text-xs flex items-center gap-1.5 transition"
                                 >
@@ -660,9 +688,9 @@
                                 </h3>
                                 <p className="text-xs text-gray-400 mb-4">Nhập mật khẩu của cố vấn để mở khóa cấu hình hệ thống & xem báo cáo đối chiếu chuyên sâu.</p>
                                 <form onSubmit={handleAdminLogin} className="space-y-4">
-                                    <input 
-                                        type="password" 
-                                        placeholder="Mật khẩu (mặc định: sihub2026)"
+                                    <input
+                                        type="password"
+                                        placeholder="Mật khẩu"
                                         value={passwordInput}
                                         onChange={(e) => setPasswordInput(e.target.value)}
                                         className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-emerald-500"
@@ -670,14 +698,14 @@
                                         autoFocus
                                     />
                                     <div className="flex gap-2 justify-end">
-                                        <button 
+                                        <button
                                             type="button"
                                             onClick={() => { setShowLoginModal(false); setPasswordInput(""); }}
                                             className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-xs font-semibold"
                                         >
                                             Hủy
                                         </button>
-                                        <button 
+                                        <button
                                             type="submit"
                                             className="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-semibold"
                                         >
@@ -691,7 +719,7 @@
 
                     {/* Main Content Area */}
                     <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6">
-                        
+
                         {/* VIEW 1: ROADMAP & TIMELINE */}
                         {currentView === "roadmap" && (
                             <div className="space-y-8 animate-fadeIn">
@@ -737,7 +765,7 @@
                                 {/* 1 Month Timeline */}
                                 <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl">
                                     <h3 className="text-lg font-bold text-white mb-6">Tiến Trình Kế Hoạch 1 Tháng Khởi Động</h3>
-                                    
+
                                     <div className="relative border-l border-gray-800 ml-4 md:ml-32 space-y-8">
                                         {/* Week 1 */}
                                         <div className="relative">
@@ -854,7 +882,7 @@
                                         <span className="text-xs font-semibold px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-gray-400">
                                             📄 File: {selectedDoc}
                                         </span>
-                                        <a 
+                                        <a
                                             href={`./${selectedDoc}`}
                                             className="text-xs text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1"
                                             target="_blank"
@@ -869,7 +897,7 @@
                                             <span className="text-xs text-gray-400">Đang biên dịch markdown...</span>
                                         </div>
                                     ) : (
-                                        <div 
+                                        <div
                                             className="markdown-content flex-1 text-sm overflow-y-auto leading-relaxed"
                                             dangerouslySetInnerHTML={{ __html: docHtml }}
                                         />
@@ -890,11 +918,11 @@
                                         <div className="space-y-3">
                                             {ARCHETYPES_DATA.map((group) => {
                                                 const isSelected = selectedGroup === group.id;
-                                                const activeColors = 
+                                                const activeColors =
                                                     group.color === 'emerald' ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300' :
-                                                    group.color === 'indigo' ? 'border-indigo-500/50 bg-indigo-500/10 text-indigo-300' :
-                                                    'border-amber-500/50 bg-amber-500/10 text-amber-300';
-                                                
+                                                        group.color === 'indigo' ? 'border-indigo-500/50 bg-indigo-500/10 text-indigo-300' :
+                                                            'border-amber-500/50 bg-amber-500/10 text-amber-300';
+
                                                 return (
                                                     <button
                                                         key={group.id}
@@ -919,31 +947,31 @@
                                 {/* Right Area: Visualizer Board */}
                                 <div className="lg:col-span-9 flex flex-col gap-4">
                                     <div className="flex flex-wrap items-center bg-[#111a2e] p-1.5 rounded-xl border border-gray-800 gap-1 text-xs">
-                                        <button 
+                                        <button
                                             onClick={() => setCurrentVisualizerTab("empathy")}
                                             className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "empathy" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
                                         >
                                             Bản Đồ Thấu Cảm
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setCurrentVisualizerTab("vpc")}
                                             className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "vpc" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
                                         >
                                             Khung Định Vị Giá Trị (VPC)
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setCurrentVisualizerTab("mapping")}
                                             className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "mapping" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
                                         >
                                             Bản Đồ Định Vị (Mapping)
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setCurrentVisualizerTab("matrix")}
                                             className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "matrix" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
                                         >
                                             Ma Trận Trùng Khớp
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setCurrentVisualizerTab("pitch-templates")}
                                             className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "pitch-templates" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "text-gray-400 hover:text-gray-200"}`}
                                         >
@@ -953,7 +981,7 @@
 
                                     <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl relative overflow-hidden min-h-[480px]">
                                         <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b" style={{ backgroundImage: `linear-gradient(to bottom, ${activeVisualizerData.themeHex}, transparent)` }} />
-                                        
+
                                         <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800/80 pb-4 gap-4">
                                             <div>
                                                 <h2 className="text-xl font-bold tracking-tight text-white">{activeVisualizerData.name}</h2>
@@ -1057,7 +1085,7 @@
                                                     <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] font-bold text-gray-400 uppercase">Trải Nghiệm</span>
                                                     <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] font-bold text-gray-400 uppercase">Thực Tế</span>
                                                     {ARCHETYPES_DATA.map((item) => (
-                                                        <div 
+                                                        <div
                                                             key={item.id}
                                                             className={`absolute flex flex-col items-center z-10 cursor-pointer ${item.id === selectedGroup ? 'scale-105' : 'opacity-60'}`}
                                                             style={{ left: `${item.positioning.x}%`, top: `${item.positioning.y}%` }}
@@ -1101,7 +1129,7 @@
                                                     <div key={idx} className="bg-[#070b13] rounded-xl border border-gray-800 p-4">
                                                         <div className="flex justify-between items-center mb-2 pb-2 border-b border-gray-800/80">
                                                             <h5 className="font-bold text-xs text-indigo-300">{template.title}</h5>
-                                                            <button 
+                                                            <button
                                                                 onClick={() => copyToClipboard(template.content)}
                                                                 className="py-1 px-2.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 rounded text-[10px] font-bold flex items-center gap-1"
                                                             >
@@ -1130,12 +1158,12 @@
                                             </h3>
                                             <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">Admin Config</span>
                                         </div>
-                                        
+
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase">Google Apps Script Web App URL</label>
-                                                <input 
-                                                    type="url" 
+                                                <input
+                                                    type="url"
                                                     name="scriptUrl"
                                                     value={apiConfig.scriptUrl}
                                                     onChange={handleConfigChange}
@@ -1145,8 +1173,8 @@
                                             </div>
                                             <div>
                                                 <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase">Mã Access Token bảo mật Backend</label>
-                                                <input 
-                                                    type="text" 
+                                                <input
+                                                    type="text"
                                                     name="accessToken"
                                                     value={apiConfig.accessToken}
                                                     onChange={handleConfigChange}
@@ -1161,7 +1189,7 @@
                                             <p className="font-semibold text-gray-200 flex items-center gap-1">📖 Hướng dẫn cấu hình Apps Script bảo mật Backend:</p>
                                             <p>1. Mở Google Sheet, chọn <b>Extensions &gt; Apps Script</b> và dán đoạn mã sau:</p>
                                             <pre className="bg-[#070b13] p-2.5 rounded border border-gray-800 text-[10px] text-gray-300 overflow-x-auto leading-relaxed">
-{`function doPost(e) {
+                                                {`function doPost(e) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var data = JSON.parse(e.postData.contents);
   
@@ -1196,18 +1224,18 @@
                                     </div>
 
                                     <form onSubmit={handleFormSubmit} className="space-y-8">
-                                        
+
                                         {/* SECTION 1 */}
                                         <div className="space-y-4">
                                             <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
                                                 <span>01</span> Tầm Nhìn & Mục Tiêu Tài Chính
                                             </h3>
-                                            
+
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="md:col-span-2">
                                                     <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Tên Doanh Chủ / Leader</label>
-                                                    <input 
-                                                        type="text" 
+                                                    <input
+                                                        type="text"
                                                         name="doanhChuName"
                                                         value={formData.doanhChuName}
                                                         onChange={handleInputChange}
@@ -1217,8 +1245,8 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 1 (VNĐ/tháng)</label>
-                                                    <input 
-                                                        type="text" 
+                                                    <input
+                                                        type="text"
                                                         name="e1"
                                                         value={formData.e1}
                                                         onChange={handleInputChange}
@@ -1228,8 +1256,8 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 2 (VNĐ/tháng)</label>
-                                                    <input 
-                                                        type="text" 
+                                                    <input
+                                                        type="text"
                                                         name="e2"
                                                         value={formData.e2}
                                                         onChange={handleInputChange}
@@ -1239,8 +1267,8 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 3 (VNĐ/tháng)</label>
-                                                    <input 
-                                                        type="text" 
+                                                    <input
+                                                        type="text"
                                                         name="e3"
                                                         value={formData.e3}
                                                         onChange={handleInputChange}
@@ -1250,7 +1278,7 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Động lực lớn nhất</label>
-                                                    <select 
+                                                    <select
                                                         name="motivation"
                                                         value={formData.motivation}
                                                         onChange={handleInputChange}
@@ -1272,8 +1300,8 @@
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Số lượng F1 nòng cốt dẫn dắt</label>
-                                                    <input 
-                                                        type="number" 
+                                                    <input
+                                                        type="number"
                                                         name="a2"
                                                         value={formData.a2}
                                                         onChange={handleInputChange}
@@ -1284,8 +1312,8 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Quy mô mạng lưới (3 năm)</label>
-                                                    <input 
-                                                        type="number" 
+                                                    <input
+                                                        type="number"
                                                         name="totalMembers"
                                                         value={formData.totalMembers}
                                                         onChange={handleInputChange}
@@ -1295,7 +1323,7 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Tỷ lệ phân bổ định hướng</label>
-                                                    <select 
+                                                    <select
                                                         name="distributionRatio"
                                                         value={formData.distributionRatio}
                                                         onChange={handleInputChange}
@@ -1317,8 +1345,8 @@
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">3 tính từ mô tả văn hóa đội nhóm</label>
-                                                    <input 
-                                                        type="text" 
+                                                    <input
+                                                        type="text"
                                                         name="culture"
                                                         value={formData.culture}
                                                         onChange={handleInputChange}
@@ -1329,7 +1357,7 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Phong cách lãnh đạo hướng tới</label>
-                                                    <select 
+                                                    <select
                                                         name="leadershipStyle"
                                                         value={formData.leadershipStyle}
                                                         onChange={handleInputChange}
@@ -1351,8 +1379,8 @@
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Thời gian cam kết (giờ/ngày)</label>
-                                                    <input 
-                                                        type="number" 
+                                                    <input
+                                                        type="number"
                                                         name="d1"
                                                         value={formData.d1}
                                                         onChange={handleInputChange}
@@ -1363,8 +1391,8 @@
                                                 </div>
                                                 <div>
                                                     <label className="block text-xs font-bold text-gray-400 mb-2">Ngân sách đầu tư ban đầu</label>
-                                                    <input 
-                                                        type="text" 
+                                                    <input
+                                                        type="text"
                                                         name="d2"
                                                         value={formData.d2}
                                                         onChange={handleInputChange}
@@ -1377,7 +1405,7 @@
                                                     <div className="space-y-2 text-xs text-gray-300">
                                                         {["Thuyết trình & Đào tạo sản phẩm", "Marketing Online", "Telesale & Chăm sóc"].map(skill => (
                                                             <label key={skill} className="flex items-center gap-2 cursor-pointer">
-                                                                <input 
+                                                                <input
                                                                     type="checkbox"
                                                                     checked={formData.skills.includes(skill)}
                                                                     onChange={() => handleCheckboxChange("skills", skill)}
@@ -1402,7 +1430,7 @@
                                                 <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider border-b border-gray-800/80 pb-1">
                                                     Trụ cột A: Định vị Giá trị của Doanh chủ (Leader Value Proposition - LVP)
                                                 </h4>
-                                                
+
                                                 <div className="space-y-4">
                                                     <div>
                                                         <label className="block text-xs font-bold text-gray-300 mb-2">A1: Hỗ trợ trực tiếp cho người mới trong 30 ngày đầu</label>
@@ -1414,7 +1442,7 @@
                                                                 "Cung cấp văn phòng trực tuyến (VPOL)"
                                                             ].map(item => (
                                                                 <label key={item} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-800/30">
-                                                                    <input 
+                                                                    <input
                                                                         type="checkbox"
                                                                         checked={formData.a1.includes(item)}
                                                                         onChange={() => handleCheckboxChange("a1", item)}
@@ -1428,8 +1456,8 @@
 
                                                     <div>
                                                         <label className="block text-xs font-bold text-gray-300 mb-2">A2: Phong cách dẫn dắt đội nhóm khác biệt</label>
-                                                        <input 
-                                                            type="text" 
+                                                        <input
+                                                            type="text"
                                                             name="lvpStyle"
                                                             value={formData.lvpStyle}
                                                             onChange={handleInputChange}
@@ -1448,7 +1476,7 @@
                                                                 "Cố vấn lộ trình tài chính rõ ràng"
                                                             ].map(item => (
                                                                 <label key={item} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-800/30">
-                                                                    <input 
+                                                                    <input
                                                                         type="checkbox"
                                                                         checked={formData.lvpIntra.includes(item)}
                                                                         onChange={() => handleCheckboxChange("lvpIntra", item)}
@@ -1469,7 +1497,7 @@
                                                                 "Giá trị thừa kế pháp lý vững chắc"
                                                             ].map(item => (
                                                                 <label key={item} className="flex items-center gap-2 cursor-pointer p-2 rounded hover:bg-gray-800/30">
-                                                                    <input 
+                                                                    <input
                                                                         type="checkbox"
                                                                         checked={formData.lvpInter.includes(item)}
                                                                         onChange={() => handleCheckboxChange("lvpInter", item)}
@@ -1483,8 +1511,8 @@
 
                                                     <div>
                                                         <label className="block text-xs font-bold text-gray-300 mb-2">A5: Định vị thương hiệu cá nhân của Doanh chủ</label>
-                                                        <input 
-                                                            type="text" 
+                                                        <input
+                                                            type="text"
                                                             name="lvpBrand"
                                                             value={formData.lvpBrand}
                                                             onChange={handleInputChange}
@@ -1500,11 +1528,11 @@
                                                 <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider border-b border-gray-800/80 pb-1">
                                                     Trụ cột B: Phân khúc Tuyến dưới Ưu tiên (Ideal Downline Profiling - IDP)
                                                 </h4>
-                                                
+
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                     <div>
                                                         <label className="block text-xs font-bold text-gray-300 mb-2">B1: Nhóm ưu tiên tập trung tuyển dụng</label>
-                                                        <select 
+                                                        <select
                                                             name="b1"
                                                             value={formData.b1}
                                                             onChange={handleInputChange}
@@ -1517,8 +1545,8 @@
                                                     </div>
                                                     <div>
                                                         <label className="block text-xs font-bold text-gray-300 mb-2">B2: Chi tiết đặc điểm nghề nghiệp & độ tuổi mục tiêu</label>
-                                                        <input 
-                                                            type="text" 
+                                                        <input
+                                                            type="text"
                                                             name="b2"
                                                             value={formData.b2}
                                                             onChange={handleInputChange}
@@ -1534,7 +1562,7 @@
                                                 <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider border-b border-gray-800/80 pb-1">
                                                     Trụ cột C: Bộ lọc Tuyển dụng Nòng cốt (Qualification Filters)
                                                 </h4>
-                                                
+
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                     <div>
                                                         <label className="block text-xs font-bold text-gray-300 mb-2">C1: 3 tiêu chí bắt buộc để đồng hành 2-1 (Chọn 3)</label>
@@ -1547,7 +1575,7 @@
                                                                 "Năng lực đầu vào"
                                                             ].map(item => (
                                                                 <label key={item} className="flex items-center gap-2 cursor-pointer">
-                                                                    <input 
+                                                                    <input
                                                                         type="checkbox"
                                                                         checked={formData.c1.includes(item)}
                                                                         onChange={() => handleCheckboxChange("c1", item)}
@@ -1560,8 +1588,8 @@
                                                     </div>
                                                     <div>
                                                         <label className="block text-xs font-bold text-gray-300 mb-2">C2: Bài test hành động đo lường sự cam kết</label>
-                                                        <input 
-                                                            type="text" 
+                                                        <input
+                                                            type="text"
                                                             name="c2"
                                                             value={formData.c2}
                                                             onChange={handleInputChange}
@@ -1575,7 +1603,7 @@
 
                                         {/* Action button & Status */}
                                         <div className="pt-6 border-t border-gray-800/80 flex flex-col md:flex-row justify-between items-center gap-4">
-                                            <button 
+                                            <button
                                                 type="submit"
                                                 className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-2.5 px-8 rounded-lg shadow-lg shadow-emerald-500/10 transition-all focus:outline-none text-xs"
                                             >
@@ -1606,4 +1634,5 @@
         root.render(<App />);
     </script>
 </body>
+
 </html>
