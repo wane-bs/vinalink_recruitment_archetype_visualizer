@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinalink F1 Recruitment Strategy Dashboard</title>
+    <title>Vinalink Doanh Chủ Workspace & Dashboard</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Marked JS for parsing markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -29,6 +31,76 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
+        /* Markdown rendering styles */
+        .markdown-content h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 0.5rem;
+        }
+        .markdown-content h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #f1f5f9;
+        }
+        .markdown-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: #cbd5e1;
+        }
+        .markdown-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #94a3b8;
+        }
+        .markdown-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        .markdown-content li {
+            margin-bottom: 0.4rem;
+        }
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+        .markdown-content th {
+            background-color: #1e293b;
+            color: #f1f5f9;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border: 1px solid #334155;
+            text-align: left;
+        }
+        .markdown-content td {
+            padding: 0.75rem 1rem;
+            border: 1px solid #1e293b;
+            color: #94a3b8;
+        }
+        .markdown-content tr:nth-child(even) {
+            background-color: #0f172a;
+        }
+        .markdown-content blockquote {
+            border-left: 4px solid #10b981;
+            background-color: #052e16/20;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.2rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+        }
+        .markdown-content strong {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -41,20 +113,23 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        const { useState, useMemo } = React;
+        const { useState, useMemo, useEffect } = React;
 
-        // Custom Inline SVG Icons
+        // Inline SVG Icons
         const Icons = {
+            Roadmap: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>,
+            Document: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>,
+            Visualizer: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>,
+            Feedback: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>,
             UserCheck: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
             Target: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22a10 10 0 110-20 10 10 0 010 20zm0 0v-4m0-12V4M4 12H2m20 0h-2m-3.05-4.95l-1.42 1.42M7.47 16.53l-1.42 1.42m10.1-1.42l1.42 1.42M7.47 7.47l1.42-1.42" /></svg>,
             Zap: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
             Brain: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>,
-            Shield: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>,
-            Search: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>,
-            Download: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>,
             Compass: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>,
             Sparkles: () => <svg className="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>,
-            MessageSquare: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+            Download: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>,
+            Info: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+            Check: () => <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
         };
 
         const ARCHETYPES_DATA = [
@@ -237,7 +312,7 @@
                 color: "amber",
                 themeHex: "#f59e0b",
                 description: "Các thủ lĩnh hệ thống giàu kinh nghiệm bán hàng/bảo hiểm, khát khao làm chủ mô hình dòng tiền thụ động vững chãi, không ly khai tách nhánh.",
-                positioning: { x: 50, y: 15, label: "Kiểm Soát Cao & Phát Triển Rộng" },
+                positioning: { x: 50, y: 15, label: "Kiểm Sát Cao & Phát Triển Rộng" },
                 empathy: {
                     thinkFeel: [
                         "Khao khát xây dựng doanh nghiệp dòng tiền bền vững lên tới hàng trăm triệu mỗi tháng.",
@@ -250,7 +325,7 @@
                     ],
                     see: [
                         "Các tập đoàn MLM nước ngoài liên tục vướng giấy phép hoặc thay đổi cơ chế bất thình lình tước đoạt quyền lợi NPP.",
-                        "Xuuyên hướng bùng nổ của thị trường chăm sóc sức khỏe tự nhiên nội địa Việt Nam."
+                        "Xu hướng bùng nổ của thị trường chăm sóc sức khỏe tự nhiên nội địa Việt Nam."
                     ],
                     sayDo: [
                         "Nói về bản đồ tầm nhìn, định hướng chiến lược đào tạo, phát triển tổ chức.",
@@ -314,12 +389,69 @@
             }
         ];
 
-        function App() {
-            const [selectedGroup, setSelectedGroup] = useState("nhom_1");
-            const [currentTab, setCurrentTab] = useState("empathy"); // "empathy" | "vpc" | "mapping" | "matrix" | "pitch-templates"
-            const [matchedPair, setMatchedPair] = useState({ type: null, index: null });
+        const DOCUMENTS_LIST = [
+            { id: "vinalink-parent-research.md", name: "1. Nghiên cứu công ty mẹ" },
+            { id: "phan-tich-co-che-kinh-doanh.md", name: "2. Phân tích cơ chế kinh doanh EMC" },
+            { id: "doanh-chu-checklist.md", name: "3. Checklist khảo sát tầm nhìn" },
+            { id: "downline-customer-persona.md", name: "4. Chân dung khách hàng mục tiêu" },
+            { id: "bo-chuan-muc-trao-doi-doanh-chu.md", name: "5. Bộ chuẩn mực trao đổi doanh chủ" },
+            { id: "doi-chieu-bao-cao.md", name: "6. Báo cáo đối chiếu & Đánh giá" }
+        ];
 
-            const activeData = useMemo(() => {
+        function App() {
+            const [currentView, setCurrentView] = useState("roadmap"); // "roadmap" | "documents" | "visualizer" | "feedback"
+            
+            // Visualizer State
+            const [selectedGroup, setSelectedGroup] = useState("nhom_1");
+            const [currentVisualizerTab, setCurrentVisualizerTab] = useState("empathy");
+            const [matchedPair, setMatchedPair] = useState({ type: null, index: null });
+            
+            // Document Viewer State
+            const [selectedDoc, setSelectedDoc] = useState("vinalink-parent-research.md");
+            const [docHtml, setDocHtml] = useState("");
+            const [loadingDoc, setLoadingDoc] = useState(false);
+            
+            // Feedback Form State
+            const [formData, setFormData] = useState({
+                doanhChuName: "Doanh Chủ Vinalink",
+                scriptUrl: "",
+                a1: "", a2: "",
+                b1: "nhom_3", b2: "",
+                c1: "", c2: "",
+                d1: "", d2: "",
+                e1: "", e2: "", e3: ""
+            });
+            const [submitStatus, setSubmitStatus] = useState({ type: null, msg: "" });
+
+            // Load Document Markdown
+            useEffect(() => {
+                if (currentView === "documents") {
+                    setLoadingDoc(true);
+                    fetch(`./${selectedDoc}`)
+                        .then(res => {
+                            if (!res.ok) throw new Error("File not found");
+                            return res.text();
+                        })
+                        .then(text => {
+                            // Configure marked options
+                            marked.setOptions({
+                                breaks: true,
+                                gfm: true
+                            });
+                            setDocHtml(marked.parse(text));
+                            setLoadingDoc(false);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            setDocHtml(`<div class="p-6 text-red-400 bg-red-950/20 border border-red-800/40 rounded-xl">
+                                <strong>⚠️ Lỗi tải file:</strong> Không tìm thấy tệp <code>${selectedDoc}</code> hoặc tệp chưa được di chuyển vào thư mục <code>visualizer_deploy/</code>.
+                            </div>`);
+                            setLoadingDoc(false);
+                        });
+                }
+            }, [selectedDoc, currentView]);
+
+            const activeVisualizerData = useMemo(() => {
                 return ARCHETYPES_DATA.find(g => g.id === selectedGroup);
             }, [selectedGroup]);
 
@@ -330,7 +462,57 @@
                 tempTextArea.select();
                 document.execCommand("copy");
                 document.body.removeChild(tempTextArea);
-                alert("Đã sao chép nội dung vào bộ nhớ tạm!");
+                alert("Đã sao chép kịch bản tuyển dụng vào bộ nhớ tạm!");
+            };
+
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setFormData(prev => ({ ...prev, [name]: value }));
+            };
+
+            const handleFormSubmit = (e) => {
+                e.preventDefault();
+                setSubmitStatus({ type: "pending", msg: "Đang gửi phản hồi về Google Sheets..." });
+                
+                const postData = {
+                    timestamp: new Date().toISOString(),
+                    ...formData
+                };
+
+                // If user didn't specify URL, mock successful submission
+                if (!formData.scriptUrl) {
+                    setTimeout(() => {
+                        setSubmitStatus({ 
+                            type: "success", 
+                            msg: "Đăng ký phản hồi thành công! (Chế độ mô phỏng: Đã lưu dữ liệu tạm thời. Để chạy thực tế, vui lòng cấu hình link Google Apps Script ở ô phía dưới)." 
+                        });
+                        console.log("Mock data submitted:", postData);
+                    }, 1500);
+                    return;
+                }
+
+                // Call Google Apps Script Web App
+                fetch(formData.scriptUrl, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(postData)
+                })
+                .then(() => {
+                    setSubmitStatus({ 
+                        type: "success", 
+                        msg: "Gửi phản hồi lên Google Sheets thành công! Dữ liệu sẽ được tự động đồng bộ về local vào lúc 20:00 hàng ngày." 
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    setSubmitStatus({ 
+                        type: "error", 
+                        msg: "Lỗi kết nối: Không thể gửi dữ liệu tới Google Apps Script URL. Vui lòng kiểm tra lại cấu hình." 
+                    });
+                });
             };
 
             return (
@@ -343,477 +525,679 @@
                             </div>
                             <div>
                                 <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-                                    Vinalink F1 Strategy Hub
+                                    Vinalink Doanh Chủ Portal
                                 </h1>
-                                <p className="text-xs text-gray-400 font-medium">Phân Tích Chân Dung & Định Vị Giá Trị Khách Hàng Tuyển Dụng</p>
+                                <p className="text-xs text-gray-400 font-medium">Không Gian Làm Việc, Trao Đổi Tài Liệu & Đồng Bộ Phản Hồi</p>
                             </div>
                         </div>
-                        <div className="text-right text-xs text-emerald-400 font-bold bg-emerald-500/5 border border-emerald-500/10 px-3 py-1.5 rounded-lg">
-                            ☕ Văn Hóa An Vui & Tinh Gọn
-                        </div>
+                        
+                        {/* Navigation Menu */}
+                        <nav className="flex items-center bg-[#111a2e] p-1 rounded-xl border border-gray-800 text-xs">
+                            <button 
+                                onClick={() => setCurrentView("roadmap")}
+                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "roadmap" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                            >
+                                <Icons.Roadmap /> Lộ Trình & Tiến Độ
+                            </button>
+                            <button 
+                                onClick={() => setCurrentView("documents")}
+                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "documents" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                            >
+                                <Icons.Document /> Tài Liệu (.md)
+                            </button>
+                            <button 
+                                onClick={() => setCurrentView("visualizer")}
+                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "visualizer" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                            >
+                                <Icons.Visualizer /> Tuyển Dụng F1
+                            </button>
+                            <button 
+                                onClick={() => setCurrentView("feedback")}
+                                className={`py-2 px-4 rounded-lg font-bold flex items-center gap-1.5 transition ${currentView === "feedback" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/10" : "text-gray-400 hover:text-gray-200"}`}
+                            >
+                                <Icons.Feedback /> Checklist Phản Hồi
+                            </button>
+                        </nav>
                     </header>
 
                     {/* Main Content Area */}
-                    <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6">
                         
-                        {/* Left Sidebar: Archetype Selector */}
-                        <div className="lg:col-span-3 flex flex-col gap-4">
-                            <div className="bg-[#111a2e] rounded-xl p-4 border border-gray-800">
-                                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                    <Icons.Brain /> Chọn Nhóm Chân Dung
-                                </h3>
-                                <div className="space-y-3">
-                                    {ARCHETYPES_DATA.map((group) => {
-                                        const isSelected = selectedGroup === group.id;
-                                        const activeColors = 
-                                            group.color === 'emerald' ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.05)]' :
-                                            group.color === 'indigo' ? 'border-indigo-500/50 bg-indigo-500/10 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.05)]' :
-                                            'border-amber-500/50 bg-amber-500/10 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.05)]';
+                        {/* VIEW 1: ROADMAP & TIMELINE */}
+                        {currentView === "roadmap" && (
+                            <div className="space-y-8 animate-fadeIn">
+                                {/* Welcome Header */}
+                                <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                                    <div className="space-y-1">
+                                        <h2 className="text-2xl font-bold tracking-tight text-white">Lộ Trình Xây Dựng Kế Hoạch Kinh Doanh 3 Năm</h2>
+                                        <p className="text-sm text-gray-400">Không gian theo dõi tiến độ công việc giữa Đội ngũ Cố vấn SIHUB và Doanh chủ hệ thống.</p>
+                                    </div>
+                                    <div className="flex items-center gap-4 bg-emerald-500/5 border border-emerald-500/10 px-4 py-3 rounded-xl">
+                                        <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold">
+                                            Tuần 1
+                                        </div>
+                                        <div>
+                                            <div className="text-xs text-gray-400">Giai đoạn hiện tại:</div>
+                                            <div className="text-sm font-bold text-white">Nghiên cứu & Khảo sát</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* 3 Years Vision Summary */}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div className="bg-gradient-to-br from-[#111a2e] to-[#0e1e35] rounded-2xl border border-gray-800 p-6 relative overflow-hidden">
+                                        <div className="absolute top-4 right-4 text-emerald-400 font-black text-4xl opacity-10">NĂM 1</div>
+                                        <h3 className="text-emerald-400 font-bold text-lg mb-2">Năm 1: Đặt Nền Móng</h3>
+                                        <p className="text-xs text-gray-400 leading-relaxed">Tập trung chuyển giao sâu quy trình EMC, tuyển dụng và dẫn dắt 3 - 4 F1 nòng cốt. Thiết lập mục tiêu đạt chức danh Ruby với thu nhập thụ động bình quân 15 triệu VNĐ/tháng.</p>
+                                        <div className="mt-4 flex items-center gap-1.5 text-xs text-gray-300"><Icons.Info /> Doanh số nhánh yếu: ~62.500 CV/tháng</div>
+                                    </div>
+                                    <div className="bg-gradient-to-br from-[#111a2e] to-[#15132d] rounded-2xl border border-gray-800 p-6 relative overflow-hidden">
+                                        <div className="absolute top-4 right-4 text-indigo-400 font-black text-4xl opacity-10">NĂM 2</div>
+                                        <h3 className="text-indigo-400 font-bold text-lg mb-2">Năm 2: Nhân Bản Quy Mô</h3>
+                                        <p className="text-xs text-gray-400 leading-relaxed">Đồng hành cùng F1 để nhân bản hệ thống sâu xuống các tầng dưới. Mở rộng mạng lưới khách hàng thân thiết tiêu dùng. Đạt chức danh Emerald với thu nhập 60 triệu VNĐ/tháng.</p>
+                                        <div className="mt-4 flex items-center gap-1.5 text-xs text-gray-300"><Icons.Info /> Doanh số nhánh yếu: ~250.000 CV/tháng</div>
+                                    </div>
+                                    <div className="bg-gradient-to-br from-[#111a2e] to-[#1e172a] rounded-2xl border border-gray-800 p-6 relative overflow-hidden">
+                                        <div className="absolute top-4 right-4 text-amber-400 font-black text-4xl opacity-10">NĂM 3</div>
+                                        <h3 className="text-amber-400 font-bold text-lg mb-2">Năm 3: Dòng Tiền Thụ Động</h3>
+                                        <p className="text-xs text-gray-400 leading-relaxed">Vận hành hệ thống tự động hóa qua VPOL, giải phóng sức lao động. Tối ưu tỷ lệ tiêu dùng thực tế. Đạt chức danh Diamond với thu nhập thụ động bền vững 150 triệu VNĐ/tháng.</p>
+                                        <div className="mt-4 flex items-center gap-1.5 text-xs text-gray-300"><Icons.Info /> Doanh số nhánh yếu: ~623.000 CV/tháng</div>
+                                    </div>
+                                </div>
+
+                                {/* 1 Month Timeline */}
+                                <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl">
+                                    <h3 className="text-lg font-bold text-white mb-6">Tiến Trình Kế Hoạch 1 Tháng Khởi Động</h3>
+                                    
+                                    <div className="relative border-l border-gray-800 ml-4 md:ml-32 space-y-8">
+                                        {/* Week 1 */}
+                                        <div className="relative">
+                                            {/* Time label on large screens */}
+                                            <div className="hidden md:block absolute -left-32 top-1 text-right w-24">
+                                                <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20">Tuần 29/2026</span>
+                                            </div>
+                                            {/* Circle indicator */}
+                                            <div className="absolute -left-2 top-1.5 w-4 h-4 rounded-full bg-[#0b0f19] border-2 border-emerald-400 flex items-center justify-center">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                                            </div>
+                                            {/* Card content */}
+                                            <div className="ml-6 md:ml-8 bg-[#172237]/50 rounded-xl p-5 border border-emerald-500/20 shadow-md">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <h4 className="font-bold text-sm text-white">Nghiên Cứu Công Ty Mẹ & Khảo Sát Tầm Nhìn Doanh Chủ</h4>
+                                                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full uppercase">Đang tiến hành</span>
+                                                </div>
+                                                <p className="text-xs text-gray-400 mb-3">Phân tích chính sách, sơ đồ nhị phân EMC, phác họa chân dung đối tượng downline mục tiêu và xây dựng checklist khảo sát.</p>
+                                                <div className="flex flex-wrap gap-2">
+                                                    <span className="text-[10px] bg-gray-900 px-2 py-1 rounded text-gray-300 flex items-center gap-1"><Icons.Check /> vinalink-parent-research.md</span>
+                                                    <span className="text-[10px] bg-gray-900 px-2 py-1 rounded text-gray-300 flex items-center gap-1"><Icons.Check /> phan-tich-co-che-kinh-doanh.md</span>
+                                                    <span className="text-[10px] bg-gray-900 px-2 py-1 rounded text-gray-300 flex items-center gap-1"><Icons.Check /> doanh-chu-checklist.md</span>
+                                                    <span className="text-[10px] bg-gray-900 px-2 py-1 rounded text-gray-300 flex items-center gap-1"><Icons.Check /> downline-customer-persona.md</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Week 2 */}
+                                        <div className="relative">
+                                            <div className="hidden md:block absolute -left-32 top-1 text-right w-24">
+                                                <span className="text-xs font-bold text-gray-500">Tuần 30/2026</span>
+                                            </div>
+                                            <div className="absolute -left-2 top-1.5 w-4 h-4 rounded-full bg-[#0b0f19] border-2 border-gray-800 flex items-center justify-center">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-gray-800" />
+                                            </div>
+                                            <div className="ml-6 md:ml-8 bg-[#111a2e]/60 rounded-xl p-5 border border-gray-800/80">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <h4 className="font-bold text-sm text-gray-300">Nhận Phản Hồi Khảo Sát & Thiết Lập Mục Tiêu</h4>
+                                                    <span className="text-[10px] font-bold text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full uppercase">Kế hoạch</span>
+                                                </div>
+                                                <p className="text-xs text-gray-400 mb-3">Doanh chủ điền phản hồi checklist trực tiếp trên giao diện web. Cố vấn tiến hành chạy đối chiếu chuẩn mực để phản biện các mục tiêu phi thực tế.</p>
+                                                <div className="flex flex-wrap gap-2">
+                                                    <span className="text-[10px] bg-gray-950 px-2 py-1 rounded text-gray-500">doanh-chu-checklist-tra-loi.md</span>
+                                                    <span className="text-[10px] bg-gray-950 px-2 py-1 rounded text-gray-500">doi-chieu-bao-cao.md</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Week 3 */}
+                                        <div className="relative">
+                                            <div className="hidden md:block absolute -left-32 top-1 text-right w-24">
+                                                <span className="text-xs font-bold text-gray-500">Tuần 31/2026</span>
+                                            </div>
+                                            <div className="absolute -left-2 top-1.5 w-4 h-4 rounded-full bg-[#0b0f19] border-2 border-gray-800 flex items-center justify-center">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-gray-800" />
+                                            </div>
+                                            <div className="ml-6 md:ml-8 bg-[#111a2e]/60 rounded-xl p-5 border border-gray-800/80">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <h4 className="font-bold text-sm text-gray-300">Xây Dựng Chiến Lược Đào Tạo & Cơ Chế Tuyển Dụng</h4>
+                                                    <span className="text-[10px] font-bold text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full uppercase">Kế hoạch</span>
+                                                </div>
+                                                <p className="text-xs text-gray-400 mb-2">Xây dựng quy trình vận hành hệ thống tinh gọn (Lean Network Operation), thiết kế giáo trình chuyển giao EMC cho F1 và phễu tuyển dụng tự động.</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Week 4 */}
+                                        <div className="relative">
+                                            <div className="hidden md:block absolute -left-32 top-1 text-right w-24">
+                                                <span className="text-xs font-bold text-gray-500">Tuần 32/2026</span>
+                                            </div>
+                                            <div className="absolute -left-2 top-1.5 w-4 h-4 rounded-full bg-[#0b0f19] border-2 border-gray-800 flex items-center justify-center">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-gray-800" />
+                                            </div>
+                                            <div className="ml-6 md:ml-8 bg-[#111a2e]/60 rounded-xl p-5 border border-gray-800/80">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <h4 className="font-bold text-sm text-gray-300">Hoàn Thiện Kế Hoạch Kinh Doanh 3 Năm</h4>
+                                                    <span className="text-[10px] font-bold text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full uppercase">Kế hoạch</span>
+                                                </div>
+                                                <p className="text-xs text-gray-400 mb-2">Hoàn thiện mô hình tài chính 36 tháng chi tiết (doanh thu, quy mô nhánh yếu, chi phí vận hành), đóng gói hồ sơ kế hoạch và chuyển giao.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* VIEW 2: DOCUMENT VIEWER */}
+                        {currentView === "documents" && (
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fadeIn">
+                                {/* Sidebar: Doc List */}
+                                <div className="lg:col-span-3 bg-[#111a2e] rounded-2xl border border-gray-800 p-4 h-fit">
+                                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 px-1 flex items-center gap-2">
+                                        <Icons.Document /> Danh Sách Tài Liệu
+                                    </h3>
+                                    <div className="space-y-2">
+                                        {DOCUMENTS_LIST.map((doc) => {
+                                            const isSelected = selectedDoc === doc.id;
+                                            return (
+                                                <button
+                                                    key={doc.id}
+                                                    onClick={() => setSelectedDoc(doc.id)}
+                                                    className={`w-full text-left py-2 px-3 text-xs font-medium rounded-lg transition ${isSelected ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "text-gray-400 hover:bg-gray-800/50 hover:text-gray-200"}`}
+                                                >
+                                                    {doc.name}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* Content Panel: Markdown Renderer */}
+                                <div className="lg:col-span-9 bg-[#111a2e] rounded-2xl border border-gray-800 p-6 min-h-[500px] flex flex-col">
+                                    <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+                                        <span className="text-xs font-semibold px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-gray-400">
+                                            📄 File: {selectedDoc}
+                                        </span>
+                                        <a 
+                                            href={`./${selectedDoc}`}
+                                            className="text-xs text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1"
+                                            target="_blank"
+                                        >
+                                            <Icons.Download /> Xem file thô (.md)
+                                        </a>
+                                    </div>
+
+                                    {loadingDoc ? (
+                                        <div className="flex-1 flex flex-col justify-center items-center gap-3">
+                                            <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                                            <span className="text-xs text-gray-400">Đang biên dịch markdown...</span>
+                                        </div>
+                                    ) : (
+                                        <div 
+                                            className="markdown-content flex-1 text-sm overflow-y-auto leading-relaxed"
+                                            dangerouslySetInnerHTML={{ __html: docHtml }}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* VIEW 3: RECRUITMENT VISUALIZER */}
+                        {currentView === "visualizer" && (
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fadeIn">
+                                {/* Left Sidebar: Archetype Selector */}
+                                <div className="lg:col-span-3 flex flex-col gap-4">
+                                    <div className="bg-[#111a2e] rounded-xl p-4 border border-gray-800">
+                                        <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                            <Icons.Brain /> Chọn Nhóm Chân Dung
+                                        </h3>
+                                        <div className="space-y-3">
+                                            {ARCHETYPES_DATA.map((group) => {
+                                                const isSelected = selectedGroup === group.id;
+                                                const activeColors = 
+                                                    group.color === 'emerald' ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300' :
+                                                    group.color === 'indigo' ? 'border-indigo-500/50 bg-indigo-500/10 text-indigo-300' :
+                                                    'border-amber-500/50 bg-amber-500/10 text-amber-300';
+                                                
+                                                return (
+                                                    <button
+                                                        key={group.id}
+                                                        onClick={() => setSelectedGroup(group.id)}
+                                                        className={`w-full text-left p-3.5 rounded-xl border transition-all duration-300 focus:outline-none ${isSelected ? activeColors : 'border-gray-800/80 bg-gray-900/40 hover:bg-gray-800/40 text-gray-400'}`}
+                                                    >
+                                                        <div className="flex justify-between items-center mb-1">
+                                                            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/40 text-gray-300">
+                                                                {group.badge}
+                                                            </span>
+                                                            <span className={`w-2 h-2 rounded-full ${group.color === 'emerald' ? 'bg-emerald-500' : group.color === 'indigo' ? 'bg-indigo-500' : 'bg-amber-500'}`} />
+                                                        </div>
+                                                        <h4 className="font-semibold text-sm leading-tight">{group.name}</h4>
+                                                        <p className="text-[11px] text-gray-400 mt-1 line-clamp-2">{group.description}</p>
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                    <div className="bg-[#111a2e]/60 rounded-xl p-4 border border-gray-800 text-xs text-gray-400 space-y-2">
+                                        <p className="font-semibold text-gray-300 border-b border-gray-800 pb-1.5 mb-1.5">Thông tin công cụ</p>
+                                        <div className="flex justify-between"><span>Tên:</span> <span className="text-gray-200">F1 Recruiter Visualizer</span></div>
+                                        <div className="flex justify-between"><span>Phiên bản:</span> <span className="text-emerald-400">v2.0 (Responsive)</span></div>
+                                    </div>
+                                </div>
+
+                                {/* Right Area: Visualizer Board */}
+                                <div className="lg:col-span-9 flex flex-col gap-4">
+                                    <div className="flex flex-wrap items-center bg-[#111a2e] p-1.5 rounded-xl border border-gray-800 gap-1 text-xs">
+                                        <button 
+                                            onClick={() => setCurrentVisualizerTab("empathy")}
+                                            className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "empathy" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                        >
+                                            Bản Đồ Thấu Cảm
+                                        </button>
+                                        <button 
+                                            onClick={() => setCurrentVisualizerTab("vpc")}
+                                            className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "vpc" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                        >
+                                            Khung Định Vị Giá Trị (VPC)
+                                        </button>
+                                        <button 
+                                            onClick={() => setCurrentVisualizerTab("mapping")}
+                                            className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "mapping" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                        >
+                                            Bản Đồ Định Vị (Mapping)
+                                        </button>
+                                        <button 
+                                            onClick={() => setCurrentVisualizerTab("matrix")}
+                                            className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "matrix" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
+                                        >
+                                            Ma Trận Trùng Khớp
+                                        </button>
+                                        <button 
+                                            onClick={() => setCurrentVisualizerTab("pitch-templates")}
+                                            className={`flex-1 py-2 px-3 rounded-lg font-semibold transition ${currentVisualizerTab === "pitch-templates" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "text-gray-400 hover:text-gray-200"}`}
+                                        >
+                                            Mẫu Bản Pitch Tuyển Dụng
+                                        </button>
+                                    </div>
+
+                                    <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl relative overflow-hidden min-h-[480px]">
+                                        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b" style={{ backgroundImage: `linear-gradient(to bottom, ${activeVisualizerData.themeHex}, transparent)` }} />
                                         
-                                        return (
-                                            <button
-                                                key={group.id}
-                                                onClick={() => setSelectedGroup(group.id)}
-                                                className={`w-full text-left p-3.5 rounded-xl border transition-all duration-300 focus:outline-none ${
-                                                    isSelected 
-                                                        ? activeColors 
-                                                        : 'border-gray-800/80 bg-gray-900/40 hover:bg-gray-800/40 text-gray-400 hover:text-gray-300'
-                                                }`}
-                                            >
-                                                <div className="flex justify-between items-center mb-1">
-                                                    <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/40 text-gray-300">
-                                                        {group.badge}
-                                                    </span>
-                                                    <span className={`w-2 h-2 rounded-full ${
-                                                        group.color === 'emerald' ? 'bg-emerald-500' :
-                                                        group.color === 'indigo' ? 'bg-indigo-500' : 'bg-amber-500'
-                                                    }`} />
-                                                </div>
-                                                <h4 className="font-semibold text-sm leading-tight">{group.name}</h4>
-                                                <p className="text-[11px] text-gray-400 mt-1 line-clamp-2">{group.description}</p>
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
-                            {/* PROJECT INFO SUMMARY CARD */}
-                            <div className="bg-[#111a2e]/60 rounded-xl p-4 border border-gray-800 text-xs text-gray-400 space-y-2">
-                                <p className="font-semibold text-gray-300 border-b border-gray-800 pb-1.5 mb-1.5">Thông tin dự án</p>
-                                <div className="flex justify-between"><span>Dự án:</span> <span className="text-gray-200 font-medium">Tuyển dụng F1 Vinalink</span></div>
-                                <div className="flex justify-between"><span>Triết lý:</span> <span className="text-emerald-400 font-medium">Lean Customer Discovery</span></div>
-                                <div className="flex justify-between"><span>Cập nhật:</span> <span className="text-gray-200">20-07-2026</span></div>
-                            </div>
-                        </div>
-
-                        {/* Right Area: Framework Tabs and Visualizers */}
-                        <div className="lg:col-span-9 flex flex-col gap-6">
-                            
-                            {/* Navigation Tabs */}
-                            <div className="flex flex-wrap items-center bg-[#111a2e] p-1.5 rounded-xl border border-gray-800 gap-1">
-                                <button 
-                                    onClick={() => setCurrentTab("empathy")}
-                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "empathy" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
-                                >
-                                    <Icons.Brain /> Bản Đồ Thấu Cảm
-                                </button>
-                                <button 
-                                    onClick={() => setCurrentTab("vpc")}
-                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "vpc" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
-                                >
-                                    <Icons.Zap /> Khung Định Vị Giá Trị (VPC)
-                                </button>
-                                <button 
-                                    onClick={() => setCurrentTab("mapping")}
-                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "mapping" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
-                                >
-                                    <Icons.Compass /> Bản Đồ Định Vị (Mapping)
-                                </button>
-                                <button 
-                                    onClick={() => setCurrentTab("matrix")}
-                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "matrix" ? "bg-gray-800 text-white shadow-sm border border-gray-700" : "text-gray-400 hover:text-gray-200"}`}
-                                >
-                                    <Icons.UserCheck /> Ma Trận Trùng Khớp
-                                </button>
-                                <button 
-                                    onClick={() => setCurrentTab("pitch-templates")}
-                                    className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${currentTab === "pitch-templates" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "text-gray-400 hover:text-gray-200"}`}
-                                >
-                                    <Icons.Sparkles /> Mẫu Bản Pitch Tuyển Dụng
-                                </button>
-                            </div>
-
-                            {/* Main Board Container */}
-                            <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl relative overflow-hidden min-h-[480px]">
-                                <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b" style={{ backgroundImage: `linear-gradient(to bottom, ${activeData.themeHex}, transparent)` }} />
-                                
-                                {/* Info Banner for Active Persona */}
-                                <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800/80 pb-4 gap-4">
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-800 text-gray-300 border border-gray-700">
-                                                Đối tượng khảo sát
-                                            </span>
-                                            <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Vinalink Core F1
-                                            </span>
-                                        </div>
-                                        <h2 className="text-2xl font-bold tracking-tight text-white">{activeData.name}</h2>
-                                        <p className="text-xs text-gray-400 font-medium mt-0.5 italic">{activeData.subTitle}</p>
-                                    </div>
-                                    <div className="text-right text-xs text-gray-400">
-                                        Triết lý cốt lõi: <span className="font-bold text-gray-200">An vui & Tinh gọn</span>
-                                    </div>
-                                </div>
-
-                                {/* TAB 1: EMPATHY MAP (4-Quadrants Layout) */}
-                                {currentTab === "empathy" && (
-                                    <div className="space-y-6">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            {/* Think & Feel */}
-                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
-                                                <h4 className="font-bold text-sm text-indigo-400 mb-3 flex items-center gap-1.5">
-                                                    💭 NGHĨ & CẢM THẤY (Think & Feel)
-                                                </h4>
-                                                <ul className="space-y-2 text-xs text-gray-300">
-                                                    {activeData.empathy.thinkFeel.map((item, i) => (
-                                                        <li key={i} className="flex items-start gap-2">
-                                                            <span className="text-indigo-400 mt-0.5">•</span>
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                        <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800/80 pb-4 gap-4">
+                                            <div>
+                                                <h2 className="text-xl font-bold tracking-tight text-white">{activeVisualizerData.name}</h2>
+                                                <p className="text-xs text-gray-400 mt-0.5 italic">{activeVisualizerData.subTitle}</p>
                                             </div>
-
-                                            {/* See */}
-                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
-                                                <h4 className="font-bold text-sm text-emerald-400 mb-3 flex items-center gap-1.5">
-                                                    👁️ NHÌN THẤY (See)
-                                                </h4>
-                                                <ul className="space-y-2 text-xs text-gray-300">
-                                                    {activeData.empathy.see.map((item, i) => (
-                                                        <li key={i} className="flex items-start gap-2">
-                                                            <span className="text-emerald-400 mt-0.5">•</span>
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            {/* Hear */}
-                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
-                                                <h4 className="font-bold text-sm text-amber-400 mb-3 flex items-center gap-1.5">
-                                                    👂 NGHE THẤY (Hear)
-                                                </h4>
-                                                <ul className="space-y-2 text-xs text-gray-300">
-                                                    {activeData.empathy.hear.map((item, i) => (
-                                                        <li key={i} className="flex items-start gap-2">
-                                                            <span className="text-amber-400 mt-0.5">•</span>
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            {/* Say & Do */}
-                                            <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60 hover:border-gray-700 transition duration-300">
-                                                <h4 className="font-bold text-sm text-pink-400 mb-3 flex items-center gap-1.5">
-                                                    🗣️ NÓI & LÀM (Say & Do)
-                                                </h4>
-                                                <ul className="space-y-2 text-xs text-gray-300">
-                                                    {activeData.empathy.sayDo.map((item, i) => (
-                                                        <li key={i} className="flex items-start gap-2">
-                                                            <span className="text-pink-400 mt-0.5">•</span>
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                            <div className="text-right text-xs text-gray-400 font-bold bg-emerald-500/5 px-2.5 py-1.5 rounded-lg border border-emerald-500/10">
+                                                ☕ Vinalink Core F1
                                             </div>
                                         </div>
 
-                                        {/* Bottom split: Pains & Gains */}
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-gray-800/80 pt-4">
-                                            {/* Pains */}
-                                            <div className="bg-red-500/5 rounded-xl p-4 border border-red-500/10 hover:border-red-500/20 transition duration-300">
-                                                <h4 className="font-bold text-sm text-red-400 mb-3 flex items-center gap-1.5">
-                                                    💥 NỖI ĐAU (Pains / Frustrations)
-                                                </h4>
-                                                <ul className="space-y-2 text-xs text-red-200/95">
-                                                    {activeData.empathy.pains.map((item, i) => (
-                                                        <li key={i} className="flex items-start gap-2">
-                                                            <span className="text-red-400 mt-0.5">⚠️</span>
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            {/* Gains */}
-                                            <div className="bg-emerald-500/5 rounded-xl p-4 border border-emerald-500/10 hover:border-emerald-500/20 transition duration-300">
-                                                <h4 className="font-bold text-sm text-emerald-400 mb-3 flex items-center gap-1.5">
-                                                    🏆 MONG MUỐN (Gains / Aspirations)
-                                                    <Icons.Sparkles />
-                                                </h4>
-                                                <ul className="space-y-2 text-xs text-emerald-200/95">
-                                                    {activeData.empathy.gains.map((item, i) => (
-                                                        <li key={i} className="flex items-start gap-2">
-                                                            <span className="text-emerald-400 mt-0.5">⭐</span>
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* TAB 2: VALUE PROPOSITION CANVAS (VPC) */}
-                                {currentTab === "vpc" && (
-                                    <div className="space-y-6">
-                                        <p className="text-xs text-gray-400 italic mb-2">
-                                            💡 Mẹo tương tác: Rê chuột vào từng ô bất kỳ để xem phân tích trùng khớp giải pháp (Fit Matrix) tự động phát sáng!
-                                        </p>
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative">
-                                            
-                                            {/* LEFT SIDE: Customer Profile */}
-                                            <div className="bg-[#0f172a]/80 p-5 rounded-2xl border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.05)] relative">
-                                                <div className="absolute top-3 right-3 text-[10px] font-extrabold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full uppercase">
-                                                    Hồ sơ khách hàng
-                                                </div>
-                                                <h3 className="text-base font-bold text-blue-300 mb-4 flex items-center gap-2">
-                                                    👤 CUSTOMER PROFILE
-                                                </h3>
-
-                                                <div className="space-y-4">
-                                                    {/* Jobs to be done */}
-                                                    <div 
-                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'jobs' ? 'bg-blue-500/15 border-blue-400' : 'bg-gray-900/50 border-gray-800 hover:border-blue-500/30'}`}
-                                                        onMouseEnter={() => setMatchedPair({ type: 'jobs', index: 0 })}
-                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
-                                                    >
-                                                        <h4 className="text-xs font-bold text-blue-300 mb-1.5 uppercase tracking-wide">💼 Việc Cần Làm (Jobs-to-be-Done)</h4>
+                                        {/* EMPATHY TAB */}
+                                        {currentVisualizerTab === "empathy" && (
+                                            <div className="space-y-6">
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60">
+                                                        <h4 className="font-bold text-xs text-indigo-400 mb-2">💭 NGHĨ & CẢM THẤY</h4>
                                                         <ul className="space-y-1.5 text-xs text-gray-300">
-                                                            {activeData.vpc.jobs.map((item, i) => <li key={i}>• {item}</li>)}
+                                                            {activeVisualizerData.empathy.thinkFeel.map((item, i) => <li key={i}>• {item}</li>)}
                                                         </ul>
                                                     </div>
-
-                                                    {/* Pains */}
-                                                    <div 
-                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'pains' ? 'bg-red-500/15 border-red-400' : 'bg-gray-900/50 border-gray-800 hover:border-red-500/30'}`}
-                                                        onMouseEnter={() => setMatchedPair({ type: 'pains', index: 0 })}
-                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
-                                                    >
-                                                        <h4 className="text-xs font-bold text-red-300 mb-1.5 uppercase tracking-wide">💥 Nỗi Đau Khách Hàng (Customer Pains)</h4>
-                                                        <ul className="space-y-1.5 text-xs text-red-200">
-                                                            {activeData.vpc.pains.map((item, i) => <li key={i}>• {item}</li>)}
-                                                        </ul>
-                                                    </div>
-
-                                                    {/* Gains */}
-                                                    <div 
-                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'gains' ? 'bg-emerald-500/15 border-emerald-400' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
-                                                        onMouseEnter={() => setMatchedPair({ type: 'gains', index: 0 })}
-                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
-                                                    >
-                                                        <h4 className="text-xs font-bold text-emerald-300 mb-1.5 uppercase tracking-wide">🏆 Mong Muốn Đạt Được (Customer Gains)</h4>
-                                                        <ul className="space-y-1.5 text-xs text-emerald-200">
-                                                            {activeData.vpc.gains.map((item, i) => <li key={i}>• {item}</li>)}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {/* RIGHT SIDE: Value Map */}
-                                            <div className="bg-[#0f172a]/80 p-5 rounded-2xl border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.05)] relative">
-                                                <div className="absolute top-3 right-3 text-[10px] font-extrabold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full uppercase">
-                                                    Bản đồ giá trị hệ thống
-                                                </div>
-                                                <h3 className="text-base font-bold text-emerald-300 mb-4 flex items-center gap-2">
-                                                    📦 VALUE PROPOSITION (VINALINK)
-                                                </h3>
-
-                                                <div className="space-y-4">
-                                                    {/* Products & Services */}
-                                                    <div 
-                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'jobs' ? 'bg-blue-500/15 border-blue-400 scale-[1.02] shadow-lg' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
-                                                        onMouseEnter={() => setMatchedPair({ type: 'jobs', index: 0 })}
-                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
-                                                    >
-                                                        <h4 className="text-xs font-bold text-blue-300 mb-1.5 uppercase tracking-wide">🛒 Sản phẩm & Dịch vụ (Products & Services)</h4>
+                                                    <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60">
+                                                        <h4 className="font-bold text-xs text-emerald-400 mb-2">👁️ NHÌN THẤY</h4>
                                                         <ul className="space-y-1.5 text-xs text-gray-300">
-                                                            {activeData.vpc.products.map((item, i) => <li key={i}>• {item}</li>)}
+                                                            {activeVisualizerData.empathy.see.map((item, i) => <li key={i}>• {item}</li>)}
                                                         </ul>
                                                     </div>
-
-                                                    {/* Pain Relievers */}
-                                                    <div 
-                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'pains' ? 'bg-red-500/15 border-red-400 scale-[1.02] shadow-lg' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
-                                                        onMouseEnter={() => setMatchedPair({ type: 'pains', index: 0 })}
-                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
-                                                    >
-                                                        <h4 className="text-xs font-bold text-red-300 mb-1.5 uppercase tracking-wide">🛡️ Bộ Giải Quyết Nỗi Đau (Pain Relievers)</h4>
-                                                        <ul className="space-y-1.5 text-xs text-emerald-200">
-                                                            {activeData.vpc.painRelievers.map((item, i) => <li key={i}>• {item}</li>)}
+                                                    <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60">
+                                                        <h4 className="font-bold text-xs text-amber-400 mb-2">👂 NGHE THẤY</h4>
+                                                        <ul className="space-y-1.5 text-xs text-gray-300">
+                                                            {activeVisualizerData.empathy.hear.map((item, i) => <li key={i}>• {item}</li>)}
                                                         </ul>
                                                     </div>
-
-                                                    {/* Gain Creators */}
-                                                    <div 
-                                                        className={`p-3 rounded-lg border transition-all duration-300 cursor-pointer ${matchedPair.type === 'gains' ? 'bg-emerald-500/15 border-emerald-400 scale-[1.02] shadow-lg' : 'bg-gray-900/50 border-gray-800 hover:border-emerald-500/30'}`}
-                                                        onMouseEnter={() => setMatchedPair({ type: 'gains', index: 0 })}
-                                                        onMouseLeave={() => setMatchedPair({ type: null, index: null })}
-                                                    >
-                                                        <h4 className="text-xs font-bold text-emerald-300 mb-1.5 uppercase tracking-wide">🚀 Bộ Tạo Lợi Ích (Gain Creators)</h4>
-                                                        <ul className="space-y-1.5 text-xs text-emerald-200">
-                                                            {activeData.vpc.gainCreators.map((item, i) => <li key={i}>• {item}</li>)}
+                                                    <div className="bg-[#172237]/50 rounded-xl p-4 border border-gray-800/60">
+                                                        <h4 className="font-bold text-xs text-pink-400 mb-2">🗣️ NÓI & LÀM</h4>
+                                                        <ul className="space-y-1.5 text-xs text-gray-300">
+                                                            {activeVisualizerData.empathy.sayDo.map((item, i) => <li key={i}>• {item}</li>)}
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Dynamic connection indicator */}
-                                        {matchedPair.type && (
-                                            <div className="bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-xs text-emerald-300 animate-pulse text-center">
-                                                🔗 Phát hiện Trùng Khớp (VPC FIT): Vinalink giải quyết trực diện khía cạnh <strong>{matchedPair.type === 'jobs' ? 'Công Việc Của Khách Hàng' : matchedPair.type === 'pains' ? 'Nỗi Đau' : 'Mong Muốn'}</strong> bằng hệ thống đặc thù của mình!
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-gray-800/80 pt-4">
+                                                    <div className="bg-red-500/5 rounded-xl p-4 border border-red-500/10">
+                                                        <h4 className="font-bold text-xs text-red-400 mb-2">💥 NỖI ĐAU (Pains)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-red-200">{activeVisualizerData.empathy.pains.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                    </div>
+                                                    <div className="bg-emerald-500/5 rounded-xl p-4 border border-emerald-500/10">
+                                                        <h4 className="font-bold text-xs text-emerald-400 mb-2">🏆 MONG MUỐN (Gains)</h4>
+                                                        <ul className="space-y-1.5 text-xs text-emerald-200">{activeVisualizerData.empathy.gains.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         )}
-                                    </div>
-                                )}
 
-                                {/* TAB 3: PERCEPTUAL MAPPING */}
-                                {currentTab === "mapping" && (
-                                    <div className="space-y-6">
-                                        <div className="bg-[#0f172a] rounded-2xl border border-gray-800 p-6 flex flex-col items-center">
-                                            <h4 className="text-sm font-bold text-gray-300 mb-2 text-center uppercase tracking-wider">
-                                                Bản Đồ Định Vị Tâm Lý Học Hành Vi Khách Hàng (Vinalink Việt Nam)
-                                            </h4>
-                                            <p className="text-xs text-gray-400 max-w-xl text-center mb-6">
-                                                Tọa độ định vị dựa trên trục hoành (Tính Thực Tế Hành Động vs. Tính Trải Nghiệm Đổi Mới) và trục tung (Xu hướng Kiểm Soát vs. Xu hướng Linh Hoạt Tự Do).
-                                            </p>
+                                        {/* VPC TAB */}
+                                        {currentVisualizerTab === "vpc" && (
+                                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                                <div className="bg-[#0f172a]/80 p-5 rounded-2xl border border-blue-500/20">
+                                                    <h3 className="text-sm font-bold text-blue-300 mb-4">👤 CUSTOMER PROFILE</h3>
+                                                    <div className="space-y-4">
+                                                        <div className="p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                                                            <h4 className="text-xs font-bold text-blue-300 mb-1">💼 Việc Cần Làm (Jobs-to-be-Done)</h4>
+                                                            <ul className="space-y-1 text-xs text-gray-300">{activeVisualizerData.vpc.jobs.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                        </div>
+                                                        <div className="p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                                                            <h4 className="text-xs font-bold text-red-300 mb-1">💥 Nỗi Đau (Pains)</h4>
+                                                            <ul className="space-y-1 text-xs text-red-200">{activeVisualizerData.vpc.pains.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                        </div>
+                                                        <div className="p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                                                            <h4 className="text-xs font-bold text-emerald-300 mb-1">🏆 Mong Muốn (Gains)</h4>
+                                                            <ul className="space-y-1 text-xs text-emerald-200">{activeVisualizerData.vpc.gains.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="bg-[#0f172a]/80 p-5 rounded-2xl border border-emerald-500/20">
+                                                    <h3 className="text-sm font-bold text-emerald-300 mb-4">📦 VALUE PROPOSITION (VINALINK)</h3>
+                                                    <div className="space-y-4">
+                                                        <div className="p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                                                            <h4 className="text-xs font-bold text-blue-300 mb-1">🛒 Sản phẩm & Dịch vụ</h4>
+                                                            <ul className="space-y-1 text-xs text-gray-300">{activeVisualizerData.vpc.products.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                        </div>
+                                                        <div className="p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                                                            <h4 className="text-xs font-bold text-red-300 mb-1">🛡️ Bộ Giải Quyết Nỗi Đau</h4>
+                                                            <ul className="space-y-1 text-xs text-emerald-200">{activeVisualizerData.vpc.painRelievers.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                        </div>
+                                                        <div className="p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                                                            <h4 className="text-xs font-bold text-emerald-300 mb-1">🚀 Bộ Tạo Lợi Ích</h4>
+                                                            <ul className="space-y-1 text-xs text-emerald-200">{activeVisualizerData.vpc.gainCreators.map((item, i) => <li key={i}>• {item}</li>)}</ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
 
-                                            {/* Core Coordinates Grid */}
-                                            <div className="relative w-full max-w-[500px] h-[350px] bg-[#0c101d] rounded-xl border border-gray-800 flex items-center justify-center">
-                                                
-                                                {/* Y Axis line */}
-                                                <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-gray-700/60" />
-                                                {/* X Axis line */}
-                                                <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gray-700/60" />
-
-                                                {/* Axis Labels */}
-                                                <span className="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                                                    Kiểm Soát Cao (Sắp đặt hệ thống)
-                                                </span>
-                                                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                                                    Linh Hoạt (Hành động tự phát)
-                                                </span>
-                                                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">
-                                                    Trải Nghiệm & Đổi Mới 👉
-                                                </span>
-                                                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                                                    👈 Thực Tế & An Toàn
-                                                </span>
-
-                                                {/* Plotting points */}
-                                                {ARCHETYPES_DATA.map((item) => {
-                                                    const isSelected = item.id === selectedGroup;
-                                                    const colorClass = 
-                                                        item.color === 'emerald' ? 'bg-emerald-500 text-emerald-200 border-emerald-400 shadow-emerald-500/20' :
-                                                        item.color === 'indigo' ? 'bg-indigo-500 text-indigo-200 border-indigo-400 shadow-indigo-500/20' :
-                                                        'bg-amber-500 text-amber-200 border-amber-400 shadow-amber-500/20';
-
-                                                    return (
+                                        {/* MAPPING TAB */}
+                                        {currentVisualizerTab === "mapping" && (
+                                            <div className="flex flex-col items-center">
+                                                <div className="relative w-full max-w-[500px] h-[300px] bg-[#0c101d] rounded-xl border border-gray-800 flex items-center justify-center">
+                                                    <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-gray-700/60" />
+                                                    <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gray-700/60" />
+                                                    <span className="absolute top-2 left-1/2 -translate-x-1/2 text-[9px] font-bold text-gray-400 uppercase">Kiểm Soát Cao</span>
+                                                    <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[9px] font-bold text-gray-400 uppercase">Linh Hoạt</span>
+                                                    <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] font-bold text-gray-400 uppercase">Trải Nghiệm</span>
+                                                    <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] font-bold text-gray-400 uppercase">Thực Tế</span>
+                                                    {ARCHETYPES_DATA.map((item) => (
                                                         <div 
                                                             key={item.id}
-                                                            className={`absolute flex flex-col items-center z-10 transition-all duration-500 cursor-pointer ${isSelected ? 'scale-110' : 'opacity-60 hover:opacity-100'}`}
+                                                            className={`absolute flex flex-col items-center z-10 cursor-pointer ${item.id === selectedGroup ? 'scale-105' : 'opacity-60'}`}
                                                             style={{ left: `${item.positioning.x}%`, top: `${item.positioning.y}%` }}
                                                             onClick={() => setSelectedGroup(item.id)}
                                                         >
-                                                            <div className={`px-2.5 py-1.5 rounded-lg border-2 text-[10px] font-bold shadow-lg ${colorClass}`}>
+                                                            <div className={`px-2 py-1 rounded border text-[9px] font-bold shadow-lg bg-gray-800 text-gray-200`}>
                                                                 {item.badge}
                                                             </div>
-                                                            <span className="text-[9px] text-gray-400 font-medium mt-1 bg-black/80 px-1 py-0.5 rounded border border-gray-800">
-                                                                {item.positioning.label}
-                                                            </span>
                                                         </div>
-                                                    );
-                                                })}
+                                                    ))}
+                                                </div>
                                             </div>
+                                        )}
 
-                                            {/* Summary text underneath mapping */}
-                                            <div className="mt-4 bg-[#172237]/50 p-3.5 rounded-xl border border-gray-800/80 text-xs text-gray-300 max-w-xl text-center">
-                                                📍 <span className="font-semibold text-emerald-400">{activeData.name}</span> nằm ở góc phân khúc <span className="font-semibold text-white">{activeData.positioning.label}</span>. Định hướng chiến dịch tuyển dụng nên bám sát hệ giá trị thực chiến trực diện của nhóm này.
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* TAB 4: MA TRẬN TRÙNG KHỚP (Fit Matrix) - DYNAMIC VERSION */}
-                                {currentTab === "matrix" && (
-                                    <div className="space-y-6 overflow-x-auto animate-fadeIn">
-                                        <div className="flex justify-between items-center mb-2">
-                                            <span className="text-xs text-gray-400 italic">
-                                                📊 Ma trận trùng khớp đặc thù cho chân dung: <strong className="text-emerald-400">{activeData.name}</strong>
-                                            </span>
-                                        </div>
-                                        <table className="w-full text-left text-xs border-collapse">
-                                            <thead>
-                                                <tr className="border-b border-gray-800 text-gray-400 uppercase tracking-wider">
-                                                    <th className="py-3 px-4 font-bold w-1/4">Khía Cạnh Đánh Giá</th>
-                                                    <th className="py-3 px-4 font-bold w-3/8">Chi Tiết Rào Cản (Struggle)</th>
-                                                    <th className="py-3 px-4 font-bold w-3/8">Giải Pháp Vinalink Định Vị (Fit)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-gray-800/60">
-                                                {activeData.fitMatrix.map((row, idx) => (
-                                                    <tr key={idx} className="hover:bg-gray-800/20 transition-all">
-                                                        <td className="py-4 px-4 font-semibold text-emerald-300">{row.need}</td>
-                                                        <td className="py-4 px-4 text-gray-300">{row.struggle}</td>
-                                                        <td className="py-4 px-4 text-emerald-400 font-medium bg-emerald-500/5 rounded">{row.solution}</td>
+                                        {/* MATRIX TAB */}
+                                        {currentVisualizerTab === "matrix" && (
+                                            <table className="w-full text-left text-xs border-collapse">
+                                                <thead>
+                                                    <tr className="border-b border-gray-800 text-gray-400 uppercase tracking-wider">
+                                                        <th className="py-2 px-3 font-bold w-1/4">Khía Cạnh</th>
+                                                        <th className="py-2 px-3 font-bold w-3/8">Rào Cản (Struggle)</th>
+                                                        <th className="py-2 px-3 font-bold w-3/8">Giải Pháp Vinalink (Fit)</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                )}
+                                                </thead>
+                                                <tbody className="divide-y divide-gray-800/60">
+                                                    {activeVisualizerData.fitMatrix.map((row, idx) => (
+                                                        <tr key={idx} className="hover:bg-gray-800/20">
+                                                            <td className="py-3 px-3 font-semibold text-emerald-300">{row.need}</td>
+                                                            <td className="py-3 px-3 text-gray-300">{row.struggle}</td>
+                                                            <td className="py-3 px-3 text-emerald-400 font-medium bg-emerald-500/5">{row.solution}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        )}
 
-                                {/* TAB 5: PITCH TEMPLATES (MANUAL PITCH GENERATOR) */}
-                                {currentTab === "pitch-templates" && (
-                                    <div className="space-y-6">
-                                        <div className="bg-[#0f172a] rounded-xl border border-gray-800 p-5 space-y-6">
-                                            <div>
-                                                <h4 className="font-bold text-sm text-emerald-400 flex items-center gap-1.5">
-                                                    <Icons.Sparkles /> Mẫu Bản Pitch Tuyển Dụng (Sao chép nhanh)
-                                                </h4>
-                                                <p className="text-[11px] text-gray-400 mt-0.5">Các mẫu kịch bản tiếp cận và tin đăng được thiết kế dựa trên đúng nỗi đau và giải pháp trùng khớp cho chân dung: <strong className="text-white">{activeData.name}</strong></p>
-                                            </div>
-
+                                        {/* PITCH TAB */}
+                                        {currentVisualizerTab === "pitch-templates" && (
                                             <div className="space-y-4">
-                                                {activeData.pitchTemplates.map((template, idx) => (
-                                                    <div key={idx} className="bg-[#070b13] rounded-xl border border-gray-800 p-4 relative">
+                                                {activeVisualizerData.pitchTemplates.map((template, idx) => (
+                                                    <div key={idx} className="bg-[#070b13] rounded-xl border border-gray-800 p-4">
                                                         <div className="flex justify-between items-center mb-2 pb-2 border-b border-gray-800/80">
-                                                            <h5 className="font-bold text-xs text-indigo-300 flex items-center gap-1.5">
-                                                                {template.title}
-                                                            </h5>
+                                                            <h5 className="font-bold text-xs text-indigo-300">{template.title}</h5>
                                                             <button 
                                                                 onClick={() => copyToClipboard(template.content)}
-                                                                className="p-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700/60 rounded-md text-gray-300 hover:text-white transition duration-200 flex items-center gap-1 text-[10px] font-bold"
-                                                                title="Sao chép bản pitch"
+                                                                className="py-1 px-2.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 rounded text-[10px] font-bold flex items-center gap-1"
                                                             >
                                                                 <Icons.Download /> Sao chép
                                                             </button>
                                                         </div>
-                                                        <pre className="text-xs text-gray-300 whitespace-pre-wrap font-sans leading-relaxed pr-6 select-all">
-                                                            {template.content}
-                                                        </pre>
+                                                        <pre className="text-xs text-gray-300 whitespace-pre-wrap font-sans leading-relaxed">{template.content}</pre>
                                                     </div>
                                                 ))}
                                             </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* VIEW 4: FEEDBACK SURVEY FORM */}
+                        {currentView === "feedback" && (
+                            <div className="bg-[#111a2e] rounded-2xl border border-gray-800 p-6 shadow-xl max-w-4xl mx-auto animate-fadeIn">
+                                <div className="border-b border-gray-800 pb-4 mb-6">
+                                    <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                                        <Icons.Feedback /> Checklist Phản Hồi Từ Doanh Chủ
+                                    </h2>
+                                    <p className="text-xs text-gray-400 mt-1">Doanh chủ điền thông tin khảo sát tầm nhìn dưới đây. Các câu hỏi được cấu hình ràng buộc theo chuẩn mực hệ thống.</p>
+                                </div>
+
+                                <form onSubmit={handleFormSubmit} className="space-y-6">
+                                    {/* Admin config for Google Sheets App Script Web App */}
+                                    <div className="p-4 bg-gray-950/40 border border-gray-800 rounded-xl space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <label className="text-xs font-bold text-gray-300 flex items-center gap-1.5">
+                                                ⚙️ Thiết lập API Google Sheets (Dành cho Cố vấn)
+                                            </label>
+                                            <span className="text-[10px] font-semibold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">Config</span>
+                                        </div>
+                                        <div>
+                                            <input 
+                                                type="url" 
+                                                name="scriptUrl"
+                                                value={formData.scriptUrl}
+                                                onChange={handleInputChange}
+                                                placeholder="Ví dụ: https://script.google.com/macros/s/.../exec"
+                                                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                            />
+                                            <p className="text-[10px] text-gray-500 mt-1">Để trống ô này để chạy thử chế độ mô phỏng. Khi chạy thực tế, dán URL của Google Apps Script Web App được kết nối với Google Sheet vào đây.</p>
                                         </div>
                                     </div>
-                                )}
+
+                                    {/* Doanh Chủ Name */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Tên Doanh Chủ / Leader</label>
+                                            <input 
+                                                type="text" 
+                                                name="doanhChuName"
+                                                value={formData.doanhChuName}
+                                                onChange={handleInputChange}
+                                                required
+                                                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Question Sections */}
+                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
+                                        <h3 className="text-sm font-bold text-emerald-400">Phần A: Định Vị Tuyển Dụng Tinh Gọn (LVP & IDP)</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu A1: Giá trị hỗ trợ cốt lõi (Tối đa 2 giá trị)</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="a1"
+                                                    value={formData.a1}
+                                                    onChange={handleInputChange}
+                                                    placeholder="VD: Đào tạo sản phẩm EMC & chia sẻ 2-1"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu B1: Phân khúc downline ưu tiên (Chọn duy nhất 1)</label>
+                                                <select 
+                                                    name="b1"
+                                                    value={formData.b1}
+                                                    onChange={handleInputChange}
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                >
+                                                    <option value="nhom_1">Nhóm 1: Người làm thêm kiếm thu nhập thụ động</option>
+                                                    <option value="nhom_2">Nhóm 2: Khách hàng tiêu dùng chuyển đổi</option>
+                                                    <option value="nhom_3">Nhóm 3: Thủ lĩnh xây dựng hệ thống chuyên nghiệp</option>
+                                                </select>
+                                            </div>
+                                            <div className="md:col-span-2">
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu B2: Chi tiết đặc điểm nghề nghiệp & độ tuổi mục tiêu</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="b2"
+                                                    value={formData.b2}
+                                                    onChange={handleInputChange}
+                                                    placeholder="VD: Nhân viên văn phòng, tuổi từ 30 - 45..."
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
+                                        <h3 className="text-sm font-bold text-emerald-400">Phần B: Chỉ Số Hành Động Lọc Cam Kết & Quy Mô</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Câu C2: Chỉ số hành động lọc cam kết tuyển dụng</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="c2"
+                                                    value={formData.c2}
+                                                    onChange={handleInputChange}
+                                                    placeholder="VD: Trải nghiệm 1 sản phẩm & học pháp lý 3 ngày"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Phần 2: Số F1 nòng cốt muốn dẫn dắt (Tối đa 5 người)</label>
+                                                <input 
+                                                    type="number" 
+                                                    name="a2"
+                                                    value={formData.a2}
+                                                    onChange={handleInputChange}
+                                                    min="1" max="10"
+                                                    placeholder="Khuyên dùng: 3 - 4 người"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
+                                        <h3 className="text-sm font-bold text-emerald-400">Phần C: Nguồn Lực & Cam Kết Thời Gian</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Thời gian cam kết làm việc mỗi ngày (giờ/ngày)</label>
+                                                <input 
+                                                    type="number" 
+                                                    name="d1"
+                                                    value={formData.d1}
+                                                    onChange={handleInputChange}
+                                                    min="1" max="24"
+                                                    placeholder="VD: 4"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Ngân sách đầu tư ban đầu (VNĐ)</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="d2"
+                                                    value={formData.d2}
+                                                    onChange={handleInputChange}
+                                                    placeholder="VD: 5.000.000 VNĐ"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4 pt-4 border-t border-gray-800/80">
+                                        <h3 className="text-sm font-bold text-emerald-400">Phần D: Mục Tiêu Thu Nhập Thụ Động Qua 3 Năm (VNĐ/tháng)</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 1 (VNĐ/tháng)</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="e1"
+                                                    value={formData.e1}
+                                                    onChange={handleInputChange}
+                                                    placeholder="VD: 15.000.000 VNĐ"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 2 (VNĐ/tháng)</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="e2"
+                                                    value={formData.e2}
+                                                    onChange={handleInputChange}
+                                                    placeholder="VD: 60.000.000 VNĐ"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-gray-400 mb-2">Mục tiêu Năm 3 (VNĐ/tháng)</label>
+                                                <input 
+                                                    type="text" 
+                                                    name="e3"
+                                                    value={formData.e3}
+                                                    onChange={handleInputChange}
+                                                    placeholder="VD: 150.000.000 VNĐ"
+                                                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-emerald-500"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Action button & Status */}
+                                    <div className="pt-6 border-t border-gray-800/80 flex flex-col md:flex-row justify-between items-center gap-4">
+                                        <button 
+                                            type="submit"
+                                            className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-2.5 px-8 rounded-lg shadow-lg shadow-emerald-500/10 transition-all focus:outline-none text-xs"
+                                        >
+                                            Gửi Phản Hồi Lên Google Sheets
+                                        </button>
+
+                                        {submitStatus.type && (
+                                            <div className={`p-3 rounded-lg text-xs leading-relaxed max-w-lg ${submitStatus.type === "success" ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/20" : submitStatus.type === "error" ? "bg-red-500/10 text-red-300 border border-red-500/20" : "bg-gray-800 text-gray-400 border border-gray-700 animate-pulse"}`}>
+                                                {submitStatus.msg}
+                                            </div>
+                                        )}
+                                    </div>
+                                </form>
                             </div>
-                        </div>
+                        )}
                     </main>
 
                     {/* Footer bar */}
