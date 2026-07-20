@@ -39,6 +39,24 @@ Bộ câu hỏi này giúp Doanh chủ tự định hình tư duy chiến lượ
 - **Anh/Chị đã có sẵn kỹ năng hoặc kinh nghiệm gì có thể tận dụng ngay?** (Kỹ năng thuyết trình, đào tạo sản phẩm, telesale, marketing online...).
   - Trả lời: [ky_nang_san_co] -> ................................................................................
 
+  * **Ma trận Năng lực & Định hướng Kỹ năng Doanh chủ (Skill Matrix):**
+    *Hướng dẫn: Đánh dấu `[x]` vào ô tương ứng để xác định các năng lực anh/chị ĐÃ CÓ SẴN (để tận dụng ngay) hoặc CẦN PHÁT TRIỂN (để tập trung đào tạo).*
+
+    | Nhóm Năng lực | STT | Kỹ năng cốt lõi của Giám đốc Hệ thống | Sẵn có | Cần phát triển | Biến mã hóa |
+    | :--- | :---: | :--- | :---: | :---: | :--- |
+    | **1. Quản trị Chiến lược & Tài chính** | 1.1 | Lập kế hoạch kinh doanh và thiết lập mục tiêu hệ thống (KPIs/OKRs) | `[ ]` | `[ ]` | `[sm_strat_plan]` |
+    | | 1.2 | Phân tích số liệu kinh doanh (CV, tỷ lệ cân nhánh nhị phân, tỷ lệ RCR) | `[ ]` | `[ ]` | `[sm_data_analysis]` |
+    | | 1.3 | Tối ưu hóa cơ chế trả thưởng và kiểm soát trần hoa hồng Maxout | `[ ]` | `[ ]` | `[sm_scheme_opt]` |
+    | **2. Phát triển Đội ngũ & Đào tạo** | 2.1 | Tuyển chọn, chuyển giao và giữ chân nhân sự nòng cốt (Key Leaders F1) | `[ ]` | `[ ]` | `[sm_team_recruit]` |
+    | | 2.2 | Thiết kế giáo trình, kèm cặp thực chiến và đào tạo sản phẩm (EMC) | `[ ]` | `[ ]` | `[sm_emc_training]` |
+    | | 2.3 | Truyền cảm hứng, tạo động lực và dẫn dắt theo phong cách Lãnh đạo phục vụ | `[ ]` | `[ ]` | `[sm_servant_lead]` |
+    | **3. Kinh doanh & Phát triển Thị trường** | 3.1 | Thuyết trình cơ hội hợp tác kinh doanh (OPP 2-1 hoặc OPP đám đông) | `[ ]` | `[ ]` | `[sm_opp_present]` |
+    | | 3.2 | Định vị thương hiệu cá nhân (LVP) và thấu cảm chân dung downline (Persona) | `[ ]` | `[ ]` | `[sm_brand_persona]` |
+    | | 3.3 | Kỹ năng thiết lập cuộc hẹn, telesale và chốt đối tác tiềm năng | `[ ]` | `[ ]` | `[sm_appointment_sales]` |
+    | **4. Số hóa & Ứng dụng Công nghệ** | 4.1 | Vận hành văn phòng trực tuyến (VPOL), đặt hàng và quản lý mã số số hóa | `[ ]` | `[ ]` | `[sm_vpol_operation]` |
+    | | 4.2 | Thiết lập Landing Page cá nhân hóa và phễu tuyển dụng tự động | `[ ]` | `[ ]` | `[sm_funnel_tech]` |
+    | | 4.3 | Sử dụng công cụ toán học và bộ mô phỏng dự phóng tài chính (Simulator) | `[ ]` | `[ ]` | `[sm_sim_usage]` |
+
 ## 5. Khảo sát Hiện trạng Hệ thống Doanh nghiệp (Phần 5)
 - **Quy mô tổng thành viên hiện tại của hệ thống (người):** [hien_tai_quy_mo_tong] -> ........................
 - **Số lượng NPP hoạt động thực tế hiện tại (người):** [hien_tai_npp_hoat_dong] -> ........................
