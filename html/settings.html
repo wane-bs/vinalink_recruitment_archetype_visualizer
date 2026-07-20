@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinalink Doanh Chủ Portal Settings">
+  <title>Cài đặt Hệ thống | Vinalink Portal</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+  <!-- Check Auth State immediately to avoid flickering -->
+  <script>
+    if (localStorage.getItem("sihub_is_admin") !== "true") {
+      alert("Đặc quyền Cố vấn yêu cầu xác thực. Vui lòng đăng nhập!");
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <a class="brand-mark" href="index.html" aria-label="Vinalink Portal">
+          <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
+            <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-title">Vinalink Portal</span>
+            <span class="brand-subtitle">Doanh Chủ Workspace</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard & Lộ trình</span>
+        </a>
+        <a class="nav-link" href="documents.html">
+          <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+          <span class="nav-text">Tài liệu Nghiên cứu</span>
+        </a>
+        <a class="nav-link" href="visualizer.html">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">Bản đồ Tuyển dụng</span>
+        </a>
+        <a class="nav-link" href="simulator.html">
+          <span class="nav-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+          <span class="nav-text">Bộ Mô Phỏng</span>
+        </a>
+        <a class="nav-link" href="feedback.html">
+          <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Khảo sát Doanh chủ</span>
+        </a>
+        <a class="nav-link active" href="settings.html" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Cài đặt Hệ thống</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+        <strong>Doanh Chủ</strong>
+        <small>Active Workspace</small>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">Hệ thống hoạt động tốt</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white border-bottom">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+                <span class="profile-name d-none d-sm-inline">Loading...</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item text-danger" id="logoutBtn"><i class="bi bi-box-arrow-right me-1"></i> Đăng xuất Cố vấn</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          
+          <div class="page-heading mb-4">
+            <div class="page-heading-copy">
+              <span class="page-icon bg-success text-white"><i class="bi bi-gear-fill" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Cài đặt Hệ thống</p>
+                <h1 class="h3 mb-1">Đồng bộ Google Sheets</h1>
+                <p class="text-muted mb-0">Cấu hình API Web App Google Apps Script và mã lực bảo mật kết nối.</p>
+              </div>
+            </div>
+          </div>
+
+          <section class="row g-3">
+            <div class="col-12 col-xl-8">
+              <div class="panel p-4">
+                <h2 class="h5 mb-3 section-title"><i class="bi bi-link-45deg me-1"></i><span>Kết nối API</span></h2>
+                <form id="settingsForm" class="needs-validation" novalidate>
+                  <div class="mb-3">
+                    <label class="form-label" for="scriptUrl">Google Apps Script Web App URL</label>
+                    <input class="form-control" id="scriptUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" required>
+                    <div class="invalid-feedback">Vui lòng nhập đường dẫn URL hợp lệ.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="accessToken">Mã Access Token Bảo Mật Backend</label>
+                    <input class="form-control" id="accessToken" type="text" placeholder="Mã xác thực gửi kèm payload" required>
+                    <div class="invalid-feedback">Vui lòng nhập mã Access Token.</div>
+                  </div>
+                  <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button class="btn btn-success" type="submit"><i class="bi bi-save me-1"></i> Lưu Cấu Hình</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Guide Panel -->
+            <div class="col-12 col-xl-4">
+              <div class="panel p-4 h-100">
+                <h2 class="h5 mb-3 section-title"><i class="bi bi-journal-code me-1"></i><span>Hướng dẫn Apps Script</span></h2>
+                <div class="text-muted small">
+                  <p class="mb-2">1. Mở Google Sheet, chọn <strong>Extensions > Apps Script</strong>.</p>
+                  <p class="mb-2">2. Dán đoạn mã sau vào dự án:</p>
+                  <pre class="bg-dark text-light p-2 rounded overflow-auto" style="font-size: 0.75rem; font-family: monospace;">
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  
+  if (data.accessToken !== "MÃ_ACCESS_TOKEN_CỦA_BẠN") {
+    return ContentService.createTextOutput("Access Denied").setMimeType(ContentService.MimeType.TEXT);
+  }
+  
+  sheet.appendRow([
+    data.timestamp, data.doanhChuName, data.e1, data.e2, data.e3, data.motivation,
+    data.a2, data.totalMembers, data.distributionRatio, data.culture, data.leadershipStyle,
+    data.d1, data.d2, data.skills.join(", "), data.a1.join(", "), data.lvpStyle,
+    data.lvpIntra.join(", "), data.lvpInter.join(", "), data.lvpBrand, data.b1, data.b2,
+    data.c1.join(", "), data.c2
+  ]);
+  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+}</pre>
+                  <p class="mb-2">3. Chọn <strong>Deploy > New Deployment</strong>, chọn loại <strong>Web App</strong>.</p>
+                  <p class="mb-0">4. Thiết lập <em>Execute as: Me</em> và <em>Who has access: Anyone</em>, sao chép URL dán vào ô bên cạnh.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="container-fluid px-3 px-lg-4">
+          <span>Copyright 2026 Vinalink Doanh Chủ Portal • Thiết kế dựa trên adminHMD</span>
+          <span>Bảo mật hệ thống thông tin</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Bind profile before loading main.js
+    window.adminHMDUser = {
+      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
+      workspace: "Vinalink Project",
+      avatar: "../assets/images/avatar/avatar.jpg"
+    };
+  </script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    // Load config from localStorage
+    document.addEventListener("DOMContentLoaded", () => {
+      const scriptUrlInput = document.getElementById("scriptUrl");
+      const accessTokenInput = document.getElementById("accessToken");
+
+      scriptUrlInput.value = localStorage.getItem("sihub_script_url") || "";
+      accessTokenInput.value = localStorage.getItem("sihub_access_token") || "sihub_token_2026";
+
+      // Form submission
+      document.getElementById("settingsForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (this.checkValidity()) {
+          localStorage.setItem("sihub_script_url", scriptUrlInput.value.trim());
+          localStorage.setItem("sihub_access_token", accessTokenInput.value.trim());
+          alert("Lưu cấu hình API Google Sheets thành công!");
+        }
+        this.classList.add("was-validated");
+      });
+
+      // Logout handler
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("sihub_is_admin");
+        alert("Đã đăng xuất tài khoản Cố vấn.");
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</body>
+</html>

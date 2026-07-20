@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinalink Doanh Chủ Portal Documents">
+  <title>Tài liệu Nghiên cứu | Vinalink Portal</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  
+  <!-- Marked JS for parsing markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <style>
+    /* Styling for rendered markdown content, adaptive to light/dark themes */
+    .markdown-content h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--admin-border);
+      color: inherit;
+    }
+    .markdown-content h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: inherit;
+    }
+    .markdown-content h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.2rem;
+      margin-bottom: 0.6rem;
+      color: inherit;
+    }
+    .markdown-content p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: var(--admin-muted);
+    }
+    .markdown-content ul, .markdown-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .markdown-content li {
+      margin-bottom: 0.4rem;
+    }
+    .markdown-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+    }
+    .markdown-content th {
+      background-color: var(--admin-surface-soft);
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--admin-border);
+      text-align: left;
+    }
+    .markdown-content td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--admin-border);
+    }
+    .markdown-content blockquote {
+      border-left: 4px solid #10b981;
+      background-color: rgba(16, 185, 129, 0.05);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.2rem;
+      border-radius: 0 0.375rem 0.375rem 0;
+    }
+    .markdown-content strong {
+      color: inherit;
+      font-weight: 700;
+    }
+    
+    /* Dark Theme specific adaptations */
+    html[data-theme="dark"] .markdown-content th {
+      background-color: #1f2937;
+    }
+    html[data-theme="dark"] .markdown-content blockquote {
+      background-color: rgba(16, 185, 129, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <a class="brand-mark" href="index.html" aria-label="Vinalink Portal">
+          <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
+            <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-title">Vinalink Portal</span>
+            <span class="brand-subtitle">Doanh Chủ Workspace</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard & Lộ trình</span>
+        </a>
+        <a class="nav-link active" href="documents.html" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+          <span class="nav-text">Tài liệu Nghiên cứu</span>
+        </a>
+        <a class="nav-link" href="visualizer.html">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">Bản đồ Tuyển dụng</span>
+        </a>
+        <a class="nav-link" href="simulator.html">
+          <span class="nav-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+          <span class="nav-text">Bộ Mô Phỏng</span>
+        </a>
+        <a class="nav-link" href="feedback.html">
+          <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Khảo sát Doanh chủ</span>
+        </a>
+        <a class="nav-link" id="settingsSidebarLink" href="settings.html">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Cài đặt Hệ thống</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+        <strong>Doanh Chủ</strong>
+        <small>Active Workspace</small>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">Hệ thống hoạt động tốt</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white border-bottom">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            
+            <div id="adminBadge" class="d-none me-2">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded text-xs font-semibold">
+                <i class="bi bi-shield-check me-1"></i> Quyền Cố Vấn
+              </span>
+            </div>
+
+            <div class="dropdown">
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+                <span class="profile-name d-none d-sm-inline">Loading...</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="login.html" id="dropdownAuthLink">Đăng nhập Cố vấn</a></li>
+                <li><button class="dropdown-item text-danger d-none" id="logoutBtn"><i class="bi bi-box-arrow-right me-1"></i> Đăng xuất Cố vấn</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          
+          <div class="page-heading mb-4">
+            <div class="page-heading-copy">
+              <span class="page-icon bg-success text-white"><i class="bi bi-journal-text" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Tài liệu Nghiên cứu & Phân tích</p>
+                <h1 class="h3 mb-1">Thư viện Hồ sơ Vinalink</h1>
+                <p class="text-muted mb-0">Tra cứu cơ chế kinh doanh, nghiên cứu nền tảng và chuẩn mực vận hành.</p>
+              </div>
+            </div>
+          </div>
+
+          <section class="row g-4">
+            <!-- Sidebar: Document List -->
+            <div class="col-12 col-lg-3">
+              <div class="panel p-3">
+                <h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-3 px-1">
+                  <i class="bi bi-list-task me-1"></i> Danh Sách Tài Liệu
+                </h3>
+                <div class="list-group list-group-flush" id="docList">
+                  <!-- Load dynamically -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Panel: Markdown Renderer -->
+            <div class="col-12 col-lg-9">
+              <div class="panel p-4" style="min-height: 520px;">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                  <span class="badge bg-light text-muted border px-2 py-1.5" id="activeDocLabel">
+                    📄 Chưa chọn tài liệu
+                  </span>
+                  <a href="#" class="text-xs fw-bold text-success" id="rawDocLink" target="_blank" style="display: none;">
+                    <i class="bi bi-download me-1"></i> Xem file thô (.md)
+                  </a>
+                </div>
+
+                <div id="docLoading" class="text-center py-5 d-none">
+                  <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Đang tải...</span>
+                  </div>
+                  <p class="text-muted small mt-2">Đang biên dịch nội dung tài liệu...</p>
+                </div>
+
+                <div id="docContent" class="markdown-content">
+                  <div class="text-center text-muted py-5">
+                    <i class="bi bi-file-earmark-text display-1"></i>
+                    <p class="mt-3">Vui lòng chọn tài liệu ở danh sách bên trái để đọc nội dung.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="container-fluid px-3 px-lg-4">
+          <span>Copyright 2026 Vinalink Doanh Chủ Portal • Thiết kế dựa trên adminHMD</span>
+          <span>Bảo mật hệ thống thông tin</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Bind profile before loading main.js
+    window.adminHMDUser = {
+      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
+      workspace: "Vinalink Project",
+      avatar: "../assets/images/avatar/avatar.jpg"
+    };
+  </script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    const DOCUMENTS_METADATA = [
+      { id: "vinalink-parent-research.md", name: "1. Nghiên cứu công ty mẹ" },
+      { id: "phan-tich-co-che-kinh-doanh.md", name: "2. Phân tích cơ chế kinh doanh EMC" },
+      { id: "doanh-chu-checklist.md", name: "3. Checklist khảo sát tầm nhìn" },
+      { id: "downline-customer-persona.md", name: "4. Chân dung khách hàng mục tiêu" },
+      { id: "vinalink-simulator-desc.md", name: "5. Giải thuật Bộ mô phỏng Kế hoạch 3 năm" },
+      { id: "bo-chuan-muc-trao-doi-doanh-chu.md", name: "6. Bộ chuẩn mực trao đổi doanh chủ" }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const isAdmin = localStorage.getItem("sihub_is_admin") === "true";
+      const adminBadge = document.getElementById("adminBadge");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const dropdownAuthLink = document.getElementById("dropdownAuthLink");
+      const settingsSidebarLink = document.getElementById("settingsSidebarLink");
+
+      if (isAdmin) {
+        adminBadge.classList.remove("d-none");
+        logoutBtn.classList.remove("d-none");
+        dropdownAuthLink.classList.add("d-none");
+      } else {
+        adminBadge.classList.add("d-none");
+        logoutBtn.classList.add("d-none");
+        dropdownAuthLink.classList.remove("d-none");
+        if (settingsSidebarLink) {
+          settingsSidebarLink.style.display = "none";
+        }
+      }
+
+      // Logout handler
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("sihub_is_admin");
+        alert("Đã đăng xuất tài khoản Cố vấn.");
+        window.location.reload();
+      });
+
+      // Load Document list
+      const docListContainer = document.getElementById("docList");
+      DOCUMENTS_METADATA.forEach((doc, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "list-group-item list-group-item-action text-xs py-2.5 px-3 border-0 rounded mb-1";
+        btn.textContent = doc.name;
+        btn.addEventListener("click", () => loadDocument(doc.id, doc.name, btn));
+        docListContainer.appendChild(btn);
+      });
+    });
+
+    function loadDocument(docId, docName, clickedBtn) {
+      // Toggle active states in list
+      const buttons = document.querySelectorAll("#docList button");
+      buttons.forEach(b => b.classList.remove("active", "bg-success-subtle", "text-success", "fw-bold"));
+      clickedBtn.classList.add("active", "bg-success-subtle", "text-success", "fw-bold");
+
+      const loadingEl = document.getElementById("docLoading");
+      const contentEl = document.getElementById("docContent");
+      const labelEl = document.getElementById("activeDocLabel");
+      const rawLinkEl = document.getElementById("rawDocLink");
+
+      loadingEl.classList.remove("d-none");
+      contentEl.innerHTML = "";
+      labelEl.textContent = `📄 File: ${docId}`;
+      rawLinkEl.href = `../docs/${docId}`;
+      rawLinkEl.style.display = "inline-flex";
+
+      fetch(`../docs/${docId}`)
+        .then(res => {
+          if (!res.ok) throw new Error("Không thể đọc tệp tin");
+          return res.text();
+        })
+        .then(text => {
+          marked.setOptions({ breaks: true, gfm: true });
+          contentEl.innerHTML = marked.parse(text);
+          loadingEl.classList.add("d-none");
+        })
+        .catch(err => {
+          console.error(err);
+          contentEl.innerHTML = `
+            <div class="alert alert-danger" role="alert">
+              <strong>⚠️ Lỗi tải file:</strong> Không tìm thấy tệp <code>${docId}</code> hoặc bạn không có quyền truy cập.
+            </div>
+          `;
+          loadingEl.classList.add("d-none");
+        });
+    }
+  </script>
+</body>
+</html>

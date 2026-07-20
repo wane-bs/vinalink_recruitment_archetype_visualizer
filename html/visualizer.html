@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinalink Doanh Chủ Portal Recruitment Visualizer">
+  <title>Bản đồ Tuyển dụng F1 | Vinalink Portal</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  
+  <style>
+    /* Styling for the Empathy grid */
+    .empathy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .empathy-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .empathy-card {
+      background-color: var(--admin-surface-soft);
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .empathy-card h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    /* VPC styling */
+    .vpc-col-profile {
+      border: 1px solid rgba(13, 110, 253, 0.2);
+      background-color: rgba(13, 110, 253, 0.02);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .vpc-col-value {
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      background-color: rgba(16, 185, 129, 0.02);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    
+    /* Positioning grid wrapper */
+    .pos-map-container {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      height: 320px;
+      background-color: var(--admin-surface-soft);
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .pos-map-line-y {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      border-left: 1px dashed var(--admin-border);
+    }
+    .pos-map-line-x {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      border-top: 1px dashed var(--admin-border);
+    }
+    .pos-map-label {
+      position: absolute;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--admin-muted);
+      text-transform: uppercase;
+    }
+    .pos-map-label.top { top: 8px; left: 50%; transform: translateX(-50%); }
+    .pos-map-label.bottom { bottom: 8px; left: 50%; transform: translateX(-50%); }
+    .pos-map-label.left { left: 8px; top: 50%; transform: translateY(-50%); }
+    .pos-map-label.right { right: 8px; top: 50%; transform: translateY(-50%); }
+    
+    .pos-map-point {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    
+    /* Active dot indicators */
+    .active-point-emerald {
+      border: 2px solid #10b981;
+      background-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+    .active-point-indigo {
+      border: 2px solid #6366f1;
+      background-color: #6366f1;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+    }
+    .active-point-amber {
+      border: 2px solid #f59e0b;
+      background-color: #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <a class="brand-mark" href="index.html" aria-label="Vinalink Portal">
+          <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
+            <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-title">Vinalink Portal</span>
+            <span class="brand-subtitle">Doanh Chủ Workspace</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard & Lộ trình</span>
+        </a>
+        <a class="nav-link" href="documents.html">
+          <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+          <span class="nav-text">Tài liệu Nghiên cứu</span>
+        </a>
+        <a class="nav-link active" href="visualizer.html" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">Bản đồ Tuyển dụng</span>
+        </a>
+        <a class="nav-link" href="simulator.html">
+          <span class="nav-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+          <span class="nav-text">Bộ Mô Phỏng</span>
+        </a>
+        <a class="nav-link" href="feedback.html">
+          <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Khảo sát Doanh chủ</span>
+        </a>
+        <a class="nav-link" id="settingsSidebarLink" href="settings.html">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Cài đặt Hệ thống</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+        <strong>Doanh Chủ</strong>
+        <small>Active Workspace</small>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">Hệ thống hoạt động tốt</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white border-bottom">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            
+            <div id="adminBadge" class="d-none me-2">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded text-xs font-semibold">
+                <i class="bi bi-shield-check me-1"></i> Quyền Cố Vấn
+              </span>
+            </div>
+
+            <div class="dropdown">
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+                <span class="profile-name d-none d-sm-inline">Loading...</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="login.html" id="dropdownAuthLink">Đăng nhập Cố vấn</a></li>
+                <li><button class="dropdown-item text-danger d-none" id="logoutBtn"><i class="bi bi-box-arrow-right me-1"></i> Đăng xuất Cố vấn</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          
+          <div class="page-heading mb-4">
+            <div class="page-heading-copy">
+              <span class="page-icon bg-success text-white"><i class="bi bi-people-fill" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Công cụ Tuyển dụng hệ thống</p>
+                <h1 class="h3 mb-1">Bản đồ Chân dung & Kịch bản F1</h1>
+                <p class="text-muted mb-0">Phân tích sâu thấu cảm, định vị giá trị và ma trận trùng khớp cho 3 nhóm đối tượng mục tiêu tuyển dụng.</p>
+              </div>
+            </div>
+          </div>
+
+          <section class="row g-4">
+            <!-- Sidebar: Archetype Selector -->
+            <div class="col-12 col-lg-3">
+              <div class="panel p-3">
+                <h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-3 px-1">
+                  <i class="bi bi-person-bounding-box me-1"></i> Chọn Chân Dung
+                </h3>
+                <div class="d-flex flex-column gap-2" id="archetypeBtns">
+                  <!-- Generated via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Area: Tabs & Visualizer Board -->
+            <div class="col-12 col-lg-9">
+              <div class="panel p-3 mb-3">
+                <ul class="nav nav-pills nav-fill text-xs" id="visualizerTabs" role="tablist">
+                  <li class="nav-item">
+                    <button class="nav-link active py-2 font-semibold" data-tab="empathy">Bản Đồ Thấu Cảm</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link py-2 font-semibold" data-tab="vpc">Khung Định Vị (VPC)</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link py-2 font-semibold" data-tab="mapping">Bản Đồ Định Vị</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link py-2 font-semibold" data-tab="matrix">Ma Trận Trùng Khớp</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link py-2 font-semibold" data-tab="pitch">Kịch Bản Tuyển Dụng</button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Main Panel Board -->
+              <div class="panel p-4" style="min-height: 480px; position: relative;">
+                <div id="borderIndicator" style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; transition: background-color 0.2s ease;"></div>
+                
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center border-bottom pb-3 mb-4 gap-2">
+                  <div>
+                    <h2 class="h5 mb-1 fw-bold" id="activeArchetypeName">Loading...</h2>
+                    <p class="text-muted small mb-0 italic" id="activeArchetypeSubtitle">Loading...</p>
+                  </div>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 text-xs font-bold" id="activeArchetypeBadge">
+                    Loading...
+                  </span>
+                </div>
+
+                <!-- Tab Content Destination -->
+                <div id="tabContentBox"></div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="container-fluid px-3 px-lg-4">
+          <span>Copyright 2026 Vinalink Doanh Chủ Portal • Thiết kế dựa trên adminHMD</span>
+          <span>Bảo mật hệ thống thông tin</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Bind profile before loading main.js
+    window.adminHMDUser = {
+      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
+      workspace: "Vinalink Project",
+      avatar: "../assets/images/avatar/avatar.jpg"
+    };
+  </script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    const ARCHETYPES_DATA = [
+      {
+        id: "nhom_1",
+        name: "Người Làm Thêm / Thu Nhập Thụ Động",
+        subTitle: "Nhà Vua Tương Lai (Muốn làm chủ cuộc đời từ gốc rễ nhỏ bé)",
+        badge: "Mẹ Bỉm, Văn Phòng",
+        color: "emerald",
+        themeHex: "#10b981",
+        description: "Nhóm mong muốn gia tăng nguồn lực tài chính chủ động, bắt đầu tinh gọn từ vài giờ rảnh mỗi ngày mà không mạo hiểm rủi ro tài chính.",
+        positioning: { x: 30, y: 75, label: "Thực Tế & An Toàn Cao" },
+        empathy: {
+          thinkFeel: [
+            "Mong muốn kiếm thêm 5 - 10 triệu/tháng trang trải cuộc sống gia đình.",
+            "Rất sợ rủi ro mất tiền, lừa đảo, hoặc dính vào đa cấp biến tướng ôm hàng.",
+            "Tự ti về khả năng bán hàng, nghĩ rằng mình 'không có duyên'."
+          ],
+          hear: [
+            "Người thân cảnh báo: 'Coi chừng bị lừa đa cấp!', 'Đừng tin mấy việc online.'",
+            "Báo đài đưa tin về lừa đảo tài chính qua mạng, giật nợ."
+          ],
+          see: [
+            "Các bài đăng khoe doanh số khủng, nhà lầu xe hơi trên MXH (vừa mơ ước vừa nghi ngờ).",
+            "Bạn bè bè phái làm đại lý, bán hàng online có đồng ra đồng vào."
+          ],
+          sayDo: [
+            "Nói: 'Em chỉ muốn kiếm thêm ít đồng bỉm sữa, không muốn làm gì phức tạp đâu.'",
+            "Làm: Lướt mạng tìm việc cộng tác viên không cọc, bán đồ ăn vặt tự phát, đăng bài ngẫu hứng nhưng ít người mua."
+          ],
+          pains: [
+            "Nỗi sợ bị ép doanh số, dồn hàng, chôn vốn gây mâu thuẫn gia đình.",
+            "Sợ sản phẩm độc hại làm mất uy tín cá nhân tích lũy cả đời.",
+            "Sợ bị bỏ rơi bơ vơ giữa chợ, không ai kèm cặp hướng dẫn."
+          ],
+          gains: [
+            "Có quy trình thực chiến bài bản, 'mì ăn liền' có thể copy paste ra đơn ngay.",
+            "Sản phẩm thảo dược Việt Nam thương hiệu quốc gia chất lượng tốt giá bình dân.",
+            "Được đội nhóm đồng hành cầm tay chỉ việc tận tình."
+          ]
+        },
+        vpc: {
+          jobs: [
+            "Tạo dòng tiền phụ từ 5 - 10 triệu/tháng bằng thời gian nhàn rỗi.",
+            "Tự chủ tài chính cá nhân, không phụ thuộc hoàn toàn vào thu nhập chính.",
+            "Được xã hội công nhận là năng động, biết vun vén gia đình."
+          ],
+          pains: [
+            "Áp lực tài chính từ việc ôm hàng ban đầu.",
+            "Mất uy tín cá nhân nếu sản phẩm không đảm bảo.",
+            "Cảm giác cô độc và bế tắc khi không biết cách tìm kiếm khách hàng đầu tiên."
+          ],
+          gains: [
+            "Quy trình bán lẻ dễ sao chép nhanh chóng.",
+            "Tự tin chia sẻ sản phẩm vì chất lượng thực tế vượt kỳ vọng.",
+            "Sinh hoạt trong một cộng đồng hỗ trợ ấm áp, tích cực."
+          ],
+          products: [
+            "Gói khởi động linh hoạt một lần duy nhất (Đồng/Bạc) từ 800k - 1.6 triệu đồng.",
+            "Quy trình đào tạo EMC rút gọn tối giản hóa mọi bước thực hành.",
+            "Hệ thống VPOL xử lý vận hành, đóng gói, giao hàng tự động không cần mang trữ hàng."
+          ],
+          painRelievers: [
+            "Không áp chỉ chỉ tiêu doanh số cá nhân hàng tháng để ép trữ hàng.",
+            "Thảo dược công nghệ cao từ nhà máy IMC đạt tiêu chuẩn GMP-WHO danh tiếng Việt Nam.",
+            "Chế độ người đi trước kèm cặp hướng dẫn 1-1 nhiệt tình."
+          ],
+          gainCreators: [
+            "Sơ đồ Nhị phân lai Mặt trời bảo lưu tích lũy điểm trọn đời không mất đi.",
+            "Sponsor Bonus 25% CV thanh khoản ngay giúp giải quyết nhu cầu kiếm tiền nhanh.",
+            "Trang bị sẵn Landing Page cá nhân và hệ thống phễu tuyển dụng số hóa tinh gọn."
+          ]
+        },
+        fitMatrix: [
+          { need: "💥 Rủi ro tài chính", struggle: "Sợ ôm hàng, chôn vốn ban đầu gây xung đột tài chính cá nhân.", solution: "Không ép doanh số cá nhân hàng tháng + Mức năng động cực thấp." },
+          { need: "🛡️ Uy tín cá nhân", struggle: "Sợ sản phẩm kém chất lượng, bị mang tiếng lừa đảo đa cấp.", solution: "Thảo dược Việt công nghệ sinh học cao (IMC), giấy phép Bộ Công Thương, chuẩn GMP-WHO." },
+          { need: "🎓 Kỹ năng & Nhân bản", struggle: "Thiếu kỹ năng bán hàng, lo lắng hệ thống dưới khó tự sao chép.", solution: "Giáo trình đào tạo EMC cải tiến tối giản + Landing Page & Phễu tuyển dụng tự động hóa." },
+          { need: "🤝 Giá trị tinh thần", struggle: "Ngại sự áp lực chạy số ảo, chèo kéo bạn bè; mong muốn văn hóa nhân văn.", solution: "Định vị 'Đồng hành dụng tâm, trí tuệ, nâng đỡ' + Văn hóa 'An vui & Tinh gọn'." }
+        ],
+        pitchTemplates: [
+          {
+            title: "📲 Kịch bản tin nhắn tiếp cận nhanh",
+            content: `Chào bạn,\n\nMình thấy bạn đang quan tâm đến các cơ hội kinh doanh online kiếm thêm thu nhập thụ động đúng không? Bên hệ thống của mình có quy trình khởi nghiệp cực kỳ tinh gọn cho người mới bắt đầu:\n\n1. KHÔNG ÉP DOANH SỐ: Bạn không lo phải ôm hàng hay chôn vốn, bắt đầu cực kỳ an toàn.\n2. QUY TRÌNH EMC RÚT GỌN: Có sẵn bài viết, hình ảnh và cách làm, bạn chỉ việc copy-paste theo hướng dẫn là có thể ra đơn ngay trong ngày.\n3. VẬN HÀNH TỰ ĐỘNG: Tổng kho xử lý hết việc đóng gói và ship hàng, bạn chỉ cần một chiếc điện thoại lúc rảnh.\n\nNếu bạn muốn trải nghiệm thử quy trình 0 đồng này, mình chia sẻ tài liệu qua Zalo nhé!`
+          },
+          {
+            title: "📝 Mẫu tin đăng tuyển dụng Group Cộng đồng / Facebook",
+            content: `📌 TUYỂN CỘNG TÁC VIÊN KINH DOANH THẢO DƯỢC CỘNG NGHỆ CAO (KHÔNG VỐN - KHÔNG ÔM HÀNG)\n\nBạn là mẹ bỉm sữa hoặc dân văn phòng muốn tận dụng 2 tiếng rảnh rỗi mỗi ngày để tạo thêm thu nhập 5-10 triệu/tháng? \n\n🌿 HỢP TÁC CÙNG VINALINK GROUP:\n❌ Không áp chỉ tiêu doanh số cá nhân - Không lo chôn vốn.\n❌ Không cần tự đóng gói và giao hàng - Tổng kho xử lý tự động.\n✅ Được hỗ trợ Landing Page cá nhân và quy trình EMC "cầm tay chỉ việc" thực chiến.\n✅ Sản phẩm thảo dược Việt Nam đạt chuẩn GMP-WHO uy tín, dễ bán.\n\n👉 Inbox ngay để nhận quy trình chuyển giao miễn phí!`
+          }
+        ]
+      },
+      {
+        id: "nhom_2",
+        name: "Người Tiêu Dùng Chuyển Đổi",
+        subTitle: "Pháp Sư Chuyển Hóa (Yêu bản chất sản phẩm, muốn lan tỏa tự nhiên)",
+        badge: "Khách Quen, Yêu Sức Khỏe",
+        color: "indigo",
+        themeHex: "#6366f1",
+        description: "Nhóm khách hàng sử dụng sản phẩm thực tế có kết quả xuất sắc, có khao khát lan tỏa giá trị thảo dược nước nhà và muốn tiêu dùng miễn phí.",
+        positioning: { x: 70, y: 35, label: "Trải Nghiệm & Đổi Mới Tâm Sức" },
+        empathy: {
+          thinkFeel: [
+            "Nhận thức sâu sắc giá trị bảo vệ sức khỏe chủ động.",
+            "Yêu thích tinh hoa y học cổ truyền kết hợp công nghệ sinh học cao của Việt Nam.",
+            "Nhạy cảm về chi phí sử dụng lâu dài hàng tháng.",
+            "Ngại định kiến xã hội rằng mình lợi dụng bạn bè để 'bán đa cấp trục lợi'."
+          ],
+          hear: [
+            "Người thân khen ngợi cải thiện sức khỏe sau khi dùng ké sản phẩm.",
+            "Ý kiến chuyên gia, bác sĩ nhấn mạnh phòng bệnh hơn chữa bệnh."
+          ],
+          see: [
+            "Thực trạng ô nhiễm môi trường, thực phẩm bẩn rình rập hàng ngày.",
+            "Kết quả xét nghiệm lâm sàng bản thân tiến triển tốt sau khi trải nghiệm sản phẩm Vinalink."
+          ],
+          sayDo: [
+            "Nói: 'Sản phẩm này cực tốt, tôi uống thấy hiệu quả kỳ diệu thật, bạn thử dùng xem sao.'",
+            "Làm: Đăng ký thành viên Khách hàng Thân thiết (KHTT) mua giá sỉ, tự tin chia sẻ câu chuyện thật của gia đình mình."
+          ],
+          pains: [
+            "Chi phí gia đình duy trì đều đặn hàng tháng tương đối lớn so với ví tiền.",
+            "Không có kiến thức chuyên sâu để giải thích chi tiết cơ chế khoa học phức tạp khi bạn bè thắc mắc.",
+            "Sợ đánh mất thiện cảm mối quan hệ bạn bè thân thiết lâu năm."
+          ],
+          gains: [
+            "Mua sản phẩm chính hãng chiết khấu sâu nhất từ tổng kho.",
+            "Tham gia học hỏi từ cộng đồng chia sẻ lối sống xanh, khoa học.",
+            "Tích lũy hoa hồng gián tiếp từ chia sẻ thật để bù trừ chi phí, hướng tới dùng sản phẩm miễn phí."
+          ]
+        },
+        vpc: {
+          jobs: [
+            "Tối ưu chi phí chăm sóc sức khỏe lâu dài của đại gia đình.",
+            "Chia sẻ giải pháp cải thiện sức khỏe uy tín giúp đỡ người thân quen.",
+            "Trở thành một hạt nhân sống khỏe, tích cực trong cộng đồng."
+          ],
+          pains: [
+            "Gánh nặng chi phí sử dụng sản phẩm trường kỳ.",
+            "Không biết diễn giải chuyên môn y dược phức tạp.",
+            "Sợ bị hiểu lầm là đi 'lôi kéo, dụ dỗ' trục lợi bè bạn."
+          ],
+          gains: [
+            "Dùng sản phẩm đạt hiệu quả tối đa với chi phí tối thiểu.",
+            "Nắm bắt kiến thức y học thường thức chuẩn xác.",
+            "Cảm giác tự hào an lành khi cứu giúp/giới thiệu điều tốt cho mọi người."
+          ],
+          products: [
+            "Đăng ký miễn phí tài khoản Khách hàng Thân thiết (KHTT) hưởng ưu đãi giá sỉ.",
+            "Các hội thảo chuyên đề sức khỏe thường kỳ chia sẻ bởi bác sĩ chuyên môn.",
+            "Công thức Storytelling (Kể chuyện chân thực) dễ ứng dụng của hệ thống EMC."
+          ],
+          painRelievers: [
+            "Không yêu cầu trữ hàng, đóng gói hay giao nhận; hệ thống logistics tự động xử lý trực tiếp.",
+            "Doanh số mua của khách hàng thân thiết được tích lũy thẳng vào mã số, tối ưu điểm thưởng.",
+            "Giáo trình chăm sóc sức khỏe tinh gọn giúp tự học nhanh chóng."
+          ],
+          gainCreators: [
+            "Chính sách dùng hoa hồng hệ thống bù đắp đơn hàng tiêu dùng cá nhân (Dùng sản phẩm 0 đồng).",
+            "Môi trường văn hóa giao lưu nâng đỡ tinh thần 'An vui & Tinh gọn'.",
+            "Mô hình hỗ trợ tư vấn chéo 2-1 trực tiếp từ các cố vấn sức khỏe chuyên sâu (Upline)."
+          ]
+        },
+        fitMatrix: [
+          { need: "💸 Gánh nặng chi phí", struggle: "Chi phí gia đình duy trì đều đặn hàng tháng tương đối lớn so với ví tiền.", solution: "Tích lũy điểm nhận hoa hồng tự nhiên từ chia sẻ, hướng tới dùng sản phẩm miễn phí (0 đồng)." },
+          { need: "🔬 Chuyên môn y dược", struggle: "Không biết diễn giải chuyên môn y dược phức tạp khi bạn bè thắc mắc.", solution: "Giáo trình sức khỏe tinh gọn dễ học + Các buổi chia sẻ từ bác sĩ chuyên môn." },
+          { need: "🤝 Định kiến xã hội", struggle: "Sợ bị hiểu lầm là đi 'lôi kéo, dụ dỗ' trục lợi bè bạn.", solution: "Không cần đóng gói/giao hàng/thu tiền (logistics VPOL tự động) + Chia sẻ tự nhiên theo Storytelling." },
+          { need: "🤝 Giá trị tinh thần", struggle: "Ngại sự áp lực chạy số ảo, chèo kéo bạn bè; mong muốn văn hóa nhân văn.", solution: "Định vị 'Đồng hành dụng tâm, trí tuệ, nâng đỡ' + Văn hóa 'An vui & Tinh gọn'." }
+        ],
+        pitchTemplates: [
+          {
+            title: "🗣️ Kịch bản chia sẻ tự nhiên (Storytelling)",
+            content: `Chào bạn, đợt trước mình dùng sản phẩm thảo dược công nghệ sinh học của Vinalink này thấy cải thiện rõ rệt quá nên mới duy trì dùng đều đặn. \n\nMình thấy sản phẩm Việt Nam công nghệ cao thế này rất đáng dùng, mà lại được đăng ký tài khoản Khách hàng Thân thiết (KHTT) miễn phí mua giá sỉ trực tiếp từ công ty luôn, không qua trung gian nên rất an tâm.\n\nHơn nữa, khi mình chia sẻ trải nghiệm thật cho bạn bè và họ cũng tự mở mã mua hàng giống mình, công ty tự động trích hoa hồng gián tiếp tích lũy vào tài khoản cho mình. Nhờ vậy mà giờ mình toàn được dùng sản phẩm miễn phí (0 đồng) đấy. \n\nĐể mình gửi link mở tài khoản miễn phí trực tiếp từ tổng kho công ty cho bạn tự đặt mua dùng thử nhé, giá sỉ tốt lắm!`
+          }
+        ]
+      },
+      {
+        id: "nhom_3",
+        name: "Doanh Chủ Hệ Thống / Thủ Lĩnh Chuyên Nghiệp",
+        subTitle: "Chiến Binh Chinh Phục (Khao khát tạo lập giang sơn tài chính thụ động thực sự)",
+        badge: "Leader MLM, Chủ Doanh Nghiệp",
+        color: "amber",
+        themeHex: "#f59e0b",
+        description: "Các thủ lĩnh hệ thống giàu kinh nghiệm bán hàng/bảo hiểm, khát khao làm chủ mô hình dòng tiền thụ động vững chãi, không ly khai tách nhánh.",
+        positioning: { x: 50, y: 15, label: "Kiểm Soát Cao & Phát Triển Rộng" },
+        empathy: {
+          thinkFeel: [
+            "Khao khát xây dựng doanh nghiệp dòng tiền bền vững lên tới hàng trăm triệu mỗi tháng.",
+            "Rất lo lắng nguy cơ hệ thống đổ gãy do chính sách tách nhánh ly khai khốc liệt của các hãng MLM lớn.",
+            "Đòi hỏi nền tảng pháp lý tối thượng, chuẩn sạch tại Việt Nam để bảo vệ sự nghiệp trọn đời và thừa kế."
+          ],
+          hear: [
+            "Đồng nghiệp than thở gãy rụng nhóm do áp lực doanh số nhóm quá ngột ngạt.",
+            "Vấn nạn bán phá giá, bán lén, cạnh tranh nội bộ bẩn thỉu tàn phá hệ thống."
+          ],
+          see: [
+            "Các tập đoàn MLM nước ngoài liên tục vướng giấy phép hoặc thay đổi cơ chế bất thình lình tước đoạt quyền lợi NPP.",
+            "Xu hướng bùng nổ của thị trường chăm sóc sức khỏe tự nhiên nội địa Việt Nam."
+          ],
+          sayDo: [
+            "Nói về bản đồ tầm nhìn, định hướng chiến lược đào tạo, phát triển tổ chức.",
+            "Làm: Nghiên cứu kỹ lưỡng sơ đồ trả thưởng, lập kế hoạch ngân sách, tích cực chiêu mộ hiền tài cốt cán và xây dựng giáo trình đào tạo bài bản."
+          ],
+          pains: [
+            "Cơ chế ly khai (tuyến dưới thăng cấp giỏi hơn sẽ bị tách nhánh khiến mất đi nguồn thu lớn).",
+            "Nạn bán phá giá thị trường do hệ thống dưới bị ép ôm hàng để giữ danh hiệu ảo.",
+            "Rủi ro mất trắng cơ nghiệp tích lũy nhiều năm do công ty đối tác thiếu cam kết pháp lý lâu dài."
+          ],
+          gains: [
+            "Sơ đồ vận hành thông minh cộng dồn doanh số trọn đời bảo toàn thành quả.",
+            "Hệ thống công cụ chuyển đổi số hiện đại tự động hóa quản trị hàng ngàn thành viên.",
+            "Hệ giá trị văn hóa gắn kết bền chặt thu hút nhân tài thực thụ hướng thượng."
+          ]
+        },
+        vpc: {
+          jobs: [
+            "Xây dựng kỳ quan hệ thống phân phối lớn phát sinh dòng tiền thụ động vô hạn.",
+            "Thăng hạng các vị trí đỉnh cao (Crown Diamond/Ambassador) khẳng định tầm vóc thủ lĩnh.",
+            "Kiến tạo di sản kinh doanh vững chắc, có tính thừa kế hợp pháp cho thế hệ con cháu."
+          ],
+          pains: [
+            "Rủi ro gãy nhánh, ly khai mất thu nhập thụ động khi tuyến dưới bứt phá xuất sắc.",
+            "Chi phí vận hành cồng kềnh, mệt mỏi xử lý tàn dư từ vấn nạn ôm hàng phá giá.",
+            "Nền tảng kỹ thuật số của hệ thống lỗi thời làm hạn chế tốc độ nhân bản quy mô lớn."
+          ],
+          gains: [
+            "Bảo tồn trọn vẹn nhánh mạnh thông qua cơ chế tích lũy cộng hưởng.",
+            "Giải phóng sức lao động cá nhân nhờ quy trình tự động hóa nhân bản hoàn hảo.",
+            "Quy quy tụ cộng đồng nhân tài bền chặt nhờ văn hóa chính trực nhân văn."
+          ],
+          products: [
+            "Sơ đồ trả thưởng nhị phân lai mặt trời được Bộ Công Thương phê chuẩn nghiêm ngặt.",
+            "Mô hình huấn luyện sao chép EMC tự động hóa toàn diện.",
+            "Nền tảng số hóa VPOL đồng bộ cùng kho Landing Page phễu thông minh."
+          ],
+          painRelievers: [
+            "Chính sách không ly khai: Hưởng Matching Bonus sâu từ F1 đến F5 đảm bảo thu nhập cộng hưởng cực lớn từ tuyến dưới siêu việt.",
+            "Tích lũy cộng dồn doanh số nhóm trọn đời giữ vững danh vị không lo hạ bậc.",
+            "Năng động cực thấp kết hợp gom doanh số khách hàng sỉ giúp triệt hạ tận gốc áp lực chôn vốn phá giá."
+          ],
+          gainCreators: [
+            "Bản đồ lộ trình phát triển doanh chủ 3 năm an vui mang tính dẫn dắt tầm cao.",
+            "Chia sẻ Quỹ Lãnh Đạo Toàn Quốc 4% doanh số toàn quốc cùng đặc quyền nhận Mercedes-Benz.",
+            "Hỗ trợ hệ thống phễu công nghệ tuyển dụng thu hút lead tự động giúp tối ưu năng suất tuyển F1."
+          ]
+        },
+        fitMatrix: [
+          { need: "📉 Rủi ro gãy rụng", struggle: "Cơ chế ly khai làm gãy nhánh, mất thu nhập thụ động khi tuyến dưới thăng cấp giỏi vượt cấp.", solution: "Sơ đồ Nhị phân lai Mặt trời KHÔNG LY KHAI, hưởng Matching Bonus sâu F1-F5 cộng hưởng thu nhập." },
+          { need: "📦 Áp lực doanh số", struggle: "Chi phí vận hành cồng kềnh, mệt mỏi xử lý tàn dư từ vấn nạn ôm hàng phá giá.", solution: "Tích lũy cộng dồn doanh số nhóm trọn đời giữ danh vị không hạ cấp + Năng động cá nhân cực thấp." },
+          { need: "⚙️ Nhân bản quy mô", struggle: "Nền tảng kỹ thuật số lỗi thời làm hạn chế tốc độ nhân bản xuống các tầng sâu.", solution: "Hệ thống phễu công nghệ tuyển dụng thu hút lead tự động + Nền tảng số hóa VPOL đồng bộ." },
+          { need: "🤝 Giá trị tinh thần", struggle: "Ngại sự áp lực chạy số ảo, chèo kéo bạn bè; mong muốn văn hóa nhân văn.", solution: "Định vị 'Đồng hành dụng tâm, trí tuệ, nâng đỡ' + Văn hóa 'An vui & Tinh gọn'." }
+        ],
+        pitchTemplates: [
+          {
+            title: "👔 Kịch bản tiếp cận thủ lĩnh MLM / Kinh doanh bảo hiểm",
+            content: `Chào anh/chị, với kinh nghiệm xây dựng hệ thống lớn của anh/chị, em rất muốn thảo luận về một mô hình trả thưởng và vận hành cực kỳ nhân văn và giải phóng sức lao động tại Vinalink hiện nay:\n\n1. SƠ ĐỒ KHÔNG LY KHAI: Dù tuyến dưới có phát triển giỏi vượt cấp, họ vẫn thuộc trực hệ của anh/chị. Matching Bonus hưởng sâu từ F1 đến F5 trên thu nhập chu kỳ của họ, bảo toàn dòng tiền thụ động trọn đời cho anh/chị.\n2. CỘNG DỒN DOANH SỐ TRỌN ĐỜI: Danh hiệu nhóm được cộng dồn lũy kế qua các tháng và không bao giờ bị hạ cấp, giúp triệt tiêu hoàn toàn áp lực chạy số ảo hay ép tuyến dưới ôm hàng.\n3. HỆ THỐNG VPOL SỐ HÓA: Quản trị tự động quy mô hàng ngàn người, quy trình sao chép EMC cải tiến giúp nhân bản cực nhanh xuống các tầng sâu mà không tốn sức hỗ trợ trực tiếp.\n\nEm rất hy vọng được trao đổi sâu hơn về lộ trình 3 năm xây dựng dòng tiền thụ động tỷ đồng cùng anh/chị. Chúng ta hẹn gặp trực tiếp hoặc qua Zoom tối nay nhé!`
+          }
+        ]
+      }
+    ];
+
+    let selectedGroupId = "nhom_1";
+    let selectedTab = "empathy";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const isAdmin = localStorage.getItem("sihub_is_admin") === "true";
+      const adminBadge = document.getElementById("adminBadge");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const dropdownAuthLink = document.getElementById("dropdownAuthLink");
+      const settingsSidebarLink = document.getElementById("settingsSidebarLink");
+
+      if (isAdmin) {
+        adminBadge.classList.remove("d-none");
+        logoutBtn.classList.remove("d-none");
+        dropdownAuthLink.classList.add("d-none");
+      } else {
+        adminBadge.classList.add("d-none");
+        logoutBtn.classList.add("d-none");
+        dropdownAuthLink.classList.remove("d-none");
+        if (settingsSidebarLink) {
+          settingsSidebarLink.style.display = "none";
+        }
+      }
+
+      // Logout handler
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("sihub_is_admin");
+        alert("Đã đăng xuất tài khoản Cố vấn.");
+        window.location.reload();
+      });
+
+      // Build left sidebar selectors
+      const btnsContainer = document.getElementById("archetypeBtns");
+      ARCHETYPES_DATA.forEach((group) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "w-100 text-start p-3 rounded border text-xs bg-white mb-2 transition-all";
+        btn.id = `btn_${group.id}`;
+        
+        btn.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="badge bg-light text-muted border px-1.5 py-0.5 rounded text-[10px] uppercase">${group.badge}</span>
+            <span class="status-dot" style="background-color: ${group.themeHex};"></span>
+          </div>
+          <strong class="d-block text-dark text-sm mt-1">${group.name}</strong>
+          <small class="text-muted d-block text-[11px] mt-1 text-truncate" style="max-width: 100%;">${group.description}</small>
+        `;
+        
+        btn.addEventListener("click", () => selectArchetype(group.id));
+        btnsContainer.appendChild(btn);
+      });
+
+      // Build Tab Click Listeners
+      const tabButtons = document.querySelectorAll("#visualizerTabs button");
+      tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          tabButtons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          selectedTab = btn.getAttribute("data-tab");
+          renderSelectedView();
+        });
+      });
+
+      // Initial Selection
+      selectArchetype("nhom_1");
+    });
+
+    function selectArchetype(groupId) {
+      selectedGroupId = groupId;
+      
+      // Update UI button active states
+      ARCHETYPES_DATA.forEach(group => {
+        const btn = document.getElementById(`btn_${group.id}`);
+        if (group.id === groupId) {
+          btn.classList.add("active", "border-2");
+          btn.style.boxShadow = `0 4px 12px rgba(0, 0, 0, 0.05)`;
+        } else {
+          btn.classList.remove("active", "border-2");
+          btn.style.boxShadow = "none";
+        }
+      });
+
+      const activeData = ARCHETYPES_DATA.find(g => g.id === groupId);
+      document.getElementById("activeArchetypeName").textContent = activeData.name;
+      document.getElementById("activeArchetypeSubtitle").textContent = activeData.subTitle;
+      document.getElementById("activeArchetypeBadge").textContent = activeData.badge;
+      
+      const indicator = document.getElementById("borderIndicator");
+      indicator.style.backgroundColor = activeData.themeHex;
+
+      renderSelectedView();
+    }
+
+    function renderSelectedView() {
+      const activeData = ARCHETYPES_DATA.find(g => g.id === selectedGroupId);
+      const container = document.getElementById("tabContentBox");
+      container.innerHTML = "";
+
+      if (selectedTab === "empathy") {
+        container.innerHTML = `
+          <div class="empathy-grid mb-4">
+            <div class="empathy-card">
+              <h4 class="text-primary"><i class="bi bi-chat-left-text me-1"></i> THĨNH & CẢM THẤY</h4>
+              <ul class="small text-muted ps-3 mb-0">
+                ${activeData.empathy.thinkFeel.map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            </div>
+            <div class="empathy-card">
+              <h4 class="text-success"><i class="bi bi-eye me-1"></i> NHÌN THẤY</h4>
+              <ul class="small text-muted ps-3 mb-0">
+                ${activeData.empathy.see.map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            </div>
+            <div class="empathy-card">
+              <h4 class="text-warning"><i class="bi bi-earbuds me-1"></i> NGHE THẤY</h4>
+              <ul class="small text-muted ps-3 mb-0">
+                ${activeData.empathy.hear.map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            </div>
+            <div class="empathy-card">
+              <h4 class="text-danger"><i class="bi bi-megaphone me-1"></i> NÓI & LÀM</h4>
+              <ul class="small text-muted ps-3 mb-0">
+                ${activeData.empathy.sayDo.map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+          <div class="row g-3 border-top pt-4">
+            <div class="col-12 col-md-6">
+              <div class="p-3 rounded" style="background-color: rgba(220, 38, 38, 0.05); border: 1px solid rgba(220, 38, 38, 0.1);">
+                <h4 class="text-danger small font-bold"><i class="bi bi-lightning-charge me-1"></i> NỖI ĐAU (Pains)</h4>
+                <ul class="small text-danger ps-3 mb-0" style="color: #991b1b !important;">
+                  ${activeData.empathy.pains.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="p-3 rounded" style="background-color: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.1);">
+                <h4 class="text-success small font-bold"><i class="bi bi-trophy me-1"></i> MONG MUỐN (Gains)</h4>
+                <ul class="small text-success ps-3 mb-0" style="color: #065f46 !important;">
+                  ${activeData.empathy.gains.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (selectedTab === "vpc") {
+        container.innerHTML = `
+          <div class="row g-4">
+            <div class="col-12 col-lg-6">
+              <div class="vpc-col-profile h-100">
+                <h3 class="text-sm font-bold text-primary mb-3"><i class="bi bi-person me-1"></i> CUSTOMER PROFILE</h3>
+                <div class="mb-3 bg-white p-3 rounded border">
+                  <h4 class="text-xs font-bold text-primary mb-1">💼 Việc Cần Làm (Jobs-to-be-Done)</h4>
+                  <ul class="small text-muted ps-3 mb-0">${activeData.vpc.jobs.map(item => `<li>${item}</li>`).join("")}</ul>
+                </div>
+                <div class="mb-3 bg-white p-3 rounded border">
+                  <h4 class="text-xs font-bold text-danger mb-1">💥 Nỗi Đau (Pains)</h4>
+                  <ul class="small text-danger ps-3 mb-0">${activeData.vpc.pains.map(item => `<li>${item}</li>`).join("")}</ul>
+                </div>
+                <div class="bg-white p-3 rounded border">
+                  <h4 class="text-xs font-bold text-success mb-1">🏆 Mong Muốn (Gains)</h4>
+                  <ul class="small text-success ps-3 mb-0">${activeData.vpc.gains.map(item => `<li>${item}</li>`).join("")}</ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-lg-6">
+              <div class="vpc-col-value h-100">
+                <h3 class="text-sm font-bold text-success mb-3"><i class="bi bi-box me-1"></i> VALUE PROPOSITION (VINALINK)</h3>
+                <div class="mb-3 bg-white p-3 rounded border">
+                  <h4 class="text-xs font-bold text-primary mb-1">🛒 Sản phẩm & Dịch vụ</h4>
+                  <ul class="small text-muted ps-3 mb-0">${activeData.vpc.products.map(item => `<li>${item}</li>`).join("")}</ul>
+                </div>
+                <div class="mb-3 bg-white p-3 rounded border">
+                  <h4 class="text-xs font-bold text-success mb-1">🛡️ Bộ Giải Quyết Nỗi Đau</h4>
+                  <ul class="small text-success ps-3 mb-0">${activeData.vpc.painRelievers.map(item => `<li>${item}</li>`).join("")}</ul>
+                </div>
+                <div class="bg-white p-3 rounded border">
+                  <h4 class="text-xs font-bold text-success mb-1">🚀 Bộ Tạo Lợi Ích</h4>
+                  <ul class="small text-success ps-3 mb-0">${activeData.vpc.gainCreators.map(item => `<li>${item}</li>`).join("")}</ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (selectedTab === "mapping") {
+        container.innerHTML = `
+          <div class="text-center mb-4">
+            <h4 class="text-xs font-bold text-muted uppercase mb-3">Bản đồ Định vị Nhóm Khách Hàng</h4>
+            <div class="pos-map-container">
+              <div class="pos-map-line-y"></div>
+              <div class="pos-map-line-x"></div>
+              <span class="pos-map-label top">Kiểm Soát Cao</span>
+              <span class="pos-map-label bottom">Linh Hoạt</span>
+              <span class="pos-map-label left">Thực Tế</span>
+              <span class="pos-map-label right">Trải Nghiệm</span>
+              
+              ${ARCHETYPES_DATA.map(item => {
+                let dotClass = item.id === selectedGroupId 
+                  ? (item.color === 'emerald' ? 'active-point-emerald' : item.color === 'indigo' ? 'active-point-indigo' : 'active-point-amber')
+                  : 'bg-secondary border border-light';
+                let zIndex = item.id === selectedGroupId ? '15' : '10';
+                
+                return `
+                  <div class="pos-map-point rounded-circle ${dotClass}" 
+                       style="left: ${item.positioning.x}%; top: ${item.positioning.y}%; width: 14px; height: 14px; z-index: ${zIndex};" 
+                       title="${item.name} (${item.positioning.label})"
+                       onclick="selectArchetype('${item.id}')">
+                    <span class="badge bg-dark text-white border position-absolute" style="top: 18px; left: 50%; transform: translateX(-50%); font-size: 8px; white-space: nowrap;">
+                      ${item.badge}
+                    </span>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+            <p class="text-muted small mt-3">Nhấp chuột vào các điểm tròn màu sắc trên bản đồ để chọn nhanh chân dung tương ứng.</p>
+          </div>
+        `;
+      } 
+      else if (selectedTab === "matrix") {
+        container.innerHTML = `
+          <div class="table-responsive">
+            <table class="table table-hover align-middle border-bottom text-xs">
+              <thead class="table-light">
+                <tr>
+                  <th style="width: 25%;">Khía Cạnh</th>
+                  <th style="width: 38%;">Rào Cản (Struggle)</th>
+                  <th style="width: 37%;">Giải Pháp Vinalink (Fit)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${activeData.fitMatrix.map(row => `
+                  <tr>
+                    <td><strong>${row.need}</strong></td>
+                    <td class="text-muted">${row.struggle}</td>
+                    <td class="fw-bold text-success bg-success-subtle/10">${row.solution}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } 
+      else if (selectedTab === "pitch") {
+        container.innerHTML = `
+          <div class="d-flex flex-column gap-3">
+            ${activeData.pitchTemplates.map((template, idx) => `
+              <div class="bg-light p-3 rounded border">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
+                  <strong class="text-primary text-xs"><i class="bi bi-file-earmark-text me-1"></i> ${template.title}</strong>
+                  <button type="button" class="btn btn-outline-success btn-xs" onclick="copyTextToClipboard('${template.content.replace(/'/g, "\\'").replace(/\n/g, "\\n")}')">
+                    <i class="bi bi-clipboard me-1"></i> Sao chép kịch bản
+                  </button>
+                </div>
+                <pre class="small text-muted mb-0 font-sans whitespace-pre-wrap" style="line-height: 1.5;">${template.content}</pre>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+    }
+
+    function copyTextToClipboard(text) {
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = text;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand("copy");
+        alert("Đã sao chép kịch bản tuyển dụng vào bộ nhớ tạm!");
+      } catch (err) {
+        console.error("Copy failed", err);
+        alert("Không thể sao chép tự động.");
+      }
+      document.body.removeChild(tempTextArea);
+    }
+  </script>
+</body>
+</html>

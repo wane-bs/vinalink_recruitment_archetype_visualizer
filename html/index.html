@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinalink Doanh Chủ Portal Dashboard">
+  <title>Dashboard & Lộ trình | Vinalink Portal</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <a class="brand-mark" href="index.html" aria-label="Vinalink Portal">
+          <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
+            <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-title">Vinalink Portal</span>
+            <span class="brand-subtitle">Doanh Chủ Workspace</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link active" href="index.html" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard & Lộ trình</span>
+        </a>
+        <a class="nav-link" href="documents.html">
+          <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+          <span class="nav-text">Tài liệu Nghiên cứu</span>
+        </a>
+        <a class="nav-link" href="visualizer.html">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">Bản đồ Tuyển dụng</span>
+        </a>
+        <a class="nav-link" href="simulator.html">
+          <span class="nav-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+          <span class="nav-text">Bộ Mô Phỏng</span>
+        </a>
+        <a class="nav-link" href="feedback.html">
+          <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Khảo sát Doanh chủ</span>
+        </a>
+        <a class="nav-link" id="settingsSidebarLink" href="settings.html">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Cài đặt Hệ thống</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+        <strong>Doanh Chủ</strong>
+        <small>Active Workspace</small>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">Hệ thống hoạt động tốt</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white border-bottom">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            
+            <!-- Admin Role Badge -->
+            <div id="adminBadge" class="d-none">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded text-xs font-semibold">
+                <i class="bi bi-shield-check me-1"></i> Quyền Cố Vấn
+              </span>
+            </div>
+            
+            <a href="login.html" id="loginBtn" class="btn btn-outline-secondary btn-sm me-2">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Cố vấn đăng nhập
+            </a>
+
+            <div class="dropdown">
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+                <span class="profile-name d-none d-sm-inline">Loading...</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="login.html" id="dropdownAuthLink">Đăng nhập Cố vấn</a></li>
+                <li><button class="dropdown-item text-danger d-none" id="logoutBtn"><i class="bi bi-box-arrow-right me-1"></i> Đăng xuất Cố vấn</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          
+          <div class="page-heading mb-4">
+            <div class="page-heading-copy">
+              <span class="page-icon bg-success text-white"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Vinalink Doanh Chủ Portal</p>
+                <h1 class="h3 mb-1">Tổng quan & Lộ trình 3 năm</h1>
+                <p class="text-muted mb-0">Hệ thống hỗ trợ lập kế hoạch, phản biện tài chính và trực quan hóa mô hình tuyển dụng F1 nòng cốt.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: 3-Year Objectives -->
+          <div class="panel mb-4">
+            <div class="panel-header">
+              <h2 class="h5 mb-0 section-title"><i class="bi bi-trophy me-2 text-warning"></i><span>Chỉ số mục tiêu 3 năm (Thống nhất & Điều chỉnh)</span></h2>
+            </div>
+            <div class="p-3 p-lg-4">
+              <div class="row g-3">
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="bg-light p-3 rounded border h-100">
+                    <div class="text-muted small mb-1">Mục tiêu tài chính Năm 3</div>
+                    <div class="fs-5 fw-bold text-success">150.000.000 VNĐ / tháng</div>
+                    <div class="small text-muted mt-1">Tương ứng danh hiệu <strong>Diamond</strong> (Nhánh yếu đạt 300k - 550k CV/tháng)</div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="bg-light p-3 rounded border h-100">
+                    <div class="text-muted small mb-1">Quy mô F1 Nòng cốt</div>
+                    <div class="fs-5 fw-bold text-primary">3 - 4 F1 chất lượng</div>
+                    <div class="small text-muted mt-1">Tập trung đào tạo và chuyển giao sâu quy trình EMC cải tiến</div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="bg-light p-3 rounded border h-100">
+                    <div class="text-muted small mb-1">Cam kết hành động</div>
+                    <div class="fs-5 fw-bold text-warning">4 - 6 tiếng / ngày</div>
+                    <div class="small text-muted mt-1">Làm việc tinh gọn, thông minh để tránh bị kiệt sức (Burnout)</div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                  <div class="bg-light p-3 rounded border h-100">
+                    <div class="text-muted small mb-1">Bộ lọc cam kết</div>
+                    <div class="fs-5 fw-bold text-danger">Khóa Pháp lý 3 ngày</div>
+                    <div class="small text-muted mt-1">Yêu cầu trải nghiệm ít nhất 1 sản phẩm để lọc nhân sự nghiêm túc</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Gantt Timeline -->
+          <div class="panel mb-4">
+            <div class="panel-header">
+              <h2 class="h5 mb-0 section-title"><i class="bi bi-calendar-range me-2 text-info"></i><span>Tiến độ & Kế hoạch Triển khai (1 Tháng)</span></h2>
+            </div>
+            <div class="p-3 p-lg-4">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle border-bottom">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width: 30%;">Nội dung công việc</th>
+                      <th style="width: 20%;">Thời gian</th>
+                      <th style="width: 15%;">Trạng thái</th>
+                      <th style="width: 35%;">Tiến độ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>1. Nghiên cứu nền tảng & Khảo sát Doanh chủ</strong></td>
+                      <td>Tuần 29/2026</td>
+                      <td><span class="badge bg-success">Hoàn thành</span></td>
+                      <td>
+                        <div class="progress" style="height: 10px;">
+                          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>2. Phản biện mục tiêu & Khảo sát xuất phát điểm</strong></td>
+                      <td>Tuần 30/2026</td>
+                      <td><span class="badge bg-primary">Đang thực hiện</span></td>
+                      <td>
+                        <div class="progress" style="height: 10px;">
+                          <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>3. Xây dựng kế hoạch kinh doanh chi tiết 36 tháng</strong></td>
+                      <td>23/07 - 26/07</td>
+                      <td><span class="badge bg-primary">Đang thực hiện</span></td>
+                      <td>
+                        <div class="progress" style="height: 10px;">
+                          <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>4. Quy trình vận hành tinh gọn & chuyển giao EMC</strong></td>
+                      <td>27/07 - 02/08</td>
+                      <td><span class="badge bg-secondary">Kế hoạch</span></td>
+                      <td>
+                        <div class="progress" style="height: 10px;">
+                          <div class="progress-bar bg-secondary" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>5. Hoàn thiện kế hoạch kinh doanh 3 năm tổng thể</strong></td>
+                      <td>Tuần 32/2026</td>
+                      <td><span class="badge bg-secondary">Kế hoạch</span></td>
+                      <td>
+                        <div class="progress" style="height: 10px;">
+                          <div class="progress-bar bg-secondary" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="container-fluid px-3 px-lg-4">
+          <span>Copyright 2026 Vinalink Doanh Chủ Portal • Thiết kế dựa trên adminHMD</span>
+          <span>Bảo mật hệ thống thông tin</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Bind profile before loading main.js
+    window.adminHMDUser = {
+      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
+      workspace: "Vinalink Project",
+      avatar: "../assets/images/avatar/avatar.jpg"
+    };
+  </script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const isAdmin = localStorage.getItem("sihub_is_admin") === "true";
+      const adminBadge = document.getElementById("adminBadge");
+      const loginBtn = document.getElementById("loginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const dropdownAuthLink = document.getElementById("dropdownAuthLink");
+      const settingsSidebarLink = document.getElementById("settingsSidebarLink");
+
+      if (isAdmin) {
+        adminBadge.classList.remove("d-none");
+        loginBtn.classList.add("d-none");
+        logoutBtn.classList.remove("d-none");
+        dropdownAuthLink.classList.add("d-none");
+      } else {
+        adminBadge.classList.add("d-none");
+        loginBtn.classList.remove("d-none");
+        logoutBtn.classList.add("d-none");
+        dropdownAuthLink.classList.remove("d-none");
+        
+        // Hide Settings page from sidebar for non-admins
+        if (settingsSidebarLink) {
+          settingsSidebarLink.style.display = "none";
+        }
+      }
+
+      // Logout handler
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("sihub_is_admin");
+        alert("Đã đăng xuất tài khoản Cố văn.");
+        window.location.reload();
+      });
+    });
+  </script>
+</body>
+</html>

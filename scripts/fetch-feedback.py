@@ -10,9 +10,9 @@ from datetime import datetime
 
 # Cấu hình đường dẫn các file local
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CHECKLIST_TRA_LOI_PATH = os.path.join(BASE_DIR, "doanh-chu-checklist-tra-loi.md")
-DOI_CHIEU_BAO_CAO_PATH = os.path.join(BASE_DIR, "doi-chieu-bao-cao.md")
-BO_CHUAN_MUC_PATH = os.path.join(BASE_DIR, "bo-chuan-muc-trao-doi-doanh-chu.md")
+CHECKLIST_TRA_LOI_PATH = os.path.join(BASE_DIR, "..", "docs", "doanh-chu-checklist-tra-loi.md")
+DOI_CHIEU_BAO_CAO_PATH = os.path.join(BASE_DIR, "..", "docs", "doi-chieu-bao-cao.md")
+BO_CHUAN_MUC_PATH = os.path.join(BASE_DIR, "..", "docs", "bo-chuan-muc-trao-doi-doanh-chu.md")
 
 # ID Google Sheet lưu phản hồi (chia sẻ Anyone with link can view)
 SPREADSHEET_ID = "1-MockSpreadsheetID-VinalinkFeedback" 

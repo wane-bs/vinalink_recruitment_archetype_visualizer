@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinalink Doanh Chủ Portal Authentication">
+  <title>Đăng nhập Cố vấn | Vinalink Portal</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="auth-body">
+  <button class="icon-button theme-toggle auth-theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+    <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+  </button>
+  
+  <main class="auth-page">
+    <section class="auth-card" style="max-width: 480px;">
+      <a class="auth-brand" href="index.html">
+        <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
+          <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
+        </span>
+        <span>
+          <strong>Vinalink Doanh Chủ</strong>
+          <small>Xác thực quyền Cố vấn SIHUB</small>
+        </span>
+      </a>
+      
+      <form class="needs-validation" id="loginForm" novalidate>
+        <div class="mb-4">
+          <p class="eyebrow mb-1">Advisor Portal</p>
+          <h1 class="h3 mb-1">Xác thực</h1>
+          <p class="text-muted mb-0">Vui lòng nhập mật khẩu cố vấn để mở khóa các đặc quyền quản trị và số liệu.</p>
+        </div>
+        
+        <div class="mb-4">
+          <label class="form-label" for="advisorPassword">Mật khẩu Cố vấn</label>
+          <input class="form-control" id="advisorPassword" type="password" required placeholder="Nhập mật khẩu...">
+          <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
+          <div id="loginError" class="text-danger small mt-2 d-none">Mật khẩu không chính xác! Vui lòng thử lại.</div>
+        </div>
+        
+        <button class="btn btn-success w-100" type="submit" style="background-color: #10b981; border-color: #10b981;">
+          <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i> Đăng Nhập
+        </button>
+      </form>
+      
+      <div class="auth-footer">
+        <a href="index.html" class="text-muted"><i class="bi bi-arrow-left me-1"></i> Quay lại Dashboard thường</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  
+  <script>
+    // SHA-256 hashing helper
+    async function sha256(text) {
+      const msgBuffer = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const passwordInput = document.getElementById("advisorPassword").value;
+      const errorDiv = document.getElementById("loginError");
+      
+      if (!passwordInput) {
+        this.classList.add("was-validated");
+        return;
+      }
+      
+      try {
+        const hash = await sha256(passwordInput);
+        if (hash === "7134e62c3f9841a77a71c08f222d9c66e0d315f8a7067a29fe61d7f3b3423107") {
+          errorDiv.classList.add("d-none");
+          localStorage.setItem("sihub_is_admin", "true");
+          // Redirect to index
+          window.location.href = "index.html";
+        } else {
+          errorDiv.classList.remove("d-none");
+          document.getElementById("advisorPassword").value = "";
+        }
+      } catch (error) {
+        console.error("Auth error:", error);
+        alert("Lỗi xác thực hệ thống!");
+      }
+      
+      this.classList.add("was-validated");
+    });
+  </script>
+</body>
+</html>

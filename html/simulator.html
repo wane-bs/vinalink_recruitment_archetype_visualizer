@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinalink Doanh Chủ Portal Simulator">
+  <title>Bộ Mô Phỏng Tài Chính | Vinalink Portal</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <a class="brand-mark" href="index.html" aria-label="Vinalink Portal">
+          <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
+            <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-title">Vinalink Portal</span>
+            <span class="brand-subtitle">Doanh Chủ Workspace</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard & Lộ trình</span>
+        </a>
+        <a class="nav-link" href="documents.html">
+          <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+          <span class="nav-text">Tài liệu Nghiên cứu</span>
+        </a>
+        <a class="nav-link" href="visualizer.html">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">Bản đồ Tuyển dụng</span>
+        </a>
+        <a class="nav-link active" href="simulator.html" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+          <span class="nav-text">Bộ Mô Phỏng</span>
+        </a>
+        <a class="nav-link" href="feedback.html">
+          <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Khảo sát Doanh chủ</span>
+        </a>
+        <a class="nav-link" id="settingsSidebarLink" href="settings.html">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Cài đặt Hệ thống</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+        <strong>Doanh Chủ</strong>
+        <small>Active Workspace</small>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">Hệ thống hoạt động tốt</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white border-bottom">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            
+            <div id="adminBadge" class="d-none me-2">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded text-xs font-semibold">
+                <i class="bi bi-shield-check me-1"></i> Quyền Cố Vấn
+              </span>
+            </div>
+
+            <div class="dropdown">
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+                <span class="profile-name d-none d-sm-inline">Loading...</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="login.html" id="dropdownAuthLink">Đăng nhập Cố vấn</a></li>
+                <li><button class="dropdown-item text-danger d-none" id="logoutBtn"><i class="bi bi-box-arrow-right me-1"></i> Đăng xuất Cố vấn</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          
+          <div class="page-heading mb-4">
+            <div class="page-heading-copy">
+              <span class="page-icon bg-success text-white"><i class="bi bi-cpu-fill" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Mô phỏng tài chính Vinalink</p>
+                <h1 class="h3 mb-1">Dự phóng và Tối ưu thu nhập thụ động</h1>
+                <p class="text-muted mb-0">Hệ thống tương tác giả lập các kịch bản dòng tiền, thăng hạng danh hiệu và tối ưu cân nhánh nhị phân.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <!-- Inputs Panel -->
+            <div class="col-12 col-lg-5">
+              <div class="panel p-4">
+                <h2 class="h5 mb-4 section-title"><i class="bi bi-sliders me-1"></i><span>Tham số Giả lập</span></h2>
+                
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="sizeInput">
+                    <span>Quy mô mạng lưới (N)</span>
+                    <span class="fw-bold text-success" id="sizeVal">10,000 người</span>
+                  </label>
+                  <input type="range" class="form-range" id="sizeInput" min="100" max="50000" step="100" value="10000">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="retentionInput">
+                    <span>Tỷ lệ giữ chân NPP hoạt động (r)</span>
+                    <span class="fw-bold text-success" id="retentionVal">30.0%</span>
+                  </label>
+                  <input type="range" class="form-range" id="retentionInput" min="5" max="100" step="5" value="30">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="splitInput">
+                    <span>Tỷ lệ nhánh mạnh (Strong)</span>
+                    <span class="fw-bold text-success" id="splitVal">70%</span>
+                  </label>
+                  <input type="range" class="form-range" id="splitInput" min="50" max="95" step="5" value="70">
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label text-xs" for="rankInput">Cấp bậc cá nhân của Doanh chủ</label>
+                  <select class="form-select text-xs" id="rankInput">
+                    <option value="BRONZE">Bronze (Đồng) - Năng động thấp</option>
+                    <option value="SILVER">Silver (Bạc)</option>
+                    <option value="GOLD" selected>Gold / VIP (Vàng) - Tối ưu Maxout</option>
+                  </select>
+                </div>
+
+                <hr class="my-4">
+
+                <h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-3">Thông số cơ bản phụ trợ</h3>
+                <div class="row g-2 text-xs">
+                  <div class="col-6">
+                    <label class="form-label mb-1">Tỷ lệ Tiêu dùng</label>
+                    <input type="text" class="form-control form-control-sm text-xs bg-light" value="80%" readonly>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label mb-1">Tỷ lệ Kinh doanh</label>
+                    <input type="text" class="form-control form-control-sm text-xs bg-light" value="20%" readonly>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label mb-1">CV tiêu dùng / tháng</label>
+                    <input type="number" class="form-control form-control-sm text-xs bg-light" value="1000" readonly>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label mb-1">CV kinh doanh / tháng</label>
+                    <input type="number" class="form-control form-control-sm text-xs bg-light" value="2000" readonly>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Outputs Panel -->
+            <div class="col-12 col-lg-7">
+              <div class="panel p-4">
+                <h2 class="h5 mb-4 section-title"><i class="bi bi-graph-up me-1"></i><span>Kết quả Dự phóng Dòng tiền</span></h2>
+                
+                <div class="row g-3 mb-4">
+                  <div class="col-6">
+                    <div class="bg-light p-3 rounded border text-center">
+                      <div class="text-muted small">Danh hiệu Đạt được</div>
+                      <div class="fs-5 fw-bold text-success" id="resTitle">Loading...</div>
+                      <div class="text-[10px] text-muted mt-1">
+                        F1 Yếu: <span id="resF1Weak" class="fw-bold">...</span> | Mạnh: <span id="resF1Strong" class="fw-bold">...</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="bg-light p-3 rounded border text-center">
+                      <div class="text-muted small">Thu nhập hàng tháng</div>
+                      <div class="fs-4 fw-bold text-primary" id="resTotalIncome">0 VNĐ</div>
+                      <div class="text-[10px] text-muted mt-1">Đã tính Matching & Thưởng Duy trì</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="table-responsive mb-4">
+                  <table class="table table-sm align-middle text-xs">
+                    <thead>
+                      <tr class="table-light">
+                        <th style="width: 50%;">Chỉ số hoạt động & Doanh số</th>
+                        <th class="text-end" style="width: 50%;">Giá trị</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Khách hàng thân thiết hoạt động</td>
+                        <td class="text-end fw-bold" id="resConsumers">0 người</td>
+                      </tr>
+                      <tr>
+                        <td>Nhà phân phối hoạt động thực tế</td>
+                        <td class="text-end fw-bold" id="resDistributors">0 người</td>
+                      </tr>
+                      <tr>
+                        <td>Doanh số phát sinh hàng tháng</td>
+                        <td class="text-end fw-bold text-success" id="resMonthlyCv">0 CV</td>
+                      </tr>
+                      <tr>
+                        <td>Doanh số tích lũy nhóm (1 Năm)</td>
+                        <td class="text-end fw-bold" id="resAccumulatedCv">0 CV</td>
+                      </tr>
+                      <tr>
+                        <td>Doanh số nhánh yếu hàng tháng</td>
+                        <td class="text-end fw-bold" id="resWeakCv">0 CV</td>
+                      </tr>
+                      <tr>
+                        <td>Số chu kỳ cân nhánh yếu</td>
+                        <td class="text-end fw-bold" id="resCycles">0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="table-responsive mb-4">
+                  <table class="table table-sm align-middle text-xs">
+                    <thead>
+                      <tr class="table-light">
+                        <th>Cơ cấu hoa hồng & Thưởng</th>
+                        <th class="text-end">Số tiền (VNĐ/tháng)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          Hoa hồng Chu kỳ nhóm
+                          <span id="maxoutWarning" class="badge bg-danger d-none ms-1">Bị trần Maxout!</span>
+                        </td>
+                        <td class="text-end fw-bold" id="resBinaryIncome">0 VNĐ</td>
+                      </tr>
+                      <tr>
+                        <td>Thưởng duy trì doanh số (Qualify Bonus)</td>
+                        <td class="text-end fw-bold" id="resQualifyIncome">0 VNĐ</td>
+                      </tr>
+                      <tr>
+                        <td>Hoa hồng Cộng hưởng (Matching Bonus) F1-F5</td>
+                        <td class="text-end fw-bold" id="resMatchingIncome">0 VNĐ</td>
+                      </tr>
+                      <tr>
+                        <td>Ước lượng hoa hồng khác (Bảo trợ trực tiếp, Quỹ...)</td>
+                        <td class="text-end fw-bold text-muted" id="resOtherIncome">0 VNĐ</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="panel p-3 bg-light" id="matchingBreakdownContainer">
+                  <h4 class="text-xs font-bold text-muted uppercase tracking-wider mb-2">Chi tiết Matching Bonus F1 - F5</h4>
+                  <div id="matchingBreakdown" class="text-[11px] text-muted space-y-1">
+                    <!-- Loaded dynamically via JS -->
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="container-fluid px-3 px-lg-4">
+          <span>Copyright 2026 Vinalink Doanh Chủ Portal • Thiết kế dựa trên adminHMD</span>
+          <span>Bảo mật hệ thống thông tin</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Bind profile before loading main.js
+    window.adminHMDUser = {
+      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
+      workspace: "Vinalink Project",
+      avatar: "../assets/images/avatar/avatar.jpg"
+    };
+  </script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    // Vinalink Constant rules (translated from Python)
+    const BRONZE_CV = 2000;
+    const SILVER_CV = 4000;
+    const GOLD_CV = 10000;
+
+    const QUALIFY_BONUS_LOOKUP = {
+      "BRONZE": { 80000: 5000, 240000: 10000, 550000: 25000 },
+      "SILVER": { 80000: 10000, 240000: 15000, 550000: 30000 },
+      "GOLD": { 80000: 10000, 240000: 22000, 550000: 38000 }
+    };
+
+    const TITLES = [
+      { id: "M", min_group_cv: 80000, name: "Manager", req_f1_title: null },
+      { id: "SM", min_group_cv: 240000, name: "Senior Manager", req_f1_title: null },
+      { id: "DIR", min_group_cv: 550000, name: "Director", req_f1_title: null },
+      { id: "RUBY", min_group_cv: 1100000, name: "Ruby", req_f1_title: null },
+      { id: "EME", min_group_cv: 2200000, name: "Emerald", req_f1_title: null },
+      { id: "DIA", min_group_cv: 4400000, name: "Diamond", req_f1_title: null },
+      { id: "BD", min_group_cv: 6600000, name: "Blue Diamond", req_f1_title: "DIA" },
+      { id: "BKD", min_group_cv: 10000000, name: "Black Diamond", req_f1_title: "BD" },
+      { id: "CD", min_group_cv: 15000000, name: "Crown Diamond", req_f1_title: "BKD" },
+      { id: "AMB", min_group_cv: 22000000, name: "Ambassador", req_f1_title: "CD" }
+    ];
+
+    const MAX_BINARY_LIMITS = {
+      "M": [5000000, 10000000, 20000000],
+      "SM": [10000000, 20000000, 40000000],
+      "DIR": [50000000, 100000000, 200000000],
+      "RUBY": [150000000, 300000000, 600000000],
+      "EME": [300000000, 600000000, 1200000000],
+      "DIA": [500000000, 1000000000, 2000000000],
+      "BD": [800000000, 1600000000, 3000000000],
+      "BKD": [1000000000, 2000000000, 4000000000],
+      "CD": [1200000000, 2400000000, 5000000000],
+      "AMB": [1500000000, 3000000000, 6000000000]
+    };
+
+    function getTitleByCvOnly(cv) {
+      let titleId = null;
+      let titleName = "NPP Thường";
+      for (let t of TITLES) {
+        if (cv >= t.min_group_cv) {
+          titleId = t.id;
+          titleName = t.name;
+        }
+      }
+      return [titleId, titleName];
+    }
+
+    function determineFinalTitle(accumulatedGroupCv, cvWeakAccumulatedF1, cvStrongAccumulatedF1) {
+      let [f1WeakTitleId] = getTitleByCvOnly(cvWeakAccumulatedF1);
+      let [f1StrongTitleId] = getTitleByCvOnly(cvStrongAccumulatedF1);
+
+      function isF1Qualified(reqTitleId, actualTitleId) {
+        if (!reqTitleId) return true;
+        if (!actualTitleId) return false;
+
+        const titleIds = TITLES.map(t => t.id);
+        const reqIdx = titleIds.indexOf(reqTitleId);
+        const actualIdx = titleIds.indexOf(actualTitleId);
+        return actualIdx >= reqIdx;
+      }
+
+      let finalTitleId = null;
+      let finalTitleName = "NPP Thường";
+
+      for (let t of TITLES) {
+        if (accumulatedGroupCv >= t.min_group_cv) {
+          let reqF1 = t.req_f1_title;
+          if (reqF1) {
+            let okWeak = isF1Qualified(reqF1, f1WeakTitleId);
+            let okStrong = isF1Qualified(reqF1, f1StrongTitleId);
+            if (okWeak && okStrong) {
+              finalTitleId = t.id;
+              finalTitleName = t.name;
+            } else {
+              break; // Bottlenecked
+            }
+          } else {
+            finalTitleId = t.id;
+            finalTitleName = t.name;
+          }
+        } else {
+          break;
+        }
+      }
+
+      const [, f1WeakName] = getTitleByCvOnly(cvWeakAccumulatedF1);
+      const [, f1StrongName] = getTitleByCvOnly(cvStrongAccumulatedF1);
+
+      return [finalTitleId, finalTitleName, f1WeakName, f1StrongName];
+    }
+
+    function runSimulation() {
+      // Inputs
+      const nTotal = parseInt(document.getElementById("sizeInput").value);
+      const rRetention = parseFloat(document.getElementById("retentionInput").value) / 100;
+      const rSplitStrong = parseFloat(document.getElementById("splitInput").value) / 100;
+      const personalRank = document.getElementById("rankInput").value;
+
+      // Update Labels
+      document.getElementById("sizeVal").textContent = nTotal.toLocaleString() + " người";
+      document.getElementById("retentionVal").textContent = (rRetention * 100).toFixed(1) + "%";
+      document.getElementById("splitVal").textContent = (rSplitStrong * 100) + "%";
+
+      // 1. Active members count
+      const pConsumer = 0.8;
+      const pDistributor = 0.2;
+      const vConsumerCv = 1000;
+      const vDistributorCv = 2000;
+
+      const nConsumer = Math.floor(nTotal * pConsumer);
+      const nDistributor = Math.floor(nTotal * pDistributor);
+      const nActiveDistributor = Math.floor(nDistributor * rRetention);
+
+      // 2. Monthly CV
+      const cvConsumerMonthly = nConsumer * vConsumerCv;
+      const cvDistributorMonthly = nActiveDistributor * vDistributorCv;
+      const cvTotalMonthly = cvConsumerMonthly + cvDistributorMonthly;
+      const accumulatedGroupCv = cvTotalMonthly * 12;
+
+      // 3. Splitting strong/weak
+      const rSplitWeak = 1.0 - rSplitStrong;
+      const cvWeakMonthly = cvTotalMonthly * rSplitWeak;
+      const cvStrongMonthly = cvTotalMonthly * rSplitStrong;
+
+      // F1 highest accumulated CV (approx 50% of monthly branch CV * 12)
+      const cvWeakAccumulatedF1 = (cvWeakMonthly * 0.5) * 12;
+      const cvStrongAccumulatedF1 = (cvStrongMonthly * 0.5) * 12;
+
+      // Title determination
+      const [titleId, groupTitle, f1WTitle, f1STitle] = determineFinalTitle(
+        accumulatedGroupCv, cvWeakAccumulatedF1, cvStrongAccumulatedF1
+      );
+
+      // 4. Group Volume Commission (GVC)
+      const titleIds = TITLES.map(t => t.id);
+      let isDirectorOrAbove = false;
+      if (titleId) {
+        const dirIdx = titleIds.indexOf("DIR");
+        const currIdx = titleIds.indexOf(titleId);
+        isDirectorOrAbove = currIdx >= dirIdx;
+      }
+
+      const cycleSize = isDirectorOrAbove ? 7000 : 3000;
+      const cycleBonus = isDirectorOrAbove ? 560000 : 300000;
+      const numCycles = Math.floor(cvWeakMonthly / cycleSize);
+      const binaryIncomeRaw = numCycles * cycleBonus;
+
+      // Apply Maxout limits
+      let binaryLimit = Infinity;
+      let rankIdx = 2; // default Gold
+      if (personalRank === "BRONZE") rankIdx = 0;
+      else if (personalRank === "SILVER") rankIdx = 1;
+
+      if (titleId && MAX_BINARY_LIMITS[titleId]) {
+        binaryLimit = MAX_BINARY_LIMITS[titleId][rankIdx];
+      }
+
+      const binaryIncome = Math.min(binaryIncomeRaw, binaryLimit);
+
+      // 5. Qualify Volume Bonus
+      let qualifyIncome = 0;
+      const rankMilestones = QUALIFY_BONUS_LOOKUP[personalRank] || {};
+      for (const [milestone, bonus] of Object.entries(rankMilestones)) {
+        if (cvWeakMonthly >= parseInt(milestone)) {
+          qualifyIncome = bonus * 1000; // 1 CV = 1,000 VND
+        }
+      }
+
+      // 6. Matching Bonus (F1 - F5)
+      let matchingIncome = 0;
+      let matchingDetails = [];
+
+      const matchingRules = {
+        "DIR": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
+        "RUBY": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
+        "EME": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
+        "DIA": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
+        "BD": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
+        "BKD": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
+        "CD": { min_weak_cv: 700000, levels: { 1: 0.10, 2: 0.10, 3: 0.05, 4: 0.05 } },
+        "AMB": { min_weak_cv: 3000000, levels: { 1: 0.10, 2: 0.10, 3: 0.05, 4: 0.05, 5: 0.05 } }
+      };
+
+      if (titleId && matchingRules[titleId]) {
+        const rule = matchingRules[titleId];
+        if (cvWeakMonthly >= rule.min_weak_cv) {
+          for (const [levelStr, rate] of Object.entries(rule.levels)) {
+            const level = parseInt(levelStr);
+            const nppInLevel = Math.pow(2, level);
+            const nppActiveInLevel = Math.min(nppInLevel, Math.max(1, Math.floor(nActiveDistributor / Math.pow(2, level))));
+
+            const cvWeakLevel = cvWeakMonthly / Math.pow(2, level);
+            const cvAccumulatedLevel = (cvTotalMonthly / Math.pow(2, level)) * 12;
+
+            const [levelTitleId] = getTitleByCvOnly(cvAccumulatedLevel);
+            let isLevelDir = false;
+            if (levelTitleId) {
+              const dirIdx = titleIds.indexOf("DIR");
+              const lIdx = titleIds.indexOf(levelTitleId);
+              isLevelDir = lIdx >= dirIdx;
+            }
+
+            const lCycleSize = isLevelDir ? 7000 : 3000;
+            const lCycleBonus = isLevelDir ? 560000 : 300000;
+            const lCycles = Math.floor(cvWeakLevel / lCycleSize);
+            const lGvcRaw = lCycles * lCycleBonus;
+
+            let lLimit = Infinity;
+            if (levelTitleId && MAX_BINARY_LIMITS[levelTitleId]) {
+              lLimit = MAX_BINARY_LIMITS[levelTitleId][2]; // Gold cap
+            }
+            const lGvc = Math.min(lGvcRaw, lLimit);
+            const levelMatching = nppActiveInLevel * lGvc * rate;
+
+            matchingIncome += levelMatching;
+            matchingDetails.push({
+              level: `F${level}`,
+              activeNpp: nppActiveInLevel,
+              avgGvc: lGvc,
+              rate: rate,
+              matching: levelMatching
+            });
+          }
+        } else {
+          matchingDetails.push({ note: `Nhánh yếu (${cvWeakMonthly.toLocaleString(undefined, {maximumFractionDigits:0})} CV) không đạt mốc tối thiểu của ${groupTitle} (${rule.min_weak_cv.toLocaleString()} CV)` });
+        }
+      } else {
+        matchingDetails.push({ note: "Danh hiệu dưới Director không được hưởng hoa hồng cộng hưởng" });
+      }
+
+      // 7. Other bonuses (10% binary raw estimate)
+      const otherIncome = binaryIncome * 0.10;
+      const totalIncome = binaryIncome + otherIncome + qualifyIncome + matchingIncome;
+
+      // Update UI Output Values
+      document.getElementById("resTitle").textContent = groupTitle + (titleId ? ` (${titleId})` : "");
+      document.getElementById("resF1Weak").textContent = f1WTitle;
+      document.getElementById("resF1Strong").textContent = f1STitle;
+
+      document.getElementById("resConsumers").textContent = nConsumer.toLocaleString() + " người";
+      document.getElementById("resDistributors").textContent = nActiveDistributor.toLocaleString() + " người";
+      document.getElementById("resMonthlyCv").textContent = cvTotalMonthly.toLocaleString() + " CV";
+      document.getElementById("resAccumulatedCv").textContent = accumulatedGroupCv.toLocaleString() + " CV";
+      document.getElementById("resWeakCv").textContent = cvWeakMonthly.toLocaleString(undefined, {maximumFractionDigits:0}) + " CV";
+      document.getElementById("resCycles").textContent = numCycles + " chu kỳ";
+
+      // Commission fields
+      document.getElementById("resBinaryIncome").textContent = binaryIncome.toLocaleString() + " VNĐ";
+      document.getElementById("resQualifyIncome").textContent = qualifyIncome.toLocaleString() + " VNĐ";
+      document.getElementById("resMatchingIncome").textContent = matchingIncome.toLocaleString() + " VNĐ";
+      document.getElementById("resOtherIncome").textContent = otherIncome.toLocaleString() + " VNĐ";
+      document.getElementById("resTotalIncome").textContent = Math.round(totalIncome).toLocaleString() + " VNĐ";
+
+      // Maxout indicator
+      const maxoutBadge = document.getElementById("maxoutWarning");
+      if (binaryIncomeRaw > binaryLimit) {
+        maxoutBadge.classList.remove("d-none");
+      } else {
+        maxoutBadge.classList.add("d-none");
+      }
+
+      // Render Matching details
+      const breakdownBox = document.getElementById("matchingBreakdown");
+      breakdownBox.innerHTML = "";
+      matchingDetails.forEach(detail => {
+        const div = document.createElement("div");
+        div.className = "d-flex justify-content-between py-1 border-bottom border-light";
+        if (detail.note) {
+          div.innerHTML = `<span class="text-danger italic"><i class="bi bi-exclamation-circle me-1"></i> ${detail.note}</span>`;
+        } else {
+          div.innerHTML = `
+            <span>• Tầng <strong>${detail.level}</strong> (Hưởng ${(detail.rate*100).toFixed(0)}% trên ${detail.activeNpp} NPP)</span>
+            <span class="fw-bold text-success">+${detail.matching.toLocaleString()} VNĐ</span>
+          `;
+        }
+        breakdownBox.appendChild(div);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const isAdmin = localStorage.getItem("sihub_is_admin") === "true";
+      const adminBadge = document.getElementById("adminBadge");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const dropdownAuthLink = document.getElementById("dropdownAuthLink");
+      const settingsSidebarLink = document.getElementById("settingsSidebarLink");
+
+      if (isAdmin) {
+        adminBadge.classList.remove("d-none");
+        logoutBtn.classList.remove("d-none");
+        dropdownAuthLink.classList.add("d-none");
+      } else {
+        adminBadge.classList.add("d-none");
+        logoutBtn.classList.add("d-none");
+        dropdownAuthLink.classList.remove("d-none");
+        if (settingsSidebarLink) {
+          settingsSidebarLink.style.display = "none";
+        }
+      }
+
+      // Logout handler
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("sihub_is_admin");
+        alert("Đã đăng xuất tài khoản Cố vấn.");
+        window.location.reload();
+      });
+
+      // Bind input events
+      const inputs = ["sizeInput", "retentionInput", "splitInput", "rankInput"];
+      inputs.forEach(id => {
+        document.getElementById(id).addEventListener("input", runSimulation);
+      });
+
+      // Initial run
+      runSimulation();
+    });
+  </script>
+</body>
+</html>

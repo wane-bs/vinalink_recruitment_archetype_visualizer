@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinalink Doanh Chủ Portal Feedback">
+  <title>Khảo sát Doanh chủ | Vinalink Portal</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  
+  <style>
+    /* Styling form headers */
+    .form-section-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #10b981;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--admin-border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <a class="brand-mark" href="index.html" aria-label="Vinalink Portal">
+          <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
+            <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-title">Vinalink Portal</span>
+            <span class="brand-subtitle">Doanh Chủ Workspace</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard & Lộ trình</span>
+        </a>
+        <a class="nav-link" href="documents.html">
+          <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+          <span class="nav-text">Tài liệu Nghiên cứu</span>
+        </a>
+        <a class="nav-link" href="visualizer.html">
+          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+          <span class="nav-text">Bản đồ Tuyển dụng</span>
+        </a>
+        <a class="nav-link" href="simulator.html">
+          <span class="nav-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+          <span class="nav-text">Bộ Mô Phỏng</span>
+        </a>
+        <a class="nav-link active" href="feedback.html" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Khảo sát Doanh chủ</span>
+        </a>
+        <a class="nav-link" id="settingsSidebarLink" href="settings.html">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Cài đặt Hệ thống</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+        <strong>Doanh Chủ</strong>
+        <small>Active Workspace</small>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">Hệ thống hoạt động tốt</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white border-bottom">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            
+            <div id="adminBadge" class="d-none me-2">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded text-xs font-semibold">
+                <i class="bi bi-shield-check me-1"></i> Quyền Cố Vấn
+              </span>
+            </div>
+
+            <div class="dropdown">
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
+                <span class="profile-name d-none d-sm-inline">Loading...</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="login.html" id="dropdownAuthLink">Đăng nhập Cố vấn</a></li>
+                <li><button class="dropdown-item text-danger d-none" id="logoutBtn"><i class="bi bi-box-arrow-right me-1"></i> Đăng xuất Cố vấn</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          
+          <div class="page-heading mb-4">
+            <div class="page-heading-copy">
+              <span class="page-icon bg-success text-white"><i class="bi bi-clipboard-check-fill" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Khảo sát Chiến lược Doanh Chủ</p>
+                <h1 class="h3 mb-1">Thiết lập mục tiêu và thông số đầu vào</h1>
+                <p class="text-muted mb-0">Cung cấp số liệu xuất phát điểm hệ thống và định hướng tuyển dụng F1 nòng cốt.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 justify-content-center">
+            <div class="col-12 col-xl-10">
+              <form id="feedbackForm" class="panel p-4 needs-validation" novalidate>
+                
+                <!-- SECTION 1: Tầm nhìn & Mục tiêu Tài chính -->
+                <div class="mb-5">
+                  <h3 class="form-section-title"><i class="bi bi-trophy me-2"></i>01. Tầm nhìn & Mục tiêu Tài chính</h3>
+                  <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="doanhChuName">Tên Doanh Chủ / Thủ lĩnh</label>
+                      <input class="form-control" id="doanhChuName" type="text" required placeholder="Nhập họ và tên...">
+                      <div class="invalid-feedback">Vui lòng nhập tên.</div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="motivation">Động lực lớn nhất</label>
+                      <input class="form-control" id="motivation" type="text" required placeholder="Ví dụ: Tự do tài chính & Tạo lập tài sản kế thừa...">
+                      <div class="invalid-feedback">Vui lòng điền động lực lớn nhất.</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="thu_nhap_nam_1">Thu nhập mục tiêu Năm 1 (VNĐ/tháng)</label>
+                      <input class="form-control" id="thu_nhap_nam_1" type="text" required placeholder="Ví dụ: 15.000.000">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="thu_nhap_nam_2">Thu nhập mục tiêu Năm 2 (VNĐ/tháng)</label>
+                      <input class="form-control" id="thu_nhap_nam_2" type="text" required placeholder="Ví dụ: 60.000.000">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="thu_nhap_nam_3">Thu nhập mục tiêu Năm 3 (VNĐ/tháng)</label>
+                      <input class="form-control" id="thu_nhap_nam_3" type="text" required placeholder="Ví dụ: 150.000.000">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SECTION 2: Quy mô & Cấu trúc mong muốn -->
+                <div class="mb-5">
+                  <h3 class="form-section-title"><i class="bi bi-diagram-3 me-2"></i>02. Quy mô & Cấu trúc Hệ thống</h3>
+                  <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="so_luong_f1_nong_cot">Số F1 nòng cốt trực tiếp</label>
+                      <input class="form-control" id="so_luong_f1_nong_cot" type="number" required placeholder="Ví dụ: 3">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="tong_quy_mo_he_thong">Tổng quy mô hệ thống sau 3 năm</label>
+                      <input class="form-control" id="tong_quy_mo_he_thong" type="number" required placeholder="Ví dụ: 1000">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="ty_le_phan_bo">Tỷ lệ phân bổ (KHTT % - NPP %)</label>
+                      <input class="form-control" id="ty_le_phan_bo" type="text" required placeholder="Ví dụ: 80% tiêu dùng - 20% kinh doanh">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SECTION 3: Văn hóa & Phong cách -->
+                <div class="mb-5">
+                  <h3 class="form-section-title"><i class="bi bi-heart-pulse me-2"></i>03. Văn hóa & Giá trị Cốt lõi</h3>
+                  <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="tinh_tu_van_hoa">3 tính từ mô tả văn hóa làm việc</label>
+                      <input class="form-control" id="tinh_tu_van_hoa" type="text" required placeholder="Ví dụ: Tinh gọn, An vui, Cam kết...">
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="phong_cach_lanh_dao">Phong cách lãnh đạo hướng tới</label>
+                      <input class="form-control" id="phong_cach_lanh_dao" type="text" required placeholder="Ví dụ: Lãnh đạo phục vụ (Servant Leadership)">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SECTION 4: Nguồn lực đầu vào -->
+                <div class="mb-5">
+                  <h3 class="form-section-title"><i class="bi bi-hourglass-split me-2"></i>04. Nguồn lực Đầu vào</h3>
+                  <div class="row g-3 mb-3">
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="thoi_gian_cam_ket">Thời gian cam kết (tiếng/ngày)</label>
+                      <input class="form-control" id="thoi_gian_cam_ket" type="number" required placeholder="Ví dụ: 4">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="ngan_sach_ban_dau">Ngân sách dự kiến hàng tháng (VNĐ)</label>
+                      <input class="form-control" id="ngan_sach_ban_dau" type="text" required placeholder="Ví dụ: 5.000.000">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="ky_nang_san_co">Kinh nghiệm/Kỹ năng sẵn có nổi bật</label>
+                      <input class="form-control" id="ky_nang_san_co" type="text" required placeholder="Ví dụ: Thuyết trình & Đào tạo sản phẩm...">
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label d-block fw-bold mb-2">Ma trận Năng lực & Định hướng Kỹ năng (Đánh dấu các kỹ năng đã có sẵn):</label>
+                    <div class="row g-2">
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_strat_plan">
+                          <label class="form-check-label text-xs" for="sm_strat_plan">Lập kế hoạch kinh doanh và thiết lập mục tiêu hệ thống</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_data_analysis">
+                          <label class="form-check-label text-xs" for="sm_data_analysis">Phân tích số liệu kinh doanh (CV, cân nhánh, tỷ lệ RCR)</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_scheme_opt">
+                          <label class="form-check-label text-xs" for="sm_scheme_opt">Tối ưu hóa cơ chế trả thưởng và kiểm soát trần Maxout</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_team_recruit">
+                          <label class="form-check-label text-xs" for="sm_team_recruit">Tuyển chọn, chuyển giao và giữ chân F1 nòng cốt</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_emc_training">
+                          <label class="form-check-label text-xs" for="sm_emc_training">Kèm cặp thực chiến và đào tạo quy trình EMC rút gọn</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_servant_lead">
+                          <label class="form-check-label text-xs" for="sm_servant_lead">Truyền cảm hứng và lãnh đạo phục vụ</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_opp_present">
+                          <label class="form-check-label text-xs" for="sm_opp_present">Thuyết trình cơ hội OPP 2-1 hoặc sự kiện</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_brand_persona">
+                          <label class="form-check-label text-xs" for="sm_brand_persona">Định vị thương hiệu LVP và thấu cảm Persona downline</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_appointment_sales">
+                          <label class="form-check-label text-xs" for="sm_appointment_sales">Thiết lập cuộc hẹn, telesale và chốt đối tác</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sm_vpol_operation">
+                          <label class="form-check-label text-xs" for="sm_vpol_operation">Vận hành văn phòng trực tuyến (VPOL) số hóa</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SECTION 5: Hiện trạng hệ thống -->
+                <div class="mb-5">
+                  <h3 class="form-section-title"><i class="bi bi-calendar-check me-2"></i>05. Khảo sát Hiện trạng Hệ thống</h3>
+                  <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_quy_mo_tong">Quy mô tổng thành viên hiện tại</label>
+                      <input class="form-control" id="hien_tai_quy_mo_tong" type="number" required placeholder="Nhập số người...">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_npp_hoat_dong">Số NPP hoạt động thực tế</label>
+                      <input class="form-control" id="hien_tai_npp_hoat_dong" type="number" required placeholder="Nhập số người...">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_khtt_hoat_dong">Số KHTT hoạt động thực tế</label>
+                      <input class="form-control" id="hien_tai_khtt_hoat_dong" type="number" required placeholder="Nhập số người...">
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="hien_tai_cap_bac_ca_nhan">Cấp bậc cá nhân hiện tại</label>
+                      <select class="form-select" id="hien_tai_cap_bac_ca_nhan" required>
+                        <option value="">Chọn cấp bậc...</option>
+                        <option value="BRONZE">Đồng (Bronze)</option>
+                        <option value="SILVER">Bạc (Silver)</option>
+                        <option value="GOLD">Vàng (Gold/VIP)</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="hien_tai_danh_hieu">Danh hiệu nhóm hiện tại</label>
+                      <select class="form-select" id="hien_tai_danh_hieu" required>
+                        <option value="NPP_THUONG">Nhà phân phối thường</option>
+                        <option value="M">Manager</option>
+                        <option value="SM">Senior Manager</option>
+                        <option value="DIR">Director</option>
+                        <option value="RUBY">Ruby</option>
+                        <option value="EME">Emerald</option>
+                        <option value="DIA">Diamond</option>
+                        <option value="BD">Blue Diamond</option>
+                        <option value="BKD">Black Diamond</option>
+                        <option value="CD">Crown Diamond</option>
+                        <option value="AMB">Ambassador</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_doanh_so_cv">Doanh số hàng tháng toàn nhóm (CV)</label>
+                      <input class="form-control" id="hien_tai_doanh_so_cv" type="number" required placeholder="Nhập số CV...">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_nhanh_yeu_cv">Doanh số nhánh yếu hàng tháng (CV)</label>
+                      <input class="form-control" id="hien_tai_nhanh_yeu_cv" type="number" required placeholder="Nhập số CV...">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_ty_le_giu_chan">Tỷ lệ giữ chân NPP hoạt động (%)</label>
+                      <input class="form-control" id="hien_tai_ty_le_giu_chan" type="number" required placeholder="Ví dụ: 80">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_diem_tran_cv">Điểm tràn từ Upline hàng tháng (CV)</label>
+                      <input class="form-control" id="hien_tai_diem_tran_cv" type="number" required placeholder="Nhập số CV...">
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label" for="hien_tai_f1_nong_cot">Số F1 nòng cốt hiện tại đã tuyển</label>
+                      <input class="form-control" id="hien_tai_f1_nong_cot" type="number" required placeholder="Ví dụ: 1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SECTION 6: Khung định vị tuyển dụng F1 -->
+                <div class="mb-5">
+                  <h3 class="form-section-title"><i class="bi bi-people me-2"></i>06. Định vị Tuyển dụng Tuyến Dưới</h3>
+                  
+                  <div class="mb-4">
+                    <label class="form-label d-block fw-bold text-xs mb-2">Trụ cột A: Quyết định hỗ trợ F1 trong 30 ngày đầu tiên (LVP):</label>
+                    <div class="row g-2">
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a1_giao_trinh">
+                          <label class="form-check-label text-xs" for="lvp_a1_giao_trinh">Quy trình chuyển giao giáo trình đào tạo sản phẩm & sức khỏe</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a1_cam_tay">
+                          <label class="form-check-label text-xs" for="lvp_a1_cam_tay">Cầm tay chỉ việc hướng dẫn kỹ năng hẹn và tuyển thực chiến</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a1_opp_21">
+                          <label class="form-check-label text-xs" for="lvp_a1_opp_21">Đồng hành chia sẻ trực tiếp (OPP 2-1) hỗ trợ chốt khách</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a1_vpol">
+                          <label class="form-check-label text-xs" for="lvp_a1_vpol">Cung cấp công cụ số hóa, tài liệu tiếp thị và văn phòng VPOL</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row g-3 mb-4">
+                    <div class="col-12">
+                      <label class="form-label" for="lvp_a2_phong_cach">Điểm khác biệt trong phong cách dẫn dắt đội nhóm (A2)</label>
+                      <input class="form-control" id="lvp_a2_phong_cach" type="text" required placeholder="Ví dụ: Đào tạo thực chiến y học cổ truyền kết hợp phễu tự động...">
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label d-block fw-bold text-xs mb-2">Trụ cột A: Lợi thế cạnh tranh nội bộ hệ thống của riêng anh/chị (A3):</label>
+                    <div class="row g-2">
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a3_emc">
+                          <label class="form-check-label text-xs" for="lvp_a3_emc">Quy trình EMC cải tiến dễ sao chép</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a3_tech">
+                          <label class="form-check-label text-xs" for="lvp_a3_tech">Công cụ Landing page & Phễu tuyển dụng</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a3_culture">
+                          <label class="form-check-label text-xs" for="lvp_a3_culture">Văn hóa An vui & Tinh gọn, không áp chạy số ảo</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a3_mentor">
+                          <label class="form-check-label text-xs" for="lvp_a3_mentor">Sự cố cố vấn cá nhân có lộ trình kinh doanh rõ ràng</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label d-block fw-bold text-xs mb-2">Trụ cột A: Lợi thế cạnh tranh ngoại bộ Vinalink (A4):</label>
+                    <div class="row g-2">
+                      <div class="col-12 col-md-4">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a4_product">
+                          <label class="form-check-label text-xs" for="lvp_a4_product">Sản phẩm Thuần Việt giá bình dân</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a4_scheme">
+                          <label class="form-check-label text-xs" for="lvp_a4_scheme">Trả thưởng Nhị phân lai không ly khai</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="lvp_a4_legal">
+                          <label class="form-check-label text-xs" for="lvp_a4_legal">Pháp lý thừa kế vững chắc</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row g-3 mb-4">
+                    <div class="col-12">
+                      <label class="form-label" for="lvp_a5_brand">Thương hiệu cá nhân / Giá trị cốt lõi của Upline (A5)</label>
+                      <input class="form-control" id="lvp_a5_brand" type="text" required placeholder="Ví dụ: Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến...">
+                    </div>
+                  </div>
+
+                  <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="idp_b1_prior">Trụ cột B: Phân khúc F1 ưu tiên tuyển dụng nhất</label>
+                      <select class="form-select" id="idp_b1_prior" required>
+                        <option value="">Chọn nhóm ưu tiên...</option>
+                        <option value="nhom_1">Nhóm 1: Người làm thêm kiếm thu nhập thụ động</option>
+                        <option value="nhom_2">Nhóm 2: Người tiêu dùng chuyển đổi</option>
+                        <option value="nhom_3">Nhóm 3: Nhà xây dựng hệ thống chuyên nghiệp</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label" for="idp_b2_demographic">Phân khúc nghề nghiệp & độ tuổi mục tiêu (B2)</label>
+                      <input class="form-control" id="idp_b2_demographic" type="text" required placeholder="Ví dụ: Nhân viên văn phòng, người làm tự do 30-45 tuổi...">
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label d-block fw-bold text-xs mb-2">Trụ cột C: Tiêu chuẩn lựa chọn F1 đồng hành (C1):</label>
+                    <div class="row g-2">
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="qf_c1_desire">
+                          <label class="form-check-label text-xs" for="qf_c1_desire">Khát khao & Động lực thay đổi lớn</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="qf_c1_coachable">
+                          <label class="form-check-label text-xs" for="qf_c1_coachable">Tinh thần học hỏi (Coachability)</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="qf_c1_trust">
+                          <label class="form-check-label text-xs" for="qf_c1_trust">Sự chính trực và uy tín cá nhân</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="qf_c1_time">
+                          <label class="form-check-label text-xs" for="qf_c1_time">Cam kết thời gian hoạt động đều đặn</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label class="form-label" for="qf_c2_test">Bài test hoặc hành động kiểm tra cam kết người mới (C2)</label>
+                      <input class="form-control" id="qf_c2_test" type="text" required placeholder="Ví dụ: Trải nghiệm ít nhất 1 sản phẩm & hoàn thành học pháp lý 3 ngày...">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SUBMIT BUTTONS -->
+                <div class="d-flex justify-content-between align-items-center border-top pt-4">
+                  <button type="button" class="btn btn-outline-secondary" id="saveDraftBtn">
+                    <i class="bi bi-pencil-square me-1"></i> Lưu Nháp Cục Bộ
+                  </button>
+                  <button type="submit" class="btn btn-success" style="background-color: #10b981; border-color: #10b981;">
+                    <i class="bi bi-send me-1"></i> Gửi Phản Hồi
+                  </button>
+                </div>
+                
+                <div id="submitStatusBox" class="alert mt-4 d-none"></div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="container-fluid px-3 px-lg-4">
+          <span>Copyright 2026 Vinalink Doanh Chủ Portal • Thiết kế dựa trên adminHMD</span>
+          <span>Bảo mật hệ thống thông tin</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Bind profile before loading main.js
+    window.adminHMDUser = {
+      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
+      workspace: "Vinalink Project",
+      avatar: "../assets/images/avatar/avatar.jpg"
+    };
+  </script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    const STORAGE_KEY = "vinalink_survey_draft";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const isAdmin = localStorage.getItem("sihub_is_admin") === "true";
+      const adminBadge = document.getElementById("adminBadge");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const dropdownAuthLink = document.getElementById("dropdownAuthLink");
+      const settingsSidebarLink = document.getElementById("settingsSidebarLink");
+
+      if (isAdmin) {
+        adminBadge.classList.remove("d-none");
+        logoutBtn.classList.remove("d-none");
+        dropdownAuthLink.classList.add("d-none");
+      } else {
+        adminBadge.classList.add("d-none");
+        logoutBtn.classList.add("d-none");
+        dropdownAuthLink.classList.remove("d-none");
+        if (settingsSidebarLink) {
+          settingsSidebarLink.style.display = "none";
+        }
+      }
+
+      // Logout handler
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("sihub_is_admin");
+        alert("Đã đăng xuất tài khoản Cố vấn.");
+        window.location.reload();
+      });
+
+      // Load draft values if exists
+      loadFormDraft();
+
+      // Local draft saver
+      document.getElementById("saveDraftBtn").addEventListener("click", () => {
+        saveFormDraft();
+        alert("Đã lưu bản nháp khảo sát thành công!");
+      });
+
+      // Form submission
+      const form = document.getElementById("feedbackForm");
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (this.checkValidity()) {
+          submitSurveyData();
+        } else {
+          alert("Vui lòng điền đầy đủ các thông tin bắt buộc!");
+        }
+
+        this.classList.add("was-validated");
+      });
+    });
+
+    function saveFormDraft() {
+      const inputs = document.querySelectorAll("#feedbackForm input[type='text'], #feedbackForm input[type='number'], #feedbackForm select");
+      const checkBoxes = document.querySelectorAll("#feedbackForm input[type='checkbox']");
+      const draft = { text: {}, checks: {} };
+
+      inputs.forEach(el => {
+        draft.text[el.id] = el.value;
+      });
+      checkBoxes.forEach(el => {
+        draft.checks[el.id] = el.checked;
+      });
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+    }
+
+    function loadFormDraft() {
+      const rawDraft = localStorage.getItem(STORAGE_KEY);
+      if (!rawDraft) {
+        // Load default mock values to matches old react defaults
+        document.getElementById("doanhChuName").value = "Doanh Chủ Vinalink";
+        document.getElementById("thu_nhap_nam_1").value = "15.000.000 VNĐ";
+        document.getElementById("thu_nhap_nam_2").value = "60.000.000 VNĐ";
+        document.getElementById("thu_nhap_nam_3").value = "150.000.000 VNĐ";
+        document.getElementById("motivation").value = "Tự do tài chính & Tạo lập tài sản kế thừa";
+        document.getElementById("so_luong_f1_nong_cot").value = "3";
+        document.getElementById("tong_quy_mo_he_thong").value = "1000";
+        document.getElementById("ty_le_phan_bo").value = "80% tiêu dùng - 20% kinh doanh";
+        document.getElementById("tinh_tu_van_hoa").value = "Tinh gọn, An vui, Cam kết";
+        document.getElementById("phong_cach_lanh_dao").value = "Lãnh đạo phục vụ (Servant Leadership)";
+        document.getElementById("thoi_gian_cam_ket").value = "4";
+        document.getElementById("ngan_sach_ban_dau").value = "5.000.000 VNĐ";
+        document.getElementById("ky_nang_san_co").value = "Thuyết trình & Đào tạo sản phẩm";
+        document.getElementById("sm_emc_training").checked = true;
+        document.getElementById("hien_tai_quy_mo_tong").value = "50";
+        document.getElementById("hien_tai_npp_hoat_dong").value = "10";
+        document.getElementById("hien_tai_khtt_hoat_dong").value = "30";
+        document.getElementById("hien_tai_cap_bac_ca_nhan").value = "GOLD";
+        document.getElementById("hien_tai_danh_hieu").value = "SM";
+        document.getElementById("hien_tai_doanh_so_cv").value = "20000";
+        document.getElementById("hien_tai_nhanh_yeu_cv").value = "8000";
+        document.getElementById("hien_tai_ty_le_giu_chan").value = "80";
+        document.getElementById("hien_tai_diem_tran_cv").value = "0";
+        document.getElementById("hien_tai_f1_nong_cot").value = "2";
+        document.getElementById("lvp_a1_cam_tay").checked = true;
+        document.getElementById("lvp_a1_opp_21").checked = true;
+        document.getElementById("lvp_a2_phong_cach").value = "Đào tạo thực chiến y học cổ truyền kết hợp phễu tự động.";
+        document.getElementById("lvp_a3_emc").checked = true;
+        document.getElementById("lvp_a3_culture").checked = true;
+        document.getElementById("lvp_a4_product").checked = true;
+        document.getElementById("lvp_a4_scheme").checked = true;
+        document.getElementById("lvp_a5_brand").value = "Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến.";
+        document.getElementById("idp_b1_prior").value = "nhom_3";
+        document.getElementById("idp_b2_demographic").value = "Nhân viên văn phòng, người làm tự do 30-45 tuổi.";
+        document.getElementById("qf_c1_desire").checked = true;
+        document.getElementById("qf_c1_coachable").checked = true;
+        document.getElementById("qf_c1_time").checked = true;
+        document.getElementById("qf_c2_test").value = "Trải nghiệm ít nhất 1 sản phẩm & hoàn thành khóa học pháp lý cơ bản 3 ngày.";
+        return;
+      }
+
+      const draft = JSON.parse(rawDraft);
+      for (const [id, value] of Object.entries(draft.text)) {
+        const el = document.getElementById(id);
+        if (el) el.value = value;
+      }
+      for (const [id, checked] of Object.entries(draft.checks)) {
+        const el = document.getElementById(id);
+        if (el) el.checked = checked;
+      }
+    }
+
+    function submitSurveyData() {
+      const statusBox = document.getElementById("submitStatusBox");
+      statusBox.className = "alert mt-4 alert-warning";
+      statusBox.innerHTML = `<span><i class="bi bi-hourglass-split me-1 animate-spin"></i> Đang kết nối và truyền tải dữ liệu khảo sát...</span>`;
+      statusBox.classList.remove("d-none");
+
+      const scriptUrl = localStorage.getItem("sihub_script_url") || "";
+      const accessToken = localStorage.getItem("sihub_access_token") || "sihub_token_2026";
+
+      // Build payload JSON matches old postData structure
+      const payload = {
+        timestamp: new Date().toISOString(),
+        accessToken: accessToken,
+        doanhChuName: document.getElementById("doanhChuName").value.trim(),
+        e1: document.getElementById("thu_nhap_nam_1").value.trim(),
+        e2: document.getElementById("thu_nhap_nam_2").value.trim(),
+        e3: document.getElementById("thu_nhap_nam_3").value.trim(),
+        motivation: document.getElementById("motivation").value.trim(),
+        a2: document.getElementById("so_luong_f1_nong_cot").value.trim(),
+        totalMembers: document.getElementById("tong_quy_mo_he_thong").value.trim(),
+        distributionRatio: document.getElementById("ty_le_phan_bo").value.trim(),
+        culture: document.getElementById("tinh_tu_van_hoa").value.trim(),
+        leadershipStyle: document.getElementById("phong_cach_lanh_dao").value.trim(),
+        d1: document.getElementById("thoi_gian_cam_ket").value.trim(),
+        d2: document.getElementById("ngan_sach_ban_dau").value.trim(),
+        skills: Array.from(document.querySelectorAll("#sm_strat_plan, #sm_data_analysis, #sm_scheme_opt, #sm_team_recruit, #sm_emc_training, #sm_servant_lead, #sm_opp_present, #sm_brand_persona, #sm_appointment_sales, #sm_vpol_operation")).filter(c => c.checked).map(c => c.id),
+        a1: Array.from(document.querySelectorAll("#lvp_a1_giao_trinh, #lvp_a1_cam_tay, #lvp_a1_opp_21, #lvp_a1_vpol")).filter(c => c.checked).map(c => c.id),
+        lvpStyle: document.getElementById("lvp_a2_phong_cach").value.trim(),
+        lvpIntra: Array.from(document.querySelectorAll("#lvp_a3_emc, #lvp_a3_tech, #lvp_a3_culture, #lvp_a3_mentor")).filter(c => c.checked).map(c => c.id),
+        lvpInter: Array.from(document.querySelectorAll("#lvp_a4_product, #lvp_a4_scheme, #lvp_a4_legal")).filter(c => c.checked).map(c => c.id),
+        lvpBrand: document.getElementById("lvp_a5_brand").value.trim(),
+        b1: document.getElementById("idp_b1_prior").value.trim(),
+        b2: document.getElementById("idp_b2_demographic").value.trim(),
+        c1: Array.from(document.querySelectorAll("#qf_c1_desire, #qf_c1_coachable, #qf_c1_trust, #qf_c1_time")).filter(c => c.checked).map(c => c.id),
+        c2: document.getElementById("qf_c2_test").value.trim()
+      };
+
+      // If simulated mode (no URL configured)
+      if (!scriptUrl) {
+        setTimeout(() => {
+          statusBox.className = "alert alert-success mt-4";
+          statusBox.innerHTML = `
+            <strong>🎉 Gửi nháp thành công!</strong> (Mô phỏng: Dữ liệu đã được ghi nhận cục bộ. Hãy cấu hình Google Apps Script URL trong mục Cài đặt hệ thống để kết nối Sheets thực tế).
+          `;
+          console.log("Mock post payload:", payload);
+          // Save draft as current values
+          saveFormDraft();
+        }, 1200);
+        return;
+      }
+
+      // Real POST fetch
+      fetch(scriptUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        statusBox.className = "alert alert-success mt-4";
+        statusBox.innerHTML = `
+          <strong>🎉 Đồng bộ thành công!</strong> Dữ liệu đã được gửi trực tiếp tới Google Sheets và được đồng bộ về máy local theo lịch trình.
+        `;
+        saveFormDraft();
+      })
+      .catch(err => {
+        console.error(err);
+        statusBox.className = "alert alert-danger mt-4";
+        statusBox.innerHTML = `
+          <strong>⚠️ Lỗi kết nối:</strong> Không thể truyền tải dữ liệu tới Google Apps Script URL. Vui lòng kiểm tra lại URL hoặc Access Token trong mục Cài đặt.
+        `;
+      });
+    }
+  </script>
+</body>
+</html>
