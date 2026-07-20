@@ -1,7 +1,7 @@
 # BẢN PHẢN HỒI CHECKLIST KHẢO SÁT TẦM NHÌN DOANH CHỦ VINALINK
 
 **Doanh chủ thực hiện:** Doanh Chủ Vinalink (Mock Leader)
-**Thời gian phản hồi:** 2026-07-20 23:06:35
+**Thời gian phản hồi:** 2026-07-20 23:19:44
 **Trạng thái đồng bộ:** Đồng bộ tự động lúc 20:00
 
 ---
@@ -16,7 +16,7 @@
 
 ### 2. Quy mô & Cấu trúc Hệ thống mong muốn (Phần 2)
 - **Số lượng F1 nòng cốt thiết lập dẫn dắt:** [so_luong_f1_nong_cot: select(3|4|5)] -> 3 người
-- **Tổng quy mô hệ thống (3 năm):** [tong_quy_mo_he_thong: integer] -> 1000 người
+- **Tổng quy mo hệ thống (3 năm):** [tong_quy_mo_he_thong: integer] -> 1000 người
 - **Tỷ lệ phân bổ định hướng:** [ty_le_phan_bo: select(...)] -> 80% tiêu dùng - 20% kinh doanh
 
 ### 3. Xác định Giá trị Cốt lõi & Văn hóa Đội nhóm (Phần 3)
@@ -42,7 +42,17 @@
 ### 4. Đánh giá Nguồn lực Đầu vào & Tự Chẩn đoán Năng lực (Phần 4)
 - **Thời gian cam kết làm việc mỗi ngày:** [thoi_gian_cam_ket: select(...)] -> 4 giờ/ngày
 - **Ngân sách đầu tư ban đầu:** [ngan_sach_ban_dau: currency_vnd] -> 5.000.000 VNĐ
-- **Kỹ năng sẵn có sở hữu:** [ky_nang_san_co: text] -> Thuyết trình & Đào tạo sản phẩm
+- **Kỹ năng sẵn có sở hữu:** [ky_nang_san_co: text] -> ['sm_recruit_trust', 'sm_opp_present', 'sm_emc_training', 'sm_servant_lead', 'sm_brand_content', 'sm_vpol_operation']
+
+- **Ma trận Năng lực & Định hướng Kỹ năng Doanh chủ (Skill Matrix):**
+
+  | # | Tuyển dụng & Kết nối | Đã có | Đào tạo & Sao chép hệ thống | Đã có | Công nghệ & Truyền thông | Đã có | Vận hành & Chăm sóc | Đã có |
+  | :---: | :--- | :---: | :--- | :---: | :--- | :---: | :--- | :---: |
+  | 1 | Thu hút, giao tiếp với người lạ & xây dựng niềm tin nhanh `[sm_recruit_trust: checkbox]` | [x] | Đóng gói quy trình phức tạp thành các bước đơn giản dễ sao chép `[sm_train_simplify: checkbox]` | [ ] | Thiết lập trang đích cá nhân hoá & phễu tuyển dụng tự động `[sm_funnel_tech: checkbox]` | [ ] | Vận hành văn phòng trực tuyến, đặt hàng & quản lý mã số `[sm_vpol_operation: checkbox]` | [x] |
+  | 2 | Thuyết trình cơ hội hợp tác thuyết phục & xử lý từ chối hiệu quả `[sm_opp_present: checkbox]` | [x] | Thiết kế giáo trình, kèm cặp thực chiến & đào tạo sản phẩm `[sm_emc_training: checkbox]` | [x] | Viết bài mạng xã hội thu hút & xây dựng thương hiệu cá nhân `[sm_brand_content: checkbox]` | [x] | Phân tích số liệu nhánh mạnh/yếu, tỷ lệ giữ chân & cân bằng nhánh `[sm_data_analysis: checkbox]` | [ ] |
+  | 3 | Thiết lập cuộc hẹn, gọi điện tư vấn & chốt đối tác tiềm năng `[sm_appointment_sales: checkbox]` | [ ] | Truyền cảm hứng, tạo động lực & dẫn dắt theo phong cách lãnh đạo phục vụ `[sm_servant_lead: checkbox]` | [x] | Thành thạo công cụ thiết kế, dựng video để làm tài liệu tiếp thị `[sm_design_tool: checkbox]` | [ ] | Sử dụng bộ mô phỏng dự phóng tài chính để kiểm soát trần hoa hồng `[sm_sim_usage: checkbox]` | [ ] |
+  | 4 | Tuyển chọn, chuyển giao & giữ chân nhân sự nòng cốt tuyến dưới `[sm_team_recruit: checkbox]` | [ ] | | | Định vị giá trị cá nhân & thấu cảm chân dung tuyến dưới mục tiêu `[sm_brand_persona: checkbox]` | [ ] | Lập kế hoạch kinh doanh & thiết lập mục tiêu hệ thống theo từng giai đoạn `[sm_strat_plan: checkbox]` | [ ] |
+  | 5 | | | | | | | Tối ưu hoá cơ chế trả thưởng & kiểm soát trần hoa hồng hệ thống `[sm_scheme_opt: checkbox]` | [ ] |
 
 #### Phần 4.1: Điểm tự đánh giá 12 năng lực quản trị (1-5)
 * **Nhóm 1: Kết nối & Tuyển dụng (Hustler)**

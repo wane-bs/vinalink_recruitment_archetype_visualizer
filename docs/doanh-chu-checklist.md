@@ -63,22 +63,15 @@ Bộ câu hỏi này giúp Doanh chủ tự định hình tư duy chiến lượ
   - Trả lời: [ky_nang_san_co: text] -> ................................................................................
 
   * **Ma trận Năng lực & Định hướng Kỹ năng Doanh chủ (Skill Matrix):**
-    *Hướng dẫn: Đánh dấu `[x]` vào ô tương ứng để xác định các năng lực anh/chị ĐÃ CÓ SẴN (để tận dụng ngay) hoặc CẦN PHÁT TRIỂN (để tập trung đào tạo).*
+    *Hướng dẫn: Đánh dấu `[x]` vào ô **"Đã có"** cho các kỹ năng anh/chị TỰ TIN đang nắm vững. Phần còn lại trống = ưu tiên phát triển.*
 
-    | Nhóm Năng lực | STT | Kỹ năng cốt lõi của Giám đốc Hệ thống | Sẵn có | Cần phát triển | Biến mã hóa |
-    | :--- | :---: | :--- | :---: | :---: | :--- |
-    | **1. Quản trị Chiến lược & Tài chính** | 1.1 | Lập kế hoạch kinh doanh và thiết lập mục tiêu hệ thống (KPIs/OKRs) | `[ ]` | `[ ]` | `[sm_strat_plan: checkbox]` |
-    | | 1.2 | Phân tích số liệu kinh doanh (CV, tỷ lệ cân nhánh nhị phân, tỷ lệ RCR) | `[ ]` | `[ ]` | `[sm_data_analysis: checkbox]` |
-    | | 1.3 | Tối ưu hóa cơ chế trả thưởng và kiểm soát trần hoa hồng Maxout | `[ ]` | `[ ]` | `[sm_scheme_opt: checkbox]` |
-    | **2. Phát triển Đội ngũ & Đào tạo** | 2.1 | Tuyển chọn, chuyển giao và giữ chân nhân sự nòng cốt (Key Leaders F1) | `[ ]` | `[ ]` | `[sm_team_recruit: checkbox]` |
-    | | 2.2 | Thiết kế giáo trình, kèm cặp thực chiến và đào tạo sản phẩm (EMC) | `[ ]` | `[ ]` | `[sm_emc_training: checkbox]` |
-    | | 2.3 | Truyền cảm hứng, tạo động lực và dẫn dắt theo phong cách Lãnh đạo phục vụ | `[ ]` | `[ ]` | `[sm_servant_lead: checkbox]` |
-    | **3. Kinh doanh & Phát triển Thị trường** | 3.1 | Thuyết trình cơ hội hợp tác kinh doanh (OPP 2-1 hoặc OPP đám đông) | `[ ]` | `[ ]` | `[sm_opp_present: checkbox]` |
-    | | 3.2 | Định vị thương hiệu cá nhân (LVP) và thấu cảm chân dung downline (Persona) | `[ ]` | `[ ]` | `[sm_brand_persona: checkbox]` |
-    | | 3.3 | Kỹ năng thiết lập cuộc hẹn, telesale và chốt đối tác tiềm năng | `[ ]` | `[ ]` | `[sm_appointment_sales: checkbox]` |
-    | **4. Số hóa & Ứng dụng Công nghệ** | 4.1 | Vận hành văn phòng trực tuyến (VPOL), đặt hàng và quản lý mã số số hóa | `[ ]` | `[ ]` | `[sm_vpol_operation: checkbox]` |
-    | | 4.2 | Thiết lập Landing Page cá nhân hóa và phễu tuyển dụng tự động | `[ ]` | `[ ]` | `[sm_funnel_tech: checkbox]` |
-    | | 4.3 | Sử dụng công cụ toán học và bộ mô phỏng dự phóng tài chính (Simulator) | `[ ]` | `[ ]` | `[sm_sim_usage: checkbox]` |
+    | # | Tuyển dụng & Kết nối | Đã có | Đào tạo & Sao chép hệ thống | Đã có | Công nghệ & Truyền thông | Đã có | Vận hành & Chăm sóc | Đã có |
+    | :---: | :--- | :---: | :--- | :---: | :--- | :---: | :--- | :---: |
+    | 1 | Thu hút, giao tiếp với người lạ & xây dựng niềm tin nhanh `[sm_recruit_trust: checkbox]` | `[ ]` | Đóng gói quy trình phức tạp thành các bước đơn giản dễ sao chép `[sm_train_simplify: checkbox]` | `[ ]` | Thiết lập trang đích cá nhân hoá & phễu tuyển dụng tự động `[sm_funnel_tech: checkbox]` | `[ ]` | Vận hành văn phòng trực tuyến, đặt hàng & quản lý mã số `[sm_vpol_operation: checkbox]` | `[ ]` |
+    | 2 | Thuyết trình cơ hội hợp tác thuyết phục & xử lý từ chối hiệu quả `[sm_opp_present: checkbox]` | `[ ]` | Thiết kế giáo trình, kèm cặp thực chiến & đào tạo sản phẩm `[sm_emc_training: checkbox]` | `[ ]` | Viết bài mạng xã hội thu hút & xây dựng thương hiệu cá nhân `[sm_brand_content: checkbox]` | `[ ]` | Phân tích số liệu nhánh mạnh/yếu, tỷ lệ giữ chân & cân bằng nhánh `[sm_data_analysis: checkbox]` | `[ ]` |
+    | 3 | Thiết lập cuộc hẹn, gọi điện tư vấn & chốt đối tác tiềm năng `[sm_appointment_sales: checkbox]` | `[ ]` | Truyền cảm hứng, tạo động lực & dẫn dắt theo phong cách lãnh đạo phục vụ `[sm_servant_lead: checkbox]` | `[ ]` | Thành thạo công cụ thiết kế, dựng video để làm tài liệu tiếp thị `[sm_design_tool: checkbox]` | `[ ]` | Sử dụng bộ mô phỏng dự phóng tài chính để kiểm soát trần hoa hồng `[sm_sim_usage: checkbox]` | `[ ]` |
+    | 4 | Tuyển chọn, chuyển giao & giữ chân nhân sự nòng cốt tuyến dưới `[sm_team_recruit: checkbox]` | `[ ]` | | | Định vị giá trị cá nhân & thấu cảm chân dung tuyến dưới mục tiêu `[sm_brand_persona: checkbox]` | `[ ]` | Lập kế hoạch kinh doanh & thiết lập mục tiêu hệ thống theo từng giai đoạn `[sm_strat_plan: checkbox]` | `[ ]` |
+    | 5 | | | | | | | Tối ưu hoá cơ chế trả thưởng & kiểm soát trần hoa hồng hệ thống `[sm_scheme_opt: checkbox]` | `[ ]` |
 
 ### 4.1 Bảng Tự Đánh giá Mức độ Kỹ năng (Dành cho việc chẩn đoán co-founder F1)
 *Hướng dẫn: Tự chấm điểm khả năng thực tế của bản thân theo thang điểm từ **1** (Yếu/Chưa biết làm) đến **5** (Rất mạnh/Tự tin giảng dạy) sau dấu mũi tên `->`.*

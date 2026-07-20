@@ -46,7 +46,7 @@ def fetch_feedback_data():
             "leadershipStyle": "Lãnh đạo phục vụ (Servant Leadership)",
             "d1": "4", # Thời gian cam kết
             "d2": "5.000.000 VNĐ",
-            "skills": "Thuyết trình & Đào tạo sản phẩm",
+            "skills": ["sm_recruit_trust", "sm_opp_present", "sm_emc_training", "sm_servant_lead", "sm_brand_content", "sm_vpol_operation"],
             
             # Khảo sát Văn hóa Tinh gọn
             "cult_pain_burnout": True,
@@ -253,9 +253,23 @@ def analyze_violations(data):
 def write_doanh_chu_checklist_tra_loi(data):
     """Ghi đè tệp local doanh-chu-checklist-tra-loi.md với câu trả lời mới đầy đủ các trường"""
     
-    # Định dạng trạng thái checkbox
+    # Định dạng trạng thái checkbox chung
     def fmt_check(val):
         return "[x]" if val else "[ ]"
+
+    # Định dạng checkbox cho từng kỹ năng cụ thể trong Ma trận
+    def fmt_skill_check(skill_id, skills_data):
+        if not skills_data:
+            return "[ ]"
+        # Nếu skills_data là list/array (truyền từ payload web)
+        if isinstance(skills_data, list):
+            return "[x]" if skill_id in skills_data else "[ ]"
+        
+        # Nếu là string (tải từ CSV Google Sheets hoặc mock)
+        skills_str = str(skills_data)
+        if skill_id in skills_str:
+            return "[x]"
+        return "[ ]"
 
     content = f"""# BẢN PHẢN HỒI CHECKLIST KHẢO SÁT TẦM NHÌN DOANH CHỦ VINALINK
 
@@ -275,7 +289,7 @@ def write_doanh_chu_checklist_tra_loi(data):
 
 ### 2. Quy mô & Cấu trúc Hệ thống mong muốn (Phần 2)
 - **Số lượng F1 nòng cốt thiết lập dẫn dắt:** [so_luong_f1_nong_cot: select(3|4|5)] -> {data["a2"]} người
-- **Tổng quy mô hệ thống (3 năm):** [tong_quy_mo_he_thong: integer] -> {data["totalMembers"]} người
+- **Tổng quy mo hệ thống (3 năm):** [tong_quy_mo_he_thong: integer] -> {data["totalMembers"]} người
 - **Tỷ lệ phân bổ định hướng:** [ty_le_phan_bo: select(...)] -> {data["distributionRatio"]}
 
 ### 3. Xác định Giá trị Cốt lõi & Văn hóa Đội nhóm (Phần 3)
@@ -302,6 +316,16 @@ def write_doanh_chu_checklist_tra_loi(data):
 - **Thời gian cam kết làm việc mỗi ngày:** [thoi_gian_cam_ket: select(...)] -> {data["d1"]} giờ/ngày
 - **Ngân sách đầu tư ban đầu:** [ngan_sach_ban_dau: currency_vnd] -> {data["d2"]}
 - **Kỹ năng sẵn có sở hữu:** [ky_nang_san_co: text] -> {data["skills"]}
+
+- **Ma trận Năng lực & Định hướng Kỹ năng Doanh chủ (Skill Matrix):**
+
+  | # | Tuyển dụng & Kết nối | Đã có | Đào tạo & Sao chép hệ thống | Đã có | Công nghệ & Truyền thông | Đã có | Vận hành & Chăm sóc | Đã có |
+  | :---: | :--- | :---: | :--- | :---: | :--- | :---: | :--- | :---: |
+  | 1 | Thu hút, giao tiếp với người lạ & xây dựng niềm tin nhanh `[sm_recruit_trust: checkbox]` | {fmt_skill_check("sm_recruit_trust", data.get("skills"))} | Đóng gói quy trình phức tạp thành các bước đơn giản dễ sao chép `[sm_train_simplify: checkbox]` | {fmt_skill_check("sm_train_simplify", data.get("skills"))} | Thiết lập trang đích cá nhân hoá & phễu tuyển dụng tự động `[sm_funnel_tech: checkbox]` | {fmt_skill_check("sm_funnel_tech", data.get("skills"))} | Vận hành văn phòng trực tuyến, đặt hàng & quản lý mã số `[sm_vpol_operation: checkbox]` | {fmt_skill_check("sm_vpol_operation", data.get("skills"))} |
+  | 2 | Thuyết trình cơ hội hợp tác thuyết phục & xử lý từ chối hiệu quả `[sm_opp_present: checkbox]` | {fmt_skill_check("sm_opp_present", data.get("skills"))} | Thiết kế giáo trình, kèm cặp thực chiến & đào tạo sản phẩm `[sm_emc_training: checkbox]` | {fmt_skill_check("sm_emc_training", data.get("skills"))} | Viết bài mạng xã hội thu hút & xây dựng thương hiệu cá nhân `[sm_brand_content: checkbox]` | {fmt_skill_check("sm_brand_content", data.get("skills"))} | Phân tích số liệu nhánh mạnh/yếu, tỷ lệ giữ chân & cân bằng nhánh `[sm_data_analysis: checkbox]` | {fmt_skill_check("sm_data_analysis", data.get("skills"))} |
+  | 3 | Thiết lập cuộc hẹn, gọi điện tư vấn & chốt đối tác tiềm năng `[sm_appointment_sales: checkbox]` | {fmt_skill_check("sm_appointment_sales", data.get("skills"))} | Truyền cảm hứng, tạo động lực & dẫn dắt theo phong cách lãnh đạo phục vụ `[sm_servant_lead: checkbox]` | {fmt_skill_check("sm_servant_lead", data.get("skills"))} | Thành thạo công cụ thiết kế, dựng video để làm tài liệu tiếp thị `[sm_design_tool: checkbox]` | {fmt_skill_check("sm_design_tool", data.get("skills"))} | Sử dụng bộ mô phỏng dự phóng tài chính để kiểm soát trần hoa hồng `[sm_sim_usage: checkbox]` | {fmt_skill_check("sm_sim_usage", data.get("skills"))} |
+  | 4 | Tuyển chọn, chuyển giao & giữ chân nhân sự nòng cốt tuyến dưới `[sm_team_recruit: checkbox]` | {fmt_skill_check("sm_team_recruit", data.get("skills"))} | | | Định vị giá trị cá nhân & thấu cảm chân dung tuyến dưới mục tiêu `[sm_brand_persona: checkbox]` | {fmt_skill_check("sm_brand_persona", data.get("skills"))} | Lập kế hoạch kinh doanh & thiết lập mục tiêu hệ thống theo từng giai đoạn `[sm_strat_plan: checkbox]` | {fmt_skill_check("sm_strat_plan", data.get("skills"))} |
+  | 5 | | | | | | | Tối ưu hoá cơ chế trả thưởng & kiểm soát trần hoa hồng hệ thống `[sm_scheme_opt: checkbox]` | {fmt_skill_check("sm_scheme_opt", data.get("skills"))} |
 
 #### Phần 4.1: Điểm tự đánh giá 12 năng lực quản trị (1-5)
 * **Nhóm 1: Kết nối & Tuyển dụng (Hustler)**
