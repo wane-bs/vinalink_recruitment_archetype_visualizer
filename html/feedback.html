@@ -935,8 +935,8 @@
       statusBox.innerHTML = `<span><i class="bi bi-hourglass-split me-1 animate-spin"></i> Đang kết nối và truyền tải dữ liệu khảo sát...</span>`;
       statusBox.classList.remove("d-none");
 
-      const scriptUrl = localStorage.getItem("sihub_script_url") || "";
-      const accessToken = localStorage.getItem("sihub_access_token") || "sihub_token_2026";
+      const scriptUrl = localStorage.getItem("sihub_script_url") || "https://script.google.com/macros/s/AKfycbyM-GH6l8CmdU11pCLZoILZjF-befnRJz4iqDG_JHyD0FkWW6raVDBSrLKyCGb_6feBGw/exec";
+      const accessToken = localStorage.getItem("sihub_access_token") || "@_sihub_token_2026";
 
       // Build complete payload JSON including all newly added fields
       const payload = {

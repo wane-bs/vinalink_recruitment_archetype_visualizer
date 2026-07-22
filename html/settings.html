@@ -200,8 +200,8 @@ function doPost(e) {
       const scriptUrlInput = document.getElementById("scriptUrl");
       const accessTokenInput = document.getElementById("accessToken");
 
-      scriptUrlInput.value = localStorage.getItem("sihub_script_url") || "";
-      accessTokenInput.value = localStorage.getItem("sihub_access_token") || "sihub_token_2026";
+      scriptUrlInput.value = localStorage.getItem("sihub_script_url") || "https://script.google.com/macros/s/AKfycbyM-GH6l8CmdU11pCLZoILZjF-befnRJz4iqDG_JHyD0FkWW6raVDBSrLKyCGb_6feBGw/exec";
+      accessTokenInput.value = localStorage.getItem("sihub_access_token") || "@_sihub_token_2026";
 
       // Form submission
       document.getElementById("settingsForm").addEventListener("submit", function(e) {

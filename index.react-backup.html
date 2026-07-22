@@ -459,8 +459,8 @@
 
             // Admin config variables (Loaded from localStorage)
             const [apiConfig, setApiConfig] = useState(() => ({
-                scriptUrl: localStorage.getItem("sihub_script_url") || "",
-                accessToken: localStorage.getItem("sihub_access_token") || "sihub_token_2026"
+                scriptUrl: localStorage.getItem("sihub_script_url") || "https://script.google.com/macros/s/AKfycbyM-GH6l8CmdU11pCLZoILZjF-befnRJz4iqDG_JHyD0FkWW6raVDBSrLKyCGb_6feBGw/exec",
+                accessToken: localStorage.getItem("sihub_access_token") || "@_sihub_token_2026"
             }));
 
             const [submitStatus, setSubmitStatus] = useState({ type: null, msg: "" });
