@@ -26,7 +26,7 @@
 
 ### 2.1 Phương trình Tăng trưởng Mạng lưới S-curve (Logistic Growth)
 $$N(t) = N_{start} + \frac{N_{total} - N_{start}}{1 + e^{-c \cdot (t - t_0)}}$$
-*Trong đó $N_{start} = 2$, $N_{total} = 10.000$, $t_0 = 18$, $c = 0.25$.*
+*Trong đó $N_{start}$ là Quy mô mạng lưới hiện tại (nhập từ Baseline), $N_{total}$ là Quy mô mạng lưới mục tiêu sau 36 tháng, $t_0 = 18$, $c = 0.25$.*
 
 ### 2.2 Cấu trúc Ma trận Trực hệ F1–F5
 $$N_{npp}(k) = n_{f1} \times dup\_factor^{k-1}$$
@@ -50,3 +50,18 @@ $$X(t) = \begin{bmatrix} NewF1(t) \\ V_{retail}(t) \\ Hours(t) \end{bmatrix}$$
 2. **Giới hạn quản trị F1 nòng cốt:** $\sum_{\tau = \max(1, t-5)}^{t} NewF1(\tau) \le 4$, $\forall t \in [1, 36]$.
 3. **Duy trì năng động cá nhân:** $V_{personal}(t) \ge 2.000\text{ CV/tháng}$, $\forall t \in [1, 36]$.
 4. **Tăng trưởng mạng lưới S-curve MLM.**
+
+### 3.4 Giải thuật Quy hoạch Tuyến KPIs và Thời gian Làm việc Tối ưu hằng tháng
+1. **Giải thuật Phân bổ Tuyển dụng F1 ($NewF1(t)$):**
+   $$NewF1(t) = NewDistributors(t) \times \frac{n\_f1\_target - f1\_start}{N_{active\_npp\_target} - npp\_start}$$
+   Trong đó:
+   * $NewDistributors(t) = N_{active\_distributors}(t) - N_{active\_distributors}(t-1)$
+   * $n\_f1\_target$: Mục tiêu F1 nòng cốt sau 3 năm.
+   * $f1\_start$: Số lượng F1 nòng cốt hiện tại Baseline.
+   * $N_{active\_npp\_target}$: Mục tiêu tổng số NPP hoạt động sau 3 năm.
+   * $npp\_start$: Số lượng NPP hoạt động hiện tại Baseline.
+2. **Giải thuật Tối ưu Hóa Thời gian làm việc ($Hours(t)$):**
+   $$Hours(t) = 4 + 0.5 \times NewF1(t) + 0.1 \times \log_2(N_{active\_distributors}(t))$$
+   Với ràng buộc trần:
+   $$Hours(t) = \max(4.0, \min(6.0, Hours(t)))$$
+   Phương trình này giải quyết bài toán tối ưu hóa nguồn lực: Doanh chủ làm việc tối thiểu 4 tiếng/ngày, tăng thêm 30 phút cho mỗi F1 mới cần bảo trợ, và tăng dần theo quy mô quản lý mạng lưới (logarithm cơ số 2), khống chế tối đa 6 tiếng/ngày để phòng ngừa burnout.

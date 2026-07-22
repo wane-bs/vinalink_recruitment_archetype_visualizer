@@ -131,8 +131,62 @@
           <div class="row g-4">
             <!-- Inputs Panel -->
             <div class="col-12 col-lg-5">
+              <!-- Baseline Inputs Panel -->
+              <div class="panel p-4 mb-4 border border-secondary border-opacity-25 bg-white shadow-sm">
+                <h2 class="h5 mb-4 section-title text-secondary"><i class="bi bi-compass-fill me-2 text-primary"></i><span>Tham số Hiện trạng (Baseline)</span></h2>
+                
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="sizeStartInput">
+                    <span>Quy mô mạng lưới hiện tại (N_start)</span>
+                    <span class="fw-bold text-secondary" id="sizeStartVal">20 người</span>
+                  </label>
+                  <input type="range" class="form-range" id="sizeStartInput" min="2" max="1000" step="1" value="20">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="nppStartInput">
+                    <span>Số NPP hoạt động hiện tại</span>
+                    <span class="fw-bold text-secondary" id="nppStartVal">6 người</span>
+                  </label>
+                  <input type="range" class="form-range" id="nppStartInput" min="1" max="200" step="1" value="6">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="khttStartInput">
+                    <span>Số KHTT hoạt động hiện tại</span>
+                    <span class="fw-bold text-secondary" id="khttStartVal">15 người</span>
+                  </label>
+                  <input type="range" class="form-range" id="khttStartInput" min="1" max="800" step="1" value="15">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="f1StartInput">
+                    <span>Số F1 nòng cốt hiện tại</span>
+                    <span class="fw-bold text-secondary" id="f1StartVal">1 người</span>
+                  </label>
+                  <input type="range" class="form-range" id="f1StartInput" min="0" max="10" step="1" value="1">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="cvStartInput">
+                    <span>Doanh số nhóm hiện tại (CV)</span>
+                    <span class="fw-bold text-secondary" id="cvStartVal">20,000 CV</span>
+                  </label>
+                  <input type="range" class="form-range" id="cvStartInput" min="0" max="50000" step="500" value="20000">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="cvWeakStartInput">
+                    <span>Doanh số nhánh yếu hiện tại (CV)</span>
+                    <span class="fw-bold text-secondary" id="cvWeakStartVal">8,000 CV</span>
+                  </label>
+                  <input type="range" class="form-range" id="cvWeakStartInput" min="0" max="25000" step="500" value="8000">
+                </div>
+              </div>
+
+              <!-- Target Settings Panel -->
               <div class="panel p-4">
-                <h2 class="h5 mb-4 section-title"><i class="bi bi-sliders me-1"></i><span>Tham số Giả lập</span></h2>
+                <h2 class="h5 mb-4 section-title"><i class="bi bi-sliders me-1"></i><span>Tham số Giả lập (Mục tiêu)</span></h2>
                 
                 <div class="mb-3">
                   <label class="form-label d-flex justify-content-between text-xs" for="sizeInput">
@@ -340,6 +394,8 @@
                         <th>Qualify</th>
                         <th>Matching</th>
                         <th>Lãnh đạo</th>
+                        <th>KPI F1 mới</th>
+                        <th>Giờ làm tối ưu</th>
                         <th class="text-end">Tổng thu nhập tháng</th>
                       </tr>
                     </thead>
@@ -496,7 +552,15 @@
     }
 
     function runSimulation() {
-      // Read Inputs
+      // Read Baseline Inputs
+      const nStart = parseInt(document.getElementById("sizeStartInput").value);
+      const nppStart = parseInt(document.getElementById("nppStartInput").value);
+      const khttStart = parseInt(document.getElementById("khttStartInput").value);
+      const f1Start = parseInt(document.getElementById("f1StartInput").value);
+      const cvStart = parseInt(document.getElementById("cvStartInput").value);
+      const cvWeakStart = parseInt(document.getElementById("cvWeakStartInput").value);
+
+      // Read Target Inputs
       const nTotal = parseInt(document.getElementById("sizeInput").value);
       const rRetention = parseFloat(document.getElementById("retentionInput").value) / 100;
       const rSplitStrong = parseFloat(document.getElementById("splitInput").value) / 100;
@@ -506,7 +570,15 @@
       const f1Share = parseFloat(document.getElementById("f1ShareInput").value) / 100;
       const isDynamic = document.getElementById("dynamicMode").checked;
 
-      // Update Slider Labels
+      // Update Baseline Slider Labels
+      document.getElementById("sizeStartVal").textContent = nStart.toLocaleString() + " người";
+      document.getElementById("nppStartVal").textContent = nppStart.toLocaleString() + " người";
+      document.getElementById("khttStartVal").textContent = khttStart.toLocaleString() + " người";
+      document.getElementById("f1StartVal").textContent = f1Start.toLocaleString() + " người";
+      document.getElementById("cvStartVal").textContent = cvStart.toLocaleString() + " CV";
+      document.getElementById("cvWeakStartVal").textContent = cvWeakStart.toLocaleString() + " CV";
+
+      // Update Target Slider Labels
       document.getElementById("sizeVal").textContent = nTotal.toLocaleString() + " người";
       document.getElementById("retentionVal").textContent = (rRetention * 100).toFixed(1) + "%";
       document.getElementById("splitVal").textContent = (rSplitStrong * 100) + "%";
@@ -714,29 +786,35 @@
       const dynamicContainer = document.getElementById("dynamicSection");
       if (isDynamic) {
         dynamicContainer.classList.remove("d-none");
-        runDynamicSimulation(nTotal, rRetention, rSplitStrong, personalRank, nF1, dupFactor, f1Share);
+        runDynamicSimulation(
+          nTotal, rRetention, rSplitStrong, personalRank, nF1, dupFactor, f1Share,
+          nStart, nppStart, khttStart, f1Start, cvStart, cvWeakStart
+        );
       } else {
         dynamicContainer.classList.add("d-none");
       }
     }
 
-    function runDynamicSimulation(nTotal, rRetention, rSplitStrong, personalRank, nF1, dupFactor, f1Share) {
+    function runDynamicSimulation(
+      nTotal, rRetention, rSplitStrong, personalRank, nF1, dupFactor, f1Share,
+      nStart, nppStart, khttStart, f1Start, cvStart, cvWeakStart
+    ) {
       const pConsumer = 0.8;
       const pDistributor = 0.2;
       const vConsumerCv = 1000;
       const vDistributorCv = 2000;
 
-      let accumulatedWeakCv = 0.0;
-      let accumulatedStrongCv = 0.0;
-      let accumulatedQualifyCv = 0.0;
+      let accumulatedWeakCv = cvWeakStart;
+      let accumulatedStrongCv = cvStart - cvWeakStart;
+      let accumulatedQualifyCv = cvWeakStart; // qualyfy tích lũy bắt đầu từ Baseline nhánh yếu
 
       let qualifyMilestones = { 80000: false, 240000: false, 550000: false };
       let awardsAchieved = { "CD": false, "AMB": false };
       let weakCvCarryover = 0.0;
-      let nDistributorPrev = 0;
-      let cvWeakPrev = 0.0;
+      let nDistributorPrev = nppStart;
+      let cvWeakPrev = cvWeakStart;
 
-      const N_start = 2.0;
+      const N_start = nStart;
       const t0 = 18.0;
       const growthRate = 0.25;
 
@@ -744,6 +822,7 @@
       tbody.innerHTML = "";
 
       let total3Y = 0;
+      let nF1Current = f1Start;
 
       for (let t = 1; t <= 36; t++) {
         const n_t = Math.floor(N_start + (nTotal - N_start) / (1.0 + Math.exp(-growthRate * (t - t0))));
@@ -773,16 +852,35 @@
         // 7 Sources
         const retailIncome = 200 * 1000;
 
-        const newNpp = Math.max(0, nDistributor - nDistributorPrev);
-        nDistributorPrev = nDistributor;
+        const newNpp = Math.max(0, nActiveDistributor - nDistributorPrev);
+        nDistributorPrev = nActiveDistributor;
+
+        // Thuật toán Quy hoạch tuyến tính KPIs:
+        const activeNppTarget = nTotal * pDistributor * rRetention;
+        const nppGap = Math.max(1, activeNppTarget - nppStart);
+        const f1Gap = Math.max(0, nF1 - f1Start);
+        
+        let newF1ThisMonth = 0;
+        if (f1Gap > 0 && nppGap > 0) {
+          newF1ThisMonth = newNpp * (f1Gap / nppGap);
+        }
+        nF1Current = Math.min(nF1, nF1Current + newF1ThisMonth);
+
+        // Optimal working hours/day
+        let optimalHours = 4.0;
+        if (nActiveDistributor > 0) {
+          optimalHours = 4.0 + 0.5 * newF1ThisMonth + 0.1 * Math.log2(nActiveDistributor);
+        }
+        if (optimalHours > 6.0) optimalHours = 6.0;
+        if (optimalHours < 4.0) optimalHours = 4.0;
 
         let sumStructuralNpp = 0;
-        for (let i = 1; i <= 5; i++) sumStructuralNpp += nF1 * Math.pow(dupFactor, i - 1);
+        for (let i = 1; i <= 5; i++) sumStructuralNpp += nF1Current * Math.pow(dupFactor, i - 1);
 
-        const newF1 = newNpp * (nF1 / sumStructuralNpp);
-        const newF2 = newNpp * ((nF1 * dupFactor) / sumStructuralNpp);
+        const newF1 = newNpp * (nF1Current / sumStructuralNpp);
+        const newF2 = newNpp * ((nF1Current * dupFactor) / sumStructuralNpp);
         let sumF3F5 = 0;
-        for (let i = 3; i <= 5; i++) sumF3F5 += nF1 * Math.pow(dupFactor, i - 1);
+        for (let i = 3; i <= 5; i++) sumF3F5 += nF1Current * Math.pow(dupFactor, i - 1);
         const newF3F5 = newNpp * (sumF3F5 / sumStructuralNpp);
 
         const sponsorIncomeRaw = (newF1 * 0.10 * 2000 * 1000) + (newF2 * 0.10 * 2000 * 1000) + (newF3F5 * 0.05 * 2000 * 1000);
@@ -846,7 +944,7 @@
           if (cvWeakMonthly >= rule.min_weak_cv) {
             for (const [levelStr, rate] of Object.entries(rule.levels)) {
               const level = parseInt(levelStr);
-              const nppInLevel = nF1 * Math.pow(dupFactor, level - 1);
+              const nppInLevel = nF1Current * Math.pow(dupFactor, level - 1);
               const nppActiveInLevel = Math.min(nppInLevel, Math.max(1, Math.floor(nppInLevel * rRetention)));
 
               const cvWeakLevel = cvWeakMonthly / nppInLevel;
@@ -914,6 +1012,8 @@
           <td>${qualifyIncome > 0 ? '+' + Math.round(qualifyIncome).toLocaleString() : '0'} VNĐ</td>
           <td>${Math.round(matchingIncome).toLocaleString()} VNĐ</td>
           <td>${Math.round(leadershipIncome).toLocaleString()} VNĐ</td>
+          <td><span class="badge bg-info text-dark">${newF1ThisMonth.toFixed(1)} F1</span></td>
+          <td><span class="badge bg-warning text-dark">${optimalHours.toFixed(1)} giờ</span></td>
           <td class="text-end fw-bold ${awardsIncome > 0 ? 'text-success fs-6' : 'text-primary'}">
             ${Math.round(totalMonthIncome).toLocaleString()} VNĐ ${awardsIncome > 0 ? '🏆 (+Thưởng xe)' : ''}
           </td>
@@ -954,7 +1054,10 @@
         window.location.reload();
       });
 
-      const inputs = ["sizeInput", "retentionInput", "splitInput", "rankInput", "f1Input", "dupInput", "f1ShareInput", "dynamicMode"];
+      const inputs = [
+        "sizeStartInput", "nppStartInput", "khttStartInput", "f1StartInput", "cvStartInput", "cvWeakStartInput",
+        "sizeInput", "retentionInput", "splitInput", "rankInput", "f1Input", "dupInput", "f1ShareInput", "dynamicMode"
+      ];
       inputs.forEach(id => {
         document.getElementById(id).addEventListener("input", runSimulation);
         document.getElementById(id).addEventListener("change", runSimulation);

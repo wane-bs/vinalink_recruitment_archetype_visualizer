@@ -328,14 +328,14 @@ def simulate(n_total, p_consumer, p_distributor, r_retention, v_consumer_cv, v_d
         "total_income": total_income
     }
 
-def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v_consumer_cv, v_distributor_cv, r_split_strong, personal_rank="GOLD", n_f1=3, dup_factor=2, f1_share=0.5):
-    """Mô phỏng động chuỗi thời gian 36 tháng, tăng trưởng S-curve, tích lũy Qualify và thăng cấp danh hiệu"""
+def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v_consumer_cv, v_distributor_cv, r_split_strong, personal_rank="GOLD", n_f1=3, dup_factor=2, f1_share=0.5, n_start=20, npp_start=6, khtt_start=15, f1_start=1, cv_start=20000, cv_weak_start=8000):
+    """Mô phỏng động chuỗi thời gian 36 tháng, tăng trưởng S-curve từ hiện trạng Baseline, tích lũy Qualify và thuật toán quy hoạch tuyến KPIs"""
     results = []
     
-    # Khởi tạo trạng thái tích lũy
-    accumulated_weak_cv = 0.0
-    accumulated_strong_cv = 0.0
-    accumulated_qualify_cv = 0.0
+    # Khởi tạo trạng thái tích lũy dựa trên Baseline
+    accumulated_weak_cv = cv_weak_start
+    accumulated_strong_cv = cv_start - cv_weak_start
+    accumulated_qualify_cv = cv_weak_start
     
     # Trạng thái đạt mốc thưởng Qualify trong chu kỳ hiện tại
     qualify_milestones = {80000: False, 240000: False, 550000: False}
@@ -347,18 +347,17 @@ def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v
     weak_cv_carryover = 0.0
     
     # Số NPP tháng trước đó để tính số tuyển mới
-    n_distributor_prev = 0.0
+    n_distributor_prev = npp_start
     
     # Doanh số nhánh yếu tháng trước đó để tính hoa hồng lãnh đạo
-    cv_weak_prev = 0.0
+    cv_weak_prev = cv_weak_start
     
-    N_start = 2.0  # bắt đầu từ 2 thành viên
-    
-    # Cấu hình hàm S-curve (Logistic): điểm uốn tháng 18, tốc độ 0.25
+    N_start = n_start
     t0 = 18.0
     growth_rate = 0.25
     
     title_ids = [t["id"] for t in TITLES]
+    n_f1_current = f1_start
     
     for t in range(1, 37):
         # 1. Tính quy mô tích lũy theo S-curve ở tháng t
@@ -400,13 +399,32 @@ def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v
         retail_income = retail_cv * 1000
         
         # 2. Hoa hồng Bảo trợ (Sponsor Bonus) dựa trên NPP tuyển mới
-        new_npp = max(0.0, n_distributor - n_distributor_prev)
-        n_distributor_prev = n_distributor
+        new_npp = max(0.0, n_active_distributor - n_distributor_prev)
+        n_distributor_prev = n_active_distributor
         
-        sum_structural_npp = sum(n_f1 * (dup_factor**(i-1)) for i in range(1, 6))
-        new_f1 = new_npp * (n_f1 / sum_structural_npp)
-        new_f2 = new_npp * ((n_f1 * dup_factor) / sum_structural_npp)
-        new_f3_f5 = new_npp * (sum(n_f1 * (dup_factor**(i-1)) for i in [3, 4, 5]) / sum_structural_npp)
+        # Thuật toán Quy hoạch tuyến tính KPIs:
+        active_npp_target = n_total * p_distributor * r_retention
+        npp_gap = max(1.0, active_npp_target - npp_start)
+        f1_gap = max(0.0, n_f1 - f1_start)
+        
+        new_f1_this_month = 0.0
+        if f1_gap > 0 and npp_gap > 0:
+            new_f1_this_month = new_npp * (f1_gap / npp_gap)
+        n_f1_current = min(n_f1, n_f1_current + new_f1_this_month)
+        
+        # Optimal working hours/day
+        optimal_hours = 4.0
+        if n_active_distributor > 0:
+            optimal_hours = 4.0 + 0.5 * new_f1_this_month + 0.1 * math.log2(n_active_distributor)
+        if optimal_hours > 6.0:
+            optimal_hours = 6.0
+        elif optimal_hours < 4.0:
+            optimal_hours = 4.0
+            
+        sum_structural_npp = sum(n_f1_current * (dup_factor**(i-1)) for i in range(1, 6))
+        new_f1 = new_npp * (n_f1_current / sum_structural_npp)
+        new_f2 = new_npp * ((n_f1_current * dup_factor) / sum_structural_npp)
+        new_f3_f5 = new_npp * (sum(n_f1_current * (dup_factor**(i-1)) for i in [3, 4, 5]) / sum_structural_npp)
         
         package_cv = 2000
         sponsor_income_raw = (new_f1 * 0.10 * package_cv * 1000) + (new_f2 * 0.10 * package_cv * 1000) + (new_f3_f5 * 0.05 * package_cv * 1000)
@@ -480,7 +498,7 @@ def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v
             rule = MATCHING_RULES[title_id]
             if cv_weak_monthly >= rule["min_weak_cv"]:
                 for level, rate in rule["levels"].items():
-                    npp_in_level = n_f1 * (dup_factor**(level - 1))
+                    npp_in_level = n_f1_current * (dup_factor**(level - 1))
                     npp_active_in_level = min(npp_in_level, max(1, int(npp_in_level * r_retention)))
                     
                     cv_weak_level = cv_weak_monthly / npp_in_level
@@ -562,7 +580,9 @@ def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v
             "matching_income": matching_income,
             "leadership_income": leadership_income,
             "awards_income": awards_income,
-            "total_income": total_income
+            "total_income": total_income,
+            "new_f1_this_month": new_f1_this_month,
+            "optimal_hours": optimal_hours
         })
         
     return results
@@ -578,6 +598,14 @@ def main():
     parser.add_argument("--f1-share", type=float, default=0.5, help="Tỷ lệ doanh số F1 mạnh gánh để tính danh hiệu (0.0 - 1.0)")
     parser.add_argument("--dynamic", action="store_true", help="Chạy mô phỏng động chuỗi thời gian 36 tháng")
     
+    # Baseline args
+    parser.add_argument("--n-start", type=int, default=20, help="Quy mô mạng lưới Baseline hiện trạng")
+    parser.add_argument("--npp-start", type=int, default=6, help="Số NPP hoạt động Baseline")
+    parser.add_argument("--khtt-start", type=int, default=15, help="Số KHTT hoạt động Baseline")
+    parser.add_argument("--f1-start", type=int, default=1, help="Số F1 nòng cốt Baseline")
+    parser.add_argument("--cv-start", type=int, default=20000, help="Doanh số nhóm hiện trạng Baseline")
+    parser.add_argument("--cv-weak-start", type=int, default=8000, help="Doanh số nhánh yếu hiện trạng Baseline")
+    
     args = parser.parse_args()
     
     if args.dynamic:
@@ -592,22 +620,29 @@ def main():
             personal_rank=args.rank,
             n_f1=args.f1,
             dup_factor=args.dup,
-            f1_share=args.f1_share
+            f1_share=args.f1_share,
+            n_start=args.n_start,
+            npp_start=args.npp_start,
+            khtt_start=args.khtt_start,
+            f1_start=args.f1_start,
+            cv_start=args.cv_start,
+            cv_weak_start=args.cv_weak_start
         )
         
-        print("=" * 110)
+        print("=" * 130)
         print("                 BÁO CÁO MÔ PHỎNG ĐỘNG DÒNG TIỀN 36 THÁNG HỆ THỐNG VINALINK (LOGISTIC S-CURVE)")
-        print("=" * 110)
+        print("=" * 130)
         print(f"Tổng quy mô tích lũy: {args.size} TV | F1 giả lập: {args.f1} | Hệ số nhân bản: {args.dup} | F1 Gánh: {args.f1_share*100:.0f}%")
         print(f"Giữ chân: {args.retention*100:.0f}% | Phân bổ nhánh: {args.split*100:.0f}/{ (1-args.split)*100:.0f} | Cấp bậc cá nhân: {args.rank}")
-        print("-" * 110)
-        print(f"{'Tháng':<5} | {'Quy mô':<7} | {'Doanh số':<12} | {'Danh hiệu':<14} | {'GVC (Nhóm)':<12} | {'Qualify':<10} | {'Matching':<10} | {'Lãnh đạo':<10} | {'TỔNG THU NHẬP':<15}")
-        print("-" * 110)
+        print(f"Baseline: Quy mô {args.n_start} TV | NPP: {args.npp_start} | KHTT: {args.khtt_start} | F1: {args.f1_start} | DS: {args.cv_start} CV")
+        print("-" * 130)
+        print(f"{'Tháng':<5} | {'Quy mô':<7} | {'Doanh số':<12} | {'Danh hiệu':<14} | {'GVC (Nhóm)':<12} | {'Qualify':<10} | {'Matching':<10} | {'Lãnh đạo':<10} | {'F1 Mới':<8} | {'Giờ làm':<8} | {'TỔNG THU NHẬP':<15}")
+        print("-" * 130)
         for r in res_list:
             if r["month"] in [1, 6, 12, 18, 24, 30, 36] or r["awards_income"] > 0 or r["qualify_income"] > 0:
                 awards_tag = " (+Thưởng xe)" if r["awards_income"] > 0 else ""
-                print(f"Tháng {r['month']:02d} | {r['n_total']:<7,d} | {r['cv_total_monthly']:<12,.0f} | {r['group_title']:<14} | {r['binary_income']:<12,.0f} | {r['qualify_income']:<10,.0f} | {r['matching_income']:<10,.0f} | {r['leadership_income']:<10,.0f} | {r['total_income']:<15,.0f}{awards_tag}")
-        print("-" * 110)
+                print(f"Tháng {r['month']:02d} | {r['n_total']:<7,d} | {r['cv_total_monthly']:<12,.0f} | {r['group_title']:<14} | {r['binary_income']:<12,.0f} | {r['qualify_income']:<10,.0f} | {r['matching_income']:<10,.0f} | {r['leadership_income']:<10,.0f} | {r['new_f1_this_month']:<8.1f} | {r['optimal_hours']:<8.1f} | {r['total_income']:<15,.0f}{awards_tag}")
+        print("-" * 130)
         
         total_3y = sum(x["total_income"] for x in res_list)
         avg_3y = total_3y / 36
