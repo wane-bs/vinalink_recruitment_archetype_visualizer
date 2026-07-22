@@ -215,13 +215,14 @@ def simulate(n_total, p_consumer, p_distributor, r_retention, v_consumer_cv, v_d
         binary_income = binary_income_raw
         
     # Nguồn 4: Thưởng Duy trì Doanh số (Qualify Bonus) cộng dồn
-    # Mô hình tĩnh: ước tính phân bổ đều theo số tháng hoàn thành chu kỳ 550k CV
-    total_milestone_bonus = sum(QUALIFY_BONUS_LOOKUP[personal_rank].values()) * 1000
-    months_to_550k = 550000 / cv_weak_monthly if cv_weak_monthly > 0 else float('inf')
-    if months_to_550k <= 1:
-        qualify_income = total_milestone_bonus
-    else:
-        qualify_income = total_milestone_bonus / months_to_550k
+    # Mô hình tĩnh: tính trực tiếp theo mốc đạt được trong tháng, không phân bổ (Amortization)
+    qualify_income = 0.0
+    if cv_weak_monthly >= 550000:
+        qualify_income = QUALIFY_BONUS_LOOKUP[personal_rank][550000] * 1000
+    elif cv_weak_monthly >= 240000:
+        qualify_income = QUALIFY_BONUS_LOOKUP[personal_rank][240000] * 1000
+    elif cv_weak_monthly >= 80000:
+        qualify_income = QUALIFY_BONUS_LOOKUP[personal_rank][80000] * 1000
         
     # Nguồn 5: Hoa hồng Cộng hưởng (Matching Bonus) trực hệ cấu hình F1
     matching_income = 0.0

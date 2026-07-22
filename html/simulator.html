@@ -578,10 +578,16 @@
       }
       const binaryIncome = Math.min(binaryIncomeRaw, binaryLimit);
 
-      // 4. Qualify Bonus (Averaged in static model)
-      const totalMilestoneBonus = Object.values(QUALIFY_BONUS_LOOKUP[personalRank]).reduce((a, b) => a + b, 0) * 1000;
-      const monthsTo550k = cvWeakMonthly > 0 ? (550000 / cvWeakMonthly) : Infinity;
-      const qualifyIncome = monthsTo550k <= 1 ? totalMilestoneBonus : (totalMilestoneBonus / monthsTo550k);
+      // 4. Qualify Bonus (Static model: directly based on milestone in month, no amortization)
+      let qualifyIncome = 0;
+      const rankMilestones = QUALIFY_BONUS_LOOKUP[personalRank] || {};
+      if (cvWeakMonthly >= 550000) {
+        qualifyIncome = (rankMilestones[550000] || 0) * 1000;
+      } else if (cvWeakMonthly >= 240000) {
+        qualifyIncome = (rankMilestones[240000] || 0) * 1000;
+      } else if (cvWeakMonthly >= 80000) {
+        qualifyIncome = (rankMilestones[80000] || 0) * 1000;
+      }
 
       // 5. Matching Bonus
       let matchingIncome = 0;
@@ -789,6 +795,13 @@
         const totalWeakCv = cvWeakMonthly + weakCvCarryover;
         const numCycles = Math.floor(totalWeakCv / cycleSize);
         let binaryIncomeRaw = numCycles * cycleBonus;
+
+        // Thêm thưởng chu kỳ đặc biệt nhị phân hằng tháng
+        const extraCycles = isDirectorOrAbove ? 8 : 20;
+        const extraBonus = isDirectorOrAbove ? 4480000 : 6000000;
+        if (numCycles >= extraCycles) {
+          binaryIncomeRaw += extraBonus;
+        }
 
         weakCvCarryover = totalWeakCv - (numCycles * cycleSize);
 
