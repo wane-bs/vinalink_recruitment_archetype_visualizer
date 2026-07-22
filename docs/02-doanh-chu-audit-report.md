@@ -1,6 +1,14 @@
-# Checklist Khảo sát Tầm nhìn & Mục tiêu Doanh chủ Vinalink
+# BÁO CÁO KHẢO SÁT VÀ CHÂN DUNG KHÁCH HÀNG DOANH CHỦ (AUDIT REPORT & PERSONA)
 
-Bộ câu hỏi này giúp Doanh chủ tự định hình tư duy chiến lược và xác lập các thông số đầu vào để AI cụ thể hóa kế hoạch kinh doanh 3 năm.
+> **Tài liệu hợp nhất:**
+> - Checklist Khảo sát Tầm nhìn & Mục tiêu Doanh chủ Vinalink
+> - Bản đồ 3 Thị trường Khách hàng Mục tiêu Vinalink
+> 
+> *Ý nghĩa: Tài liệu này cung cấp bộ câu hỏi khảo sát chẩn đoán 7 phần dành cho Doanh chủ và bản phân tích thấu cảm 3 thị trường khách hàng mục tiêu để phục vụ việc lập Kế hoạch Kinh doanh 3 năm.*
+
+---
+
+# PHẦN I. CHECKLIST KHẢO SÁT TẦM NHÌN & MỤC TIÊU DOANH CHỦ
 
 > [!IMPORTANT]
 > **QUY ƯỚC ĐỊNH DẠNG KHÓA (KHÔNG ĐƯỢC THAY ĐỔI):**
@@ -107,78 +115,77 @@ Bộ câu hỏi này giúp Doanh chủ tự định hình tư duy chiến lượ
 
 ## 6. Khung Định vị Tuyển dụng Tuyến dưới Tinh gọn (Phần 6)
 
-Để tìm kiếm và chọn lọc được những nhà phân phối tuyến dưới (downline) chất lượng cao và đồng điệu về tư duy, doanh chủ cần xác định rõ lực hút cá nhân và tiêu chuẩn lựa chọn thông qua 3 trụ cột của Khung định vị dưới đây:
-
 ### Trụ cột A: Định vị Giá trị của Doanh chủ (Leader Value Proposition - LVP)
-*Mục tiêu: Làm rõ lý do tại sao một ứng viên tiềm năng nên chọn đồng hành cùng anh/chị và hệ thống của anh/chị chứ không phải bất kỳ một Leader (Upline) nào khác.*
-
 - **Câu hỏi A1**: Anh/Chị sẽ hỗ trợ trực tiếp điều gì cho người mới trong 30 ngày đầu tiên tham gia?
   - `[ ]` Quy trình chuyển giao giáo trình đào tạo sản phẩm & sức khỏe chủ động từ Vinalink [lvp_a1_giao_trinh: checkbox]
   - `[ ]` Cầm tay chỉ việc hướng dẫn kỹ năng thiết lập cuộc hẹn và tuyển dụng thực chiến [lvp_a1_cam_tay: checkbox]
   - `[ ]` Đồng hành chia sẻ trực tiếp (OPP 2-1) hỗ trợ chốt khách cho họ [lvp_a1_opp_21: checkbox]
   - `[ ]` Cung cấp công cụ số hóa, tài liệu tiếp thị và văn phòng trực tuyến (VPOL) [lvp_a1_vpol: checkbox]
-- **Câu hỏi A2**: Điểm khác biệt lớn nhất trong phong cách dẫn dắt đội nhóm của anh/chị so với các hệ thống đa cấp truyền thống là gì? (Ví dụ: Ứng dụng công nghệ tiếp thị liên kết tinh gọn, đào tạo chuyên sâu về y học cổ truyền kết hợp công nghệ cao, hay tập trung vào văn hóa tự do an vui...).
+- **Câu hỏi A2**: Điểm khác biệt lớn nhất trong phong cách dẫn dắt đội nhóm của anh/chị so với các hệ thống đa cấp truyền thống là gì?
   - Trả lời: [lvp_a2_phong_cach: text] -> ................................................................................
-- **Câu hỏi A3 (Lợi thế cạnh tranh nội bộ Vinalink - Intra-system)**: Giữa vô số các Upline và đội nhóm khác cũng đang phân phối Vinalink ngoài thị trường, tại sao một người mới lại nên chọn gia nhập hệ thống của riêng anh/chị? Lợi thế độc bản hệ thống của anh/chị mang lại là gì?
-  - `[ ]` **Quy trình EMC cải tiến**: Giáo trình đào tạo được đơn giản hóa tối đa, giúp người mới học nhanh, làm được ngay (dễ sao chép) [lvp_a3_emc: checkbox]
-  - `[ ]` **Công nghệ và Công cụ hỗ trợ**: Cung cấp phễu tuyển dụng, Landing Page cá nhân hóa và quy trình tương tác số hóa (VPOL) chuyên nghiệp [lvp_a3_tech: checkbox]
-  - `[ ]` **Văn hóa "An vui & Tinh gọn"**: Không ép doanh số cá nhân, không ôm hàng, tập trung vào sự phát triển tự nhiên và bền vững của từng thành viên [lvp_a3_culture: checkbox]
-  - `[ ]` **Sự cố cố vấn cá nhân**: Bản thân anh/chị là một Doanh chủ cam kết có lộ trình xây dựng sự nghiệp 3 năm và kế hoạch phát triển tài chính rõ ràng cho từng F1 nòng cốt [lvp_a3_mentor: checkbox]
+- **Câu hỏi A3 (Lợi thế cạnh tranh nội bộ Vinalink - Intra-system)**: Giữa vô số các Upline và đội nhóm khác cũng đang phân phối Vinalink ngoài thị trường, tại sao một người mới lại nên chọn gia nhập hệ thống của riêng anh/chị?
+  - `[ ]` **Quy trình EMC cải tiến**: Giáo trình đào tạo được đơn giản hóa tối đa, giúp người mới học nhanh, làm được ngay [lvp_a3_emc: checkbox]
+  - `[ ]` **Công nghệ và Công cụ hỗ trợ**: Cung cấp phễu tuyển dụng, Landing Page cá nhân hóa và VPOL [lvp_a3_tech: checkbox]
+  - `[ ]` **Văn hóa "An vui & Tinh gọn"**: Không ép doanh số cá nhân, không ôm hàng [lvp_a3_culture: checkbox]
+  - `[ ]` **Sự cố cố vấn cá nhân**: Lộ trình 3 năm rõ ràng cho từng F1 nòng cốt [lvp_a3_mentor: checkbox]
   - Khác: [lvp_a3_khac: text] -> ................................................................................
-- **Câu hỏi A4 (Lợi thế cạnh tranh ngoại bộ - Inter-system)**: Khi ứng viên đang cân nhắc giữa hệ thống Vinalink của anh/chị và các công ty đa cấp nước ngoài (như Amway, Herbalife, Nuskin) hoặc các mô hình tài chính khác, anh/chị sẽ định vị những lợi thế vượt trội nào từ mô hình của mình để thuyết phục họ?
-  - `[ ]` **Lợi thế "Thuần Việt" của sản phẩm**: Nguồn nguyên liệu y học cổ truyền dân tộc kết hợp công nghệ sinh học cao (IMC) có giá thành rất hợp lý cho người Việt (trung bình 1.000 VNĐ = 2,5 CV), dễ tái tiêu dùng hơn sản phẩm ngoại giá cao [lvp_a4_product: checkbox]
-  - `[ ]` **Chính sách trả thưởng nhị phân lai mặt trời**: Cộng dồn doanh số nhóm trọn đời, không hạ cấp bậc, năng động cực thấp và không ly khai hệ thống $\rightarrow$ giúp giảm thiểu rủi ro chôn vốn và rụng hệ thống so với sơ đồ ly khai mặt trời truyền thống của các hãng lớn [lvp_a4_scheme: checkbox]
-  - `[ ]` **Giá trị thừa kế pháp lý vững chắc**: Hoạt động kinh doanh 100% hợp pháp tại Việt Nam, đóng thuế TNCN đầy đủ, bảo vệ tài sản hệ thống trọn đời để thừa kế cho con cháu [lvp_a4_legal: checkbox]
+- **Câu hỏi A4 (Lợi thế cạnh tranh ngoại bộ - Inter-system)**: Khi ứng viên đang cân nhắc giữa Vinalink và các công ty khác (Amway, Herbalife, Nuskin...):
+  - `[ ]` **Lợi thế "Thuần Việt" của sản phẩm**: Sản phẩm IMC y học cổ truyền giá hợp lý (1.000 VNĐ = 2,5 CV) [lvp_a4_product: checkbox]
+  - `[ ]` **Chính sách nhị phân lai mặt trời**: Cộng dồn doanh số trọn đời, không hạ cấp bậc, năng động cực thấp và không ly khai [lvp_a4_scheme: checkbox]
+  - `[ ]` **Giá trị thừa kế pháp lý vững chắc**: Hoạt động 100% hợp pháp tại Việt Nam theo Nghị định 40 [lvp_a4_legal: checkbox]
   - Khác: [lvp_a4_khac: text] -> ................................................................................
-- **Câu hỏi A5 (Định vị Thương hiệu cá nhân của Doanh chủ)**: Khi một tuyến dưới nhắc đến anh/chị với tư cách là một Upline/Người dẫn đường trực tiếp, anh/chị muốn họ nhớ đến anh/chị với hình ảnh hay giá trị cốt lõi nào nhất? (Ví dụ: Một nhà cố vấn chiến lược tài chính thực tế, một thủ lĩnh tận tâm cầm tay chỉ việc, hay một người đồng hành trung thực, kỷ luật và cam kết trọn đời?).
+- **Câu hỏi A5 (Định vị Thương hiệu cá nhân của Doanh chủ)**:
   - Trả lời: [lvp_a5_brand: text] -> ................................................................................
 
 ### Trụ cột B: Xác định Chân dung Phân khúc Tuyến dưới Ưu tiên (Ideal Downline Profiling - IDP)
-*Mục tiêu: Định vị nhóm đối tượng downline mục tiêu mà anh/chị muốn tập trung tuyển dụng trong giai đoạn này.*
-
-- **Câu hỏi B1**: Trong 3 nhóm đối tượng dưới đây, anh/chị muốn ưu tiên phân bổ nguồn lực tuyển dụng vào nhóm nào nhất để xây dựng hệ thống F1?
-  - `[ ]` **Nhóm 1: Người làm thêm kiếm thu nhập thụ động** (Mẹ bỉm sữa, dân văn phòng có thời gian rảnh, mong muốn kiếm thêm 5 - 10 triệu/tháng thông qua chia sẻ sản phẩm. Rất sợ ôm hàng, sợ bị lừa) [idp_b1_nhom1: checkbox]
-  - `[ ]` **Nhóm 2: Người tiêu dùng chuyển đổi** (Người đang có nhu cầu chăm sóc sức khỏe chủ động bằng sản phẩm Vinalink, yêu thích thảo dược Việt Nam công nghệ cao và muốn chia sẻ để được dùng giá sỉ hoặc nhận hoa hồng tự nhiên) [idp_b1_nhom2: checkbox]
-  - `[ ]` **Nhóm 3: Nhà xây dựng hệ thống chuyên nghiệp/Doanh chủ hệ thống** (Những người có tham vọng lớn, sẵn sàng cam kết thời gian, có kinh nghiệm kinh doanh, muốn xây dựng dòng tiền thụ động tỷ đồng và thăng cấp lên Diamond/Ambassador) [idp_b1_nhom3: checkbox]
-- **Câu hỏi B2**: Phân khúc nghề nghiệp và độ tuổi nào của ứng viên mà anh/chị cảm thấy dễ kết nối và thấu hiểu nỗi đau của họ nhất? (Ví dụ: Nhân viên văn phòng 28-40 tuổi, người làm tự do, hoặc những người làm ngành y tế/dinh dưỡng...).
+- **Câu hỏi B1**: Trong 3 nhóm đối tượng dưới đây, anh/chị muốn ưu tiên phân bổ nguồn lực tuyển dụng vào nhóm nào nhất?
+  - `[ ]` **Nhóm 1: Người làm thêm kiếm thu nhập thụ động** (Mẹ bỉm sữa, dân văn phòng có thời gian rảnh 2-3h/ngày, mong muốn kiếm 5 - 10 triệu/tháng) [idp_b1_nhom1: checkbox]
+  - `[ ]` **Nhóm 2: Người tiêu dùng chuyển đổi** (Người yêu thích thảo dược Việt Nam công nghệ cao, muốn dùng giá sỉ hoặc miễn phí) [idp_b1_nhom2: checkbox]
+  - `[ ]` **Nhóm 3: Nhà xây dựng hệ thống chuyên nghiệp/Doanh chủ hệ thống** (Tham vọng lớn, muốn xây dựng dòng tiền thụ động tỷ đồng lên Diamond/Ambassador) [idp_b1_nhom3: checkbox]
+- **Câu hỏi B2**: Phân khúc nghề nghiệp và độ tuổi nào dễ kết nối nhất?
   - Trả lời: [idp_b2_demographic: text] -> ................................................................................
 
 ### Trụ cột C: Bộ lọc Tuyển dụng Nòng cốt (Qualification Filters)
-*Mục tiêu: Thiết lập các tiêu chí cụ thể để doanh chủ "lọc" và giữ lại những nhân sự F1 nòng cốt (Key Leaders), tránh lãng phí thời gian vào những người không cam kết.*
-
-- **Câu hỏi C1**: Đâu là 3 tiêu chí bắt buộc phải có ở một ứng viên để anh/chị quyết định đầu tư thời gian đồng hành và hỗ trợ 2-1 cùng họ? (Chọn tối đa 3 tiêu chí):
-  - `[ ]` **Khát khao & Động lực lớn**: Có mong muốn thay đổi tài chính hoặc nâng cao chất lượng cuộc sống một cách rõ ràng [qf_c1_desire: checkbox]
-  - `[ ]` **Tinh thần học hỏi (Coachability)**: Sẵn sàng đổ hết nước cũ trong ly để học quy trình mới của hệ thống EMC [qf_c1_coachable: checkbox]
-  - `[ ]` **Uy tín cá nhân (Trustworthiness)**: Có tệp mối quan hệ chất lượng tốt và có sự trung thực trong lối sống [qf_c1_trust: checkbox]
-  - `[ ]` **Cam kết thời gian**: Cam kết dành tối thiểu 2 - 3 tiếng mỗi ngày để hành động theo kế hoạch [qf_c1_time: checkbox]
-  - `[ ]` **Năng lực đầu vào**: Có kỹ năng giao tiếp tốt, tự tin thuyết trình hoặc có sẵn kinh nghiệm bán hàng [qf_c1_skill: checkbox]
-- **Câu hỏi C2**: Anh/Chị sẽ sử dụng "bài test" hoặc hành động cụ thể nào để kiểm tra mức độ cam kết của một người mới trước khi chuyển giao sâu công nghệ hệ thống? (Ví dụ: Yêu cầu họ tự dùng sản phẩm để trải nghiệm thật, yêu cầu họ hoàn thành khóa đào tạo cơ bản bắt buộc trong vòng 3 ngày, hay yêu cầu họ lập danh sách 50 người quen...).
+- **Câu hỏi C1**: Đâu là 3 tiêu chí bắt buộc phải có ở một ứng viên để đầu tư thời gian hỗ trợ 2-1?
+  - `[ ]` Khát khao & Động lực lớn [qf_c1_desire: checkbox]
+  - `[ ]` Tinh thần học hỏi (Coachability) [qf_c1_coachable: checkbox]
+  - `[ ]` Uy tín cá nhân (Trustworthiness) [qf_c1_trust: checkbox]
+  - `[ ]` Cam kết thời gian (2-3h/ngày) [qf_c1_time: checkbox]
+  - `[ ]` Năng lực đầu vào (giao tiếp, thuyết trình) [qf_c1_skill: checkbox]
+- **Câu hỏi C2**: Bài test hoặc hành động cụ thể để kiểm tra cam kết của người mới:
   - Trả lời: [qf_c2_test: text] -> ................................................................................
 
 ## 7. Các Tham số Định lượng Chuẩn hóa cho Mô hình Tối ưu 3 năm (Phần 7)
-
-Để áp dụng quy hoạch tuyến tính nguyên hỗn hợp (MILP) và tối ưu hóa toàn cục, các tham số định lượng dưới đây được chuẩn hóa làm cơ sở thiết lập mô hình toán học:
-
-### A. Hàm mục tiêu tối ưu (Objective Function)
-- **Mục tiêu chính:** [opt_objective: text] -> Tối đa hóa tổng giá trị hiện tại ròng của thu nhập (NPV) tích lũy trong 3 năm (36 tháng) với tỷ suất chiết khấu hàng tháng r = 0.83% (tương đương 10%/năm).
-- **Ràng buộc biên tài chính (VNĐ):** [opt_income_target_36: currency_vnd] -> ........................
-
-### B. Định mức nguồn lực và chi phí tuyển dụng trực tiếp (F0)
-- **KHTT - Thời gian tuyển dụng (giờ/người):** [opt_time_recruit_consumer: integer] -> ........................
-- **KHTT - Chi phí tiếp thị bình quan (VNĐ/người):** [opt_cost_recruit_consumer: currency_vnd] -> ........................
-- **NPP - Thời gian tuyển dụng (giờ/người):** [opt_time_recruit_distributor: integer] -> ........................
-- **NPP - Chi phí tiếp thị bình quan (VNĐ/người):** [opt_cost_recruit_distributor: currency_vnd] -> ........................
-
-### C. Định mức đào tạo, chuyển giao và sao chép (Coachability & Support)
+- **Mục tiêu chính:** Tối đa hóa tổng giá trị hiện tại ròng của thu nhập (NPV) tích lũy trong 3 năm (36 tháng).
+- **KHTT - Thời gian tuyển dụng:** [opt_time_recruit_consumer: integer] -> ........................
+- **KHTT - Chi phí tiếp thị bình quan:** [opt_cost_recruit_consumer: currency_vnd] -> ........................
+- **NPP - Thời gian tuyển dụng:** [opt_time_recruit_distributor: integer] -> ........................
+- **NPP - Chi phí tiếp thị bình quan:** [opt_cost_recruit_distributor: currency_vnd] -> ........................
 - **Thời gian kèm cặp NPP mới tháng đầu (giờ):** [opt_time_train_first_month: integer] -> ........................
 - **Thời gian hỗ trợ duy trì NPP cũ các tháng sau (giờ/tháng):** [opt_time_support_monthly: integer] -> ........................
-- **Hệ số nhân bản NPP mới tự thân hàng tháng (NPP mới/NPP/tháng):** [opt_replication_distributor_rate: float] -> ........................
-- **Hệ số nhân bản KHTT mới tự thân hàng tháng (KHTT mới/NPP/tháng):** [opt_replication_consumer_rate: float] -> ........................
+- **Tỷ lệ hao hụt KHTT & NPP hàng tháng (%/tháng):** [opt_churn_rate: float] -> ........................
 
-### D. Tỷ lệ hao hụt mạng lưới (Attrition & Churn Rates)
-- **KHTT - Tỷ lệ hao hụt hàng tháng (%/tháng):** [opt_churn_rate_consumer: float] -> ........................
-- **NPP mới - Tỷ lệ hao hụt hàng tháng (%/tháng):** [opt_churn_rate_new_distributor: float] -> ........................
-- **NPP cũ - Tỷ lệ hao hụt hàng tháng (%/tháng):** [opt_churn_rate_old_distributor: float] -> ........................
+---
 
-### E. Điểm tràn từ Upline (Spillover Bonus)
-- **Điểm tràn hỗ trợ nhánh Mạnh từ tháng thứ 6 (CV/tháng):** [opt_spillover_from_month_6: integer] -> ........................
+# PHẦN II. BẢN ĐỒ 3 THỊ TRƯỜNG KHÁCH HÀNG MỤC TIÊU VINALINK
+
+## 1. Thị trường 1: Nhóm Người làm thêm kiếm thu nhập thụ động
+* **Định vị:** Nhóm tìm kiếm nguồn thu nhập phụ linh hoạt (5 - 10 triệu/tháng) bằng thời gian rảnh rỗi 2-3h/ngày.
+* **Nỗi đau lớn nhất:** Sợ bị lừa đảo đa cấp biến tướng, sợ bị ép ôm hàng chôn vốn, sợ không bán được hàng.
+* **Thông điệp tiếp cận:** *"Kinh doanh không ôm hàng - Quy trình EMC tối giản có sẵn, cầm tay chỉ việc từ xa."*
+* **Lộ trình tiếp cận:** Tiếp cận hội nhóm online $\rightarrow$ Đăng bài chia sẻ giá trị $\rightarrow$ Gửi lời mời trải nghiệm thử không bỏ vốn.
+* **Quy trình bán hàng:** Đăng ký KHTT giá sỉ $\rightarrow$ Kích hoạt gói khởi động nhỏ (800k - 1.6M) $\rightarrow$ Chuyển giao bài đăng EMC mẫu $\rightarrow$ Vận hành giao hàng tự động qua VPOL.
+
+## 2. Thị trường 2: Nhóm Khách hàng tiêu dùng chuyển đổi
+* **Định vị:** Người dùng có trải nghiệm tốt với sản phẩm thảo dược sinh học Vinalink, muốn tối ưu chi phí sử dụng hàng tháng.
+* **Nỗi đau lớn nhất:** Chi phí dùng sản phẩm đều đặn hàng tháng cao, ngại mang tiếng lôi kéo bạn bè kiếm lời.
+* **Thông điệp tiếp cận:** *"Giải pháp bảo vệ sức khỏe chủ động cho gia đình - Chia sẻ câu chuyện thật, nhận hoa hồng tự nhiên hướng tới dùng sản phẩm miễn phí."*
+* **Lộ trình tiếp cận:** Chăm sóc định kỳ $\rightarrow$ Kích hoạt chia sẻ câu chuyện thật $\rightarrow$ Kết nối cộng đồng sống khỏe.
+* **Quy trình bán hàng:** Chuyển đổi KHTT mua giá sỉ $\rightarrow$ Hướng dẫn Storytelling tự nhiên $\rightarrow$ Hỗ trợ tư vấn 2-1 trực tiếp $\rightarrow$ Khấu trừ hoa hồng đạt trạng thái dùng sản phẩm miễn phí (Free Product).
+
+## 3. Thị trường 3: Nhóm Doanh chủ hệ thống / Leader chuyên nghiệp
+* **Định vị:** Người có tư tư duy làm chủ, kinh nghiệm MLM/Bảo hiểm/Sale, muốn thiết lập sự nghiệp dòng tiền thụ động tỷ đồng thừa kế.
+* **Nỗi đau lớn nhất:** Sợ sơ đồ ly khai tách nhánh làm mất công đào tạo; áp lực doanh số cá nhân ép ôm hàng phá giá; rủi ro pháp lý.
+* **Thông điệp tiếp cận:** *"Sự nghiệp dòng tiền thụ động bền vững trọn đời - Sơ đồ trả thưởng không ly khai, cộng dồn doanh số trọn đời - Hệ thống số hóa giải phóng sức lao động."*
+* **Lộ trình tiếp cận:** Tiếp cận vai trò Cố vấn Quản trị Tinh gọn $\rightarrow$ Phỏng vấn thấu cảm sâu $\rightarrow$ Phản biện định lượng bằng bộ mô phỏng đưa mục tiêu năm 3 về mốc Diamond (150M VNĐ/tháng).
+* **Quy trình bán hàng:** Đăng ký NPP chính thức & hoàn thành khóa học pháp lý 3 ngày $\rightarrow$ Phân tích Matching Bonus F1-F5 bảo toàn dòng tiền $\rightarrow$ Chuyển giao VPOL & Landing Page $\rightarrow$ Đồng kiến tạo Master Plan 3 năm.

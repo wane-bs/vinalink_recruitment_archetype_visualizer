@@ -3,101 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vinalink Doanh Chủ Portal Simulator">
-  <title>Bộ Mô Phỏng Tài Chính | Vinalink Portal</title>
+  <title>Vinalink Doanh Chủ Portal - Mô phỏng Tài chính 36 tháng</title>
 
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- Google Fonts & Bootstrap Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Core Theme Style -->
+  <link rel="stylesheet" href="../assets/css/main.css">
 </head>
+<body class="bg-light">
 
-<body>
-  <div class="admin-shell">
-    <div class="sidebar-backdrop" data-sidebar-close></div>
-
-    <!-- Sidebar Navigation -->
-    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
       <div class="sidebar-header">
-        <a class="brand-mark" href="index.html" aria-label="Vinalink Portal">
-          <span class="brand-icon" style="background: linear-gradient(135deg, #10b981, #0f766e);">
-            <i class="bi bi-grid-1x2-fill" aria-hidden="true"></i>
-          </span>
-          <span class="brand-copy">
-            <span class="brand-title">Vinalink Portal</span>
-            <span class="brand-subtitle">Doanh Chủ Workspace</span>
-          </span>
+        <a href="../index.html" class="sidebar-brand text-decoration-none">
+          <span class="brand-icon"><i class="bi bi-diagram-3-fill"></i></span>
+          <div class="brand-text">
+            <span class="brand-name">VINALINK</span>
+            <span class="brand-sub">DOANH CHỦ PORTAL</span>
+          </div>
         </a>
       </div>
 
       <nav class="sidebar-nav">
-        <a class="nav-link" href="index.html">
-          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
-          <span class="nav-text">Dashboard & Lộ trình</span>
-        </a>
-        <a class="nav-link" href="documents.html">
-          <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
-          <span class="nav-text">Tài liệu Nghiên cứu</span>
-        </a>
-        <a class="nav-link" href="visualizer.html">
-          <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
-          <span class="nav-text">Bản đồ Tuyển dụng</span>
-        </a>
-        <a class="nav-link active" href="simulator.html" aria-current="page">
-          <span class="nav-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
-          <span class="nav-text">Bộ Mô Phỏng</span>
-        </a>
-        <a class="nav-link" href="feedback.html">
-          <span class="nav-icon"><i class="bi bi-clipboard-check" aria-hidden="true"></i></span>
-          <span class="nav-text">Khảo sát Doanh chủ</span>
-        </a>
-        <a class="nav-link" id="settingsSidebarLink" href="settings.html">
-          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
-          <span class="nav-text">Cài đặt Hệ thống</span>
-        </a>
+        <div class="nav-section">
+          <span class="nav-section-title">Tổng quan</span>
+          <a href="../index.html" class="nav-link">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="visualizer.html" class="nav-link">
+            <i class="bi bi-diagram-2"></i>
+            <span>Visualizer Hệ thống</span>
+          </a>
+          <a href="simulator.html" class="nav-link active">
+            <i class="bi bi-cpu-fill"></i>
+            <span>Bộ mô phỏng 36 tháng</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-title">Tài liệu & Phản hồi</span>
+          <a href="documents.html" class="nav-link">
+            <i class="bi bi-file-earmark-text-fill"></i>
+            <span>Hồ sơ & Quy chuẩn</span>
+          </a>
+          <a href="feedback.html" class="nav-link">
+            <i class="bi bi-chat-left-quote-fill"></i>
+            <span>Ý kiến Cố vấn</span>
+          </a>
+        </div>
+
+        <div class="nav-section" id="adminOnlySection">
+          <span class="nav-section-title">Quản trị Cố vấn</span>
+          <a href="settings.html" class="nav-link" id="settingsSidebarLink">
+            <i class="bi bi-gear-fill"></i>
+            <span>Cấu hình Tham số</span>
+          </a>
+        </div>
       </nav>
-
-      <div class="sidebar-user">
-        <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
-        <strong>Doanh Chủ</strong>
-        <small>Active Workspace</small>
-      </div>
-
-      <div class="sidebar-footer">
-        <span class="status-dot"></span>
-        <span class="sidebar-footer-text">Hệ thống hoạt động tốt</span>
-      </div>
     </aside>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Wrapper -->
     <div class="admin-main">
-      <nav class="navbar admin-navbar navbar-expand bg-white border-bottom">
-        <div class="container-fluid px-3 px-lg-4">
-          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar" aria-expanded="true" aria-label="Toggle sidebar">
-            <span></span>
-            <span></span>
-            <span></span>
+      <nav class="admin-navbar">
+        <div class="navbar-left">
+          <button class="btn btn-icon d-lg-none me-2" id="sidebarToggle">
+            <i class="bi bi-list"></i>
           </button>
+          <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2 text-xs fw-semibold">
+            <i class="bi bi-check-circle-fill me-1"></i> SSoT VNL-2026 Ready
+          </span>
+        </div>
 
-          <div class="navbar-actions ms-auto">
-            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
-              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+        <div class="navbar-right d-flex align-items-center gap-3">
+          <span class="badge bg-warning text-dark me-2 d-none" id="adminBadge">
+            <i class="bi bi-shield-lock-fill me-1"></i> Admin SIHUB Mode
+          </span>
+          <div class="dropdown">
+            <button class="profile-dropdown-btn border-0 bg-transparent d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+              <img src="../assets/images/avatar/avatar.jpg" alt="Avatar" class="avatar-img rounded-circle" style="width: 36px; height: 36px;">
+              <div class="text-start d-none d-sm-block">
+                <div class="fw-bold text-xs" id="userDisplayName">Doanh chủ Vinalink</div>
+                <div class="text-muted text-[10px]" id="userRoleName">Khởi nghiệp SIHUB 2026</div>
+              </div>
+              <i class="bi bi-chevron-down text-muted text-xs ms-1"></i>
             </button>
-            
-            <div id="adminBadge" class="d-none me-2">
-              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded text-xs font-semibold">
-                <i class="bi bi-shield-check me-1"></i> Quyền Cố Vấn
-              </span>
-            </div>
-
-            <div class="dropdown">
-              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="User Avatar">
-                <span class="profile-name d-none d-sm-inline">Loading...</span>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="login.html" id="dropdownAuthLink">Đăng nhập Cố vấn</a></li>
-                <li><button class="dropdown-item text-danger d-none" id="logoutBtn"><i class="bi bi-box-arrow-right me-1"></i> Đăng xuất Cố vấn</button></li>
-              </ul>
+            <div class="dropdown-menu dropdown-menu-end shadow-sm border-0 text-xs">
+              <a class="dropdown-item py-2" href="feedback.html"><i class="bi bi-person me-2"></i>Hồ sơ khảo sát</a>
+              <a class="dropdown-item py-2" href="settings.html" id="dropdownAuthLink"><i class="bi bi-key me-2"></i>Đăng nhập Cố vấn</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item py-2 text-danger d-none" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất Cố vấn</button>
             </div>
           </div>
         </div>
@@ -110,9 +110,9 @@
             <div class="page-heading-copy">
               <span class="page-icon bg-success text-white"><i class="bi bi-cpu-fill" aria-hidden="true"></i></span>
               <div>
-                <p class="eyebrow mb-1">Mô phỏng tài chính Vinalink</p>
-                <h1 class="h3 mb-1">Dự phóng và Tối ưu thu nhập thụ động</h1>
-                <p class="text-muted mb-0">Hệ thống tương tác giả lập các kịch bản dòng tiền, thăng hạng danh hiệu và tối ưu cân nhánh nhị phân.</p>
+                <p class="eyebrow mb-1">Mô phỏng tài chính Vinalink 7 Nguồn thu</p>
+                <h1 class="h3 mb-1">Dự phóng Dòng tiền & Tự động thăng cấp 36 tháng</h1>
+                <p class="text-muted mb-0">Hệ thống mô phỏng chuỗi thời gian S-curve, tích lũy Qualify Bonus cộng dồn liên tháng và cấu trúc F1 nòng cốt.</p>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@
                 
                 <div class="mb-3">
                   <label class="form-label d-flex justify-content-between text-xs" for="sizeInput">
-                    <span>Quy mô mạng lưới (N)</span>
+                    <span>Quy mô mạng lưới tối đa (N)</span>
                     <span class="fw-bold text-success" id="sizeVal">10,000 người</span>
                   </label>
                   <input type="range" class="form-range" id="sizeInput" min="100" max="50000" step="100" value="10000">
@@ -147,35 +147,46 @@
                   <input type="range" class="form-range" id="splitInput" min="50" max="95" step="5" value="70">
                 </div>
 
-                <div class="mb-4">
-                  <label class="form-label text-xs" for="rankInput">Cấp bậc cá nhân của Doanh chủ</label>
+                <div class="mb-3">
+                  <label class="form-label text-xs" for="rankInput">Cấp bậc cá nhân của Doanh chủ (1 lần trọn đời)</label>
                   <select class="form-select text-xs" id="rankInput">
-                    <option value="BRONZE">Bronze (Đồng) - Năng động thấp</option>
-                    <option value="SILVER">Silver (Bạc)</option>
-                    <option value="GOLD" selected>Gold / VIP (Vàng) - Tối ưu Maxout</option>
+                    <option value="BRONZE">Bronze (Đồng - 2.000 CV)</option>
+                    <option value="SILVER">Silver (Bạc - 4.000 CV)</option>
+                    <option value="GOLD" selected>Gold / VIP (Vàng - 10.000 CV) - Tối ưu 7 nguồn thu</option>
                   </select>
                 </div>
 
-                <hr class="my-4">
+                <hr class="my-3">
 
-                <h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-3">Thông số cơ bản phụ trợ</h3>
-                <div class="row g-2 text-xs">
-                  <div class="col-6">
-                    <label class="form-label mb-1">Tỷ lệ Tiêu dùng</label>
-                    <input type="text" class="form-control form-control-sm text-xs bg-light" value="80%" readonly>
-                  </div>
-                  <div class="col-6">
-                    <label class="form-label mb-1">Tỷ lệ Kinh doanh</label>
-                    <input type="text" class="form-control form-control-sm text-xs bg-light" value="20%" readonly>
-                  </div>
-                  <div class="col-6">
-                    <label class="form-label mb-1">CV tiêu dùng / tháng</label>
-                    <input type="number" class="form-control form-control-sm text-xs bg-light" value="1000" readonly>
-                  </div>
-                  <div class="col-6">
-                    <label class="form-label mb-1">CV kinh doanh / tháng</label>
-                    <input type="number" class="form-control form-control-sm text-xs bg-light" value="2000" readonly>
-                  </div>
+                <h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-3">Cấu trúc Nhân bản & F1 Giả lập</h3>
+                
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="f1Input">
+                    <span>Số lượng F1 nòng cốt (n_f1)</span>
+                    <span class="fw-bold text-primary" id="f1Val">3 người</span>
+                  </label>
+                  <input type="range" class="form-range" id="f1Input" min="1" max="10" step="1" value="3">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="dupInput">
+                    <span>Hệ số nhân bản chiều sâu (dup_factor)</span>
+                    <span class="fw-bold text-primary" id="dupVal">x2</span>
+                  </label>
+                  <input type="range" class="form-range" id="dupInput" min="2" max="5" step="1" value="2">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label d-flex justify-content-between text-xs" for="f1ShareInput">
+                    <span>F1 mạnh nhất gánh nhánh</span>
+                    <span class="fw-bold text-primary" id="f1ShareVal">50%</span>
+                  </label>
+                  <input type="range" class="form-range" id="f1ShareInput" min="10" max="90" step="5" value="50">
+                </div>
+
+                <div class="mb-3 form-check form-switch text-xs bg-light p-2 rounded border">
+                  <input class="form-check-input ms-0 me-2" type="checkbox" id="dynamicMode" checked>
+                  <label class="form-check-label fw-bold text-dark" for="dynamicMode">Bật mô phỏng động 36 tháng (S-curve)</label>
                 </div>
 
               </div>
@@ -184,12 +195,12 @@
             <!-- Outputs Panel -->
             <div class="col-12 col-lg-7">
               <div class="panel p-4">
-                <h2 class="h5 mb-4 section-title"><i class="bi bi-graph-up me-1"></i><span>Kết quả Dự phóng Dòng tiền</span></h2>
+                <h2 class="h5 mb-4 section-title"><i class="bi bi-graph-up me-1"></i><span>Kết quả Dự phóng 7 Nguồn thu</span></h2>
                 
                 <div class="row g-3 mb-4">
                   <div class="col-6">
                     <div class="bg-light p-3 rounded border text-center">
-                      <div class="text-muted small">Danh hiệu Đạt được</div>
+                      <div class="text-muted small">Danh hiệu Cao nhất đạt được</div>
                       <div class="fs-5 fw-bold text-success" id="resTitle">Loading...</div>
                       <div class="text-[10px] text-muted mt-1">
                         F1 Yếu: <span id="resF1Weak" class="fw-bold">...</span> | Mạnh: <span id="resF1Strong" class="fw-bold">...</span>
@@ -198,9 +209,9 @@
                   </div>
                   <div class="col-6">
                     <div class="bg-light p-3 rounded border text-center">
-                      <div class="text-muted small">Thu nhập hàng tháng</div>
+                      <div class="text-muted small">Thu nhập hàng tháng (Tĩnh ổn định)</div>
                       <div class="fs-4 fw-bold text-primary" id="resTotalIncome">0 VNĐ</div>
-                      <div class="text-[10px] text-muted mt-1">Đã tính Matching & Thưởng Duy trì</div>
+                      <div class="text-[10px] text-muted mt-1">Đã tính đầy đủ 7 nguồn thu nhập</div>
                     </div>
                   </div>
                 </div>
@@ -236,7 +247,7 @@
                       </tr>
                       <tr>
                         <td>Số chu kỳ cân nhánh yếu</td>
-                        <td class="text-end fw-bold" id="resCycles">0</td>
+                        <td class="text-end fw-bold" id="resCycles">0 chu kỳ</td>
                       </tr>
                     </tbody>
                   </table>
@@ -246,38 +257,99 @@
                   <table class="table table-sm align-middle text-xs">
                     <thead>
                       <tr class="table-light">
-                        <th>Cơ cấu hoa hồng & Thưởng</th>
+                        <th>Chi tiết 7 Nguồn thu nhập Vinalink</th>
                         <th class="text-end">Số tiền (VNĐ/tháng)</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <td>1. Thu nhập Bán lẻ (1 CV = 1.000 VNĐ)</td>
+                        <td class="text-end fw-bold text-secondary" id="resRetailIncome">0 VNĐ</td>
+                      </tr>
+                      <tr>
+                        <td>2. Hoa hồng Bảo trợ trực tiếp (Sponsor Bonus)</td>
+                        <td class="text-end fw-bold text-secondary" id="resSponsorIncome">0 VNĐ</td>
+                      </tr>
+                      <tr>
                         <td>
-                          Hoa hồng Chu kỳ nhóm
+                          3. Hoa hồng Chu kỳ nhóm (GVC)
                           <span id="maxoutWarning" class="badge bg-danger d-none ms-1">Bị trần Maxout!</span>
                         </td>
-                        <td class="text-end fw-bold" id="resBinaryIncome">0 VNĐ</td>
+                        <td class="text-end fw-bold text-primary" id="resBinaryIncome">0 VNĐ</td>
                       </tr>
                       <tr>
-                        <td>Thưởng duy trì doanh số (Qualify Bonus)</td>
-                        <td class="text-end fw-bold" id="resQualifyIncome">0 VNĐ</td>
+                        <td>4. Thưởng Duy trì Doanh số (Qualify Bonus cộng dồn TB)</td>
+                        <td class="text-end fw-bold text-warning" id="resQualifyIncome">0 VNĐ</td>
                       </tr>
                       <tr>
-                        <td>Hoa hồng Cộng hưởng (Matching Bonus) F1-F5</td>
-                        <td class="text-end fw-bold" id="resMatchingIncome">0 VNĐ</td>
+                        <td>5. Hoa hồng Cộng hưởng (Matching Bonus F1-F5)</td>
+                        <td class="text-end fw-bold text-info" id="resMatchingIncome">0 VNĐ</td>
                       </tr>
                       <tr>
-                        <td>Ước lượng hoa hồng khác (Bảo trợ trực tiếp, Quỹ...)</td>
-                        <td class="text-end fw-bold text-muted" id="resOtherIncome">0 VNĐ</td>
+                        <td>6. Hoa hồng Lãnh đạo (Quỹ Lãnh đạo toàn quốc)</td>
+                        <td class="text-end fw-bold text-success" id="resLeadershipIncome">0 VNĐ</td>
+                      </tr>
+                      <tr>
+                        <td>7. Thưởng Vinh danh & Hiện vật cấp cao (Crown/Ambassador)</td>
+                        <td class="text-end fw-bold text-muted" id="resAwardsIncome">0 VNĐ</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
 
-                <div class="panel p-3 bg-light" id="matchingBreakdownContainer">
-                  <h4 class="text-xs font-bold text-muted uppercase tracking-wider mb-2">Chi tiết Matching Bonus F1 - F5</h4>
+                <div class="panel p-3 bg-light mb-4" id="matchingBreakdownContainer">
+                  <h4 class="text-xs font-bold text-muted uppercase tracking-wider mb-2">Chi tiết Matching Bonus theo F1 Giả lập</h4>
                   <div id="matchingBreakdown" class="text-[11px] text-muted space-y-1">
                     <!-- Loaded dynamically via JS -->
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic 36 Months Report Panel -->
+          <div class="row g-4 mt-1" id="dynamicSection">
+            <div class="col-12">
+              <div class="panel p-4 border border-success border-opacity-25">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h2 class="h5 mb-0 text-success"><i class="bi bi-calendar3 me-2"></i><span>Báo cáo Dòng tiền 36 tháng Chi tiết (Logistic S-Curve)</span></h2>
+                  <span class="badge bg-success-subtle text-success border border-success px-3 py-1">Tích lũy Qualify & Thăng cấp Tự động</span>
+                </div>
+
+                <div class="table-responsive" style="max-height: 380px; overflow-y: auto;">
+                  <table class="table table-sm table-hover align-middle text-xs mb-0">
+                    <thead>
+                      <tr class="table-light sticky-top">
+                        <th>Tháng</th>
+                        <th>Quy mô tích lũy</th>
+                        <th>Doanh số tháng</th>
+                        <th>Danh hiệu</th>
+                        <th>GVC (Nhóm)</th>
+                        <th>Qualify</th>
+                        <th>Matching</th>
+                        <th>Lãnh đạo</th>
+                        <th class="text-end">Tổng thu nhập tháng</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dynamicTableBody">
+                      <!-- Loaded via JS -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="row g-3 mt-3 pt-3 border-top">
+                  <div class="col-12 col-md-6">
+                    <div class="bg-light p-3 rounded text-center border">
+                      <div class="text-muted small">Tổng thu nhập tích lũy 3 năm (36 tháng)</div>
+                      <div class="fs-5 fw-bold text-primary" id="dynTotal3Y">0 VNĐ</div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="bg-light p-3 rounded text-center border">
+                      <div class="text-muted small">Thu nhập thụ động bình quân hàng tháng</div>
+                      <div class="fs-5 fw-bold text-success" id="dynAvgMonthly">0 VNĐ/tháng</div>
+                    </div>
                   </div>
                 </div>
 
@@ -298,7 +370,6 @@
   </div>
 
   <script>
-    // Bind profile before loading main.js
     window.adminHMDUser = {
       name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
       workspace: "Vinalink Project",
@@ -346,6 +417,17 @@
       "AMB": [1500000000, 3000000000, 6000000000]
     };
 
+    const MATCHING_RULES = {
+      "DIR": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
+      "RUBY": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
+      "EME": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
+      "DIA": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
+      "BD": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
+      "BKD": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
+      "CD": { min_weak_cv: 700000, levels: { 1: 0.10, 2: 0.10, 3: 0.05, 4: 0.05 } },
+      "AMB": { min_weak_cv: 3000000, levels: { 1: 0.10, 2: 0.10, 3: 0.05, 4: 0.05, 5: 0.05 } }
+    };
+
     function getTitleByCvOnly(cv) {
       let titleId = null;
       let titleName = "NPP Thường";
@@ -385,7 +467,7 @@
               finalTitleId = t.id;
               finalTitleName = t.name;
             } else {
-              break; // Bottlenecked
+              break;
             }
           } else {
             finalTitleId = t.id;
@@ -403,18 +485,25 @@
     }
 
     function runSimulation() {
-      // Inputs
+      // Read Inputs
       const nTotal = parseInt(document.getElementById("sizeInput").value);
       const rRetention = parseFloat(document.getElementById("retentionInput").value) / 100;
       const rSplitStrong = parseFloat(document.getElementById("splitInput").value) / 100;
       const personalRank = document.getElementById("rankInput").value;
+      const nF1 = parseInt(document.getElementById("f1Input").value);
+      const dupFactor = parseInt(document.getElementById("dupInput").value);
+      const f1Share = parseFloat(document.getElementById("f1ShareInput").value) / 100;
+      const isDynamic = document.getElementById("dynamicMode").checked;
 
-      // Update Labels
+      // Update Slider Labels
       document.getElementById("sizeVal").textContent = nTotal.toLocaleString() + " người";
       document.getElementById("retentionVal").textContent = (rRetention * 100).toFixed(1) + "%";
       document.getElementById("splitVal").textContent = (rSplitStrong * 100) + "%";
+      document.getElementById("f1Val").textContent = nF1 + " người";
+      document.getElementById("dupVal").textContent = "x" + dupFactor;
+      document.getElementById("f1ShareVal").textContent = (f1Share * 100) + "%";
 
-      // 1. Active members count
+      // 1. Static Calculations
       const pConsumer = 0.8;
       const pDistributor = 0.2;
       const vConsumerCv = 1000;
@@ -424,27 +513,45 @@
       const nDistributor = Math.floor(nTotal * pDistributor);
       const nActiveDistributor = Math.floor(nDistributor * rRetention);
 
-      // 2. Monthly CV
       const cvConsumerMonthly = nConsumer * vConsumerCv;
       const cvDistributorMonthly = nActiveDistributor * vDistributorCv;
       const cvTotalMonthly = cvConsumerMonthly + cvDistributorMonthly;
       const accumulatedGroupCv = cvTotalMonthly * 12;
 
-      // 3. Splitting strong/weak
       const rSplitWeak = 1.0 - rSplitStrong;
       const cvWeakMonthly = cvTotalMonthly * rSplitWeak;
       const cvStrongMonthly = cvTotalMonthly * rSplitStrong;
 
-      // F1 highest accumulated CV (approx 50% of monthly branch CV * 12)
-      const cvWeakAccumulatedF1 = (cvWeakMonthly * 0.5) * 12;
-      const cvStrongAccumulatedF1 = (cvStrongMonthly * 0.5) * 12;
+      const cvWeakAccumulatedF1 = (cvWeakMonthly * f1Share) * 12;
+      const cvStrongAccumulatedF1 = (cvStrongMonthly * f1Share) * 12;
 
-      // Title determination
       const [titleId, groupTitle, f1WTitle, f1STitle] = determineFinalTitle(
         accumulatedGroupCv, cvWeakAccumulatedF1, cvStrongAccumulatedF1
       );
 
-      // 4. Group Volume Commission (GVC)
+      // --- 7 Nguồn thu nhập (Static estimate) ---
+      // 1. Retail
+      const retailIncome = 200 * 1000;
+
+      // 2. Sponsor Bonus
+      const newNpp = Math.max(1, Math.floor(nActiveDistributor * 0.05));
+      let sumStructuralNpp = 0;
+      for (let i = 1; i <= 5; i++) sumStructuralNpp += nF1 * Math.pow(dupFactor, i - 1);
+
+      const newF1 = newNpp * (nF1 / sumStructuralNpp);
+      const newF2 = newNpp * ((nF1 * dupFactor) / sumStructuralNpp);
+      let sumF3F5 = 0;
+      for (let i = 3; i <= 5; i++) sumF3F5 += nF1 * Math.pow(dupFactor, i - 1);
+      const newF3F5 = newNpp * (sumF3F5 / sumStructuralNpp);
+
+      const sponsorIncomeRaw = (newF1 * 0.10 * 2000 * 1000) + (newF2 * 0.10 * 2000 * 1000) + (newF3F5 * 0.05 * 2000 * 1000);
+      let goldSponsorBonus = 0;
+      if (personalRank === "GOLD") {
+        goldSponsorBonus = (newF1 * 0.20) * 1000000;
+      }
+      const sponsorIncome = sponsorIncomeRaw + goldSponsorBonus;
+
+      // 3. Group Volume Commission (GVC)
       const titleIds = TITLES.map(t => t.id);
       let isDirectorOrAbove = false;
       if (titleId) {
@@ -455,55 +562,42 @@
 
       const cycleSize = isDirectorOrAbove ? 7000 : 3000;
       const cycleBonus = isDirectorOrAbove ? 560000 : 300000;
-      const numCycles = Math.floor(cvWeakMonthly / cycleSize);
-      const binaryIncomeRaw = numCycles * cycleBonus;
+      const extraCycles = isDirectorOrAbove ? 8 : 20;
+      const extraBonus = isDirectorOrAbove ? 4480000 : 6000000;
 
-      // Apply Maxout limits
+      const numCycles = Math.floor(cvWeakMonthly / cycleSize);
+      let binaryIncomeRaw = numCycles * cycleBonus;
+      if (numCycles >= extraCycles) binaryIncomeRaw += extraBonus;
+
       let binaryLimit = Infinity;
-      let rankIdx = 2; // default Gold
+      let rankIdx = 2; // Gold
       if (personalRank === "BRONZE") rankIdx = 0;
       else if (personalRank === "SILVER") rankIdx = 1;
 
       if (titleId && MAX_BINARY_LIMITS[titleId]) {
         binaryLimit = MAX_BINARY_LIMITS[titleId][rankIdx];
       }
-
       const binaryIncome = Math.min(binaryIncomeRaw, binaryLimit);
 
-      // 5. Qualify Volume Bonus
-      let qualifyIncome = 0;
-      const rankMilestones = QUALIFY_BONUS_LOOKUP[personalRank] || {};
-      for (const [milestone, bonus] of Object.entries(rankMilestones)) {
-        if (cvWeakMonthly >= parseInt(milestone)) {
-          qualifyIncome = bonus * 1000; // 1 CV = 1,000 VND
-        }
-      }
+      // 4. Qualify Bonus (Averaged in static model)
+      const totalMilestoneBonus = Object.values(QUALIFY_BONUS_LOOKUP[personalRank]).reduce((a, b) => a + b, 0) * 1000;
+      const monthsTo550k = cvWeakMonthly > 0 ? (550000 / cvWeakMonthly) : Infinity;
+      const qualifyIncome = monthsTo550k <= 1 ? totalMilestoneBonus : (totalMilestoneBonus / monthsTo550k);
 
-      // 6. Matching Bonus (F1 - F5)
+      // 5. Matching Bonus
       let matchingIncome = 0;
       let matchingDetails = [];
 
-      const matchingRules = {
-        "DIR": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
-        "RUBY": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
-        "EME": { min_weak_cv: 85000, levels: { 1: 0.10, 2: 0.10 } },
-        "DIA": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
-        "BD": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
-        "BKD": { min_weak_cv: 300000, levels: { 1: 0.10, 2: 0.10, 3: 0.05 } },
-        "CD": { min_weak_cv: 700000, levels: { 1: 0.10, 2: 0.10, 3: 0.05, 4: 0.05 } },
-        "AMB": { min_weak_cv: 3000000, levels: { 1: 0.10, 2: 0.10, 3: 0.05, 4: 0.05, 5: 0.05 } }
-      };
-
-      if (titleId && matchingRules[titleId]) {
-        const rule = matchingRules[titleId];
+      if (titleId && MATCHING_RULES[titleId]) {
+        const rule = MATCHING_RULES[titleId];
         if (cvWeakMonthly >= rule.min_weak_cv) {
           for (const [levelStr, rate] of Object.entries(rule.levels)) {
             const level = parseInt(levelStr);
-            const nppInLevel = Math.pow(2, level);
-            const nppActiveInLevel = Math.min(nppInLevel, Math.max(1, Math.floor(nActiveDistributor / Math.pow(2, level))));
+            const nppInLevel = nF1 * Math.pow(dupFactor, level - 1);
+            const nppActiveInLevel = Math.min(nppInLevel, Math.max(1, Math.floor(nppInLevel * rRetention)));
 
-            const cvWeakLevel = cvWeakMonthly / Math.pow(2, level);
-            const cvAccumulatedLevel = (cvTotalMonthly / Math.pow(2, level)) * 12;
+            const cvWeakLevel = cvWeakMonthly / nppInLevel;
+            const cvAccumulatedLevel = (cvTotalMonthly / nppInLevel) * 12;
 
             const [levelTitleId] = getTitleByCvOnly(cvAccumulatedLevel);
             let isLevelDir = false;
@@ -515,12 +609,16 @@
 
             const lCycleSize = isLevelDir ? 7000 : 3000;
             const lCycleBonus = isLevelDir ? 560000 : 300000;
+            const lExtraCycles = isLevelDir ? 8 : 20;
+            const lExtraBonus = isLevelDir ? 4480000 : 6000000;
+
             const lCycles = Math.floor(cvWeakLevel / lCycleSize);
-            const lGvcRaw = lCycles * lCycleBonus;
+            let lGvcRaw = lCycles * lCycleBonus;
+            if (lCycles >= lExtraCycles) lGvcRaw += lExtraBonus;
 
             let lLimit = Infinity;
             if (levelTitleId && MAX_BINARY_LIMITS[levelTitleId]) {
-              lLimit = MAX_BINARY_LIMITS[levelTitleId][2]; // Gold cap
+              lLimit = MAX_BINARY_LIMITS[levelTitleId][2];
             }
             const lGvc = Math.min(lGvcRaw, lLimit);
             const levelMatching = nppActiveInLevel * lGvc * rate;
@@ -541,9 +639,21 @@
         matchingDetails.push({ note: "Danh hiệu dưới Director không được hưởng hoa hồng cộng hưởng" });
       }
 
-      // 7. Other bonuses (10% binary raw estimate)
-      const otherIncome = binaryIncome * 0.10;
-      const totalIncome = binaryIncome + otherIncome + qualifyIncome + matchingIncome;
+      // 6. Leadership Commission
+      let leadershipRate = 0.0;
+      if (titleId === "RUBY" && cvWeakMonthly >= 110000) leadershipRate = 0.010;
+      else if (titleId === "EME" && cvWeakMonthly >= 220000) leadershipRate = 0.015;
+      else if (titleId === "DIA" && cvWeakMonthly >= 440000) leadershipRate = 0.020;
+      else if (titleId === "BD" && cvWeakMonthly >= 660000) leadershipRate = 0.025;
+      else if (titleId === "BKD" && cvWeakMonthly >= 1000000) leadershipRate = 0.030;
+      else if (["CD", "AMB"].includes(titleId) && cvWeakMonthly >= 1000000) leadershipRate = 0.035;
+
+      const leadershipIncome = cvWeakMonthly * leadershipRate * 1000;
+
+      // 7. Awards Income (0 in static UI)
+      const awardsIncome = 0;
+
+      const totalIncome = retailIncome + sponsorIncome + binaryIncome + qualifyIncome + matchingIncome + leadershipIncome + awardsIncome;
 
       // Update UI Output Values
       document.getElementById("resTitle").textContent = groupTitle + (titleId ? ` (${titleId})` : "");
@@ -555,22 +665,22 @@
       document.getElementById("resMonthlyCv").textContent = cvTotalMonthly.toLocaleString() + " CV";
       document.getElementById("resAccumulatedCv").textContent = accumulatedGroupCv.toLocaleString() + " CV";
       document.getElementById("resWeakCv").textContent = cvWeakMonthly.toLocaleString(undefined, {maximumFractionDigits:0}) + " CV";
-      document.getElementById("resCycles").textContent = numCycles + " chu kỳ";
+      document.getElementById("resCycles").textContent = numCycles.toLocaleString() + " chu kỳ";
 
-      // Commission fields
-      document.getElementById("resBinaryIncome").textContent = binaryIncome.toLocaleString() + " VNĐ";
-      document.getElementById("resQualifyIncome").textContent = qualifyIncome.toLocaleString() + " VNĐ";
-      document.getElementById("resMatchingIncome").textContent = matchingIncome.toLocaleString() + " VNĐ";
-      document.getElementById("resOtherIncome").textContent = otherIncome.toLocaleString() + " VNĐ";
+      // 7 Income fields
+      document.getElementById("resRetailIncome").textContent = Math.round(retailIncome).toLocaleString() + " VNĐ";
+      document.getElementById("resSponsorIncome").textContent = Math.round(sponsorIncome).toLocaleString() + " VNĐ";
+      document.getElementById("resBinaryIncome").textContent = Math.round(binaryIncome).toLocaleString() + " VNĐ";
+      document.getElementById("resQualifyIncome").textContent = Math.round(qualifyIncome).toLocaleString() + " VNĐ";
+      document.getElementById("resMatchingIncome").textContent = Math.round(matchingIncome).toLocaleString() + " VNĐ";
+      document.getElementById("resLeadershipIncome").textContent = Math.round(leadershipIncome).toLocaleString() + " VNĐ";
+      document.getElementById("resAwardsIncome").textContent = "0 VNĐ (Thưởng 1 lần)";
       document.getElementById("resTotalIncome").textContent = Math.round(totalIncome).toLocaleString() + " VNĐ";
 
       // Maxout indicator
       const maxoutBadge = document.getElementById("maxoutWarning");
-      if (binaryIncomeRaw > binaryLimit) {
-        maxoutBadge.classList.remove("d-none");
-      } else {
-        maxoutBadge.classList.add("d-none");
-      }
+      if (binaryIncomeRaw > binaryLimit) maxoutBadge.classList.remove("d-none");
+      else maxoutBadge.classList.add("d-none");
 
       // Render Matching details
       const breakdownBox = document.getElementById("matchingBreakdown");
@@ -583,11 +693,224 @@
         } else {
           div.innerHTML = `
             <span>• Tầng <strong>${detail.level}</strong> (Hưởng ${(detail.rate*100).toFixed(0)}% trên ${detail.activeNpp} NPP)</span>
-            <span class="fw-bold text-success">+${detail.matching.toLocaleString()} VNĐ</span>
+            <span class="fw-bold text-success">+${Math.round(detail.matching).toLocaleString()} VNĐ</span>
           `;
         }
         breakdownBox.appendChild(div);
       });
+
+      // 2. Dynamic 36-Month Time-Series Simulation
+      const dynamicContainer = document.getElementById("dynamicSection");
+      if (isDynamic) {
+        dynamicContainer.classList.remove("d-none");
+        runDynamicSimulation(nTotal, rRetention, rSplitStrong, personalRank, nF1, dupFactor, f1Share);
+      } else {
+        dynamicContainer.classList.add("d-none");
+      }
+    }
+
+    function runDynamicSimulation(nTotal, rRetention, rSplitStrong, personalRank, nF1, dupFactor, f1Share) {
+      const pConsumer = 0.8;
+      const pDistributor = 0.2;
+      const vConsumerCv = 1000;
+      const vDistributorCv = 2000;
+
+      let accumulatedWeakCv = 0.0;
+      let accumulatedStrongCv = 0.0;
+      let accumulatedQualifyCv = 0.0;
+
+      let qualifyMilestones = { 80000: false, 240000: false, 550000: false };
+      let awardsAchieved = { "CD": false, "AMB": false };
+      let weakCvCarryover = 0.0;
+      let nDistributorPrev = 0;
+      let cvWeakPrev = 0.0;
+
+      const N_start = 2.0;
+      const t0 = 18.0;
+      const growthRate = 0.25;
+
+      const tbody = document.getElementById("dynamicTableBody");
+      tbody.innerHTML = "";
+
+      let total3Y = 0;
+
+      for (let t = 1; t <= 36; t++) {
+        const n_t = Math.floor(N_start + (nTotal - N_start) / (1.0 + Math.exp(-growthRate * (t - t0))));
+        const nConsumer = Math.floor(n_t * pConsumer);
+        const nDistributor = Math.floor(n_t * pDistributor);
+        const nActiveDistributor = Math.floor(nDistributor * rRetention);
+
+        const cvConsumerMonthly = nConsumer * vConsumerCv;
+        const cvDistributorMonthly = nActiveDistributor * vDistributorCv;
+        const cvTotalMonthly = cvConsumerMonthly + cvDistributorMonthly;
+
+        const rSplitWeak = 1.0 - rSplitStrong;
+        const cvWeakMonthly = cvTotalMonthly * rSplitWeak;
+        const cvStrongMonthly = cvTotalMonthly * rSplitStrong;
+
+        accumulatedWeakCv += cvWeakMonthly;
+        accumulatedStrongCv += cvStrongMonthly;
+        const accumulatedGroupCv = accumulatedWeakCv + accumulatedStrongCv;
+
+        const cvWeakAccumulatedF1 = accumulatedWeakCv * f1Share;
+        const cvStrongAccumulatedF1 = accumulatedStrongCv * f1Share;
+
+        const [titleId, groupTitle] = determineFinalTitle(
+          accumulatedGroupCv, cvWeakAccumulatedF1, cvStrongAccumulatedF1
+        );
+
+        // 7 Sources
+        const retailIncome = 200 * 1000;
+
+        const newNpp = Math.max(0, nDistributor - nDistributorPrev);
+        nDistributorPrev = nDistributor;
+
+        let sumStructuralNpp = 0;
+        for (let i = 1; i <= 5; i++) sumStructuralNpp += nF1 * Math.pow(dupFactor, i - 1);
+
+        const newF1 = newNpp * (nF1 / sumStructuralNpp);
+        const newF2 = newNpp * ((nF1 * dupFactor) / sumStructuralNpp);
+        let sumF3F5 = 0;
+        for (let i = 3; i <= 5; i++) sumF3F5 += nF1 * Math.pow(dupFactor, i - 1);
+        const newF3F5 = newNpp * (sumF3F5 / sumStructuralNpp);
+
+        const sponsorIncomeRaw = (newF1 * 0.10 * 2000 * 1000) + (newF2 * 0.10 * 2000 * 1000) + (newF3F5 * 0.05 * 2000 * 1000);
+        let goldSponsorBonus = 0;
+        if (personalRank === "GOLD") goldSponsorBonus = (newF1 * 0.20) * 1000000;
+        const sponsorIncome = sponsorIncomeRaw + goldSponsorBonus;
+
+        const titleIds = TITLES.map(x => x.id);
+        let isDirectorOrAbove = false;
+        if (titleId) {
+          const dirIdx = titleIds.indexOf("DIR");
+          const currIdx = titleIds.indexOf(titleId);
+          isDirectorOrAbove = currIdx >= dirIdx;
+        }
+
+        const cycleSize = isDirectorOrAbove ? 7000 : 3000;
+        const cycleBonus = isDirectorOrAbove ? 560000 : 300000;
+        const extraCycles = isDirectorOrAbove ? 8 : 20;
+        const extraBonus = isDirectorOrAbove ? 4480000 : 6000000;
+
+        const totalWeakCv = cvWeakMonthly + weakCvCarryover;
+        const numCycles = Math.floor(totalWeakCv / cycleSize);
+        let binaryIncomeRaw = numCycles * cycleBonus;
+        if (numCycles >= extraCycles) binaryIncomeRaw += extraBonus;
+
+        weakCvCarryover = totalWeakCv - (numCycles * cycleSize);
+
+        let binaryLimit = Infinity;
+        let rankIdx = 2;
+        if (personalRank === "BRONZE") rankIdx = 0;
+        else if (personalRank === "SILVER") rankIdx = 1;
+
+        if (titleId && MAX_BINARY_LIMITS[titleId]) binaryLimit = MAX_BINARY_LIMITS[titleId][rankIdx];
+        const binaryIncome = Math.min(binaryIncomeRaw, binaryLimit);
+
+        // Qualify Cumulative
+        accumulatedQualifyCv += cvWeakMonthly;
+        let qualifyIncome = 0;
+        const rankMilestones = QUALIFY_BONUS_LOOKUP[personalRank] || {};
+        
+        Object.keys(rankMilestones).map(Number).sort((a,b)=>a-b).forEach(ms => {
+          if (accumulatedQualifyCv >= ms && !qualifyMilestones[ms]) {
+            qualifyIncome += rankMilestones[ms] * 1000;
+            qualifyMilestones[ms] = true;
+          }
+        });
+
+        if (accumulatedQualifyCv >= 550000) {
+          accumulatedQualifyCv = 0.0;
+          qualifyMilestones = { 80000: false, 240000: false, 550000: false };
+        }
+
+        // Matching
+        let matchingIncome = 0;
+        if (titleId && MATCHING_RULES[titleId]) {
+          const rule = MATCHING_RULES[titleId];
+          if (cvWeakMonthly >= rule.min_weak_cv) {
+            for (const [levelStr, rate] of Object.entries(rule.levels)) {
+              const level = parseInt(levelStr);
+              const nppInLevel = nF1 * Math.pow(dupFactor, level - 1);
+              const nppActiveInLevel = Math.min(nppInLevel, Math.max(1, Math.floor(nppInLevel * rRetention)));
+
+              const cvWeakLevel = cvWeakMonthly / nppInLevel;
+              const cvAccumulatedLevel = (cvTotalMonthly / nppInLevel) * 12;
+              const [levelTitleId] = getTitleByCvOnly(cvAccumulatedLevel);
+
+              let isLevelDir = false;
+              if (levelTitleId) {
+                const dirIdx = titleIds.indexOf("DIR");
+                const lIdx = titleIds.indexOf(levelTitleId);
+                isLevelDir = lIdx >= dirIdx;
+              }
+
+              const lCycleSize = isLevelDir ? 7000 : 3000;
+              const lCycleBonus = isLevelDir ? 560000 : 300000;
+              const lExtraCycles = isLevelDir ? 8 : 20;
+              const lExtraBonus = isLevelDir ? 4480000 : 6000000;
+
+              const lCycles = Math.floor(cvWeakLevel / lCycleSize);
+              let lGvcRaw = lCycles * lCycleBonus;
+              if (lCycles >= lExtraCycles) lGvcRaw += lExtraBonus;
+
+              let lLimit = Infinity;
+              if (levelTitleId && MAX_BINARY_LIMITS[levelTitleId]) lLimit = MAX_BINARY_LIMITS[levelTitleId][2];
+              const lGvc = Math.min(lGvcRaw, lLimit);
+
+              matchingIncome += nppActiveInLevel * lGvc * rate;
+            }
+          }
+        }
+
+        // Leadership
+        let leadershipRate = 0.0;
+        if (titleId === "RUBY" && cvWeakPrev >= 110000) leadershipRate = 0.010;
+        else if (titleId === "EME" && cvWeakPrev >= 220000) leadershipRate = 0.015;
+        else if (titleId === "DIA" && cvWeakPrev >= 440000) leadershipRate = 0.020;
+        else if (titleId === "BD" && cvWeakPrev >= 660000) leadershipRate = 0.025;
+        else if (titleId === "BKD" && cvWeakPrev >= 1000000) leadershipRate = 0.030;
+        else if (["CD", "AMB"].includes(titleId) && cvWeakPrev >= 1000000) leadershipRate = 0.035;
+
+        const leadershipIncome = cvWeakMonthly * leadershipRate * 1000;
+        cvWeakPrev = cvWeakMonthly;
+
+        // Awards
+        let awardsIncome = 0;
+        if (titleId === "CD" && !awardsAchieved["CD"]) {
+          awardsIncome = 1100000000;
+          awardsAchieved["CD"] = true;
+        } else if (titleId === "AMB" && !awardsAchieved["AMB"]) {
+          awardsIncome = 1900000000;
+          awardsAchieved["AMB"] = true;
+        }
+
+        const totalMonthIncome = retailIncome + sponsorIncome + binaryIncome + qualifyIncome + matchingIncome + leadershipIncome + awardsIncome;
+        total3Y += totalMonthIncome;
+
+        // Render Table Row
+        const tr = document.createElement("tr");
+        if (awardsIncome > 0) tr.className = "table-success fw-bold";
+        else if (qualifyIncome > 0) tr.className = "table-warning-subtle";
+
+        tr.innerHTML = `
+          <td>Tháng ${t.toString().padStart(2, '0')}</td>
+          <td>${n_t.toLocaleString()} TV</td>
+          <td>${cvTotalMonthly.toLocaleString()} CV</td>
+          <td><span class="badge ${awardsIncome > 0 ? 'bg-success' : 'bg-secondary'}">${groupTitle}</span></td>
+          <td>${Math.round(binaryIncome).toLocaleString()} VNĐ</td>
+          <td>${qualifyIncome > 0 ? '+' + Math.round(qualifyIncome).toLocaleString() : '0'} VNĐ</td>
+          <td>${Math.round(matchingIncome).toLocaleString()} VNĐ</td>
+          <td>${Math.round(leadershipIncome).toLocaleString()} VNĐ</td>
+          <td class="text-end fw-bold ${awardsIncome > 0 ? 'text-success fs-6' : 'text-primary'}">
+            ${Math.round(totalMonthIncome).toLocaleString()} VNĐ ${awardsIncome > 0 ? '🏆 (+Thưởng xe)' : ''}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById("dynTotal3Y").textContent = Math.round(total3Y).toLocaleString() + " VNĐ";
+      document.getElementById("dynAvgMonthly").textContent = Math.round(total3Y / 36).toLocaleString() + " VNĐ/tháng";
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -610,20 +933,18 @@
         }
       }
 
-      // Logout handler
       logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("sihub_is_admin");
         alert("Đã đăng xuất tài khoản Cố vấn.");
         window.location.reload();
       });
 
-      // Bind input events
-      const inputs = ["sizeInput", "retentionInput", "splitInput", "rankInput"];
+      const inputs = ["sizeInput", "retentionInput", "splitInput", "rankInput", "f1Input", "dupInput", "f1ShareInput", "dynamicMode"];
       inputs.forEach(id => {
         document.getElementById(id).addEventListener("input", runSimulation);
+        document.getElementById(id).addEventListener("change", runSimulation);
       });
 
-      // Initial run
       runSimulation();
     });
   </script>
