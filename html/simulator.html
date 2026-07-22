@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <!-- Core Theme Style -->
-  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body class="bg-light">
 
@@ -562,12 +564,9 @@
 
       const cycleSize = isDirectorOrAbove ? 7000 : 3000;
       const cycleBonus = isDirectorOrAbove ? 560000 : 300000;
-      const extraCycles = isDirectorOrAbove ? 8 : 20;
-      const extraBonus = isDirectorOrAbove ? 4480000 : 6000000;
 
       const numCycles = Math.floor(cvWeakMonthly / cycleSize);
       let binaryIncomeRaw = numCycles * cycleBonus;
-      if (numCycles >= extraCycles) binaryIncomeRaw += extraBonus;
 
       let binaryLimit = Infinity;
       let rankIdx = 2; // Gold
@@ -609,12 +608,9 @@
 
             const lCycleSize = isLevelDir ? 7000 : 3000;
             const lCycleBonus = isLevelDir ? 560000 : 300000;
-            const lExtraCycles = isLevelDir ? 8 : 20;
-            const lExtraBonus = isLevelDir ? 4480000 : 6000000;
 
             const lCycles = Math.floor(cvWeakLevel / lCycleSize);
             let lGvcRaw = lCycles * lCycleBonus;
-            if (lCycles >= lExtraCycles) lGvcRaw += lExtraBonus;
 
             let lLimit = Infinity;
             if (levelTitleId && MAX_BINARY_LIMITS[levelTitleId]) {
@@ -789,13 +785,10 @@
 
         const cycleSize = isDirectorOrAbove ? 7000 : 3000;
         const cycleBonus = isDirectorOrAbove ? 560000 : 300000;
-        const extraCycles = isDirectorOrAbove ? 8 : 20;
-        const extraBonus = isDirectorOrAbove ? 4480000 : 6000000;
 
         const totalWeakCv = cvWeakMonthly + weakCvCarryover;
         const numCycles = Math.floor(totalWeakCv / cycleSize);
         let binaryIncomeRaw = numCycles * cycleBonus;
-        if (numCycles >= extraCycles) binaryIncomeRaw += extraBonus;
 
         weakCvCarryover = totalWeakCv - (numCycles * cycleSize);
 
@@ -847,12 +840,9 @@
 
               const lCycleSize = isLevelDir ? 7000 : 3000;
               const lCycleBonus = isLevelDir ? 560000 : 300000;
-              const lExtraCycles = isLevelDir ? 8 : 20;
-              const lExtraBonus = isLevelDir ? 4480000 : 6000000;
 
               const lCycles = Math.floor(cvWeakLevel / lCycleSize);
               let lGvcRaw = lCycles * lCycleBonus;
-              if (lCycles >= lExtraCycles) lGvcRaw += lExtraBonus;
 
               let lLimit = Infinity;
               if (levelTitleId && MAX_BINARY_LIMITS[levelTitleId]) lLimit = MAX_BINARY_LIMITS[levelTitleId][2];
