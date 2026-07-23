@@ -140,34 +140,183 @@
                 <!-- SECTION 1: Tầm nhìn & Mục tiêu Tài chính -->
                 <div class="mb-5">
                   <h3 class="form-section-title"><i class="bi bi-trophy me-2"></i>01. Tầm nhìn & Mục tiêu Tài chính</h3>
-                  <div class="row g-3">
+                  
+                  <div class="row g-3 mb-4">
                     <div class="col-12 col-md-6">
-                      <label class="form-label" for="doanhChuName">Tên Doanh Chủ / Thủ lĩnh</label>
+                      <label class="form-label fw-bold" for="doanhChuName">Tên Doanh Chủ / Thủ lĩnh</label>
                       <input class="form-control" id="doanhChuName" type="text" required placeholder="Nhập họ và tên...">
                       <div class="invalid-feedback">Vui lòng nhập tên.</div>
                     </div>
                     <div class="col-12 col-md-6">
-                      <label class="form-label" for="motivation">Động lực lớn nhất</label>
-                      <select class="form-select" id="motivation" required>
-                        <option value="">Chọn động lực lớn nhất...</option>
-                        <option value="Tự do tài chính">Tự do tài chính</option>
-                        <option value="Phát triển bản thân">Phát triển bản thân</option>
-                        <option value="Giúp đỡ cộng đồng">Giúp đỡ cộng đồng</option>
-                        <option value="Tạo lập tài sản kế thừa">Tạo lập tài sản kế thừa</option>
+                      <label class="form-label fw-bold text-success" for="surveyTypeSelect">
+                        <i class="bi bi-list-check me-1"></i> Chọn Loại Khảo sát Doanh chủ
+                      </label>
+                      <select class="form-select border-success fw-bold text-success" id="surveyTypeSelect">
+                        <option value="system_goals" selected>1. Khảo sát Hệ thống và Mục tiêu</option>
+                        <option value="team_vision">2. Khảo sát Tầm nhìn Đội nhóm (Lean Culture Toolkit)</option>
                       </select>
-                      <div class="invalid-feedback">Vui lòng chọn động lực lớn nhất.</div>
                     </div>
-                    <div class="col-12 col-md-4">
-                      <label class="form-label" for="thu_nhap_nam_1">Thu nhập mục tiêu Năm 1 (VNĐ/tháng)</label>
-                      <input class="form-control" id="thu_nhap_nam_1" type="text" required placeholder="Ví dụ: 15.000.000">
+                  </div>
+
+                  <!-- Khối Form 1: Khảo sát Hệ thống và Mục tiêu -->
+                  <div id="formSystemGoals">
+                    <div class="p-3 border rounded bg-light-subtle mb-3">
+                      <h6 class="fw-bold text-success mb-3 text-xs uppercase"><i class="bi bi-graph-up-arrow me-1"></i>Chỉ số Mục tiêu Tài chính 3 Năm</h6>
+                      <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                          <label class="form-label" for="motivation">Động lực lớn nhất</label>
+                          <select class="form-select" id="motivation" required>
+                            <option value="">Chọn động lực lớn nhất...</option>
+                            <option value="Tự do tài chính">Tự do tài chính</option>
+                            <option value="Phát triển bản thân">Phát triển bản thân</option>
+                            <option value="Giúp đỡ cộng đồng">Giúp đỡ cộng đồng</option>
+                            <option value="Tạo lập tài sản kế thừa">Tạo lập tài sản kế thừa</option>
+                          </select>
+                          <div class="invalid-feedback">Vui lòng chọn động lực lớn nhất.</div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-2">
+                          <label class="form-label text-xs" for="thu_nhap_nam_1">Mục tiêu Năm 1 (VNĐ/tháng)</label>
+                          <input class="form-control" id="thu_nhap_nam_1" type="text" required placeholder="Ví dụ: 15.000.000">
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-2">
+                          <label class="form-label text-xs" for="thu_nhap_nam_2">Mục tiêu Năm 2 (VNĐ/tháng)</label>
+                          <input class="form-control" id="thu_nhap_nam_2" type="text" required placeholder="Ví dụ: 60.000.000">
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-2">
+                          <label class="form-label text-xs" for="thu_nhap_nam_3">Mục tiêu Năm 3 (VNĐ/tháng)</label>
+                          <input class="form-control" id="thu_nhap_nam_3" type="text" required placeholder="Ví dụ: 150.000.000">
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-12 col-md-4">
-                      <label class="form-label" for="thu_nhap_nam_2">Thu nhập mục tiêu Năm 2 (VNĐ/tháng)</label>
-                      <input class="form-control" id="thu_nhap_nam_2" type="text" required placeholder="Ví dụ: 60.000.000">
+                  </div>
+
+                  <!-- Khối Form 2: Khảo sát Tầm nhìn Đội nhóm (Lean Culture Toolkit) -->
+                  <div id="formTeamVision" class="d-none">
+                    <div class="p-3 border rounded bg-success-subtle border-success-subtle mb-4">
+                      <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-success me-2">PHẦN A</span>
+                        <h6 class="fw-bold text-success mb-0">Bộ câu hỏi phỏng vấn định hình Tầm nhìn Founder (Founder Vision Clarifier)</h6>
+                      </div>
+                      <p class="text-muted text-xs mb-0">Doanh chủ suy ngẫm và trả lời 10 câu hỏi định hình triết lý dẫn dắt & kỷ luật vận hành đội ngũ.</p>
                     </div>
-                    <div class="col-12 col-md-4">
-                      <label class="form-label" for="thu_nhap_nam_3">Thu nhập mục tiêu Năm 3 (VNĐ/tháng)</label>
-                      <input class="form-control" id="thu_nhap_nam_3" type="text" required placeholder="Ví dụ: 150.000.000">
+
+                    <!-- Nhóm 1: Động lực Cốt lõi & Sự Đánh đổi -->
+                    <div class="card mb-3 border-0 bg-light p-3">
+                      <h6 class="fw-bold text-dark text-sm mb-3 border-bottom pb-2">
+                        <i class="bi bi-compass me-1 text-primary"></i>Nhóm 1: Động lực Cốt lõi & Sự Đánh đổi
+                      </h6>
+                      <div class="row g-3">
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q1">
+                            1. Động lực thực sự đằng sau mong muốn xây dựng hệ thống kinh doanh thụ động của bạn là gì?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q1">
+                            <option value="Sự an tâm tài chính cho gia đình">Sự an tâm tài chính cho gia đình</option>
+                            <option value="Mong muốn khẳng định giá trị bản thân">Mong muốn khẳng định giá trị bản thân</option>
+                            <option value="Tự do thời gian và tự do quyết định cuộc sống">Tự do thời gian và tự do quyết định cuộc sống</option>
+                            <option value="Tạo lập di sản và giá trị kế thừa dài hạn">Tạo lập di sản và giá trị kế thừa dài hạn</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q2">
+                            2. Khi bắt đầu xây dựng nền móng hệ thống, nếu quy mô người tiêu dùng tăng trưởng đúng lộ trình nhưng thành quả ban đầu chưa bứt phá ngay, bạn có sẵn sàng kiên định với con đường tinh gọn không?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q2">
+                            <option value="Sẵn sàng kiên định 100% với lộ trình tinh gọn dài hạn">Sẵn sàng kiên định 100% với lộ trình tinh gọn dài hạn</option>
+                            <option value="Kiên định nhưng cần Cố vấn hỗ trợ rà soát chỉ số thường xuyên">Kiên định nhưng cần Cố vấn hỗ trợ rà soát chỉ số thường xuyên</option>
+                            <option value="Chưa sẵn sàng nếu chưa thấy kết quả tài chính trong 3 tháng">Chưa sẵn sàng nếu chưa thấy kết quả tài chính trong 3 tháng</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q3">
+                            3. Giới hạn đánh đổi thời gian và năng lượng của bạn là gì?
+                          </label>
+                          <input class="form-control form-control-sm" id="tv_q3" type="text" placeholder="Ví dụ: Chấp nhận dành 4 tiếng tinh gọn/ngày, sẵn sàng cắt bỏ toàn bộ cuộc họp vô bổ...">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Nhóm 2: Phong cách Dẫn dắt & Giá trị Di sản -->
+                    <div class="card mb-3 border-0 bg-light p-3">
+                      <h6 class="fw-bold text-dark text-sm mb-3 border-bottom pb-2">
+                        <i class="bi bi-people-fill me-1 text-success"></i>Nhóm 2: Phong cách Dẫn dắt & Giá trị Di sản
+                      </h6>
+                      <div class="row g-3">
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q4">
+                            4. Bạn muốn tuyến dưới nhớ đến bạn với hình ảnh nào?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q4">
+                            <option value="Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến">"Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến"</option>
+                            <option value="Người sếp ép doanh số bằng mọi giá">"Người sếp ép doanh số bằng mọi giá"</option>
+                            <option value="Nhà huấn luyện chuyển giao quy trình tinh gọn chuẩn hóa">"Nhà huấn luyện chuyển giao quy trình tinh gọn chuẩn hóa"</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q5">
+                            5. Khi một F1 gặp khó khăn và muốn bỏ cuộc, phản ứng đầu tiên của bạn là gì?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q5">
+                            <option value="Cùng ngồi lại thấu cảm, phân tích nút thắt quy trình">Cùng ngồi lại thấu cảm, phân tích nút thắt quy trình</option>
+                            <option value="Chỉ trích thiếu cam kết và yêu cầu tự vượt qua">Chỉ trích thiếu cam kết và yêu cầu tự vượt qua</option>
+                            <option value="Trực tiếp đứng lớp huấn luyện lại (Retrain) kiến thức cốt lõi">Trực tiếp đứng lớp huấn luyện lại (Retrain) kiến thức cốt lõi</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q6">
+                            6. Bạn định nghĩa thế nào là một hệ thống kinh doanh "An vui & Tinh gọn"?
+                          </label>
+                          <input class="form-control form-control-sm" id="tv_q6" type="text" placeholder="Ví dụ: Quy trình đơn giản tầng 5 tự sao chép được, không áp lực gôm hàng, làm việc an vui...">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Nhóm 3: Giới hạn Kỷ luật & Pháp lý -->
+                    <div class="card mb-3 border-0 bg-light p-3">
+                      <h6 class="fw-bold text-dark text-sm mb-3 border-bottom pb-2">
+                        <i class="bi bi-shield-lock-fill me-1 text-warning"></i>Nhóm 3: Giới hạn Kỷ luật & Pháp lý
+                      </h6>
+                      <div class="row g-3">
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q7">
+                            7. Nếu một F1 tạo ra doanh số lớn nhưng cố tình ôm hàng, bán phá giá hoặc cường điệu công dụng sản phẩm, bạn có sẵn sàng xử lý nghiêm để bảo vệ văn hóa chính trực không?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q7">
+                            <option value="Sẵn sàng xử lý nghiêm (Không thỏa hiệp / Zero Tolerance)">Sẵn sàng xử lý nghiêm (Không thỏa hiệp / Zero Tolerance)</option>
+                            <option value="Nhắc nhở nội bộ và cho cơ hội sửa sai 1 lần">Nhắc nhở nội bộ và cho cơ hội sửa sai 1 lần</option>
+                            <option value="Bỏ qua nếu doanh số mang lại cho nhóm đủ lớn">Bỏ qua nếu doanh số mang lại cho nhóm đủ lớn</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q8">
+                            8. Bạn có cam kết tuân thủ 100% hành lang pháp lý Nghị định 40 và quy chế hoạt động của Vinalink Group không?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q8">
+                            <option value="Cam kết tuân thủ 100% tuyệt đối">Cam kết tuân thủ 100% tuyệt đối</option>
+                            <option value="Đang tìm hiểu kỹ hơn về Nghị định 40 & Quy chế">Đang tìm hiểu kỹ hơn về Nghị định 40 & Quy chế</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q9">
+                            9. Khi đội nhóm gặp sự cố gãy rụng nhánh, bạn đối thoại bằng cảm xúc cá nhân hay dựa trên nguyên tắc học hỏi từ thất bại (Fail Fast, Learn Faster)?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q9">
+                            <option value="Dựa trên nguyên tắc Fail Fast, Learn Faster (Phân tích nút thắt quy trình)">Dựa trên nguyên tắc Fail Fast, Learn Faster (Phân tích nút thắt quy trình)</option>
+                            <option value="Bày tỏ cảm xúc cá nhân và tìm nguyên nhân từ thành viên">Bày tỏ cảm xúc cá nhân và tìm nguyên nhân từ thành viên</option>
+                            <option value="Tập trung tuyển nhánh mới thay thế ngay">Tập trung tuyển nhánh mới thay thế ngay</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label fw-bold text-xs" for="tv_q10">
+                            10. Bạn có sẵn sàng đứng lớp đóng gói quy trình và trao quyền hoàn toàn cho F1 khi họ đạt đủ năng lực không?
+                          </label>
+                          <select class="form-select form-select-sm" id="tv_q10">
+                            <option value="Sẵn sàng đóng gói, đứng lớp và trao quyền hoàn toàn">Sẵn sàng đóng gói, đứng lớp và trao quyền hoàn toàn</option>
+                            <option value="Sẵn sàng đứng lớp nhưng giữ quyền quyết định chính">Sẵn sàng đứng lớp nhưng giữ quyền quyết định chính</option>
+                            <option value="Chưa sẵn sàng trao quyền trong 6 tháng đầu">Chưa sẵn sàng trao quyền trong 6 tháng đầu</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -802,6 +951,12 @@
         window.location.reload();
       });
 
+      // Survey type toggle listener
+      const surveyTypeSelect = document.getElementById("surveyTypeSelect");
+      if (surveyTypeSelect) {
+        surveyTypeSelect.addEventListener("change", updateSurveyTypeUI);
+      }
+
       // Load draft values if exists
       loadFormDraft();
 
@@ -826,6 +981,22 @@
         this.classList.add("was-validated");
       });
     });
+
+    function updateSurveyTypeUI() {
+      const surveyTypeSelect = document.getElementById("surveyTypeSelect");
+      const formSystemGoals = document.getElementById("formSystemGoals");
+      const formTeamVision = document.getElementById("formTeamVision");
+
+      if (!surveyTypeSelect || !formSystemGoals || !formTeamVision) return;
+
+      if (surveyTypeSelect.value === "team_vision") {
+        formSystemGoals.classList.add("d-none");
+        formTeamVision.classList.remove("d-none");
+      } else {
+        formSystemGoals.classList.remove("d-none");
+        formTeamVision.classList.add("d-none");
+      }
+    }
 
     function saveFormDraft() {
       const inputs = document.querySelectorAll("#feedbackForm input[type='text'], #feedbackForm input[type='number'], #feedbackForm input[type='time'], #feedbackForm select");
@@ -857,6 +1028,19 @@
         document.getElementById("tinh_tu_van_hoa").value = "Tinh gọn, An vui, Cam kết";
         document.getElementById("phong_cach_lanh_dao").value = "Lãnh đạo phục vụ (Servant Leadership)";
         
+        // Team Vision defaults
+        if (document.getElementById("surveyTypeSelect")) document.getElementById("surveyTypeSelect").value = "system_goals";
+        if (document.getElementById("tv_q1")) document.getElementById("tv_q1").value = "Sự an tâm tài chính cho gia đình";
+        if (document.getElementById("tv_q2")) document.getElementById("tv_q2").value = "Sẵn sàng kiên định 100% với lộ trình tinh gọn dài hạn";
+        if (document.getElementById("tv_q3")) document.getElementById("tv_q3").value = "Dành 4 tiếng tinh gọn/ngày, sẵn sàng cắt bỏ toàn bộ cuộc họp vô bổ";
+        if (document.getElementById("tv_q4")) document.getElementById("tv_q4").value = "Người dẫn đường tận tâm, cam kết hỗ trợ F1 thực chiến";
+        if (document.getElementById("tv_q5")) document.getElementById("tv_q5").value = "Cùng ngồi lại thấu cảm, phân tích nút thắt quy trình";
+        if (document.getElementById("tv_q6")) document.getElementById("tv_q6").value = "Hệ thống vận hành an vui, quy trình đơn giản sao chép đến tầng 5";
+        if (document.getElementById("tv_q7")) document.getElementById("tv_q7").value = "Sẵn sàng xử lý nghiêm (Không thỏa hiệp / Zero Tolerance)";
+        if (document.getElementById("tv_q8")) document.getElementById("tv_q8").value = "Cam kết tuân thủ 100% tuyệt đối";
+        if (document.getElementById("tv_q9")) document.getElementById("tv_q9").value = "Dựa trên nguyên tắc Fail Fast, Learn Faster (Phân tích nút thắt quy trình)";
+        if (document.getElementById("tv_q10")) document.getElementById("tv_q10").value = "Sẵn sàng đóng gói, đứng lớp và trao quyền hoàn toàn";
+
         // Cult Defaults
         document.getElementById("cult_pain_burnout").checked = true;
         document.getElementById("cult_daily_time").value = "08:00";
@@ -917,6 +1101,8 @@
         document.getElementById("sm_servant_lead").checked = true;
         document.getElementById("sm_brand_content").checked = true;
         document.getElementById("sm_vpol_operation").checked = true;
+
+        updateSurveyTypeUI();
         return;
       }
 
@@ -929,6 +1115,8 @@
         const el = document.getElementById(id);
         if (el) el.checked = checked;
       }
+
+      updateSurveyTypeUI();
     }
 
     function submitSurveyData() {
@@ -937,18 +1125,31 @@
       statusBox.innerHTML = `<span><i class="bi bi-hourglass-split me-1 animate-spin"></i> Đang kết nối và truyền tải dữ liệu khảo sát...</span>`;
       statusBox.classList.remove("d-none");
 
-      const scriptUrl = localStorage.getItem("sihub_script_url") || "https://script.google.com/macros/s/AKfycbyM-GH6l8CmdU11pCLZoILZjF-befnRJz4iqDG_JHyD0FkWW6raVDBSrLKyCGb_6feBGw/exec";
+      const scriptUrl = localStorage.getItem("sihub_script_url") || "https://script.google.com/macros/s/AKfycbyDn9skLtbRrTpc0T2kKyM0N3WZ0XiLgr0foFEQB3aEeyxc2WpaidgXqrjEcqAgNZ8tiA/exec";
       const accessToken = localStorage.getItem("sihub_access_token") || "@_sihub_token_2026";
 
       // Build complete payload JSON including all newly added fields
       const payload = {
         timestamp: new Date().toISOString(),
         accessToken: accessToken,
+        surveyType: document.getElementById("surveyTypeSelect") ? document.getElementById("surveyTypeSelect").value : "system_goals",
         doanhChuName: document.getElementById("doanhChuName").value.trim(),
         e1: document.getElementById("thu_nhap_nam_1").value.trim(),
         e2: document.getElementById("thu_nhap_nam_2").value.trim(),
         e3: document.getElementById("thu_nhap_nam_3").value.trim(),
         motivation: document.getElementById("motivation").value.trim(),
+
+        // Team Vision Variables
+        tv_q1: document.getElementById("tv_q1") ? document.getElementById("tv_q1").value.trim() : "",
+        tv_q2: document.getElementById("tv_q2") ? document.getElementById("tv_q2").value.trim() : "",
+        tv_q3: document.getElementById("tv_q3") ? document.getElementById("tv_q3").value.trim() : "",
+        tv_q4: document.getElementById("tv_q4") ? document.getElementById("tv_q4").value.trim() : "",
+        tv_q5: document.getElementById("tv_q5") ? document.getElementById("tv_q5").value.trim() : "",
+        tv_q6: document.getElementById("tv_q6") ? document.getElementById("tv_q6").value.trim() : "",
+        tv_q7: document.getElementById("tv_q7") ? document.getElementById("tv_q7").value.trim() : "",
+        tv_q8: document.getElementById("tv_q8") ? document.getElementById("tv_q8").value.trim() : "",
+        tv_q9: document.getElementById("tv_q9") ? document.getElementById("tv_q9").value.trim() : "",
+        tv_q10: document.getElementById("tv_q10") ? document.getElementById("tv_q10").value.trim() : "",
         a2: document.getElementById("so_luong_f1_nong_cot").value.trim(),
         totalMembers: document.getElementById("tong_quy_mo_he_thong").value.trim(),
         distributionRatio: document.getElementById("ty_le_phan_bo").value.trim(),
