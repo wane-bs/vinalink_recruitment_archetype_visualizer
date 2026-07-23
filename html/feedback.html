@@ -321,9 +321,11 @@
                   </div>
                 </div>
 
-                <!-- SECTION 2: Quy mô & Cấu trúc mong muốn -->
-                <div class="mb-5">
-                  <h3 class="form-section-title"><i class="bi bi-diagram-3 me-2"></i>02. Quy mô & Cấu trúc Hệ thống</h3>
+                <!-- Khối bổ trợ: Các phần tiếp theo của Khảo sát Hệ thống & Mục tiêu -->
+                <div id="formSystemGoalsExtended">
+                  <!-- SECTION 2: Quy mô & Cấu trúc mong muốn -->
+                  <div class="mb-5">
+                    <h3 class="form-section-title"><i class="bi bi-diagram-3 me-2"></i>02. Quy mô & Cấu trúc Hệ thống</h3>
                   <div class="row g-3">
                     <div class="col-12 col-md-4">
                       <label class="form-label" for="so_luong_f1_nong_cot">Số F1 nòng cốt trực tiếp</label>
@@ -881,8 +883,9 @@
                     </div>
                   </div>
                 </div>
+              </div> <!-- end formSystemGoalsExtended -->
 
-                <!-- SUBMIT BUTTONS -->
+              <!-- SUBMIT BUTTONS -->
                 <div class="d-flex justify-content-between align-items-center border-top pt-4">
                   <button type="button" class="btn btn-outline-secondary" id="saveDraftBtn">
                      Lưu Nháp Cục Bộ
@@ -986,16 +989,39 @@
       const surveyTypeSelect = document.getElementById("surveyTypeSelect");
       const formSystemGoals = document.getElementById("formSystemGoals");
       const formTeamVision = document.getElementById("formTeamVision");
+      const formSystemGoalsExtended = document.getElementById("formSystemGoalsExtended");
 
-      if (!surveyTypeSelect || !formSystemGoals || !formTeamVision) return;
+      if (!surveyTypeSelect || !formSystemGoals || !formTeamVision || !formSystemGoalsExtended) return;
 
       if (surveyTypeSelect.value === "team_vision") {
         formSystemGoals.classList.add("d-none");
+        formSystemGoalsExtended.classList.add("d-none");
         formTeamVision.classList.remove("d-none");
+
+        toggleInputsDisabled(formSystemGoals, true);
+        toggleInputsDisabled(formSystemGoalsExtended, true);
+        toggleInputsDisabled(formTeamVision, false);
       } else {
         formSystemGoals.classList.remove("d-none");
+        formSystemGoalsExtended.classList.remove("d-none");
         formTeamVision.classList.add("d-none");
+
+        toggleInputsDisabled(formSystemGoals, false);
+        toggleInputsDisabled(formSystemGoalsExtended, false);
+        toggleInputsDisabled(formTeamVision, true);
       }
+    }
+
+    function toggleInputsDisabled(container, isDisabled) {
+      if (!container) return;
+      const elements = container.querySelectorAll("input, select, textarea");
+      elements.forEach(el => {
+        if (isDisabled) {
+          el.setAttribute("disabled", "true");
+        } else {
+          el.removeAttribute("disabled");
+        }
+      });
     }
 
     function saveFormDraft() {
