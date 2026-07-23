@@ -5,6 +5,7 @@ Tuân thủ nghiêm ngặt McKinsey Presentation Playbook Standard:
 - 16:9 Widescreen Layout Grid (Action Title, Breadcrumb, Core Content Body, Footnote & Source)
 - High Contrast Color Palette (Slate Dark #0F172A, Card #1E293B, Text Bright White #F8FAFC)
 - Action Titles theo Minto Pyramid Principle
+- Embed Word-by-Slide Presenter Script vào Speaker Notes của từng slide.
 """
 
 import os
@@ -43,7 +44,6 @@ def create_presentation():
         fill.fore_color.rgb = BG_DARK
 
     def add_slide_header(slide, action_title, breadcrumb="LEAN STARTUP PROGRAM | DOANH CHỦ LÊ THỊ HỒNG MINH"):
-        # 1. Breadcrumb Tracker
         tb_crumb = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.7), Inches(0.3))
         tf_c = tb_crumb.text_frame
         tf_c.word_wrap = True
@@ -53,7 +53,6 @@ def create_presentation():
         p_c.font.bold = True
         p_c.font.color.rgb = ACCENT_GREEN
         
-        # 2. Action Title (Minto Pyramid Conclusion)
         tb_title = slide.shapes.add_textbox(Inches(0.8), Inches(0.7), Inches(11.7), Inches(0.8))
         tf_t = tb_title.text_frame
         tf_t.word_wrap = True
@@ -64,7 +63,6 @@ def create_presentation():
         p_t.font.color.rgb = TEXT_WHITE
 
     def add_slide_footer(slide, footnote_text="Giả định kịch bản: Baseline 20 TV, Cấp GOLD, Tỷ lệ KHTT 80% - NPP 20%, F1 gánh 50%", source_text="Nguồn: Financial Simulator & Vinalink Compensation Model"):
-        # Footnote & Source Line
         tb_foot = slide.shapes.add_textbox(Inches(0.8), Inches(6.9), Inches(11.7), Inches(0.4))
         tf_f = tb_foot.text_frame
         tf_f.word_wrap = True
@@ -74,13 +72,17 @@ def create_presentation():
         p_f.font.italic = True
         p_f.font.color.rgb = TEXT_MUTED
 
+    def add_speaker_notes(slide, notes_text):
+        notes_slide = slide.notes_slide
+        tf = notes_slide.notes_text_frame
+        tf.text = notes_text
+
     # =============================================================
     # SLIDE 1: COVER SLIDE
     # =============================================================
     slide1 = prs.slides.add_slide(blank_layout)
     apply_slide_background(slide1)
     
-    # Cover Box
     tb_cover = slide1.shapes.add_textbox(Inches(1.0), Inches(2.0), Inches(11.3), Inches(4.0))
     tf_cov = tb_cover.text_frame
     tf_cov.word_wrap = True
@@ -93,7 +95,7 @@ def create_presentation():
     p0.space_after = Pt(16)
     
     p1 = tf_cov.add_paragraph()
-    p1.text = "ĐỀ XUẤT TÁI CẤU TRÚC MỤC TIÊU &\nLỘ TRÌNH THỰC THI DÒNG TIỀN 36 THÁNG"
+    p1.text = "BÁO CÁO ĐỀ XUẤT TÁI CẤU TRÚC MỤC TIÊU &\nLỘ TRÌNH THỰC THI DÒNG TIỀN 36 THÁNG"
     p1.font.size = Pt(30)
     p1.font.bold = True
     p1.font.color.rgb = TEXT_WHITE
@@ -104,15 +106,16 @@ def create_presentation():
     p2.font.size = Pt(14)
     p2.font.color.rgb = TEXT_MUTED
 
+    add_speaker_notes(slide1, "Trân trọng chào chị Lê Thị Hồng Minh. Rất vui được gặp lại chị trong buổi làm việc chuyên sâu hôm nay thuộc Chuyên đề 2 & 3 của Chương trình Huấn luyện Khởi nghiệp Tinh gọn 2026. Dựa trên toàn bộ dữ liệu khảo sát hiện trạng Baseline 20 thành viên, Đội ngũ Cố vấn Lean Startup Team xin gửi tới chị Báo cáo Đề xuất Tái cấu trúc Mục tiêu và Lộ trình Vận hành 36 tháng.")
+
     # =============================================================
     # SLIDE 2: ACTION TITLE - ĐIỀU CHỈNH MỤC TIÊU & KỲ VỌNG
     # =============================================================
     slide2 = prs.slides.add_slide(blank_layout)
     apply_slide_background(slide2)
-    add_slide_header(slide2, "1. ĐỀ XUẤT ĐIỀU CHỈNH MỤC TIÊU NĂM 3 VỀ MỐC 350M - 500M VNĐ/THÁNG ĐỂ TRÁNH RỦI RO QUÁ TẢI")
+    add_slide_header(slide2, "1. ĐỀ XUẤT ĐIỀU CHỈNH MỤC TIÊU NĂM 3 VỀ MỐC 350M - 500M VNĐ/THÁNG ĐỂ BẢO TỒN SỨC LAO ĐỘNG VÀ TRÁNH QUÁ TẢI")
     add_slide_footer(slide2)
     
-    # Left Card: Mục tiêu cũ vs Mới
     card1 = slide2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.6), Inches(5.6), Inches(5.0))
     card1.fill.solid()
     card1.fill.fore_color.rgb = CARD_BG
@@ -121,7 +124,6 @@ def create_presentation():
     
     tf1 = card1.text_frame
     tf1.word_wrap = True
-    
     p = tf1.paragraphs[0]
     p.text = "ĐỀ XUẤT TÁI CẤU TRÚC KỲ VỌNG THU NHẬP"
     p.font.size = Pt(13)
@@ -148,7 +150,6 @@ def create_presentation():
     p3.font.italic = True
     p3.font.color.rgb = TEXT_WHITE
 
-    # Right Card: Luận cứ Định lượng
     card2 = slide2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.6), Inches(5.7), Inches(5.0))
     card2.fill.solid()
     card2.fill.fore_color.rgb = CARD_BG
@@ -157,7 +158,6 @@ def create_presentation():
     
     tf2 = card2.text_frame
     tf2.word_wrap = True
-    
     p = tf2.paragraphs[0]
     p.text = "LUẬN CỨ ĐỊNH LƯỢNG & NĂNG LỰC THỰC THI"
     p.font.size = Pt(13)
@@ -188,20 +188,94 @@ def create_presentation():
     p_l2_sub.font.size = Pt(11)
     p_l2_sub.font.color.rgb = TEXT_MUTED
 
+    add_speaker_notes(slide2, "Xin mời chị Minh cùng nhìn vào Slide 1. Luận điểm quan trọng nhất là chúng ta cần điều chỉnh lại mục tiêu thu nhập Năm 3 từ 1.5 tỷ về 350M - 500M/tháng. Mức 1.5 tỷ vượt trần chi trả của sơ đồ nhị phân Vinalink tại quy mô 10.000 người (~573M). Mức 350M - 500M vẫn tạo ra tự do tài chính bền vững và giữ hạn mức 4 tiếng tinh gọn/ngày.")
+
     # =============================================================
-    # SLIDE 3: ACTION TITLE - BẢNG SO SÁNH 3 KỊCH BẢN
+    # SLIDE 3: BỘ CÔNG CỤ VĂN HÓA & CHẾ TÀI
     # =============================================================
     slide3 = prs.slides.add_slide(blank_layout)
     apply_slide_background(slide3)
-    add_slide_header(slide3, "2. KỊCH BẢN ỔN ĐỊNH VÀ TỐT MANG LẠI DÒNG TIỀN TÍCH LŨY 3 NĂM TỪ 5.8 TỶ ĐẾN 14.2 TỶ VNĐ")
+    add_slide_header(slide3, "2. THỰC THI 3 GIÁ TRỊ CỐT LÕI VÀ BỘ QUY TẮC KỶ LUẬT ZERO TOLERANCE ĐỂ BẢO VỆ THƯƠNG HIỆU ĐỘI NGŨ")
     add_slide_footer(slide3)
     
-    # Table Grid
-    rows, cols = 8, 4
-    t_shape = slide3.shapes.add_table(rows, cols, Inches(0.8), Inches(1.6), Inches(11.7), Inches(5.0))
-    table = t_shape.table
+    card_v1 = slide3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.6), Inches(5.6), Inches(5.0))
+    card_v1.fill.solid()
+    card_v1.fill.fore_color.rgb = CARD_BG
+    card_v1.line.color.rgb = ACCENT_GREEN
+    card_v1.line.width = Pt(1.5)
     
-    # Column widths
+    tf_v1 = card_v1.text_frame
+    tf_v1.word_wrap = True
+    p = tf_v1.paragraphs[0]
+    p.text = "3 GIÁ TRỊ CỐT LÕI (TẢNG BĂNG VĂN HÓA)"
+    p.font.size = Pt(13)
+    p.font.bold = True
+    p.font.color.rgb = ACCENT_GREEN
+    p.space_after = Pt(14)
+    
+    vals = [
+        ("1. Đồng hành Dụng tâm (Servant Leadership):", "Lấy thành công của tuyến dưới làm thước đo. Tuyến trên hỗ trợ, không quản lý."),
+        ("2. Tối giản Tinh gọn (Lean & Simplicity):", "Đóng gói bài giảng đơn giản để F5 tự sao chép được ngay."),
+        ("3. Chính trực & Minh bạch (Integrity):", "Tuyệt đối không ép số ảo, không ôm hàng, không bán phá giá.")
+    ]
+    for t_val, d_val in vals:
+        p_t = tf_v1.add_paragraph()
+        p_t.text = t_val
+        p_t.font.size = Pt(11)
+        p_t.font.bold = True
+        p_t.font.color.rgb = TEXT_WHITE
+        p_d = tf_v1.add_paragraph()
+        p_d.text = d_val
+        p_d.font.size = Pt(10)
+        p_d.font.color.rgb = TEXT_MUTED
+        p_d.space_after = Pt(8)
+
+    card_v2 = slide3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.6), Inches(5.7), Inches(5.0))
+    card_v2.fill.solid()
+    card_v2.fill.fore_color.rgb = CARD_BG
+    card_v2.line.color.rgb = ACCENT_GOLD
+    card_v2.line.width = Pt(1.5)
+    
+    tf_v2 = card_v2.text_frame
+    tf_v2.word_wrap = True
+    p = tf_v2.paragraphs[0]
+    p.text = "QUY TẮC KỶ LUẬT & CHẾ TÀI XỬ LÝ VI PHẠM"
+    p.font.size = Pt(13)
+    p.font.bold = True
+    p.font.color.rgb = ACCENT_GOLD
+    p.space_after = Pt(14)
+    
+    rules = [
+        ("• Chế tài Zero Tolerance Anti-Dumping:", "Cảnh cáo lần 1; Cắt quyền bảo trợ & xử lý lần 2 đối với hành vi bán phá giá trên sàn e-commerce."),
+        ("• Họp Daily Power 14:00 (15 phút Zoom):", "Đúng giờ tuyệt đối, trễ 1 phút tự giác gieo hạt 30.000 VNĐ vào quỹ chung."),
+        ("• Giao tiếp Phi đồng bộ Zalo:", "Phản hồi tin nhắn công việc trong 2-4 tiếng."),
+        ("• Văn hóa Không đổ lỗi (Fail Fast):", "Đối thoại bằng số liệu Simulator khi doanh số sụt giảm.")
+    ]
+    for r_t, r_d in rules:
+        p_t = tf_v2.add_paragraph()
+        p_t.text = r_t
+        p_t.font.size = Pt(11)
+        p_t.font.bold = True
+        p_t.font.color.rgb = TEXT_WHITE
+        p_d = tf_v2.add_paragraph()
+        p_d.text = r_d
+        p_d.font.size = Pt(10)
+        p_d.font.color.rgb = TEXT_MUTED
+        p_d.space_after = Pt(8)
+
+    add_speaker_notes(slide3, "Chuyển sang Slide 2, đây chính là Bộ công cụ Tầm nhìn & Văn hóa Cốt lõi (Lean Culture Toolkit). Chúng ta thiết lập 3 Giá trị Cốt lõi: Đồng hành Dụng tâm, Tối giản Tinh gọn và Chính trực. Đồng thời áp dụng Quy tắc Zero Tolerance: Xử lý nghiêm vi phạm bán phá giá/gôm hàng để bảo vệ thương hiệu đội ngũ.")
+
+    # =============================================================
+    # SLIDE 4: BẢNG SO SÁNH 3 KỊCH BẢN
+    # =============================================================
+    slide4 = prs.slides.add_slide(blank_layout)
+    apply_slide_background(slide4)
+    add_slide_header(slide4, "3. KỊCH BẢN ỔN ĐỊNH VÀ TỐT MANG LẠI DÒNG TIỀN TÍCH LŨY 3 NĂM TỪ 5.8 TỶ ĐẾN 14.2 TỶ VNĐ")
+    add_slide_footer(slide4)
+    
+    rows, cols = 8, 4
+    t_shape = slide4.shapes.add_table(rows, cols, Inches(0.8), Inches(1.6), Inches(11.7), Inches(5.0))
+    table = t_shape.table
     table.columns[0].width = Inches(3.6)
     table.columns[1].width = Inches(2.7)
     table.columns[2].width = Inches(2.7)
@@ -227,7 +301,6 @@ def create_presentation():
         ["TỔNG THU NHẬP THÁNG 36", "56,8 triệu VNĐ", "242,2 triệu VNĐ", "573,0 triệu VNĐ"],
         ["TỔNG TÍCH LŨY 3 NĂM", "1,03 tỷ VNĐ", "5,85 tỷ VNĐ", "14,22 tỷ VNĐ"]
     ]
-    
     for row_idx, row_data in enumerate(data, start=1):
         is_highlight_row = row_idx in [6, 7]
         for col_idx, text_val in enumerate(row_data):
@@ -238,77 +311,23 @@ def create_presentation():
             p = cell.text_frame.paragraphs[0]
             p.font.size = Pt(11)
             p.font.bold = is_highlight_row or col_idx == 0
-            if is_highlight_row and col_idx > 0:
-                p.font.color.rgb = ACCENT_GOLD
-            else:
-                p.font.color.rgb = TEXT_WHITE
+            p.font.color.rgb = ACCENT_GOLD if (is_highlight_row and col_idx > 0) else TEXT_WHITE
+
+    add_speaker_notes(slide4, "Xin mời chị xem Slide 3 – So sánh định lượng 3 kịch bản. Ở Kịch bản Ổn định (khuyên dùng), Tháng 36 chị đạt Crown Diamond, thu nhập 242.2M/tháng và tổng dòng tiền tích lũy 3 năm đạt 5.85 tỷ VNĐ (+ thưởng xe 1.1 tỷ). Kịch bản Tốt mang về 14.22 tỷ 3 năm.")
 
     # =============================================================
-    # SLIDE 4: ACTION TITLE - LỘ TRÌNH KPI TRACKING
-    # =============================================================
-    slide4 = prs.slides.add_slide(blank_layout)
-    apply_slide_background(slide4)
-    add_slide_header(slide4, "3. LỘ TRÌNH 36 THÁNG TẬP TRUNG BẢO TRỢ F1 NÒNG CỐT Ở CÁC CỘT MỐC THÁNG 12, 19 VÀ 25")
-    add_slide_footer(slide4, footnote_text="Giờ làm tối ưu được kiểm soát dưới 5.3 giờ/ngày trong suốt 36 tháng để đảm bảo tính bền vững.")
-    
-    rows, cols = 7, 5
-    t_shape2 = slide4.shapes.add_table(rows, cols, Inches(0.8), Inches(1.6), Inches(11.7), Inches(5.0))
-    table2 = t_shape2.table
-    
-    table2.columns[0].width = Inches(2.2)
-    table2.columns[1].width = Inches(2.2)
-    table2.columns[2].width = Inches(2.2)
-    table2.columns[3].width = Inches(2.7)
-    table2.columns[4].width = Inches(2.4)
-    
-    headers2 = ["Mốc Thời Gian", "KPI Quy Mô (TV)", "NPP Hoạt Động", "KPI F1 Tích Lũy", "Giờ Làm Tối Ưu"]
-    for col_idx, h_text in enumerate(headers2):
-        cell = table2.cell(0, col_idx)
-        cell.text = h_text
-        cell.fill.solid()
-        cell.fill.fore_color.rgb = CARD_BG
-        p = cell.text_frame.paragraphs[0]
-        p.font.size = Pt(12)
-        p.font.bold = True
-        p.font.color.rgb = ACCENT_GREEN
-        
-    data2 = [
-        ["Tháng 01", "90 TV", "5 NPP", "1 F1 (Hiện trạng)", "4,2 giờ/ngày"],
-        ["Tháng 06", "256 TV", "15 NPP", "1 F1", "4,4 giờ/ngày"],
-        ["Tháng 12", "928 TV", "55 NPP", "2 F1 (+1 F1 mới)", "5,1 giờ/ngày (Tuyển)"],
-        ["Tháng 18", "2.510 TV", "150 NPP", "2 F1", "4,7 giờ/ngày"],
-        ["Tháng 25", "4.262 TV", "255 NPP", "4 F1 (+1 F1 mới)", "5,3 giờ/ngày (Tuyển)"],
-        ["Tháng 36", "4.945 TV", "296 NPP", "4 F1 (Hoàn tất)", "4,8 giờ/ngày"]
-    ]
-    
-    for row_idx, row_data in enumerate(data2, start=1):
-        for col_idx, text_val in enumerate(row_data):
-            cell = table2.cell(row_idx, col_idx)
-            cell.text = text_val
-            cell.fill.solid()
-            cell.fill.fore_color.rgb = BG_DARK
-            p = cell.text_frame.paragraphs[0]
-            p.font.size = Pt(11)
-            if col_idx == 3 and "+" in text_val:
-                p.font.color.rgb = ACCENT_GOLD
-                p.font.bold = True
-            else:
-                p.font.color.rgb = TEXT_WHITE
-
-    # =============================================================
-    # SLIDE 5: ACTION TITLE - MA TRẬN ĐỘI NGŨ F1 BỔ KHUYẾT
+    # SLIDE 5: BỘ LỌC QF & MA TRẬN F1 BỔ KHUYẾT
     # =============================================================
     slide5 = prs.slides.add_slide(blank_layout)
     apply_slide_background(slide5)
-    add_slide_header(slide5, "4. XÂY DỰNG MA TRẬN F1 NÒNG CỐT BỔ KHUYẾT (HUSTLER - HACKER - HIPSTER) ĐỂ GIẢI PHÓNG THỜI GIAN")
+    add_slide_header(slide5, "4. ÁP DỤNG BỘ LỌC 5 TIÊU CHUẨN QF ĐỂ XÂY DỰNG ĐỘI NGŨ F1 NÒNG CỐT BỔ KHUYẾT (HUSTLER - HACKER - HIPSTER)")
     add_slide_footer(slide5, footnote_text="Doanh chủ tập trung thế mạnh Quản trị (Operator 5/5), ủy quyền năng lực đào tạo và công nghệ cho F1.")
     
     roles = [
-        ("F1-1: HUSTLER", "Thủ lĩnh Tuyển dụng & Kết nối", "• Chốt hợp tác nhóm Doanh chủ/Leader lớn.\n• Tạo xung lực bảo trợ từ Tháng 1 đến 6.\n• Có uy tín cá nhân và tầm ảnh hưởng mạnh.", ACCENT_GOLD),
-        ("F1-2: HACKER", "Chuyên gia Đào tạo & SOP", "• Đóng gói quy trình EMC tối giản dễ sao chép.\n• Đứng lớp huấn luyện tuyến dưới F2-F5.\n• Giúp Doanh chủ giữ hạn mức 4 giờ/ngày.", ACCENT_GREEN),
-        ("F1-3: HIPSTER", "Kỹ sư Công nghệ & Phễu", "• Thiết lập phễu tuyển dụng tự động số hóa.\n• Sản xuất video Capcut/Canva xây dựng thương hiệu.\n• Cung cấp nguồn khách hàng tiềm năng liên tục.", ACCENT_BLUE)
+        ("F1-1: HUSTLER", "Thủ lĩnh Tuyển dụng & Kết nối", "• Chốt hợp tác nhóm Leader lớn.\n• Tạo xung lực bảo trợ từ Tháng 1-6.\n• Có uy tín cá nhân và tầm ảnh hưởng.", ACCENT_GOLD),
+        ("F1-2: HACKER", "Chuyên gia Đào tạo & SOP", "• Đóng gói quy trình EMC tối giản dễ sao chép.\n• Đứng lớp huấn luyện tuyến dưới F2-F5.\n• Giúp Doanh chủ giữ hạn mức 4h/ngày.", ACCENT_GREEN),
+        ("F1-3: HIPSTER", "Kỹ sư Công nghệ & Phễu", "• Thiết lập phễu tuyển dụng tự động số hóa.\n• Sản xuất video Capcut/Canva xây thương hiệu.\n• Cung cấp nguồn khách hàng tiềm năng.", ACCENT_BLUE)
     ]
-    
     for idx, (title, subtitle, desc, color) in enumerate(roles):
         left = Inches(0.8 + idx * 4.0)
         card = slide5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, Inches(1.6), Inches(3.7), Inches(5.0))
@@ -319,7 +338,6 @@ def create_presentation():
         
         tf = card.text_frame
         tf.word_wrap = True
-        
         p = tf.paragraphs[0]
         p.text = title
         p.font.size = Pt(15)
@@ -339,8 +357,10 @@ def create_presentation():
         p_d.font.size = Pt(11)
         p_d.font.color.rgb = TEXT_MUTED
 
+    add_speaker_notes(slide5, "Slide 4 thể hiện giải pháp giải phóng thời gian: Chị Minh tập trung thế mạnh Quản trị (Operator 5/5) và bổ khuyết 3 F1 (Hustler, Hacker, Hipster). Sử dụng Bộ lọc 5 tiêu chí QF (đạt 5/5 mới làm F1 nòng cốt) ngay trong OPP 2-1 để chọn đúng người.")
+
     # =============================================================
-    # SLIDE 6: ACTION TITLE - KHUYẾN NGHỊ HÀNH ĐỘNG
+    # SLIDE 6: KHUYẾN NGHỊ HÀNH ĐỘNG
     # =============================================================
     slide6 = prs.slides.add_slide(blank_layout)
     apply_slide_background(slide6)
@@ -366,10 +386,9 @@ def create_presentation():
     recs = [
         ("1. Kiên trì kịch bản Ổn định (Persevere):", "Điều chỉnh mục tiêu thu nhập Năm 3 về mốc 350M - 500M VNĐ/tháng để tạo nguồn thu thụ động bền vững mà không bị kiệt sức."),
         ("2. Tập trung Đóng gói SOP (Năng lực Hacker):", "Ưu tiên tuyển dụng F1 Hacker hoặc nâng cấp kỹ năng đóng gói quy trình EMC tối giản, giúp hệ thống sao chép sâu xuống tầng F5."),
-        ("3. Thực thi Văn hóa Kỷ luật (Lean Culture Code):", "Duy trì nghiêm ngặt họp Daily Power 15 phút đầu ngày, chế độ giao tiếp phi đồng bộ (2-4h) và cam kết không ôm hàng/không bán phá giá."),
+        ("3. Thực thi Văn hóa Kỷ luật (Lean Culture Code):", "Duy trì nghiêm ngặt họp Daily Power 14:00 (15 phút), giao tiếp phi đồng bộ (2-4h) và cam kết Zero Tolerance với bán phá giá."),
         ("4. Quản trị bằng Số liệu Định lượng (Simulator):", "Sử dụng Bộ mô phỏng Simulator trong các buổi họp tuần để đối thoại bằng số liệu, chủ động điều hướng điểm tràn và duy trì tỷ lệ cân nhánh 70/30.")
     ]
-    
     for title, desc in recs:
         p_t = tf_rec.add_paragraph()
         p_t.text = title
@@ -383,7 +402,8 @@ def create_presentation():
         p_d.font.color.rgb = TEXT_WHITE
         p_d.space_after = Pt(10)
 
-    # Save Presentation
+    add_speaker_notes(slide6, "Để kết thúc, xin mời chị nhìn vào Slide 5 – 4 Khuyến nghị hành động chiến lược: Kiên trì kịch bản Ổn định, Đóng gói bài giảng SOP, Thực thi kỷ luật văn hóa & chế tài chống phá giá, Quản trị bằng số liệu Simulator. Lean Startup Team cam kết đồng hành 2-1 cùng chị trong 30 ngày đầu.")
+
     out_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "04-Knowledge", "bao-cao"))
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
