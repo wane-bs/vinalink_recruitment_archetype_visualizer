@@ -13,7 +13,7 @@ Toàn bộ các trang hoạt động tĩnh được chia nhỏ theo mô hình đ
 * [html/simulator.html](file:///d:/DebianBackup/source_code/lop_sihub/03-Projects/vinalink/visualizer_deploy/html/simulator.html) - Bộ giả lập 7 nguồn thu nhập và dòng tiền 36 tháng.
 * [html/feedback.html](file:///d:/DebianBackup/source_code/lop_sihub/03-Projects/vinalink/visualizer_deploy/html/feedback.html) - Form khảo sát Doanh chủ 22 trường dữ liệu.
 * [html/settings.html](file:///d:/DebianBackup/source_code/lop_sihub/03-Projects/vinalink/visualizer_deploy/html/settings.html) - Cài đặt API kết nối Google Sheets (Dành riêng cho Cố vấn).
-* [html/login.html](file:///d:/DebianBackup/source_code/lop_sihub/03-Projects/vinalink/visualizer_deploy/html/login.html) - Xác thực quyền quản trị Cố vấn SIHUB.
+* [html/login.html](file:///d:/DebianBackup/source_code/lop_sihub/03-Projects/vinalink/visualizer_deploy/html/login.html) - Xác thực quyền quản trị Cố vấn Lean Startup.
 
 ---
 

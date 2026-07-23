@@ -3,7 +3,7 @@
 
 **Mã tài liệu:** VNL-2026-SRD-04  
 **Dự án:** Lập Kế hoạch Kinh doanh 3 năm - Doanh chủ Vinalink  
-**Đơn vị xây dựng:** SIHUB Lean Startup Team  
+**Đơn vị xây dựng:** Lean Startup Team  
 **Ngày phát hành:** 22-07-2026  
 **Trạng thái:** Chính thức phê duyệt  
 

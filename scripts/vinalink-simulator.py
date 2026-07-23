@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Vinalink Network Marketing Compensation & Structure Simulator (Upgraded)
-Created for: SIHUB 2026 Lean Startup Program - Chuyên đề 2 & 3
+Created for: 2026 Lean Startup Program - Chuyên đề 2 & 3
 Doanh chủ: Vinalink Group Compensation Model (Nâng cấp giải thuật danh hiệu & 7 Nguồn thu)
 """
 
@@ -357,6 +357,7 @@ def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v
     growth_rate = 0.25
     
     title_ids = [t["id"] for t in TITLES]
+    n_f1_current_float = float(f1_start)
     n_f1_current = f1_start
     
     for t in range(1, 37):
@@ -407,10 +408,13 @@ def simulate_dynamic_36months(n_total, p_consumer, p_distributor, r_retention, v
         npp_gap = max(1.0, active_npp_target - npp_start)
         f1_gap = max(0.0, n_f1 - f1_start)
         
-        new_f1_this_month = 0.0
+        n_f1_prev_int = int(round(n_f1_current_float))
+        new_f1_this_month_float = 0.0
         if f1_gap > 0 and npp_gap > 0:
-            new_f1_this_month = new_npp * (f1_gap / npp_gap)
-        n_f1_current = min(n_f1, n_f1_current + new_f1_this_month)
+            new_f1_this_month_float = new_npp * (f1_gap / npp_gap)
+        n_f1_current_float = min(float(n_f1), n_f1_current_float + new_f1_this_month_float)
+        n_f1_current = int(round(n_f1_current_float))
+        new_f1_this_month = n_f1_current - n_f1_prev_int
         
         # Optimal working hours/day
         optimal_hours = 4.0

@@ -438,7 +438,7 @@
 
   <script>
     window.adminHMDUser = {
-      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn SIHUB" : "Doanh chủ Vinalink",
+      name: localStorage.getItem("sihub_is_admin") === "true" ? "Cố vấn Lean Startup" : "Doanh chủ Vinalink",
       workspace: "Vinalink Project",
       avatar: "../assets/images/avatar/avatar.jpg"
     };
@@ -822,6 +822,7 @@
       tbody.innerHTML = "";
 
       let total3Y = 0;
+      let nF1CurrentFloat = parseFloat(f1Start);
       let nF1Current = f1Start;
 
       for (let t = 1; t <= 36; t++) {
@@ -860,11 +861,14 @@
         const nppGap = Math.max(1, activeNppTarget - nppStart);
         const f1Gap = Math.max(0, nF1 - f1Start);
         
-        let newF1ThisMonth = 0;
+        const nF1PrevInt = Math.round(nF1CurrentFloat);
+        let newF1ThisMonthFloat = 0;
         if (f1Gap > 0 && nppGap > 0) {
-          newF1ThisMonth = newNpp * (f1Gap / nppGap);
+          newF1ThisMonthFloat = newNpp * (f1Gap / nppGap);
         }
-        nF1Current = Math.min(nF1, nF1Current + newF1ThisMonth);
+        nF1CurrentFloat = Math.min(nF1, nF1CurrentFloat + newF1ThisMonthFloat);
+        nF1Current = Math.round(nF1CurrentFloat);
+        const newF1ThisMonth = nF1Current - nF1PrevInt;
 
         // Optimal working hours/day
         let optimalHours = 4.0;
@@ -1012,7 +1016,7 @@
           <td>${qualifyIncome > 0 ? '+' + Math.round(qualifyIncome).toLocaleString() : '0'} VNĐ</td>
           <td>${Math.round(matchingIncome).toLocaleString()} VNĐ</td>
           <td>${Math.round(leadershipIncome).toLocaleString()} VNĐ</td>
-          <td><span class="badge bg-info text-dark">${newF1ThisMonth.toFixed(1)} F1</span></td>
+          <td><span class="badge bg-info text-dark">${newF1ThisMonth.toFixed(0)} F1</span></td>
           <td><span class="badge bg-warning text-dark">${optimalHours.toFixed(1)} giờ</span></td>
           <td class="text-end fw-bold ${awardsIncome > 0 ? 'text-success fs-6' : 'text-primary'}">
             ${Math.round(totalMonthIncome).toLocaleString()} VNĐ ${awardsIncome > 0 ? '🏆 (+Thưởng xe)' : ''}

@@ -399,7 +399,7 @@ def update_doi_chieu_bao_cao(data, violations):
 
 **Mã tài liệu:** VNL-2026-VAL-01
 **Dự án:** Lập Kế hoạch Kinh doanh 3 năm - Doanh chủ Vinalink
-**Đơn vị thực hiện:** SIHUB Lean Startup Team
+**Đơn vị thực hiện:** Lean Startup Team
 **Ngày lập:** {datetime.now().strftime("%d-%m-%Y")}
 
 ---
@@ -429,7 +429,7 @@ def send_email_report(data, violations):
         print("Bỏ qua gửi email: Chưa cấu hình thông tin tài khoản SMTP trong file .env.")
         return
 
-    subject = f"[SIHUB Vinalink] Báo cáo đối chiếu phản hồi Doanh chủ - {datetime.now().strftime('%Y-%m-%d')}"
+    subject = f"[Vinalink] Báo cáo đối chiếu phản hồi Doanh chủ - {datetime.now().strftime('%Y-%m-%d')}"
     
     violation_html = ""
     if not violations:
@@ -448,7 +448,7 @@ def send_email_report(data, violations):
             Báo Cáo Đối Chiếu Phản Hồi Doanh Chủ Vinalink (Bản Nâng Cấp)
         </h2>
         <p>Chào anh Mr. Híu,</p>
-        <p>Hệ thống SIHUB đã ghi nhận phản hồi khảo sát của Doanh chủ <b>{data["doanhChuName"]}</b> gửi từ website lúc {data["timestamp"]}.</p>
+        <p>Hệ thống đã ghi nhận phản hồi khảo sát của Doanh chủ <b>{data["doanhChuName"]}</b> gửi từ website lúc {data["timestamp"]}.</p>
         
         <h3 style="color: #0f172a;">Kết quả đối chiếu chuẩn mực:</h3>
         {violation_html}
@@ -461,7 +461,7 @@ def send_email_report(data, violations):
             </ul>
         </p>
         <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-top: 30px;">
-        <p style="font-size: 11px; color: #94a3b8;">Báo cáo được tạo tự động bởi SIHUB Automation Engine lúc 20:00 hàng ngày.</p>
+        <p style="font-size: 11px; color: #94a3b8;">Báo cáo được tạo tự động bởi Automation Engine lúc 20:00 hàng ngày.</p>
     </body>
     </html>
     """

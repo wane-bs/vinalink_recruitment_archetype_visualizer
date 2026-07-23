@@ -3,7 +3,7 @@
 
 **Mã tài liệu:** VNL-2026-FSD-03  
 **Dự án:** Lập Kế hoạch Kinh doanh 3 năm - Doanh chủ Vinalink  
-**Đơn vị xây dựng:** SIHUB Lean Startup Team  
+**Đơn vị xây dựng:** Lean Startup Team  
 **Ngày phát hành:** 22-07-2026  
 **Trạng thái:** Chính thức phê duyệt  
 
@@ -12,11 +12,11 @@
 ## 1. TỔNG QUAN HỆ THỐNG & PHẠM VI CHỨC NĂNG
 
 ### 1.1 Mục tiêu Hệ thống
-Bộ mô phỏng tài chính Vinalink Group được xây dựng nhằm cung cấp một công cụ phản biện định lượng minh bạch cho các Doanh chủ hệ thống MLM và Cố vấn khởi nghiệp SIHUB. Hệ thống cho phép giả lập các kịch bản phát triển mạng lưới, tính toán chính xác **7 Nguồn thu nhập độc lập**, tự động hóa quy trình thăng cấp danh hiệu và tích lũy thưởng duy trì (Qualify Bonus) theo chuỗi thời gian 36 tháng.
+Bộ mô phỏng tài chính Vinalink Group được xây dựng nhằm cung cấp một công cụ phản biện định lượng minh bạch cho các Doanh chủ hệ thống MLM và Cố vấn khởi nghiệp Lean Startup. Hệ thống cho phép giả lập các kịch bản phát triển mạng lưới, tính toán chính xác **7 Nguồn thu nhập độc lập**, tự động hóa quy trình thăng cấp danh hiệu và tích lũy thưởng duy trì (Qualify Bonus) theo chuỗi thời gian 36 tháng.
 
 ### 1.2 Người dùng Đích (Target Users)
 1. **Doanh chủ Hệ thống (Network Leaders):** Đánh giá tính khả thi của mục tiêu tài chính 36 tháng, xây dựng lộ trình tuyển dụng F1 nòng cốt và tối ưu hóa cân nhánh nhị phân.
-2. **Cố vấn SIHUB (Startup Advisors):** Phản biện các mục tiêu thu nhập phi thực tế của học viên dựa trên các tham số hao hụt thực tế ($R_{retention}$, $R_{split}$).
+2. **Cố vấn Lean Startup (Startup Advisors):** Phản biện các mục tiêu thu nhập phi thực tế của học viên dựa trên các tham số hao hụt thực tế ($R_{retention}$, $R_{split}$).
 
 ---
 
