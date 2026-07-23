@@ -12,9 +12,6 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-# Tài liệu phản biện nhạy cảm của cố vấn
-doi-chieu-bao-cao.md
-docs/doi-chieu-bao-cao.md
 
 # Script đăng ký scheduled task Windows
 setup-task.ps1
